@@ -1,0 +1,284 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is([data-theme="dark"] *));
+
+/*
+  Private Translator design tokens.
+  Light values checked against WCAG AA (4.5:1) for every text pair; see the
+  verification checklist in the technical design, section 13.
+  The bright accent green is never used as small text on the cream background
+  (2.6:1). Green words use --accent-text. Gold stays on icons and badges.
+*/
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-surface: var(--surface);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--text);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--text);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--on-primary);
+  --color-muted: var(--hover);
+  --color-muted-foreground: var(--text-muted);
+  --color-accent: var(--hover);
+  --color-accent-foreground: var(--text);
+  --color-secondary: var(--hover);
+  --color-secondary-foreground: var(--text);
+  --color-destructive: var(--danger);
+  --color-destructive-foreground: var(--on-danger);
+  --color-accent-green: var(--accent);
+  --color-accent-green-text: var(--accent-text);
+  --color-highlight: var(--highlight);
+  --color-on-highlight: var(--on-highlight);
+  --color-danger: var(--danger);
+  --color-on-danger: var(--on-danger);
+  --font-sans: var(--app-sans);
+  --font-serif: var(--app-serif);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  color-scheme: light;
+
+  --bg: #f8f7f2;
+  --surface: #fdfcf8;
+  --border: #e3e0d6;
+  --text: #243b53;
+  --text-muted: #5b6b7b;
+  --primary: #243b53;
+  --on-primary: #f8f7f2;
+  /* Slightly deeper than the PRD's starting #3BB273 so state bearing green
+     fills (active toggles, dots) clear 3:1 non text contrast on the cream
+     background, as the PRD's own AA rule requires. Green words still use
+     --accent-text. */
+  --accent: #329e66;
+  --accent-text: #1f7a4d;
+  --highlight: #ffd166;
+  --on-highlight: #243b53;
+  --danger: #a94438;
+  --on-danger: #fdfcf8;
+  --hover: #f0eee5;
+  --ring: #243b53;
+
+  --radius: 8px;
+  --radius-card: 12px;
+  --radius-control: 8px;
+  --shadow-card: 0 1px 2px rgba(36, 59, 83, 0.06);
+  --shadow-layer: 0 4px 16px rgba(36, 59, 83, 0.12), 0 1px 2px rgba(36, 59, 83, 0.06);
+
+  --motion-fast: 150ms;
+  --motion-base: 200ms;
+  --ease-quiet: cubic-bezier(0, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #12171d;
+  --surface: #1a212a;
+  --border: #2a3440;
+  --text: #ece9e1;
+  --text-muted: #9aa7b4;
+  --primary: #9db7d3;
+  --on-primary: #12171d;
+  --accent: #4cc38a;
+  --accent-text: #6fd9a4;
+  --highlight: #ffd166;
+  --on-highlight: #12171d;
+  --danger: #e58a7e;
+  --on-danger: #12171d;
+  --hover: #222b36;
+  --ring: #9db7d3;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-layer: 0 4px 20px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/*
+  Self hosted script companion fonts. Loaded on demand through unicode-range,
+  so people only download the scripts they actually render. The latin fonts are
+  loaded through next/font in layout.tsx. No font is ever fetched from a third
+  party at runtime.
+*/
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/plex-arabic-400-arabic.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/plex-arabic-500-arabic.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB;
+}
+@font-face {
+  font-family: "IBM Plex Sans Devanagari";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/plex-devanagari-400-devanagari.woff2") format("woff2");
+  unicode-range: U+0900-097F, U+1CD0-1CF4, U+1CF7-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF;
+}
+@font-face {
+  font-family: "IBM Plex Sans Devanagari";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/plex-devanagari-500-devanagari.woff2") format("woff2");
+  unicode-range: U+0900-097F, U+1CD0-1CF4, U+1CF7-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF;
+}
+@font-face {
+  font-family: "IBM Plex Sans Hebrew";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/plex-hebrew-400-hebrew.woff2") format("woff2");
+  unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: "IBM Plex Sans Thai";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/plex-thai-400-thai.woff2") format("woff2");
+  unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/60;
+  }
+  html {
+    @apply bg-background;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Defined on body, where next/font's variable classes apply, so the var()
+       chain resolves and descendants inherit the computed stacks. */
+    --app-sans: var(--plex-sans), "IBM Plex Sans Arabic", "IBM Plex Sans Devanagari", "IBM Plex Sans Hebrew",
+      "IBM Plex Sans Thai", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans",
+      "Noto Sans Arabic", "Noto Sans Devanagari", "Noto Sans Hebrew", "Noto Sans Thai", "Noto Sans Bengali",
+      "Noto Sans Tamil", "Noto Sans Telugu", "Noto Sans Kannada", "Noto Sans Malayalam", "Noto Sans Gujarati",
+      "Noto Sans Gurmukhi", "Noto Sans Oriya", "Noto Sans Sinhala", "Noto Sans Ethiopic", "Noto Sans CJK SC",
+      "Noto Sans CJK TC", "Noto Sans CJK JP", "Noto Sans CJK KR", "PingFang SC", "PingFang TC", "Hiragino Sans",
+      "Hiragino Kaku Gothic Pro", "Yu Gothic", "Microsoft YaHei", "Microsoft JhengHei", "Malgun Gothic",
+      "Apple SD Gothic Neo", sans-serif;
+    --app-serif: var(--newsreader), Georgia, "Times New Roman", serif;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 28%, transparent);
+  }
+}
+
+@layer utilities {
+  /* Four type sizes only: wordmark, heading, body, small. Panes use body at a
+     slightly larger responsive size for comfortable reading. */
+  .type-wordmark {
+    font-family: var(--app-serif);
+    font-size: 1.375rem;
+    line-height: 1.25;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .type-heading {
+    font-size: 1.125rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+  .type-body {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .type-small {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+  }
+  .type-pane {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  @media (min-width: 768px) {
+    .type-pane {
+      font-size: 1.125rem;
+    }
+  }
+
+  .surface-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+  .surface-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-layer);
+  }
+
+  /* Newly arrived text settles in gently: a soft fade with a tiny rise. */
+  @keyframes arrive {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .arrive {
+    animation: arrive var(--motion-base) var(--ease-quiet) both;
+  }
+
+  /* Hide input: a strong blur so text can't be read at a glance. Typing, the
+     caret and translation all carry on as normal. */
+  .masked {
+    filter: blur(6px);
+  }
+  .masked-strong {
+    filter: blur(8px);
+  }
+
+  /* Quiet scrollbars for long lists. */
+  .scroll-surface {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .scroll-surface::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scroll-surface::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+  .scroll-surface::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
