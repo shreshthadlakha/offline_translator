@@ -1,0 +1,117 @@
+// Language audit: the final editorial verdicts for every candidate pair,
+// combining three signals:
+//   1. the structural gate (scripts/language-audit/gate-results.json)
+//   2. chrF against the NLLB-200 references (scripts/language-audit/chrf.json),
+//      calibrated on the already shipped pairs: the shipped floor is
+//      en->zh at chrF 46.0 (en->hi 50.4, zh->en 65.7); the removed en->ja
+//      hallucinating model scored 5.4.
+//   3. the manual ten-sentence review of every pair against the reference
+//      (hallucinations, central-noun substitutions, mid-word truncations,
+//      clause dropping), recorded below per pair.
+//
+// Ship rule: chrF >= 46, gate pass, no hallucination pattern, and at most
+// four seriously wrong sentences of ten. The rule is applied mechanically
+// after the review; the reasons are kept so the calls stay auditable.
+//
+// Usage: node scripts/language-audit/verdicts.mjs (writes verdicts.json)
+import { writeFileSync } from 'node:fs';
+
+const V = {
+  // --- single pair models: all verified, all ship --------------------------------
+  singles: {
+    note: 'Every single pair model passed the gate, the chrF band and the review. Shipped.',
+    pairs: [
+      'en->afr_Latn', 'afr_Latn->en', 'en->ces_Latn', 'ces_Latn->en', 'en->dan_Latn',
+      'dan_Latn->en', 'en->fin_Latn', 'fin_Latn->en', 'en->hun_Latn', 'hun_Latn->en',
+      'en->ind_Latn', 'ind_Latn->en', 'en->ron_Latn', 'en->swe_Latn', 'swe_Latn->en',
+      'en->ukr_Cyrl', 'ukr_Cyrl->en', 'en->vie_Latn', 'vie_Latn->en', 'kor_Hang->en',
+      'pol_Latn->en', 'tha_Thai->en',
+    ],
+  },
+
+  // --- group models: kept pairs ----------------------------------------------------
+  keep: {
+    'en->hrv_Latn': { chrf: 58.5, reason: 'Real Croatian throughout; misspellings only (kišljku). The motivating case for this audit.' },
+    'hrv_Latn->en': { chrf: 67.0, reason: 'Real English; two wrong nouns of ten (16 Saturdays, apothecary).' },
+    'en->srp_Cyrl': { chrf: 56.4, reason: 'Real Serbian; four single-word substitutions of ten, sentence structure intact.' },
+    'srp_Cyrl->en': { chrf: 65.3, reason: 'Clean English; two wrong nouns (appetizer, card).' },
+    'en->bul_Cyrl': { chrf: 60.0, reason: 'Real Bulgarian; garbled train sentence and a cut tail, rest solid.' },
+    'bul_Cyrl->en': { chrf: 62.9, reason: 'Real English; three single-word substitutions (appetite, desk, ten at lunch).' },
+    'en->nob_Latn': { chrf: 68.1, reason: 'Comprehensible Bokmal with Danish colouring (spill, Barnene); highest group chrF.' },
+    'nob_Latn->en': { chrf: 68.9, reason: 'Real English; three wrong nouns of ten (We are here today, paraplenic, destination).' },
+    'ell_Grek->en': { chrf: 70.1, reason: 'Fluent English; three errors of ten (flier of coffee, 10th half of the afternoon, field). At the shipped hi->en level.' },
+    'en->por_Latn': { chrf: 74.0, reason: 'Natural Portuguese via the Romance model; near reference quality.' },
+    'por_Latn->en': { chrf: 89.2, reason: 'Excellent; matches the reference almost everywhere.' },
+    'ron_Latn->en': { chrf: 80.6, reason: 'Excellent; one leaked word (Copiii) of ten.' },
+  },
+
+  // --- group models: rejected pairs, with the reason -------------------------------
+  drop: {
+    'en->zho_Hant': { chrf: 0.2, reason: 'Unrelated Latin garbage (the en-jap failure pattern).' },
+    'zho_Hant->en': { chrf: 47.6, reason: 'Fluent English but three of ten sentences drop whole clauses; below the shipped zh->en quality despite chrF at the floor.' },
+    'en->amh_Ethi': { chrf: 24.3, reason: 'Semantic drift through every sentence (nearby ships for pharmacy); five wrong of ten.' },
+    'amh_Ethi->en': { chrf: 51.5, reason: 'Bible-register hallucinations (I will make you a nation, and I will bless you).' },
+    'en->asm_Beng': { chrf: 20.5, reason: 'Hallucinated sentence (Those Christians how) and mid-word truncations.' },
+    'asm_Beng->en': { chrf: 51.2, reason: 'Garbled meanings (nearest suspect, jungle for traffic).' },
+    'en->ben_Beng': { chrf: 49.9, reason: 'Garbage sentence two and mid-word truncations on six and ten.' },
+    'ben_Latn->en': { chrf: 58.6, reason: 'Central-noun hallucinations (I forgot my face in the office).' },
+    'en->cat_Latn': { chrf: 60.5, reason: 'Five wrong of ten including a truncated word (prop for proxima) and paraplula.' },
+    'cat_Latn->en': { chrf: 54.8, reason: 'Five wrong of ten including a total garbage sentence (My sister is above to ask her the gift she comes).' },
+    'en->ell_Grek': { chrf: 54.5, reason: 'Mid-word truncations on three sentences; vulgar garbage word in ten.' },
+    'en->guj_Gujr': { chrf: 32.4, reason: 'Garbage opener and truncated words throughout.' },
+    'guj_Gujr->en': { chrf: 46.4, reason: 'Hallucinations (married to one of the brothers, practice of stealing).' },
+    'en->hau_Latn': { chrf: 44.5, reason: 'Five wrong of ten (kusantar aiki = nearest work for pharmacy); below the chrF floor.' },
+    'hau_Latn->en': { chrf: 36.5, reason: 'Garbled or hallucinated on six of ten.' },
+    'en->heb_Hebr': { chrf: 60.0, reason: 'Central-noun substitution in both directions (shirt for pharmacy, fighter for pharmacy); four wrong each way, the weakest keep candidate.' },
+    'heb_Hebr->en': { chrf: 53.2, reason: 'See en->heb: same systematic weakness, lowest chrF of the borderline set.' },
+    'en->jpn_Jpan': { chrf: 21.9, reason: 'Real Japanese but eight of ten with wrong time expressions, garbage words (sharpuru) or broken spacing; the single pair en-jap was already removed for hallucination, this is better but still below the bar.' },
+    'en->kan_Knda': { chrf: 35.9, reason: 'Garbage words and nonsense sentences.' },
+    'kan_Knda->en': { chrf: 48.1, reason: 'What Is the Answer? for the pharmacy question; watching their video games.' },
+    'en->mal_Mlym': { chrf: 43.8, reason: 'Garbage transliterations (Gud Mon, Fastikki) and truncations; below the chrF floor.' },
+    'mal_Mlym->en': { chrf: 68.5, reason: 'High chrF but I forgot my baby in the office (umbrella) is a central-noun hallucination; forward direction failed anyway.' },
+    'en->mar_Deva': { chrf: 31.0, reason: 'Garbage openers and a repetition storm (tila tila tila).' },
+    'mar_Deva->en': { chrf: 45.9, reason: 'Bible hallucinations (the people of God) on half the sentences.' },
+    'npi_Deva->en': { chrf: 38.3, reason: 'Jehovah witness register hallucinations (cast lots, the good news is being preached).' },
+    'en->ory_Orya': { chrf: 14.4, reason: 'Truncated and garbled throughout.' },
+    'ory_Orya->en': { chrf: 39.8, reason: 'The source set itself was broken by a reference-side repetition, and the model output garbage on the rest too.' },
+    'en->pbt_Arab': { chrf: 15.6, reason: 'Repetition storms (hech hech hech) from sentence one.' },
+    'pbt_Arab->en': { chrf: 31.2, reason: 'Computer-text hallucinations (the mount point, the mouse pointer).' },
+    'en->pes_Arab': { chrf: 31.3, reason: 'Fluent but wrong: wrong nouns on six of ten (the delay is beautiful today).' },
+    'pes_Arab->en': { chrf: 29.0, reason: 'Bible-register hallucination (I eat the flesh of bulls).' },
+    'en->pan_Guru': { chrf: 38.3, reason: 'Garbled sentences and truncations.' },
+    'pan_Guru->en': { chrf: 62.6, reason: 'Four central errors of ten (form of communication, ten years old).' },
+    'en->sin_Sinh': { chrf: 34.7, reason: 'Garbled meanings and a broken final sentence.' },
+    'sin_Sinh->en': { chrf: 58.3, reason: 'Five wrong of ten (the closest famous, get out of the car).' },
+    'swh_Latn->en': { chrf: 21.5, reason: 'The worst hallucination set of the audit, including profanity unrelated to the source.' },
+    'en->tam_Taml': { chrf: 46.5, reason: 'Wrong nouns on most sentences (kariyam = task for pharmacy).' },
+    'tam_Taml->en': { chrf: 48.6, reason: 'Jehovah-register hallucination on six of ten.' },
+    'en->tel_Telu': { chrf: 38.8, reason: 'Garbage opener (Gud Midhya) and wrong nouns.' },
+    'tel_Telu->en': { chrf: 45.1, reason: 'Four to five central errors of ten (Where are the drugs).' },
+    'en->tur_Latn': { chrf: 51.9, reason: 'Garbage words (farmatik), a repetition (sekillerde şekilde) and on gunden once (ten days early).' },
+    'en->urd_Arab': { chrf: 44.2, reason: 'Below the chrF floor; garbage nouns (afstwi, tapee) and the wrong time of day.' },
+    'urd_Arab->en': { chrf: 57.7, reason: 'Five wrong of ten (nearest second house, ten times a year, my six in the book).' },
+    'en->yor_Latn': { chrf: 42.0, reason: 'Garbage words (Aaro jirolo, ife kofi) and wrong meanings; below the floor.' },
+    'yor_Latn->en': { chrf: 44.8, reason: 'Computer-text hallucination (the home folder) and invented scenes.' },
+    'en->zsm_Latn': { chrf: 57.2, reason: 'Six wrong of ten (the nearest disease, pairpail).' },
+    'zsm_Latn->en': { chrf: 42.8, reason: 'Hallucinations (make up my mind to smoke, the fireman released ten minutes of sleep); below the floor.' },
+    'en->zul_Latn': { chrf: 47.9, reason: 'Wrong nouns on half the sentences (inkomo = cow for cup).' },
+    'zul_Latn->en': { chrf: 65.9, reason: 'What is the chemical code of AIDS is a dangerous-sounding hallucination.' },
+  },
+
+  // The Romance model keeps Portuguese and Romanian; Catalan fails both ways
+  // (Portuguese contamination forward: Bom dia, tac,a, abanar; garbage sentence
+  // reverse). The mul models keep Croatian, Serbian, Bulgarian, Norwegian (both
+  // directions) and Greek to English only.
+  routing: {
+    enMulTargets: ['hrv', 'srp_Cyrl', 'bul', 'nob'],
+    mulEnSources: ['hrv_Latn', 'srp_Cyrl', 'bul_Cyrl', 'nob_Latn', 'ell_Grek'],
+    enRomanceTargets: ['pt'],
+    romanceEnSources: ['pt', 'ro'],
+  },
+};
+
+writeFileSync('scripts/language-audit/verdicts.json', JSON.stringify({ generatedAt: new Date().toISOString(), ...V }, null, 2));
+const kept = Object.keys(V.keep).length;
+const dropped = Object.keys(V.drop).length;
+console.log(`verdicts: ${V.singles.pairs.length} single pairs ship, ${kept} group directions keep, ${dropped} group directions drop`);
+console.log('group routing:', JSON.stringify(V.routing));

@@ -72,4 +72,9 @@ export const STORAGE_KEYS = {
   history: "pt.history.v1",
   settings: "pt.settings.v1",
   modelReady: "pt.model.ready",
+  /** Written while setup runs, cleared when it finishes. A leftover means
+   * the last setup stopped before it was done. */
+  setupCrash: "pt.setup.crash",
+  /** Whether the Details panel was left open, remembered between visits. */
+  detailsOpen: "pt.details.open",
 } as const;

@@ -2,11 +2,13 @@
 
 /**
  * Settings: appearance (light, dark, follow the device), keep history with a
- * clear action, removing the downloaded model, installing the app, and a link
- * to the How it works explanation.
+ * clear action, the "On this device" block (the faster models switch, the
+ * experimental graphics device switch, every saved model with its size and a
+ * Remove button, storage used, saved translations, and Erase everything),
+ * installing the app, and a link to the How it works section on the page.
  */
 
-import { memo } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { Info, Monitor, Moon, Sun, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -26,30 +28,101 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useTranslatorState } from "@/components/translate/translator-provider";
-import { deleteModelCache } from "@/hooks/use-engine";
+import { deleteModelCache, deleteModelEntries, savedModels } from "@/lib/model-cache";
 import { useInstallPrompt } from "@/hooks/use-install-prompt";
-import { toast } from "@/hooks/use-toast";
+import { STORAGE_KEYS, storageRemove } from "@/lib/storage";
+import { formatBytes, mbWhole } from "@/lib/format";
+import { allEngines } from "@/lib/engines";
 import { copy as strings } from "@/lib/copy";
+import { toast } from "@/hooks/use-toast";
 import type { Settings } from "@/hooks/use-settings";
 
 type Props = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onOpenHowItWorks: () => void;
+  onHowItWorks: () => void;
 };
 
-function SettingsSheetInner({ open, onOpenChange, onOpenHowItWorks }: Props) {
+type SavedModel = { modelId: string; name: string; bytes: number; engineId: string | null };
+
+function SettingsSheetInner({ open, onOpenChange, onHowItWorks }: Props) {
   const { settings, updateSettings, engine, history } = useTranslatorState();
   const install = useInstallPrompt();
-  const modelReady = engine.modelPresent;
 
-  const onRemoveModel = async () => {
+  // The real numbers for the On this device block, read while the sheet is
+  // open. Never during render.
+  const [savedModelList, setSavedModelList] = useState<SavedModel[]>([]);
+  const [storage, setStorage] = useState<{ usage: number; quota: number } | null>(null);
+  const [removing, setRemoving] = useState<string | null>(null);
+
+  const refresh = useCallback(async () => {
+    try {
+      const sizes = await savedModels();
+      const engines = allEngines();
+      const list: SavedModel[] = [];
+      for (const [modelId, bytes] of sizes) {
+        const engineForModel = engines.find((candidate) => candidate.modelId === modelId);
+        list.push({ modelId, bytes, name: engineForModel?.name ?? modelId, engineId: engineForModel?.id ?? null });
+      }
+      list.sort((a, b) => a.name.localeCompare(b.name));
+      setSavedModelList(list);
+    } catch {
+      setSavedModelList([]);
+    }
+    try {
+      const estimate = await navigator.storage?.estimate?.();
+      if (estimate && typeof estimate.usage === "number" && typeof estimate.quota === "number") {
+        setStorage({ usage: estimate.usage, quota: estimate.quota });
+      } else {
+        setStorage(null);
+      }
+    } catch {
+      setStorage(null);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    void refresh();
+  }, [open, refresh, engine.status, engine.readyTick]);
+
+  const onRemoveModel = useCallback(
+    async (model: SavedModel) => {
+      setRemoving(model.modelId);
+      try {
+        await deleteModelEntries(model.modelId);
+        if (model.engineId != null && (engine.engineInfo?.id === model.engineId || engine.desiredEngine?.id === model.engineId)) {
+          // The engine in memory came from those files. Drop it, so the next
+          // use sets up again honestly instead of running on removed files.
+          engine.reset();
+        }
+        const remaining = await savedModels();
+        if (remaining.size === 0) storageRemove(STORAGE_KEYS.modelReady);
+        toast({ description: strings.settings.removedNote });
+        await refresh();
+      } finally {
+        setRemoving(null);
+      }
+    },
+    [engine, refresh],
+  );
+
+  const onEraseEverything = async () => {
     await deleteModelCache();
+    history.clear();
+    storageRemove(STORAGE_KEYS.settings);
+    storageRemove(STORAGE_KEYS.history);
+    storageRemove(STORAGE_KEYS.modelReady);
+    storageRemove(STORAGE_KEYS.setupCrash);
     engine.reset();
-    toast({ description: strings.settings.removed });
+    // A reload presents the true fresh state, including the first visit hero.
+    window.location.reload();
   };
 
   const setTheme = (theme: Settings["theme"]) => updateSettings({ theme });
+
+  const storageFraction =
+    storage && storage.quota > 0 ? Math.min(100, (storage.usage / storage.quota) * 100) : null;
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -135,21 +208,118 @@ function SettingsSheetInner({ open, onOpenChange, onOpenHowItWorks }: Props) {
 
           <Separator className="my-5" />
 
-          {/* Model */}
-          <section aria-labelledby="settings-model">
-            <h3 id="settings-model" className="type-small font-medium text-muted-foreground">
-              {strings.settings.model}
+          {/* On this device */}
+          <section aria-labelledby="settings-device">
+            <h3 id="settings-device" className="type-small font-medium text-muted-foreground">
+              {strings.settings.onThisDevice}
             </h3>
-            <p className="type-body mt-2">{strings.settings.removeModelNote}</p>
-            <div className="mt-3">
-              {modelReady ? (
-                <Button variant="outline" size="sm" onClick={() => void onRemoveModel()} className="type-small">
-                  <Trash2 aria-hidden className="size-4" />
-                  {strings.settings.removeModel}
-                </Button>
-              ) : (
-                <p className="type-small text-muted-foreground">{strings.settings.nothingToRemove}</p>
-              )}
+
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <Label htmlFor="fast-models" className="type-body cursor-pointer font-normal">
+                {strings.settings.fastModels}
+              </Label>
+              <Switch
+                id="fast-models"
+                checked={settings.useFastModels}
+                onCheckedChange={(checked) => updateSettings({ useFastModels: checked })}
+                aria-label={strings.settings.fastModels}
+              />
+            </div>
+            <p className="type-small mt-1 text-muted-foreground">{strings.settings.fastModelsHint}</p>
+
+            <div className="mt-4 flex items-center justify-between gap-3">
+              <Label htmlFor="webgpu" className="type-body cursor-pointer font-normal">
+                {strings.settings.webgpu}
+              </Label>
+              <Switch
+                id="webgpu"
+                checked={settings.useWebGPU}
+                onCheckedChange={(checked) => updateSettings({ useWebGPU: checked })}
+                aria-label={strings.settings.webgpu}
+              />
+            </div>
+            <p className="type-small mt-1 text-muted-foreground">{strings.settings.webgpuHint}</p>
+
+            <h4 className="type-small mt-5 font-medium text-muted-foreground">{strings.settings.savedModels}</h4>
+            {savedModelList.length === 0 ? (
+              <p className="type-small mt-1.5 text-muted-foreground">{strings.settings.savedModelsEmpty}</p>
+            ) : (
+              <ul className="mt-1.5 space-y-1.5">
+                {savedModelList.map((model) => (
+                  <li
+                    key={model.modelId}
+                    className="flex items-center justify-between gap-3 rounded-lg border border-border bg-surface px-3 py-2"
+                  >
+                    <div className="min-w-0">
+                      <p className="type-small truncate">{model.name}</p>
+                      <p className="type-small text-muted-foreground tabular-nums">
+                        {strings.settings.savedModelSize(mbWhole(model.bytes))}
+                      </p>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => void onRemoveModel(model)}
+                      disabled={removing === model.modelId}
+                      aria-label={strings.settings.removeModelAria(model.name)}
+                      className="type-small h-8 shrink-0 text-muted-foreground"
+                    >
+                      <Trash2 aria-hidden className="size-3.5" />
+                      {strings.settings.removeModel}
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <dl className="mt-4 space-y-2.5">
+              {storage ? (
+                <>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <dt className="type-body">{strings.settings.storageUsed}</dt>
+                    <dd className="type-small text-muted-foreground tabular-nums">
+                      {strings.settings.storageLine(formatBytes(storage.usage), formatBytes(storage.quota))}
+                    </dd>
+                  </div>
+                  <div className="h-1.5 overflow-hidden rounded-full bg-hover">
+                    <div
+                      className="h-full rounded-full bg-accent-green-text"
+                      style={storageFraction != null ? { width: `${storageFraction}%` } : undefined}
+                    />
+                  </div>
+                </>
+              ) : null}
+              <div className="flex items-baseline justify-between gap-3">
+                <dt className="type-body">{strings.settings.historyLabel}</dt>
+                <dd className="type-small text-muted-foreground tabular-nums">
+                  {strings.settings.historyCount(history.entries.length)}
+                </dd>
+              </div>
+            </dl>
+            <div className="mt-4">
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button variant="outline" size="sm" className="type-small text-danger">
+                    <Trash2 aria-hidden className="size-4" />
+                    {strings.settings.erase}
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle className="type-heading">{strings.settings.eraseTitle}</AlertDialogTitle>
+                    <AlertDialogDescription className="type-small">{strings.settings.eraseBody}</AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>{strings.settings.eraseCancel}</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => void onEraseEverything()}
+                      className="bg-danger text-on-danger hover:bg-danger/90"
+                    >
+                      {strings.settings.eraseConfirm}
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
           </section>
 
@@ -173,14 +343,14 @@ function SettingsSheetInner({ open, onOpenChange, onOpenHowItWorks }: Props) {
             </>
           ) : null}
 
-          {/* How it works */}
+          {/* How it works, on the page */}
           <section>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => {
                 onOpenChange(false);
-                onOpenHowItWorks();
+                onHowItWorks();
               }}
               className="type-small text-accent-green-text"
             >

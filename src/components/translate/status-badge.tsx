@@ -1,19 +1,23 @@
 "use client";
 
 /**
- * One small badge in one place, with a polite live region. States: Starting,
- * Setting up, Ready, Works offline, Offline and not set up.
+ * One small badge in one place, at the right end of the tool card's top row,
+ * with a polite live region. States: Starting, Setting up, Ready, Works
+ * offline, and a short offline note when translation isn't set up yet. The
+ * full offline message lives in the setup card, where there is room for it.
+ *
+ * Reads the engine context directly, so a keystroke never re renders it.
  */
 
 import { memo } from "react";
 import { CloudOff } from "lucide-react";
-import { useTranslatorState } from "@/components/translate/translator-provider";
+import { useEngineContext } from "@/hooks/use-engine";
 import { useOnlineStatus } from "@/hooks/use-online-status";
 import { copy } from "@/lib/copy";
 import { cn } from "@/lib/utils";
 
 function StatusBadgeInner({ className }: { className?: string }) {
-  const { engine } = useTranslatorState();
+  const engine = useEngineContext();
   const online = useOnlineStatus();
 
   let content: React.ReactNode = null;
@@ -45,7 +49,7 @@ function StatusBadgeInner({ className }: { className?: string }) {
     content = (
       <>
         <CloudOff aria-hidden className="size-3.5 text-muted-foreground" />
-        <span>{copy.status.offlineNotSetup}</span>
+        <span>{copy.offline.offline}</span>
       </>
     );
   }

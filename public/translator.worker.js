@@ -20,6 +20,65 @@ var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require
   throw Error('Dynamic require of "' + x + '" is not supported');
 });
 
+// src/workers/net-report.ts
+function postReport(url, finalUrl, size) {
+  try {
+    self.postMessage({
+      type: "netlog",
+      url,
+      finalUrl,
+      size
+    });
+  } catch {}
+}
+function requestUrlOf(input) {
+  try {
+    if (typeof input === "string")
+      return new URL(input, self.location.href).href;
+    if (input instanceof URL)
+      return input.href;
+    return input.url;
+  } catch {
+    return "";
+  }
+}
+function stripQuery(url) {
+  try {
+    const parsed = new URL(url);
+    return `${parsed.origin}${parsed.pathname}`;
+  } catch {
+    return url;
+  }
+}
+function sizeOf(response) {
+  try {
+    const header = response.headers.get("content-length");
+    if (header == null)
+      return 0;
+    const size = Number(header);
+    return Number.isFinite(size) && size >= 0 ? size : 0;
+  } catch {
+    return 0;
+  }
+}
+function installNetworkReporting() {
+  const original = globalThis.fetch;
+  if (typeof original !== "function")
+    return;
+  globalThis.fetch = function reportedFetch(input, init) {
+    const requestUrl = requestUrlOf(input);
+    return original.call(globalThis, input, init).then((response) => {
+      const finalUrl = typeof input === "string" ? new URL(input, self.location.href).href : input instanceof URL ? input.href : input.url;
+      postReport(stripQuery(requestUrl), stripQuery(response.url || finalUrl), sizeOf(response));
+      return response;
+    }, (error) => {
+      postReport(stripQuery(requestUrl), stripQuery(requestUrl), 0);
+      throw error;
+    });
+  };
+}
+installNetworkReporting();
+
 // node_modules/onnxruntime-common/dist/esm/index.js
 var exports_esm = {};
 __export(exports_esm, {
@@ -35258,6 +35317,7 @@ var __webpack_exports__zeros = __webpack_exports__.zeros;
 var __webpack_exports__zeros_like = __webpack_exports__.zeros_like;
 
 // src/workers/protocol.ts
+var PROTOCOL_VERSION = 5;
 var PRIORITY_RANK = {
   manual: 0,
   sentence: 1,
@@ -35265,25 +35325,75 @@ var PRIORITY_RANK = {
   batch: 3
 };
 
+// src/workers/build-id.ts
+var BUILD_ID = "202610110659-ro5kdg";
+
+// src/lib/speed-config.ts
+var SPEED_CONFIG = {
+  fragmentDebounce: {
+    fastMedianMs: 700,
+    slowMedianMs: 2000,
+    fastWaitMs: 250,
+    mediumWaitMs: 700,
+    slowWaitMs: 1500
+  },
+  decoding: {
+    numBeams: 1,
+    doSample: false,
+    factor: 1.6,
+    plus: 8,
+    cap: 200,
+    charsPerToken: 4
+  },
+  sentenceSplitLimit: 200,
+  progressThrottleMs: 250,
+  downloadStallMs: 15000,
+  heartbeat: {
+    intervalMs: 5000,
+    timeoutMs: 15000,
+    busyGraceMs: 90000
+  },
+  batch: {
+    groupSize: 1,
+    minSpeedup: 0.2
+  },
+  crashFlagMaxAgeMs: 10 * 60 * 1000,
+  timingLogSize: 10
+};
+
 // src/workers/translator.worker.ts
-var MODEL_ID = "Xenova/nllb-200-distilled-600M";
 __webpack_exports__env.allowLocalModels = false;
 __webpack_exports__env.useBrowserCache = true;
 var onnxEnv = __webpack_exports__env.backends.onnx;
 onnxEnv.wasm = onnxEnv.wasm ?? {};
 onnxEnv.wasm.wasmPaths = "/ort/";
-onnxEnv.wasm.numThreads = 1;
 var queue = [];
 var runningJob = null;
+var runningInterrupt = null;
+var pumpScheduled = false;
 var translator = null;
+var loadedEngine = null;
 var deviceUsed = null;
 var loading = false;
 var seqCounter = 0;
+var graphOptimizationLevel = "basic";
+var WARMUP_TEXT = "Hello.";
 function post(message) {
   self.postMessage(message);
 }
+
+class InterruptCriteria extends __webpack_exports__StoppingCriteria {
+  stopped = false;
+  _call(inputIds, _scores) {
+    const length = Array.isArray(inputIds) ? inputIds.length : 1;
+    return new Array(length).fill(this.stopped);
+  }
+}
 var fileProgress = new Map;
-var lastProgressPost = 0;
+var lastAggregatePost = 0;
+var lastFilePost = new Map;
+var downloadStagePosted = false;
+var initializingStagePosted = false;
 function aggregateProgress() {
   let loaded = 0;
   let total = 0;
@@ -35293,21 +35403,55 @@ function aggregateProgress() {
   }
   return { loaded, total };
 }
+function allFilesDone() {
+  if (fileProgress.size === 0)
+    return false;
+  for (const { status, loaded, total } of fileProgress.values()) {
+    if (status !== "done")
+      return false;
+    if (total > 0 && loaded < total)
+      return false;
+  }
+  return true;
+}
 function onProgressCallback(data) {
   if (!data.file)
     return;
-  if (data.status === "initiate" || data.status === "download" || data.status === "progress" || data.status === "done") {
-    const prev = fileProgress.get(data.file) ?? { loaded: 0, total: 0 };
-    fileProgress.set(data.file, {
-      loaded: Math.max(prev.loaded, data.loaded ?? 0),
-      total: Math.max(prev.total, data.total ?? 0)
-    });
+  const name = data.file;
+  const prev = fileProgress.get(name) ?? { loaded: 0, total: 0, status: "waiting" };
+  if (data.status === "initiate") {
+    fileProgress.set(name, { ...prev, status: "waiting" });
+    post({ type: "file", file: name, status: "waiting", loaded: prev.loaded, total: prev.total });
+  } else if (data.status === "progress" || data.status === "download") {
+    const loaded = Math.max(prev.loaded, data.loaded ?? prev.loaded);
+    const total = Math.max(prev.total, data.total ?? prev.total);
+    fileProgress.set(name, { loaded, total, status: "downloading" });
+    const now2 = performance.now();
+    const last = lastFilePost.get(name) ?? 0;
+    if (now2 - last > SPEED_CONFIG.progressThrottleMs) {
+      lastFilePost.set(name, now2);
+      post({ type: "file", file: name, status: "downloading", loaded, total });
+    }
+  } else if (data.status === "done") {
+    const total = Math.max(prev.total, data.total ?? prev.total);
+    const loaded = total > 0 ? total : prev.loaded;
+    fileProgress.set(name, { loaded, total, status: "done" });
+    lastFilePost.delete(name);
+    post({ type: "file", file: name, status: "done", loaded, total });
+  }
+  if (!downloadStagePosted) {
+    downloadStagePosted = true;
+    post({ type: "stage", stage: "downloading" });
   }
   const now = performance.now();
-  if (now - lastProgressPost > 150 || data.status === "done") {
-    lastProgressPost = now;
+  if (now - lastAggregatePost > SPEED_CONFIG.progressThrottleMs || data.status === "done") {
+    lastAggregatePost = now;
     const { loaded, total } = aggregateProgress();
     post({ type: "progress", loaded, total });
+  }
+  if (!initializingStagePosted && allFilesDone()) {
+    initializingStagePosted = true;
+    post({ type: "stage", stage: "initializing" });
   }
 }
 async function supportsWebGPU() {
@@ -35333,40 +35477,147 @@ function classifyTranslateError(err) {
     return "memory";
   return "translate";
 }
-async function load(deviceWanted, dtype) {
-  if (loading || translator)
+function applyLangTag(text) {
+  const tag = loadedEngine?.langTag;
+  if (!tag)
+    return text;
+  return `>>${tag}<< ${text}`;
+}
+function stripLangTagEcho(text) {
+  return text.replace(/^>>[a-zA-Z_][a-zA-Z0-9_-]*<<\s*/, "");
+}
+function maxNewTokensFor(text) {
+  const { factor, plus, cap, charsPerToken } = SPEED_CONFIG.decoding;
+  let tokens;
+  try {
+    const tokenizer = translator.tokenizer;
+    tokens = tokenizer?.encode ? tokenizer.encode(text, { add_special_tokens: false }).length : Math.ceil(text.length / charsPerToken);
+  } catch {
+    tokens = Math.ceil(text.length / charsPerToken);
+  }
+  return Math.min(cap, Math.max(12, Math.round(factor * tokens + plus)));
+}
+function generateOptions(text, src, tgt, interrupt) {
+  const options = {
+    max_new_tokens: maxNewTokensFor(text),
+    num_beams: SPEED_CONFIG.decoding.numBeams,
+    do_sample: SPEED_CONFIG.decoding.doSample,
+    stopping_criteria: interrupt
+  };
+  if (loadedEngine?.kind === "nllb") {
+    options.src_lang = src;
+    options.tgt_lang = tgt;
+  }
+  return options;
+}
+function generateOptionsForGroup(texts, src, tgt, interrupt) {
+  const options = generateOptions(texts[0] ?? "", src, tgt, interrupt);
+  let maxTokens = Number(options.max_new_tokens) ?? 12;
+  for (const text of texts.slice(1)) {
+    maxTokens = Math.max(maxTokens, maxNewTokensFor(text));
+  }
+  options.max_new_tokens = maxTokens;
+  return options;
+}
+function resetFileProgress() {
+  fileProgress.clear();
+  lastFilePost.clear();
+  lastAggregatePost = 0;
+  downloadStagePosted = false;
+  initializingStagePosted = false;
+}
+async function disposeCurrent() {
+  if (runningJob)
+    runningJob.cancelled = true;
+  if (runningInterrupt)
+    runningInterrupt.stopped = true;
+  for (const job of queue)
+    job.cancelled = true;
+  queue.length = 0;
+  if (translator) {
+    try {
+      await translator.dispose();
+    } catch {}
+    translator = null;
+  }
+  loadedEngine = null;
+  deviceUsed = null;
+  postStatsSnapshot();
+}
+async function createPipeline(spec, device) {
+  return __webpack_exports__pipeline("translation", spec.modelId, {
+    dtype: "q8",
+    device,
+    progress_callback: onProgressCallback,
+    session_options: {
+      enableCpuMemArena: false,
+      graphOptimizationLevel,
+      enableMemPattern: false
+    }
+  });
+}
+async function warmUp(spec, src, tgt) {
+  if (!translator)
+    return false;
+  const interrupt = new InterruptCriteria;
+  const warmupText = applyLangTag(WARMUP_TEXT);
+  const output = await translator(warmupText, generateOptions(warmupText, src, tgt, interrupt));
+  const text = Array.isArray(output) ? output.map((o) => typeof o === "string" ? o : o.translation_text).join("").trim() : String(output).trim();
+  return text.length > 0;
+}
+async function load(spec, src, tgt, deviceWanted) {
+  if (loading)
     return;
+  if (translator && loadedEngine?.id === spec.id) {
+    if (loadedEngine.langTag !== spec.langTag) {
+      if (runningJob)
+        runningJob.cancelled = true;
+      if (runningInterrupt)
+        runningInterrupt.stopped = true;
+      for (const job of queue)
+        job.cancelled = true;
+      queue.length = 0;
+      loadedEngine = spec;
+    }
+    post({ type: "ready", device: deviceUsed ?? "wasm", engineId: spec.id });
+    return;
+  }
   loading = true;
   try {
-    const wantsGPU = deviceWanted === "webgpu" || deviceWanted === "auto" && await supportsWebGPU();
-    if (wantsGPU) {
+    await disposeCurrent();
+    resetFileProgress();
+    let usedDevice = "wasm";
+    if (deviceWanted === "webgpu" && await supportsWebGPU()) {
       try {
-        translator = await __webpack_exports__pipeline("translation", MODEL_ID, {
-          dtype,
-          device: "webgpu",
-          progress_callback: onProgressCallback
-        });
+        translator = await createPipeline(spec, "webgpu");
         deviceUsed = "webgpu";
+        usedDevice = "webgpu";
+        post({ type: "stage", stage: "testing" });
+        const ok = await warmUp(spec, src, tgt);
+        if (!ok)
+          throw new Error("empty warm up output");
       } catch {
+        if (translator) {
+          try {
+            await translator.dispose();
+          } catch {}
+        }
         translator = null;
         deviceUsed = null;
+        resetFileProgress();
       }
     }
     if (!translator) {
-      translator = await __webpack_exports__pipeline("translation", MODEL_ID, {
-        dtype,
-        device: "wasm",
-        progress_callback: onProgressCallback,
-        session_options: {
-          enableCpuMemArena: false,
-          graphOptimizationLevel: "basic",
-          enableMemPattern: false
-        }
-      });
+      translator = await createPipeline(spec, "wasm");
       deviceUsed = "wasm";
+      usedDevice = "wasm";
+      post({ type: "stage", stage: "testing" });
+      const ok = await warmUp(spec, src, tgt);
+      if (!ok)
+        throw new Error("empty warm up output");
     }
-    post({ type: "ready", device: deviceUsed });
-    pump();
+    loadedEngine = spec;
+    post({ type: "ready", device: usedDevice, engineId: spec.id });
   } catch (err) {
     post({
       type: "error",
@@ -35375,6 +35626,7 @@ async function load(deviceWanted, dtype) {
     });
   } finally {
     loading = false;
+    schedulePump();
   }
 }
 function pickNext() {
@@ -35391,79 +35643,113 @@ function pickNext() {
     return null;
   return queue.splice(bestIndex, 1)[0] ?? null;
 }
-async function pump() {
-  if (runningJob || !translator)
+function schedulePump() {
+  if (pumpScheduled)
     return;
-  for (;; ) {
-    const job = pickNext();
-    if (!job)
-      return;
-    runningJob = job;
-    try {
-      const started = performance.now();
-      const output = await translator(job.text, {
-        src_lang: job.src,
-        tgt_lang: job.tgt,
-        max_new_tokens: Math.min(512, Math.max(80, job.text.length))
+  pumpScheduled = true;
+  setTimeout(() => {
+    pumpScheduled = false;
+    pump();
+  }, 0);
+}
+async function pump() {
+  if (runningJob || !translator || loading)
+    return;
+  const job = pickNext();
+  if (!job)
+    return;
+  runningJob = job;
+  const interrupt = new InterruptCriteria;
+  runningInterrupt = interrupt;
+  const started = performance.now();
+  const chars = job.texts.reduce((sum, t) => sum + t.length, 0);
+  try {
+    const taggedTexts = job.texts.map(applyLangTag);
+    const perCallOptions = job.texts.length === 1 ? generateOptions(taggedTexts[0] ?? "", job.src, job.tgt, interrupt) : generateOptionsForGroup(taggedTexts, job.src, job.tgt, interrupt);
+    const output = await translator(job.texts.length === 1 ? taggedTexts[0] ?? "" : taggedTexts, perCallOptions);
+    const texts = (Array.isArray(output) ? output : [output]).map((o) => typeof o === "string" ? stripLangTagEcho(o).trim() : String(o.translation_text ?? "").trim());
+    if (!job.cancelled) {
+      post({
+        type: "result",
+        id: job.id,
+        texts,
+        ms: Math.round(performance.now() - started),
+        chars,
+        engineId: loadedEngine?.id ?? ""
       });
-      const text = Array.isArray(output) ? output.map((o) => typeof o === "string" ? o : o.translation_text).join("").trim() : String(output).trim();
-      if (!job.cancelled) {
-        post({ type: "result", id: job.id, text, ms: Math.round(performance.now() - started) });
-      }
-    } catch (err) {
-      if (!job.cancelled) {
-        post({
-          type: "error",
-          id: job.id,
-          code: classifyTranslateError(err),
-          message: err instanceof Error ? err.message : String(err)
-        });
-      }
-    } finally {
-      runningJob = null;
     }
+  } catch (err) {
+    if (!job.cancelled) {
+      post({
+        type: "error",
+        id: job.id,
+        code: classifyTranslateError(err),
+        message: err instanceof Error ? err.message : String(err)
+      });
+    }
+  } finally {
+    runningJob = null;
+    runningInterrupt = null;
+    schedulePump();
   }
+}
+function postStatsSnapshot() {
+  const memory = performance.memory;
+  post({
+    type: "stats",
+    used: memory?.usedJSHeapSize ?? null,
+    limit: memory?.jsHeapSizeLimit ?? null,
+    device: deviceUsed
+  });
 }
 self.onmessage = (event) => {
   const msg = event.data;
   switch (msg.type) {
-    case "init":
-      load(msg.device ?? "auto", msg.dtype ?? "q8");
+    case "hello":
+      post({ type: "hello", protocolVersion: PROTOCOL_VERSION, buildId: BUILD_ID });
       break;
-    case "translate":
+    case "init":
+      if (msg.graphOptimizationLevel)
+        graphOptimizationLevel = msg.graphOptimizationLevel;
+      load(msg.engine, msg.src, msg.tgt, msg.device);
+      break;
+    case "translate": {
+      const texts = msg.texts ?? (msg.text !== undefined ? [msg.text] : []);
+      if (texts.length === 0)
+        break;
       queue.push({
         id: msg.id,
-        text: msg.text,
+        texts,
         src: msg.src,
         tgt: msg.tgt,
         priority: msg.priority,
         seq: seqCounter++,
         cancelled: false
       });
-      pump();
+      schedulePump();
       break;
+    }
     case "cancel": {
       for (const job of queue) {
         if (job.id === msg.id)
           job.cancelled = true;
       }
-      if (runningJob?.id === msg.id)
-        runningJob.cancelled = true;
       for (let i = queue.length - 1;i >= 0; i--) {
         if (queue[i]?.cancelled)
           queue.splice(i, 1);
       }
+      if (runningJob?.id === msg.id) {
+        runningJob.cancelled = true;
+        if (runningInterrupt)
+          runningInterrupt.stopped = true;
+      }
       break;
     }
-    case "stats": {
-      const memory = performance.memory;
-      post({
-        type: "stats",
-        used: memory?.usedJSHeapSize ?? null,
-        limit: memory?.jsHeapSizeLimit ?? null,
-        device: deviceUsed
-      });
+    case "ping":
+      post({ type: "pong" });
       break;
-    }
+    case "stats":
+      postStatsSnapshot();
+      break;
   }
 };

@@ -17,6 +17,7 @@ import { toast } from "@/hooks/use-toast";
 import { translationCache } from "@/lib/cache";
 import { languageByCode } from "@/lib/languages";
 import { flatSentences, joinLines, segmentText } from "@/lib/segment";
+import { SPEED_CONFIG } from "@/lib/speed-config";
 import { copy as strings } from "@/lib/copy";
 
 type Props = {
@@ -40,7 +41,8 @@ export function BatchDialog({ open, onOpenChange }: Props) {
   const { engine, srcCode, tgtCode, srcLang, tgtLang, maybeStartSetup } = useTranslatorState();
   const [state, setState] = useState<BatchState>(INITIAL);
   const [batchText, setBatchText] = useState("");
-  const pendingRef = useRef(new Map<string, string>());
+  /** One entry per queued job: the sentences it carries. */
+  const pendingRef = useRef(new Map<string, string[]>());
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -77,20 +79,30 @@ export function BatchDialog({ open, onOpenChange }: Props) {
   }, [batchText, maybeStartSetup, srcLang?.bcp47]);
 
   // Queue work once the engine is ready. If setup was needed, this runs after
-  // it finishes, so whatever was pasted gets translated.
+  // it finishes, so whatever was pasted gets translated. Sentences are grouped
+  // into one inference call per group, which is faster per sentence than one
+  // call each when the engine benefits from batching (see lib/speed-config.ts).
   useEffect(() => {
     if (state.phase !== "running" || engine.status !== "ready") return;
     const segments = segmentText(state.text, srcLang?.bcp47 ?? "en");
     const all = flatSentences(segments);
-    let queued = 0;
+    const pendingSentences = new Set<string>();
+    for (const group of pendingRef.current.values()) {
+      for (const sentence of group) pendingSentences.add(sentence);
+    }
+    const toTranslate: string[] = [];
     for (const s of all) {
       if (translationCache.get(srcCode, tgtCode, s.text) !== undefined) continue;
-      if (Array.from(pendingRef.current.values()).includes(s.text)) continue;
-      const id = `b-${Date.now().toString(36)}-${batchIdCounter++}`;
-      pendingRef.current.set(id, s.text);
-      engine.translate(id, s.text, srcCode, tgtCode, "batch");
-      queued += 1;
+      if (pendingSentences.has(s.text)) continue;
+      toTranslate.push(s.text);
     }
+    for (let i = 0; i < toTranslate.length; i += SPEED_CONFIG.batch.groupSize) {
+      const group = toTranslate.slice(i, i + SPEED_CONFIG.batch.groupSize);
+      const id = `b-${Date.now().toString(36)}-${batchIdCounter++}`;
+      pendingRef.current.set(id, group);
+      engine.translate(id, group, srcCode, tgtCode, "batch");
+    }
+    const queued = toTranslate.length;
     const alreadyCached = all.length - queued;
     if (queued === 0) {
       setState((prev) => ({ ...prev, phase: "done", done: all.length }));
@@ -104,21 +116,24 @@ export function BatchDialog({ open, onOpenChange }: Props) {
     if (state.phase !== "running") return;
     return engine.subscribe((message) => {
       if (message.type === "result" && message.id && pendingRef.current.has(message.id)) {
-        const sentence = pendingRef.current.get(message.id) ?? "";
+        const group = pendingRef.current.get(message.id) ?? [];
         pendingRef.current.delete(message.id);
-        // The result lands in the shared cache, and the assembled output is
+        // The results land in the shared cache, and the assembled output is
         // derived from it, never from arrival order.
-        translationCache.set(srcCode, tgtCode, sentence, message.text);
+        group.forEach((sentence, index) => {
+          translationCache.set(srcCode, tgtCode, sentence, message.texts[index] ?? "");
+        });
         setState((prev) => {
-          const done = prev.done + 1;
+          const done = prev.done + group.length;
           const finished = done >= prev.total && pendingRef.current.size === 0;
           return { ...prev, done, phase: finished ? "done" : "running" };
         });
       } else if (message.type === "error" && message.id && pendingRef.current.has(message.id)) {
+        const group = pendingRef.current.get(message.id) ?? [];
         pendingRef.current.delete(message.id);
         setState((prev) => {
-          const done = prev.done + 1;
-          const failed = prev.failed + 1;
+          const done = prev.done + group.length;
+          const failed = prev.failed + group.length;
           const finished = done >= prev.total && pendingRef.current.size === 0;
           return { ...prev, done, failed, phase: finished ? "done" : "running" };
         });

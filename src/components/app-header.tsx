@@ -2,10 +2,11 @@
 
 /**
  * Page header. Wordmark on the left, History, Batch, Share and Settings on the
- * right, collapsing into a menu on small screens.
+ * right, collapsing into a menu on small screens. Slim and sticky, with a
+ * hairline border that appears once the page scrolls.
  */
 
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { History, Layers, MoreHorizontal, Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,9 +27,21 @@ type Props = {
 };
 
 function AppHeaderInner({ onOpenHistory, onOpenBatch, onOpenSettings }: Props) {
+  // A hairline border appears once the page scrolls.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="border-b bg-background">
-      <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+    <header
+      data-scrolled={scrolled ? "true" : undefined}
+      className="sticky top-0 z-40 border-b border-transparent bg-background transition-colors duration-200 data-[scrolled=true]:border-border"
+    >
+      <div className="mx-auto flex w-full max-w-[1120px] items-center justify-between gap-3 px-4 py-2.5 sm:px-6 lg:px-8">
         <div className="type-wordmark select-none">{copy.app.wordmark}</div>
 
         <nav aria-label={copy.app.wordmark} className="hidden items-center gap-0.5 md:flex">

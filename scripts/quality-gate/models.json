@@ -1,0 +1,29 @@
+{
+  "fullModel": {
+    "modelId": "Xenova/nllb-200-distilled-600M",
+    "dtype": "q8"
+  },
+  "candidates": [
+    { "pair": "en->fr", "modelId": "Xenova/opus-mt-en-fr",   "srcLang": "eng_Latn", "tgtLang": "fra_Latn", "testSet": "en", "nllbNeedsLangs": true },
+    { "pair": "en->es", "modelId": "Xenova/opus-mt-en-es",   "srcLang": "eng_Latn", "tgtLang": "spa_Latn", "testSet": "en", "nllbNeedsLangs": true },
+    { "pair": "en->de", "modelId": "Xenova/opus-mt-en-de",   "srcLang": "eng_Latn", "tgtLang": "deu_Latn", "testSet": "en", "nllbNeedsLangs": true },
+    { "pair": "en->it", "modelId": "Xenova/opus-mt-en-it",   "srcLang": "eng_Latn", "tgtLang": "ita_Latn", "testSet": "en", "nllbNeedsLangs": true },
+    { "pair": "en->nl", "modelId": "Xenova/opus-mt-en-nl",   "srcLang": "eng_Latn", "tgtLang": "nld_Latn", "testSet": "en", "nllbNeedsLangs": true },
+    { "pair": "en->ru", "modelId": "Xenova/opus-mt-en-ru",   "srcLang": "eng_Latn", "tgtLang": "rus_Cyrl", "testSet": "en", "nllbNeedsLangs": true },
+    { "pair": "en->zh", "modelId": "Xenova/opus-mt-en-zh",   "srcLang": "eng_Latn", "tgtLang": "zho_Hans", "testSet": "en", "nllbNeedsLangs": true },
+    { "pair": "en->ja", "modelId": "Xenova/opus-mt-en-jap",  "srcLang": "eng_Latn", "tgtLang": "jpn_Jpan", "testSet": "en", "nllbNeedsLangs": true },
+    { "pair": "en->ar", "modelId": "Xenova/opus-mt-en-ar",   "srcLang": "eng_Latn", "tgtLang": "arb_Arab", "testSet": "en", "nllbNeedsLangs": true },
+    { "pair": "en->hi", "modelId": "Xenova/opus-mt-en-hi",   "srcLang": "eng_Latn", "tgtLang": "hin_Deva", "testSet": "en", "nllbNeedsLangs": true },
+    { "pair": "fr->en", "modelId": "Xenova/opus-mt-fr-en",   "srcLang": "fra_Latn", "tgtLang": "eng_Latn", "testSet": "fr", "nllbNeedsLangs": true },
+    { "pair": "es->en", "modelId": "Xenova/opus-mt-es-en",   "srcLang": "spa_Latn", "tgtLang": "eng_Latn", "testSet": "es", "nllbNeedsLangs": true },
+    { "pair": "de->en", "modelId": "Xenova/opus-mt-de-en",   "srcLang": "deu_Latn", "tgtLang": "eng_Latn", "testSet": "de", "nllbNeedsLangs": true },
+    { "pair": "it->en", "modelId": "Xenova/opus-mt-it-en",   "srcLang": "ita_Latn", "tgtLang": "eng_Latn", "testSet": "it", "nllbNeedsLangs": true },
+    { "pair": "nl->en", "modelId": "Xenova/opus-mt-nl-en",   "srcLang": "nld_Latn", "tgtLang": "eng_Latn", "testSet": "nl", "nllbNeedsLangs": true },
+    { "pair": "ru->en", "modelId": "Xenova/opus-mt-ru-en",   "srcLang": "rus_Cyrl", "tgtLang": "eng_Latn", "testSet": "ru", "nllbNeedsLangs": true },
+    { "pair": "zh->en", "modelId": "Xenova/opus-mt-zh-en",   "srcLang": "zho_Hans", "tgtLang": "eng_Latn", "testSet": "zh", "nllbNeedsLangs": true },
+    { "pair": "ja->en", "modelId": "Xenova/opus-mt-ja-en",   "srcLang": "jpn_Jpan", "tgtLang": "eng_Latn", "testSet": "ja", "nllbNeedsLangs": true },
+    { "pair": "ar->en", "modelId": "Xenova/opus-mt-ar-en",   "srcLang": "arb_Arab", "tgtLang": "eng_Latn", "testSet": "ar", "nllbNeedsLangs": true },
+    { "pair": "hi->en", "modelId": "Xenova/opus-mt-hi-en",   "srcLang": "hin_Deva", "tgtLang": "eng_Latn", "testSet": "hi", "nllbNeedsLangs": true },
+    { "pair": "tr->en", "modelId": "Xenova/opus-mt-tr-en",   "srcLang": "tur_Latn", "tgtLang": "eng_Latn", "testSet": "tr", "nllbNeedsLangs": true }
+  ]
+}

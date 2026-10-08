@@ -55,6 +55,14 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// Runs before first paint, like the theme script. If setup finished on an
+// earlier visit, the root gets data-hero="compact" and CSS renders the compact
+// hero at the first frame: no flash, no layout shift, no hydration mismatch,
+// because the markup never changes. The js class only enables the section
+// reveal when JavaScript is actually running, so content is never hidden
+// without it.
+const prePaintScript = `(function(){try{if(localStorage.getItem("pt.model.ready")==="1"){document.documentElement.dataset.hero="compact"}}catch(e){}try{document.documentElement.classList.add("js")}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -63,6 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <body className={`${plexSans.variable} ${newsreader.variable} font-sans antialiased bg-background text-foreground`}>
+        <script dangerouslySetInnerHTML={{ __html: prePaintScript }} />
         <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
           <Toaster />

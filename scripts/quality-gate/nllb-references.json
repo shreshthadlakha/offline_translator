@@ -1,0 +1,387 @@
+{
+  "modelId": "Xenova/nllb-200-distilled-600M",
+  "dtype": "q8",
+  "generatedAt": "2026-10-10T11:04:05.918Z",
+  "maxNewTokens": 256,
+  "directions": [
+    {
+      "pair": "en->fr",
+      "srcLang": "eng_Latn",
+      "tgtLang": "fra_Latn",
+      "testSet": "en",
+      "outputs": [
+        "- Je vous en prie.",
+        "Où se trouve la pharmacie la plus proche?",
+        "Je voudrais une tasse de café, s'il vous plaît.",
+        "Le train part à dix heures du midi.",
+        "Tu peux m'aider à le porter?",
+        "Ma sœur vient me rendre visite la semaine prochaine.",
+        "Le temps est beau aujourd'hui.",
+        "J'ai oublié mon parapluie au bureau.",
+        "Nous devrions partir tôt pour éviter la circulation.",
+        "Les enfants jouaient dans le jardin tandis que leur grand-mère regardait par la fenêtre."
+      ]
+    },
+    {
+      "pair": "en->es",
+      "srcLang": "eng_Latn",
+      "tgtLang": "spa_Latn",
+      "testSet": "en",
+      "outputs": [
+        "- ¿Qué pasa?",
+        "¿Dónde está la farmacia más cercana?",
+        "Me gustaría una taza de café, por favor.",
+        "El tren sale a las diez del mediodía.",
+        "¿Podrías ayudarme a llevar esto arriba?",
+        "Mi hermana viene a visitarla la semana que viene.",
+        "El tiempo es precioso hoy.",
+        "Me olvidé de mi paraguas en la oficina.",
+        "Deberíamos salir temprano para evitar el tráfico.",
+        "Los niños jugaban en el jardín mientras su abuela miraba por la ventana."
+      ]
+    },
+    {
+      "pair": "en->de",
+      "srcLang": "eng_Latn",
+      "tgtLang": "deu_Latn",
+      "testSet": "en",
+      "outputs": [
+        "- Gute Morgen. - Gute Morgen.",
+        "Wo ist die nächste Apotheke?",
+        "Ich hätte gern eine Tasse Kaffee, bitte.",
+        "Der Zug fährt um zehn Uhr nachmittags ab.",
+        "Kannst du mir helfen, das oben zu tragen?",
+        "Meine Schwester kommt nächste Woche zu Besuch.",
+        "Das Wetter ist heute schön.",
+        "Ich habe meinen Regenschirm im Büro vergessen.",
+        "Wir sollten früh gehen, um den Verkehr zu vermeiden.",
+        "Die Kinder spielten im Garten, während ihre Großmutter vom Fenster aus zuschaute."
+      ]
+    },
+    {
+      "pair": "en->it",
+      "srcLang": "eng_Latn",
+      "tgtLang": "ita_Latn",
+      "testSet": "en",
+      "outputs": [
+        "- Buongiorno. - Ciao.",
+        "Dov'è la farmacia più vicina?",
+        "Vorrei una tazza di caffè, per favore.",
+        "Il treno parte alle dieci del pomeriggio.",
+        "Potresti aiutarmi a portare questo di sopra?",
+        "Mia sorella viene a trovarmi la settimana prossima.",
+        "Il tempo è bello oggi.",
+        "Ho dimenticato il mio ombrello in ufficio.",
+        "Dovremmo partire presto per evitare il traffico.",
+        "I bambini giocavano nel giardino mentre la nonna guardava dalla finestra."
+      ]
+    },
+    {
+      "pair": "en->nl",
+      "srcLang": "eng_Latn",
+      "tgtLang": "nld_Latn",
+      "testSet": "en",
+      "outputs": [
+        "- Goedenavond.",
+        "Waar is de dichtstbijzijnde apotheek?",
+        "Ik wil graag een kop koffie, alsjeblieft.",
+        "De trein vertrekt om tien uur.",
+        "Kun je me helpen dit naar boven te dragen?",
+        "Mijn zus komt volgende week op bezoek.",
+        "Het weer is heerlijk vandaag.",
+        "Ik ben mijn paraplu vergeten.",
+        "We moeten vroeg vertrekken om het verkeer te vermijden.",
+        "De kinderen speelden in de tuin terwijl hun oma uit het raam keek."
+      ]
+    },
+    {
+      "pair": "en->ru",
+      "srcLang": "eng_Latn",
+      "tgtLang": "rus_Cyrl",
+      "testSet": "en",
+      "outputs": [
+        "- Доброе утро.",
+        "Где ближайшая аптека?",
+        "Я бы хотел чашку кофе, пожалуйста.",
+        "Поезд отправляется в десять часов дня.",
+        "Поможешь мне с этим подняться?",
+        "Моя сестра придет на следующую неделю.",
+        "Сегодня прекрасная погода.",
+        "Я забыл свой зонтик в офисе.",
+        "Мы должны уехать рано, чтобы избежать трафика.",
+        "Дети играли в саду, а их бабушка смотрела из окна."
+      ]
+    },
+    {
+      "pair": "en->zh",
+      "srcLang": "eng_Latn",
+      "tgtLang": "zho_Hans",
+      "testSet": "en",
+      "outputs": [
+        "您好,您好.",
+        "最近的药店在哪里?",
+        "我想要一杯咖啡,请.",
+        "火车上午十点离开.",
+        "你能帮我抬上楼吗?",
+        "我妹妹下周来拜访.",
+        "今天天气很好.",
+        "我在办公室里忘了我的雨.",
+        "我们应该早点离开,以避免交通.",
+        "孩子们在花园里玩,而他们的祖母从窗户看着."
+      ]
+    },
+    {
+      "pair": "en->ja",
+      "srcLang": "eng_Latn",
+      "tgtLang": "jpn_Jpan",
+      "testSet": "en",
+      "outputs": [
+        "おはようございます",
+        "最寄りの薬局はどこですか?",
+        "コーヒーを飲みたい.",
+        "電車は昼10時に出発する.",
+        "持ち上げてくれる?",
+        "私の妹は来週訪問に来ます.",
+        "今日は天気が素敵だ.",
+        "オフィスで傘を忘れた.",
+        "交通を避けるために早めに出発すべきだ.",
+        "子供たちは庭で遊んでいたが,祖母は窓から眺めていた."
+      ]
+    },
+    {
+      "pair": "en->ar",
+      "srcLang": "eng_Latn",
+      "tgtLang": "arb_Arab",
+      "testSet": "en",
+      "outputs": [
+        "صباح الخير",
+        "أين أقرب صيدلية؟",
+        "أريد كوب قهوة من فضلك",
+        "القطار يغادر الساعة العاشرة بعد الظهر.",
+        "هل يمكنك مساعدتي في حمل هذا إلى الأعلى؟",
+        "أختي ستأتي لزيارة الأسبوع المقبل",
+        "الطقس جميل اليوم",
+        "نسيت مظلتي في المكتب",
+        "يجب أن نغادر مبكراً لتجنب حركة المرور",
+        "كان الأطفال يلعبون في الحديقة بينما كانت جدتهم تنظر من النافذة."
+      ]
+    },
+    {
+      "pair": "en->hi",
+      "srcLang": "eng_Latn",
+      "tgtLang": "hin_Deva",
+      "testSet": "en",
+      "outputs": [
+        "शुभ दोपहर.",
+        "निकटतम दवाखाना कहाँ है?",
+        "मैं एक कप कॉफी चाहूंगा, कृपया।",
+        "ट्रेन दोपहर दस बजे निकलती है।",
+        "क्या आप मुझे ऊपर ले जाने में मदद कर सकते हैं?",
+        "मेरी बहन अगले सप्ताह आने वाली है।",
+        "आज मौसम अच्छा है।",
+        "मैं कार्यालय में अपनी छतरी भूल गया.",
+        "हमें यातायात से बचने के लिए जल्दी जाना चाहिए।",
+        "बच्चे बाग में खेल रहे थे जबकि उनकी दादी खिड़की से देख रही थी।"
+      ]
+    },
+    {
+      "pair": "fr->en",
+      "srcLang": "fra_Latn",
+      "tgtLang": "eng_Latn",
+      "testSet": "fr",
+      "outputs": [
+        "- What's up?",
+        "Where's the nearest pharmacy?",
+        "I'd like a coffee, please.",
+        "The train leaves at ten o'clock.",
+        "Can you help me carry this upstairs?",
+        "My sister's coming to visit next week.",
+        "It's a beautiful day today.",
+        "I forgot my umbrella at the office.",
+        "We should leave early to avoid traffic jams.",
+        "The children were playing in the garden while their grandmother was watching them from the window."
+      ]
+    },
+    {
+      "pair": "es->en",
+      "srcLang": "spa_Latn",
+      "tgtLang": "eng_Latn",
+      "testSet": "es",
+      "outputs": [
+        "- Good morning to you.",
+        "Where's the nearest pharmacy?",
+        "I want a coffee, please.",
+        "The train leaves at twelve and ten.",
+        "Can you help me get this up?",
+        "My sister is coming to visit next week.",
+        "Today is a very pleasant time.",
+        "I forgot my umbrella in the office.",
+        "We should leave early to avoid traffic.",
+        "The children were playing in the garden while their grandmother looked at them from the window."
+      ]
+    },
+    {
+      "pair": "de->en",
+      "srcLang": "deu_Latn",
+      "tgtLang": "eng_Latn",
+      "testSet": "de",
+      "outputs": [
+        "- Good morning, please.",
+        "Where's the next pharmacy?",
+        "I'd like a coffee, please.",
+        "The train leaves at ten to twelve.",
+        "Can you help me carry this upstairs?",
+        "My sister's coming next week.",
+        "The weather is lovely today.",
+        "I left my umbrella in the office.",
+        "We should leave early to avoid traffic.",
+        "The children were playing in the garden while their grandmother was looking out the window."
+      ]
+    },
+    {
+      "pair": "it->en",
+      "srcLang": "ita_Latn",
+      "tgtLang": "eng_Latn",
+      "testSet": "it",
+      "outputs": [
+        "- Good morning, please.",
+        "Where's the nearest pharmacy?",
+        "I'd like a coffee, please.",
+        "The train leaves at twelve and ten.",
+        "Can you help me get this upstairs?",
+        "My sister's coming to visit next week.",
+        "Today's the weather is beautiful.",
+        "I forgot my umbrella at the office.",
+        "We should leave early to avoid traffic.",
+        "The children were playing in the garden while grandma was looking out the window."
+      ]
+    },
+    {
+      "pair": "nl->en",
+      "srcLang": "nld_Latn",
+      "tgtLang": "eng_Latn",
+      "testSet": "nl",
+      "outputs": [
+        "- Good morning, please.",
+        "Where's the nearest pharmacy?",
+        "I'd like a cup of coffee, please.",
+        "The train leaves at ten o'clock at twelve.",
+        "Can you help me carry this upstairs?",
+        "My sister's coming next week.",
+        "The weather is delicious today.",
+        "I forgot my umbrella at the office.",
+        "We have to leave early to avoid traffic.",
+        "The children were playing in the garden while their grandmother was looking out the window."
+      ]
+    },
+    {
+      "pair": "ru->en",
+      "srcLang": "rus_Cyrl",
+      "tgtLang": "eng_Latn",
+      "testSet": "ru",
+      "outputs": [
+        "- Good morning, please.",
+        "Where's the nearest pharmacy?",
+        "I'd like a cup of coffee, please.",
+        "The train leaves at ten minutes one.",
+        "Can you help me get this upstairs?",
+        "My sister's coming to see us next week.",
+        "It's a wonderful day.",
+        "I forgot my umbrella in the office.",
+        "We should leave early to avoid traffic.",
+        "The children were playing in the garden while their grandmother was looking out the window."
+      ]
+    },
+    {
+      "pair": "zh->en",
+      "srcLang": "zho_Hans",
+      "tgtLang": "eng_Latn",
+      "testSet": "zh",
+      "outputs": [
+        "Good morning, please.",
+        "Where is the nearest pharmacy?",
+        "Give me a cup of coffee, please.",
+        "The train leaves at 12:10 pm.",
+        "Can you help me move this upstairs?",
+        "My sister is coming to visit us next week.",
+        "The weather is nice today.",
+        "I forgot my mom in the office.",
+        "We should leave early to avoid the traffic jam.",
+        "The children are playing in the garden, their grandmothers are watching them from the window."
+      ]
+    },
+    {
+      "pair": "ja->en",
+      "srcLang": "jpn_Jpan",
+      "tgtLang": "eng_Latn",
+      "testSet": "ja",
+      "outputs": [
+        "Good morning, you know.",
+        "Where's the nearest pharmacy?",
+        "Have a cup of coffee.",
+        "The train leaves at 12 o'clock.",
+        "Can you help me carry this upstairs?",
+        "My sister's coming to visit next week.",
+        "It's a nice day.",
+        "I left my umbrella in my office.",
+        "We should leave early to avoid traffic jams.",
+        "The children were playing in the garden, and Grandma was looking out the window."
+      ]
+    },
+    {
+      "pair": "ar->en",
+      "srcLang": "arb_Arab",
+      "tgtLang": "eng_Latn",
+      "testSet": "ar",
+      "outputs": [
+        "Good morning, you.",
+        "Where's the nearest pharmacy?",
+        "I'd like a cup of coffee, please.",
+        "The train leaves at 12:10 minutes.",
+        "Can you help me carry this upstairs?",
+        "My sister's coming next week.",
+        "The weather is nice today.",
+        "I forgot my umbrella at the office.",
+        "We have to get out early to avoid the crowds.",
+        "The children were playing in the garden while their grandmother was watching them out the window."
+      ]
+    },
+    {
+      "pair": "hi->en",
+      "srcLang": "hin_Deva",
+      "tgtLang": "eng_Latn",
+      "testSet": "hi",
+      "outputs": [
+        "Good morning.",
+        "Where is the nearest pharmacy?",
+        "I need a cup of coffee, please.",
+        "The train leaves at twelve o 'clock and ten minutes.",
+        "Can you help me get it up?",
+        "My sister is coming to visit us next week.",
+        "Today the weather is very good.",
+        "I forgot my umbrella in the office.",
+        "We must leave early to avoid traffic.",
+        "The children were playing in the garden and their grandmother was looking out the window."
+      ]
+    },
+    {
+      "pair": "tr->en",
+      "srcLang": "tur_Latn",
+      "tgtLang": "eng_Latn",
+      "testSet": "tr",
+      "outputs": [
+        "- Good morning, please.",
+        "Where's the nearest pharmacy?",
+        "I'd like a cup of coffee, please.",
+        "The train leaves at 12 o'clock.",
+        "Can you help me move this up?",
+        "My sister is coming to visit us next week.",
+        "It's a nice day.",
+        "I left my umbrella at the office.",
+        "We need to get out early so we don't get caught in traffic.",
+        "The children were playing in the garden and their grandmothers were watching them through the window."
+      ]
+    }
+  ],
+  "loadTimeSeconds": 5.991
+}

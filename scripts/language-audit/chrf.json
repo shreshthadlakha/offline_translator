@@ -1,0 +1,559 @@
+{
+  "generatedAt": "2026-10-10T21:32:21.823Z",
+  "shippedBand": {
+    "count": 21,
+    "min": 5.382772454606988,
+    "p25": 75.50966863875692,
+    "median": 77.06993713262302,
+    "max": 87.69217237597978
+  },
+  "shipped": [
+    {
+      "id": "Xenova/opus-mt-en-fr",
+      "key": "en->fr",
+      "chrf": 76.0426952719562
+    },
+    {
+      "id": "Xenova/opus-mt-en-es",
+      "key": "en->es",
+      "chrf": 75.50966863875692
+    },
+    {
+      "id": "Xenova/opus-mt-en-de",
+      "key": "en->de",
+      "chrf": 86.95193004416345
+    },
+    {
+      "id": "Xenova/opus-mt-en-it",
+      "key": "en->it",
+      "chrf": 76.65626018963644
+    },
+    {
+      "id": "Xenova/opus-mt-en-nl",
+      "key": "en->nl",
+      "chrf": 81.35811716428111
+    },
+    {
+      "id": "Xenova/opus-mt-en-ru",
+      "key": "en->ru",
+      "chrf": 76.51817518044356
+    },
+    {
+      "id": "Xenova/opus-mt-en-zh",
+      "key": "en->zh",
+      "chrf": 46.03319965571437
+    },
+    {
+      "id": "Xenova/opus-mt-en-jap",
+      "key": "en->ja",
+      "chrf": 5.382772454606988
+    },
+    {
+      "id": "Xenova/opus-mt-en-ar",
+      "key": "en->ar",
+      "chrf": 87.69217237597978
+    },
+    {
+      "id": "Xenova/opus-mt-en-hi",
+      "key": "en->hi",
+      "chrf": 50.41589959993739
+    },
+    {
+      "id": "Xenova/opus-mt-fr-en",
+      "key": "fr->en",
+      "chrf": 80.17528942826728
+    },
+    {
+      "id": "Xenova/opus-mt-es-en",
+      "key": "es->en",
+      "chrf": 79.07268597443212
+    },
+    {
+      "id": "Xenova/opus-mt-de-en",
+      "key": "de->en",
+      "chrf": 77.06993713262302
+    },
+    {
+      "id": "Xenova/opus-mt-it-en",
+      "key": "it->en",
+      "chrf": 81.59283340187048
+    },
+    {
+      "id": "Xenova/opus-mt-nl-en",
+      "key": "nl->en",
+      "chrf": 87.09674537771141
+    },
+    {
+      "id": "Xenova/opus-mt-ru-en",
+      "key": "ru->en",
+      "chrf": 78.48463373855847
+    },
+    {
+      "id": "Xenova/opus-mt-zh-en",
+      "key": "zh->en",
+      "chrf": 65.69582429781481
+    },
+    {
+      "id": "Xenova/opus-mt-ja-en",
+      "key": "ja->en",
+      "chrf": 77.99314001304681
+    },
+    {
+      "id": "Xenova/opus-mt-ar-en",
+      "key": "ar->en",
+      "chrf": 80.84203578018035
+    },
+    {
+      "id": "Xenova/opus-mt-hi-en",
+      "key": "hi->en",
+      "chrf": 70.81766757571114
+    },
+    {
+      "id": "Xenova/opus-mt-tr-en",
+      "key": "tr->en",
+      "chrf": 76.45048344863935
+    }
+  ],
+  "rows": [
+    {
+      "id": "opus-en-mul",
+      "key": "en->zho_Hant",
+      "chrf": 0.2442380460956312
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->ory_Orya",
+      "chrf": 14.387462240814504
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->pbt_Arab",
+      "chrf": 15.64944889134909
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->asm_Beng",
+      "chrf": 20.522915643938667
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "swh_Latn->en",
+      "chrf": 21.45603814449459
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->jpn_Jpan",
+      "chrf": 21.865619952532207
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->amh_Ethi",
+      "chrf": 24.268884788099438
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "pes_Arab->en",
+      "chrf": 28.981330159108502
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->mar_Deva",
+      "chrf": 30.967597023571273
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "pbt_Arab->en",
+      "chrf": 31.18332246917088
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->pes_Arab",
+      "chrf": 31.268886605404937
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->guj_Gujr",
+      "chrf": 32.36247342393936
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->sin_Sinh",
+      "chrf": 34.65650675084832
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->kan_Knda",
+      "chrf": 35.89800264474567
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "hau_Latn->en",
+      "chrf": 36.527313723756194
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "npi_Deva->en",
+      "chrf": 38.27980212517246
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->pan_Guru",
+      "chrf": 38.286025019693135
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->tel_Telu",
+      "chrf": 38.76066697685937
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "ory_Orya->en",
+      "chrf": 39.8176410433446
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->yor_Latn",
+      "chrf": 42.03939019889389
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "zsm_Latn->en",
+      "chrf": 42.79845998697326
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->mal_Mlym",
+      "chrf": 43.803496479487514
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->urd_Arab",
+      "chrf": 44.226804699237604
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->hau_Latn",
+      "chrf": 44.54711451799692
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "yor_Latn->en",
+      "chrf": 44.79355442645395
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "tel_Telu->en",
+      "chrf": 45.09132711326415
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "mar_Deva->en",
+      "chrf": 45.91176186401509
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "guj_Gujr->en",
+      "chrf": 46.425865998657684
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->tam_Taml",
+      "chrf": 46.46695448918283
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "zho_Hant->en",
+      "chrf": 47.591952656005176
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->zul_Latn",
+      "chrf": 47.88750588491489
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "kan_Knda->en",
+      "chrf": 48.094327500716375
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "tam_Taml->en",
+      "chrf": 48.59830637804079
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->ben_Beng",
+      "chrf": 49.92949419378648
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "asm_Beng->en",
+      "chrf": 51.20796155508428
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "amh_Ethi->en",
+      "chrf": 51.51450213613475
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->tur_Latn",
+      "chrf": 51.907376231064845
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "heb_Hebr->en",
+      "chrf": 53.211229444053686
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->ell_Grek",
+      "chrf": 54.45717688178407
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "cat_Latn->en",
+      "chrf": 54.776420696610145
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->srp_Cyrl",
+      "chrf": 56.433105940638804
+    },
+    {
+      "id": "opus-th-en",
+      "key": "tha_Thai->en",
+      "chrf": 56.586359918517374
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->zsm_Latn",
+      "chrf": 57.15480236311258
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "ron_Latn->en",
+      "chrf": 57.174168805343356
+    },
+    {
+      "id": "opus-en-romance",
+      "key": "en->cat_Latn",
+      "chrf": 57.37381383479051
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "urd_Arab->en",
+      "chrf": 57.716283410994286
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "sin_Sinh->en",
+      "chrf": 58.26801846467654
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->hrv_Latn",
+      "chrf": 58.460217882084365
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "ben_Beng->en",
+      "chrf": 58.558669398156056
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->heb_Hebr",
+      "chrf": 60.00317807337476
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->bul_Cyrl",
+      "chrf": 60.04916518600887
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->cat_Latn",
+      "chrf": 60.49638276328515
+    },
+    {
+      "id": "opus-romance-en",
+      "key": "cat_Latn->en",
+      "chrf": 61.385293300108096
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "pan_Guru->en",
+      "chrf": 62.582246535234596
+    },
+    {
+      "id": "opus-en-uk",
+      "key": "en->ukr_Cyrl",
+      "chrf": 62.71823652008603
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "bul_Cyrl->en",
+      "chrf": 62.905653408362376
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "por_Latn->en",
+      "chrf": 63.17591314997909
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "srp_Cyrl->en",
+      "chrf": 65.27946948998508
+    },
+    {
+      "id": "opus-en-vi",
+      "key": "en->vie_Latn",
+      "chrf": 65.7137986555297
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->por_Latn",
+      "chrf": 65.79899839717376
+    },
+    {
+      "id": "opus-ko-en",
+      "key": "kor_Hang->en",
+      "chrf": 65.84621549278245
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "zul_Latn->en",
+      "chrf": 65.87159893074325
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "hrv_Latn->en",
+      "chrf": 66.9958146651166
+    },
+    {
+      "id": "opus-en-hu",
+      "key": "en->hun_Latn",
+      "chrf": 67.5283940914399
+    },
+    {
+      "id": "opus-en-mul",
+      "key": "en->nob_Latn",
+      "chrf": 68.13219805422315
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "mal_Mlym->en",
+      "chrf": 68.5249615116605
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "nob_Latn->en",
+      "chrf": 68.9113788538262
+    },
+    {
+      "id": "opus-mul-en",
+      "key": "ell_Grek->en",
+      "chrf": 70.14921748792621
+    },
+    {
+      "id": "opus-en-fi",
+      "key": "en->fin_Latn",
+      "chrf": 72.64018678059475
+    },
+    {
+      "id": "opus-en-romance",
+      "key": "en->por_Latn",
+      "chrf": 73.96754421081047
+    },
+    {
+      "id": "opus-en-cs",
+      "key": "en->ces_Latn",
+      "chrf": 75.06241332541714
+    },
+    {
+      "id": "opus-hu-en",
+      "key": "hun_Latn->en",
+      "chrf": 77.58652882618021
+    },
+    {
+      "id": "opus-cs-en",
+      "key": "ces_Latn->en",
+      "chrf": 77.9330229835059
+    },
+    {
+      "id": "opus-af-en",
+      "key": "afr_Latn->en",
+      "chrf": 78.34887825247367
+    },
+    {
+      "id": "opus-en-da",
+      "key": "en->dan_Latn",
+      "chrf": 78.93041648277013
+    },
+    {
+      "id": "opus-da-en",
+      "key": "dan_Latn->en",
+      "chrf": 78.96062559798085
+    },
+    {
+      "id": "opus-fi-en",
+      "key": "fin_Latn->en",
+      "chrf": 79.74422524787562
+    },
+    {
+      "id": "opus-en-sv",
+      "key": "en->swe_Latn",
+      "chrf": 80.34368675056734
+    },
+    {
+      "id": "opus-romance-en",
+      "key": "ron_Latn->en",
+      "chrf": 80.5688931050671
+    },
+    {
+      "id": "opus-pl-en",
+      "key": "pol_Latn->en",
+      "chrf": 83.6008506366427
+    },
+    {
+      "id": "opus-uk-en",
+      "key": "ukr_Cyrl->en",
+      "chrf": 84.58848067963785
+    },
+    {
+      "id": "opus-id-en",
+      "key": "ind_Latn->en",
+      "chrf": 85.1215215929695
+    },
+    {
+      "id": "opus-en-af",
+      "key": "en->afr_Latn",
+      "chrf": 85.4106055886388
+    },
+    {
+      "id": "opus-vi-en",
+      "key": "vie_Latn->en",
+      "chrf": 85.4471574966528
+    },
+    {
+      "id": "opus-sv-en",
+      "key": "swe_Latn->en",
+      "chrf": 86.48197118952599
+    },
+    {
+      "id": "opus-en-ro",
+      "key": "en->ron_Latn",
+      "chrf": 88.14333727460094
+    },
+    {
+      "id": "opus-romance-en",
+      "key": "por_Latn->en",
+      "chrf": 89.24582272841835
+    },
+    {
+      "id": "opus-en-id",
+      "key": "en->ind_Latn",
+      "chrf": 96.743708247054
+    }
+  ]
+}

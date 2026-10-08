@@ -16,6 +16,10 @@ export type Settings = {
   keepHistory: boolean;
   lastSrc: string;
   lastTgt: string;
+  /** Prefer small fast models for pairs that have one. */
+  useFastModels: boolean;
+  /** Experimental: try WebGPU instead of WebAssembly. Off by default. */
+  useWebGPU: boolean;
 };
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -24,6 +28,8 @@ export const DEFAULT_SETTINGS: Settings = {
   keepHistory: true,
   lastSrc: "eng_Latn",
   lastTgt: "fra_Latn",
+  useFastModels: true,
+  useWebGPU: false,
 };
 
 let snapshot: Settings | null = null;
@@ -38,6 +44,8 @@ function readFromStorage(): Settings {
     keepHistory: typeof stored.keepHistory === "boolean" ? stored.keepHistory : DEFAULT_SETTINGS.keepHistory,
     lastSrc: typeof stored.lastSrc === "string" ? stored.lastSrc : DEFAULT_SETTINGS.lastSrc,
     lastTgt: typeof stored.lastTgt === "string" ? stored.lastTgt : DEFAULT_SETTINGS.lastTgt,
+    useFastModels: typeof stored.useFastModels === "boolean" ? stored.useFastModels : DEFAULT_SETTINGS.useFastModels,
+    useWebGPU: typeof stored.useWebGPU === "boolean" ? stored.useWebGPU : DEFAULT_SETTINGS.useWebGPU,
   };
 }
 

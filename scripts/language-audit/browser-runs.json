@@ -1,0 +1,3019 @@
+{
+  "generatedAt": "2026-10-10T19:06:33.703Z",
+  "models": {
+    "opus-en-af": {
+      "id": "opus-en-af",
+      "modelId": "Xenova/opus-mt-en-af",
+      "pairs": [
+        {
+          "key": "en->afr_Latn",
+          "tag": null,
+          "loadMs": 14100,
+          "warmup": false,
+          "outputs": [
+            "Goeie môre",
+            "Waar is die naaste apteek?",
+            "Ek wil graag 'n koppie koffie hê, asseblief",
+            "Die trein vertrek om tienuur.",
+            "Kan jy my help om hierdie boonste verdieping te dra?",
+            "My suster kom volgende week kuier.",
+            "Die weer is vandag pragtig.",
+            "Ek het my sambreel by die kantoor vergeet.",
+            "Ons moet vroeg vertrek om die verkeer te vermy.",
+            "Die kinders het in die tuin gespeel terwyl hulle ouma by die venster gekyk het."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            271,
+            330,
+            366,
+            316,
+            328,
+            210,
+            167,
+            225,
+            249,
+            392
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 110916295,
+      "complete": true,
+      "warmLoadMs": 1211
+    },
+    "opus-en-cs": {
+      "id": "opus-en-cs",
+      "modelId": "Xenova/opus-mt-en-cs",
+      "pairs": [
+        {
+          "key": "en->ces_Latn",
+          "tag": null,
+          "loadMs": 13744,
+          "warmup": false,
+          "outputs": [
+            "Dobré ráno.",
+            "Kde je nejbližší lékárna?",
+            "Dal bych si šálek kávy, prosím.",
+            "Vlak odjíždí v deset hodin po poledni.",
+            "Pomůžeš mi s tím?",
+            "Příští týden přijede moje sestra.",
+            "Dnes je krásné počasí.",
+            "Zapomněl jsem si deštník v kanceláři.",
+            "Měli bychom odejít dřív, abychom se vyhnuli dopravnímu provozu.",
+            "Děti si hrály na zahradě, zatímco jejich babička se dívala z okna."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            262,
+            330,
+            458,
+            520,
+            206,
+            252,
+            159,
+            261,
+            370,
+            427
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 116695526,
+      "complete": true,
+      "warmLoadMs": 3072
+    },
+    "opus-en-da": {
+      "id": "opus-en-da",
+      "modelId": "Xenova/opus-mt-en-da",
+      "pairs": [
+        {
+          "key": "en->dan_Latn",
+          "tag": null,
+          "loadMs": 18199,
+          "warmup": false,
+          "outputs": [
+            "Godmorgen.",
+            "Hvor er det nærmeste apotek?",
+            "Jeg vil gerne have en kop kaffe, tak.",
+            "Toget kører klokken ti om eftermiddagen.",
+            "Kan du hjælpe mig med at bære den opstairs?",
+            "Min søster kommer på besøg i næste uge.",
+            "Vejret er dejligt i dag.",
+            "Jeg glemte min paraply på kontoret.",
+            "Vi bør tage af sted tidligt for at undgå trafikken.",
+            "Børnene legede i haven mens deres bedstemor så på fra vinduet."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            306,
+            376,
+            500,
+            475,
+            391,
+            318,
+            265,
+            270,
+            330,
+            510
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 112558991,
+      "complete": true,
+      "warmLoadMs": 2885
+    },
+    "opus-en-fi": {
+      "id": "opus-en-fi",
+      "modelId": "Xenova/opus-mt-en-fi",
+      "pairs": [
+        {
+          "key": "en->fin_Latn",
+          "tag": null,
+          "loadMs": 13890,
+          "warmup": false,
+          "outputs": [
+            "Huomenta.",
+            "Missä on lähin apteekki?",
+            "Haluaisin kupin kahvia, kiitos.",
+            "Juna lähtee kymmeneltä yli puolenpäivän.",
+            "Voitko auttaa kantamaan tämän ylös?",
+            "Siskoni tulee käymään ensi viikolla.",
+            "Sää on tänään ihana.",
+            "Unohdin sateenvarjoni toimistoon.",
+            "Meidän pitäisi lähteä aikaisin välttääksemme ruuhkaa.",
+            "Lapset leikkivät puutarhassa, kun isoäiti katseli ikkunasta."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            206,
+            394,
+            378,
+            387,
+            188,
+            197,
+            157,
+            188,
+            292,
+            346
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 119429988,
+      "complete": true,
+      "warmLoadMs": 2708
+    },
+    "opus-en-hu": {
+      "id": "opus-en-hu",
+      "modelId": "Xenova/opus-mt-en-hu",
+      "pairs": [
+        {
+          "key": "en->hun_Latn",
+          "tag": null,
+          "loadMs": 13910,
+          "warmup": false,
+          "outputs": [
+            "Jó reggelt.",
+            "Hol van a legközelebbi gyógyszertár?",
+            "Egy csésze kávét kérek.",
+            "A vonat dél után tízkor indul.",
+            "Felvinnéd ezt az emeletre?",
+            "A nővérem jövő héten jön meglátogatni.",
+            "Az időjárás ma csodás.",
+            "Az irodában felejtettem az esernyőmet.",
+            "Korán el kellene indulnunk, hogy elkerüljük a forgalmat.",
+            "A gyerekek a kertben játszottak, miközben a nagymamájuk az ablakból nézte."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            275,
+            320,
+            347,
+            386,
+            308,
+            282,
+            200,
+            313,
+            422,
+            536
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 116699316,
+      "complete": true,
+      "warmLoadMs": 2864
+    },
+    "opus-en-id": {
+      "id": "opus-en-id",
+      "modelId": "Xenova/opus-mt-en-id",
+      "pairs": [
+        {
+          "key": "en->ind_Latn",
+          "tag": null,
+          "loadMs": 12650,
+          "warmup": false,
+          "outputs": [
+            "Selamat pagi.",
+            "Dimana apotek terdekat?",
+            "Aku ingin secangkir kopi, tolong.",
+            "Kereta berangkat pukul 10 siang.",
+            "Bisakah kau membantuku membawa ini ke atas?",
+            "Adikku akan datang untuk mengunjungi minggu depan.",
+            "Cuaca hari ini indah.",
+            "Aku lupa payungku di kantor.",
+            "Kita harus pergi lebih awal untuk menghindari lalu lintas.",
+            "Anak-anak bermain di taman sementara nenek mereka menonton dari jendela."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            259,
+            238,
+            422,
+            345,
+            387,
+            237,
+            156,
+            221,
+            274,
+            355
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 107915091,
+      "complete": true,
+      "warmLoadMs": 2960
+    },
+    "opus-en-ro": {
+      "id": "opus-en-ro",
+      "modelId": "Xenova/opus-mt-en-ro",
+      "pairs": [
+        {
+          "key": "en->ron_Latn",
+          "tag": null,
+          "loadMs": 13497,
+          "warmup": false,
+          "outputs": [
+            "Bună dimineaţa.",
+            "Unde este cea mai apropiată farmacie?",
+            "Aş vrea o ceaşcă de cafea, vă rog.",
+            "Trenul pleacă la ora 10:00.",
+            "Mă ajuţi să duc asta sus?",
+            "Sora mea vine în vizită săptămâna viitoare.",
+            "Vremea e frumoasă azi.",
+            "Mi-am uitat umbrela la birou.",
+            "Ar trebui să plecăm mai devreme pentru a evita traficul.",
+            "Copiii se jucau în grădină în timp ce bunica lor privea de la fereastră."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            285,
+            314,
+            509,
+            389,
+            271,
+            289,
+            207,
+            290,
+            342,
+            539
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 113247006,
+      "complete": true,
+      "warmLoadMs": 2906
+    },
+    "opus-en-sv": {
+      "id": "opus-en-sv",
+      "modelId": "Xenova/opus-mt-en-sv",
+      "pairs": [
+        {
+          "key": "en->swe_Latn",
+          "tag": null,
+          "loadMs": 12818,
+          "warmup": false,
+          "outputs": [
+            "God morgon.",
+            "Var finns närmaste apotek?",
+            "Jag vill ha en kopp kaffe, tack.",
+            "Tåget går klockan tio.",
+            "Kan du hjälpa mig att bära upp den här?",
+            "Min syster kommer på besök nästa vecka.",
+            "Vädret är underbart idag.",
+            "Jag glömde mitt paraply på kontoret.",
+            "Vi borde åka tidigt för att undvika trafiken.",
+            "Barnen lekte i trädgården medan deras mormor tittade från fönstret."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            275,
+            310,
+            478,
+            238,
+            512,
+            230,
+            160,
+            184,
+            223,
+            282
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 109758413,
+      "complete": true,
+      "warmLoadMs": 2728
+    },
+    "opus-en-uk": {
+      "id": "opus-en-uk",
+      "modelId": "Xenova/opus-mt-en-uk",
+      "pairs": [
+        {
+          "key": "en->ukr_Cyrl",
+          "tag": null,
+          "loadMs": 13171,
+          "warmup": false,
+          "outputs": [
+            "Доброго ранку.",
+            "Де найближча аптека?",
+            "Я хотів би чашку кави, будь ласка.",
+            "Поїзд відправляється о десятій тридцять.",
+            "Ти не міг би допомогти мені перенести це наверх?",
+            "Моя сестра приїде наступного тижня.",
+            "Сьогодні гарна погода.",
+            "Я забув парасольку в офісі.",
+            "Нам треба йти рано, щоб уникнути вуличного руху.",
+            "Діти гралися в саду, а бабуся дивилася з вікна."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            208,
+            424,
+            534,
+            452,
+            336,
+            204,
+            144,
+            195,
+            313,
+            373
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 116526929,
+      "complete": true,
+      "warmLoadMs": 3050
+    },
+    "opus-en-vi": {
+      "id": "opus-en-vi",
+      "modelId": "Xenova/opus-mt-en-vi",
+      "pairs": [
+        {
+          "key": "en->vie_Latn",
+          "tag": null,
+          "loadMs": 12080,
+          "warmup": false,
+          "outputs": [
+            "Chào buổi sáng.",
+            "Địa điểm ở đâu?",
+            "Tôi muốn một tách cà phê.",
+            "Con tàu khởi hành lúc 10 giờ chiều.",
+            "Cô giúp tôi mang cái này lên lầu được không?",
+            "Em gái tôi sẽ đến thăm tuần tới.",
+            "Hôm nay trời đẹp quá.",
+            "Tôi quên mang theo đồ ở văn phòng.",
+            "Chúng ta nên đi sớm để tránh giao thông.",
+            "Các trẻ em đang chơi đùa trong vườn trong khi bà ngoại của họ nhìn từ cửa sổ."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            307,
+            254,
+            375,
+            444,
+            274,
+            220,
+            179,
+            248,
+            253,
+            405
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 106645206,
+      "complete": true,
+      "warmLoadMs": 2921
+    },
+    "opus-en-mul": {
+      "id": "opus-en-mul",
+      "modelId": "Xenova/opus-mt-en-mul",
+      "pairs": [
+        {
+          "key": "en->amh_Ethi",
+          "tag": "amh",
+          "loadMs": 13396,
+          "warmup": false,
+          "outputs": [
+            "ጥሩ ዕለት ።",
+            "የቅርብ መርከቦች የት ነው?",
+            "እባካችሁ አንድ ጽዋት ኮፍን መፈለግ እፈልጋለሁ ።",
+            "ባቡር በዓመቱ አሥር ቀን ይወጣል ።",
+            "ይህንን ከላይ መውጣት ትችላለህ?",
+            "እህቴ የሚቀጥለው ሳምንት ለመሄድ እያለች ።",
+            "ዛሬ አየር ውብ ነው ።",
+            "በቢሮው ቅርብ ረሳሁ ።",
+            "ቲራፊክን ለመርዳት ቀደም ሲል መሄድ ይኖርብና",
+            "ልጆቹ በገነት ውስጥ አያቶቻቸው ከመስኮት ሳያመለከት በኋላ ጫማው ነበር ።"
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            496,
+            791,
+            765,
+            473,
+            359,
+            433,
+            249,
+            320,
+            596,
+            739
+          ]
+        },
+        {
+          "key": "en->asm_Beng",
+          "tag": "asm",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "শুভ সকাল.",
+            "সেই খ্ৰীষ্টানসকলে কেনেকৈ",
+            "মই এটা কফি খুব বিচাৰে, অনুগ্ৰহ কৰি।",
+            "ট্ৰেইন জীৱনৰ দিনত থকা দি",
+            "আপুনি আমাক এইটো উপৰত মাজত নেকি স",
+            "আমাৰ বোন পৰৱৰ্তী সপ্তাহে আসছে ।",
+            "আজকে আবহাৰ খুব লাগিব ।",
+            "আফিচত মই আমাৰ ছাট্ৰী ভুলে",
+            "তেওঁলোকে তেওঁলোকৰ জীৱনত থকা",
+            "তেওঁলোকে তেওঁলোকৰ দাদীৰ উইন্ডোৰ পৰা চাবলৈ চেষ্টা কৰি"
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            197,
+            434,
+            465,
+            493,
+            500,
+            492,
+            411,
+            500,
+            532,
+            791
+          ]
+        },
+        {
+          "key": "en->ben_Beng",
+          "tag": "ben",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "শুভ সকাল।",
+            "কোথায় নীচে হার্ডিকে?",
+            "আমি একটা ক্যাফি চাই, অনুগ্রহ করে।",
+            "ট্রেন দশ ঘরে যাচ্ছে।",
+            "তুমি কি আমাকে এই উপরে নিয়ে আসতে সাহায্য করবে",
+            "আমার বোন পরের সপ্তাহের পরিদর্শন করতে আসছে।",
+            "আজ আবহাওয়া খুবই খুবই লা",
+            "আমি অফিসের রাস্তা ভুলে গেছি।",
+            "ট্রাফিক থেকে ছাড়া আমাদের বেশি দিতে হবে",
+            "সেই ছাড়া সেই বাগানের খেলা খেলছিল, যখন তাদের দাবা উ"
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            238,
+            434,
+            438,
+            418,
+            588,
+            668,
+            571,
+            547,
+            716,
+            999
+          ]
+        },
+        {
+          "key": "en->bul_Cyrl",
+          "tag": "bul",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Добро утро.",
+            "Къде е най-близото аптека?",
+            "Бих искал чаша кафе, моля.",
+            "Тя си тръгва в десет миналата полета.",
+            "Можеш ли да ми помогнеш да го носиш горе?",
+            "Сестра ми идва да посети следващата седмица.",
+            "Днес е красив.",
+            "Забравих си шефлицата в офиса.",
+            "Трябва да си тръгваме рано, за да избягваме",
+            "Децата играха в градина, докато бабата им гледаха от прозореца."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            232,
+            496,
+            420,
+            563,
+            565,
+            627,
+            239,
+            497,
+            673,
+            862
+          ]
+        },
+        {
+          "key": "en->cat_Latn",
+          "tag": "cat",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Bona dia.",
+            "On és la farmacia més prop?",
+            "M'agradaria una copa de cafè, si us plau.",
+            "El tren va a partir de deu a la mitjana.",
+            "Pots ajudar-me a portar-ho a dalt?",
+            "La meva germana vindrà a visitar la setmana propera.",
+            "El temps és fantàstica avui.",
+            "He oblidat la meva paraplula a l'oficina.",
+            "Hauríem de marxar de temps per evitar el tráfic.",
+            "Els nens estaven jugant al jardí mentre la seva àvia vigilaven des de la finestra."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            148,
+            321,
+            534,
+            481,
+            459,
+            572,
+            310,
+            481,
+            527,
+            825
+          ]
+        },
+        {
+          "key": "en->zho_Hant",
+          "tag": "zho_Hant",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "ÂÂÂ ̈ Â ̈ Â",
+            "Narkotika--------------",
+            "Bessbeththless will, sweadlessless - week-pace co",
+            "Package-pace-pace witness witness west -",
+            "Ɣeyiɣi Yüng-wey-wey-wey-weights",
+            "Westness Shepherd weekse sweadsless weekday weekday we",
+            "Package-path-pace sweadpace week-",
+            "B.B.B.B.B.B.B.B.B.B.B",
+            "Westweepsweek weekday weekday weekday weekday weekse up up",
+            "B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B"
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            337,
+            451,
+            582,
+            508,
+            482,
+            547,
+            451,
+            515,
+            542,
+            772
+          ]
+        },
+        {
+          "key": "en->hrv_Latn",
+          "tag": "hrv",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Dobro jutro.",
+            "Gdje je najbliži apoteka?",
+            "Želim kavu, molim vas.",
+            "Vlak je otišao u deset prošlog podne.",
+            "Možeš li mi pomoći da nosim ovo gore?",
+            "Moja sestra dolazi posjetiti sljedeće tjedan.",
+            "Vreme je lijepo danas.",
+            "Zaboravio sam svoju kišljku u kancelariji.",
+            "Trebamo rano otići da izbjegnemo promet.",
+            "Deca su igrale u vrtu dok su njihova baka gledale iz prozora."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            120,
+            256,
+            273,
+            379,
+            381,
+            470,
+            255,
+            386,
+            392,
+            625
+          ]
+        },
+        {
+          "key": "en->ell_Grek",
+          "tag": "ell",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Καλημέρα.",
+            "Πού είναι η κοντά φαρμακική;",
+            "Θα ήθελα ένα καφέ, παρακαλώ.",
+            "Το τρένο φύγει σε 10 μέσα.",
+            "Μπορείς να με βοηθήσεις να το πάω αυτό πάν",
+            "Η αδελφή μου έρχεται να επισκέφει η επόμενη ε",
+            "Το καιρό είναι ωραίο σήμερα.",
+            "Ξέχασα το φύλλο μου στο γραφείο.",
+            "Πρέπει να φύγουμε πρώτα για να αποφεύγουμε το",
+            "Οι παιδιές παίζουν στο καρδιά, ενώ η γαμώπη τους κοί"
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            195,
+            339,
+            403,
+            369,
+            507,
+            546,
+            329,
+            452,
+            529,
+            760
+          ]
+        },
+        {
+          "key": "en->guj_Gujr",
+          "tag": "guj",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "શુનિયાત.",
+            "નજીક ફાપેટી ક્યાં છે?",
+            "મહેરબાની કરીને હું એક કોફી ચાહી હતી.",
+            "ટ્રેઈન ગાઉંટે દસ વાર છો",
+            "શું તમે મને આ ઉપર લોકો મદદ કરી શકો?",
+            "મારી બહેન પછીના અઠવાડિયામાં મુલાકાત લે",
+            "આજે હવામાન લાગે છે.",
+            "ઓફિસમાં મેં પોતાના ચોકી ભૂ",
+            "ચાલો લોકોને ચાલવાથી લગ્ન છ",
+            "તેઓ બાગમાં રમતા હતા."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            210,
+            361,
+            538,
+            508,
+            469,
+            577,
+            318,
+            520,
+            614,
+            335
+          ]
+        },
+        {
+          "key": "en->hau_Latn",
+          "tag": "hau_Latn",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Safena.",
+            "Inã mafi kusantar aiki?",
+            "Na so kafe kafe, don ni saurara.",
+            "Sa’ad da ake yi a rana goma, tirin yana tafiya.",
+            "Za ka iya taimaka mini na ɗauki wannan a sama?",
+            "’ Yar’uwata ta zo ta ziyarci mako na gaba.",
+            "Yau yana da kyau.",
+            "Na manta da shafulena a ofishin.",
+            "Ya kamata mu bar ago don mu guji tafiyar.",
+            "Yaran suna wasan a lambun sa’ad da kakansu suka kallo daga tagan."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            132,
+            257,
+            320,
+            472,
+            377,
+            446,
+            202,
+            333,
+            367,
+            576
+          ]
+        },
+        {
+          "key": "en->heb_Hebr",
+          "tag": "heb",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "בוקר טוב.",
+            "איפה החולצה הקרובה?",
+            "אני רוצה קפה, בבקשה.",
+            "הרכבת יוצאה בעשר הערב שעבר.",
+            "אתה יכול לעזור לי לקחת את זה למעלה?",
+            "אחותיי באה לבקר בשבוע הבא.",
+            "הזמן היא נחמדה היום.",
+            "שכחתי את החלק שלי במשרד.",
+            "אנחנו צריכים ללכת מוקדם כדי להימנע",
+            "הילדים משחקים בגן בעוד שסבתם ראה מהחלון."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            192,
+            345,
+            356,
+            467,
+            409,
+            410,
+            384,
+            375,
+            533,
+            677
+          ]
+        },
+        {
+          "key": "en->kan_Knda",
+          "tag": "kan",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "ಗುಡ್ಡ ಮೊದಲು.",
+            "ಹತ್ತಿರದ ಫಾರ್ಮಿಕ್‌ ಎಲ್ಲಿ?",
+            "ದಯವಿಟ್ಟು ನನಗೆ ಒಂದು ಕಾಫಿಯ ಪಾತ್ರೆ ಇಷ್ಟವಾಗುತ್ತಿತ್ತು.",
+            "ಟ್ರೈನ್‌ ಹತ್ತು ಮಧ್ಯಾಹ್ನದ ಕಡೆಗೆ ಹೋ",
+            "ಈ ಮೇಲಿನ ಮೇಲೆ ಹೋಗಲು ನನಗೆ ಸಹಾಯ ಮಾಡಬಲ್ಲಿರಿ?",
+            "ನನ್ನ ಸಹೋದರಿಯು ಮುಂದಿನ ವಾರಕ್ಕೆ ಭೇಟಿಯಾಗುತ್ತಿದೆ.",
+            "ಇಂದು ಹಾಳಾಗುವ ಲೋಕದಲ್ಲೂ ಸಂತೋಷ",
+            "ಆಫೀಸಿನಲ್ಲಿ ನನ್ನ ಚರ್ಮಿಲನ್ನು ಮರೆಯಲಾಯಿತು.",
+            "ಟ್ರಾಫಿಕ್‌ ರಕ್ಷಣೆಯನ್ನು ತಪ್ಪಿಸಿಕೊಳ್ಳಲು ನಾವು ತುಂಬ ಪ್ರ",
+            "ಅವರ ತಂದೆ ಕಿಟಕಿಯಿಂದ ಕಾಳಜಿ ನೋಡುತ್ತಿದ್ದಾಗ ಅವರ ತಂದೆ ತೋಟದಲ್ಲಿ ಆಟಿಸುತ್ತಿದ್ದರು."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            252,
+            350,
+            528,
+            497,
+            432,
+            505,
+            424,
+            479,
+            558,
+            748
+          ]
+        },
+        {
+          "key": "en->zsm_Latn",
+          "tag": "zlm_Latn",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Selamat pagi.",
+            "Di manakah penyakit yang terdekat?",
+            "Saya ingin sebuah kopi, silakan.",
+            "Kereta itu berada pada masa 10 hari.",
+            "Bolehkah anda membantu saya membawanya di atas?",
+            "Adik saya akan datang untuk melawat minggu seterusnya.",
+            "Hari ini, cuaca itu sangat indah.",
+            "Saya lupa pairpail di pejabat cawangan.",
+            "Kita harus meninggalkan perjalanan awal untuk mengelakkan perjalanan.",
+            "Anak - anak itu sedang bermain di taman apabila nenek mereka menonton jendela."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            165,
+            288,
+            272,
+            284,
+            342,
+            419,
+            255,
+            356,
+            476,
+            548
+          ]
+        },
+        {
+          "key": "en->mal_Mlym",
+          "tag": "mal",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "ഗുഡ് മോണ്‍.",
+            "അടുത്ത ഫാസ്റ്റിക്കി എവിടെ?",
+            "എനിക്ക് ഒരു കപ്പ് കേഫ് വേണം, ദയവായി.",
+            "ട്രെയിൻ പത്തു മണിലേക്ക് പോകുന്നു.",
+            "ഇത് മുകളില്‍ കൊണ്ടുപോകാന്‍ എനിക്കെന്നെ സഹായിക്ക",
+            "അടുത്ത ആഴ്ചയിലേക്ക് എന്‍റെ സഹോദരി വരുന്നു.",
+            "ഇന്ന് ആവശ്യം നന്നായി.",
+            "ഓഫീസില്‍ എന്റെ ഷെലിം മറന്നു.",
+            "ട്രാഫിക്‌ ഒഴിവാക്കാൻ നമുക്ക് വേഗം പോ",
+            "ജാലകത്തിൽനിന്നുള്ള അമ്മയോട്‌ അവരുടെ മുത്തശ്ശി കളിച്ചു."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            279,
+            356,
+            477,
+            447,
+            494,
+            554,
+            306,
+            442,
+            541,
+            565
+          ]
+        },
+        {
+          "key": "en->mar_Deva",
+          "tag": "mar",
+          "loadMs": 2,
+          "warmup": false,
+          "outputs": [
+            "सुदृश्‍य.",
+            "जवळजवळच्या पोर्टिक कोठे आहे?",
+            "कृपया मला एक कॅफीची प्याली इच्छा होती.",
+            "ट्रेन दहा रात्री झाली.",
+            "तुम्ही मला या वर उचलून घेऊ शकता का?",
+            "मी तिला तिला तिथं तिला समजतं.",
+            "आज हवामान सुखी आहे.",
+            "मी ऑफिसमध्ये माझी टोपणी विसरली.",
+            "ट्रॅफिक्स टाकण्यासाठी आपण लवकरच जाऊ नये.",
+            "त्यांची आई चौकटातून पाहत होती."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            191,
+            331,
+            469,
+            382,
+            363,
+            481,
+            236,
+            466,
+            524,
+            373
+          ]
+        },
+        {
+          "key": "en->nob_Latn",
+          "tag": "nob",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Godmorgen.",
+            "Hvor er den nærmeste apoteket?",
+            "Jeg vil vil ha en kop kaffe, vennligst.",
+            "Toget går på ti siste middag.",
+            "Kan du hjelpe meg med å føre dette oppe?",
+            "Min søster kommer til å besøke neste uke.",
+            "Vêret er smuk i dag.",
+            "Jeg glemte parapluen på kontoret.",
+            "Vi bør forlate tidlig for å unngå trafikk.",
+            "Barnene spill i haven mens mormor deres så fra vinduet."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            126,
+            303,
+            365,
+            280,
+            373,
+            375,
+            260,
+            322,
+            395,
+            459
+          ]
+        },
+        {
+          "key": "en->ory_Orya",
+          "tag": "ori",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "ସୁଭା ସନ୍ଧାନ।",
+            "ନିକଟେ ଜାଣିପାରିବେ?",
+            "ମୁଁ ଗୋଟିଏ କଫି ଚାହୁଁଛନ୍ତି, ଦୟାକରି।",
+            "ଟରେନ ଦଶ ମତରେ ଛାଡ଼ି ଯାଇଛି ।",
+            "ଆପଣ ମୁଁ ଉପର ଭାବରେ ଏହାକୁ ହାଡ଼",
+            "ମୋର ସନ୍ଧାନ ଦେଶିବା ପାଇଁ ପରବର୍ତ୍ତୀ",
+            "ଆଜି ମାଘର ଉତ୍ତମ ଅଟେ।",
+            "ମୁଁ ମୋର ମୁକ୍ତ ମୁକ୍ତ",
+            "ଆମେ ଚାଳକ ଦେବାକୁ ଦ୍ୱନ୍ଦ କରିବା ପାଇଁ ଶ",
+            "ଏହା ମୁଦ୍ରା ମୁଦ୍ରା ମେସିଆ ଦେଇଥିଲେ ଏହ"
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            264,
+            327,
+            583,
+            492,
+            497,
+            554,
+            395,
+            507,
+            580,
+            796
+          ]
+        },
+        {
+          "key": "en->pbt_Arab",
+          "tag": "pus",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            ".مهره",
+            "د نږدې هېڅ هېڅ؟",
+            ".م هېڅ کوفې هڅه هڅه هڅه.",
+            ".ولانه په دوه هېڅ هېڅ هېڅ",
+            "تاسو خو تر ښه رالېږي؟",
+            "زما ښه راتلونکی اونۍ کتنه ته راتلونکی دي.",
+            "هوا نن ښه دی.",
+            ".مم هېڅ هېڅ هېڅ هېڅ",
+            "د هندې ګورت ګارليک د نغوتلو لپاره تلواله",
+            "د ګندې په ګندې کې د هنڅو د هنوزې د کړکۍ نه کتل شوي."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            149,
+            363,
+            565,
+            484,
+            344,
+            521,
+            226,
+            502,
+            533,
+            743
+          ]
+        },
+        {
+          "key": "en->pes_Arab",
+          "tag": "pes",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "صبح سلام.",
+            "رفاقی نزدیک کجا است؟",
+            "می‌خواهم پیاله قیدی، معاف نمایید.",
+            "تا ده ظهر باقی می‌رود.",
+            "آیا مرا اعانت می‌کنی که این را بالا برداشته نمایی؟",
+            "خواهر من به جهت تفقد هفته دیگر می‌آید.",
+            "و تاخیر امروز زیبا است.",
+            "و پرمای خود را در مکان فراموش کردم.",
+            "باید صبح زود رها کنیم تا از راحت اجتناب نمایی",
+            "و پسران در باغ می‌نواختند، و مادامی که مادر ایشان از پنجره می‌نگریستند."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            142,
+            277,
+            402,
+            312,
+            472,
+            449,
+            274,
+            361,
+            531,
+            701
+          ]
+        },
+        {
+          "key": "en->por_Latn",
+          "tag": "por",
+          "loadMs": 2,
+          "warmup": false,
+          "outputs": [
+            "Bom dia.",
+            "Onde está a farmacia mais próxima?",
+            "Gostaria de uma copa de café, por favor.",
+            "O tren saia às dez a hora de hora.",
+            "Podes ajudar-me a levar isto em cima?",
+            "A minha irmã vê a visitar a próxima semana.",
+            "O tempo é belo hoje.",
+            "Esqueci-me a meu parapluma no escritório.",
+            "Devemos sair antes para evitar o tráfego.",
+            "As crianças estavam a jogar no jardim, enquanto a sua avó viveu da janela."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            121,
+            299,
+            353,
+            392,
+            363,
+            438,
+            216,
+            414,
+            367,
+            673
+          ]
+        },
+        {
+          "key": "en->pan_Guru",
+          "tag": "pan_Guru",
+          "loadMs": 1,
+          "warmup": false,
+          "outputs": [
+            "ਸਵੇਰ.",
+            "ਨਜ਼ਰੀਆ ਫਾਰਕੀ ਕਿੱਥੇ ਹੈ?",
+            "ਮੈਂ ਕੋਫ਼ੀ ਨੂੰ ਚਾਹੁੰਦਾ ਹਾਂ ਜੀ ਹਾਂ ।",
+            "ਟ੍ਰੇਨ ਰਹਿੰਦੇ ਹਨ ।",
+            "ਕੀ ਤੁਸੀਂ ਮੈਨੂੰ ਇਹ ਉੱਪਰ ਚੱਲਣ ਦੀ ਮਦਦ",
+            "ਮੇਰੀ ਭੈਣ ਅਗਲੇ ਹਫ਼ਤੇ ਵਾਪਸ ਆ ਰਹੀ ਹੈ",
+            "ਅੱਜ ਮੌਸਮ ਸੁਆਰਥ ਹੈ ।",
+            "ਮੈਂ ਆਫ਼ਿਸ ਵਿਚ ਆਪਣੀ ਸ਼ੈਰਮਲ ਭੁੱਲਿਆ ।",
+            "ਸਾਡੇ ਲਈ ਤੁਰੰਤ ਤੁਰਨਾ ਚਾਹੀਦਾ ਹੈ ।",
+            "ਬੱਚਿਆਂ ਨੂੰ ਬਾਗ਼ ਵਿਚ ਖੇਡ ਰਹੇ ਸਨ ਜਦੋਂ ਉਨ੍ਹਾਂ ਦੀ ਨੌਜਵਾਨ ਨੇ ਵਿੰ"
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            121,
+            393,
+            394,
+            302,
+            497,
+            552,
+            326,
+            469,
+            526,
+            800
+          ]
+        },
+        {
+          "key": "en->srp_Cyrl",
+          "tag": "srp_Cyrl",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Добро јутро.",
+            "Где је најближаја аптека?",
+            "Желим кафу, молим те.",
+            "Воз оставља у десет прошлог пладу.",
+            "Можеш ли ми помоћи да носи ово горе?",
+            "Моја сестра долази да посетим следеће недеље.",
+            "Време је данас дивно.",
+            "Заборавио сам своју округу у канцеларији.",
+            "Треба да одемо рано да избегнемо провод.",
+            "Деца су играли у бату док су њихова бака гледали из прозора."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            205,
+            364,
+            261,
+            436,
+            360,
+            454,
+            280,
+            469,
+            441,
+            682
+          ]
+        },
+        {
+          "key": "en->sin_Sinh",
+          "tag": "sin",
+          "loadMs": 2,
+          "warmup": false,
+          "outputs": [
+            "සුභ උදෑසනක්.",
+            "ළඟින් රෝග්‍රීය රැස්වීම",
+            "මට කැමතියි කෝපි එකක්, කරුණාකරලා.",
+            "රේන් දින දහයකට යන්න.",
+            "ඔයාට උදව් කරන්න පුළුවන්ද මේක උඩට ගෙනියන්න?",
+            "මගේ නංගි ඊළඟ සතියට එනවා.",
+            "අද කාලකානයක් ලස්සනයි.",
+            "මම කාර්යාලයේ මගේ පාලනය අමතක වුනා.",
+            "අපි මුලින්ම යන්න ඕනේ වාහනයෙන් අතහරින්න.",
+            "දරුවන්ට හිටියේ ටොන්වලට හිටියේ ඔවුන්ගේ අම්මා කවුළුවෙන් බලාගෙන සිටි"
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            266,
+            451,
+            499,
+            347,
+            520,
+            381,
+            365,
+            477,
+            488,
+            778
+          ]
+        },
+        {
+          "key": "en->tam_Taml",
+          "tag": "tam",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "நாள்காலம்.",
+            "அருகில் உள்ள காரியம் எங்கே?",
+            "நான் ஒரு கப்பை காப்பை விரும்புகிறேன், தயவு செய்து.",
+            "ரேய்ன் பத்து மாலைக்குள் விட்டுவிடுகிறது.",
+            "நீங்கள் என்னை உட்கார்ந்ததை எடுக்க உதவி செய்யலாம்?",
+            "அடுத்த வாரத்தில் என் சகோதரர் பார்க்க வருகின்றனர்.",
+            "இன்று வாழ்க்கை அழகானது.",
+            "நான் அலுவலகத்தில் என் குரும்பை மறந்துவிட்டேன்.",
+            "வாங்கிவிடுவதற்கு நாம் முன்னேறாமல் போக வேண்டும்.",
+            "அவர்களுடைய அப்பா சாளரத்திலிருந்து கண்காணித்தபோது, அந்த தோட்டத்தில் விளையாட்டுகின்றனர்."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            188,
+            319,
+            538,
+            414,
+            441,
+            523,
+            352,
+            482,
+            441,
+            740
+          ]
+        },
+        {
+          "key": "en->tel_Telu",
+          "tag": "tel",
+          "loadMs": 3,
+          "warmup": false,
+          "outputs": [
+            "గుడ్ మధ్య.",
+            "సమీపమైన పాత్ర ఎక్కడ ఉంది?",
+            "నేను ఒక కఫీ కోరుకోవాలి, దయచేసి.",
+            "ట్రైన్‌ పది మధ్యకాలంలో వెళ్లిపోతే.",
+            "మీరు నాకు ఈ పైపై తీసుకుని సహాయం చేయగలరా?",
+            "నా సహోదరి తర్వాత వారం సందర్శించడానికి రావడం.",
+            "నేడు వాతావరణం అందమైనది.",
+            "నేను ఆఫీసులో నా రూపం మరచిపోయాను.",
+            "ట్రాఫిక్‌ను తప్పించుకోవడానికి మనం తరచూ వెళ్లాలి.",
+            "పిల్లలు తోటలో ఆటించారు."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            192,
+            335,
+            406,
+            524,
+            447,
+            565,
+            347,
+            431,
+            526,
+            327
+          ]
+        },
+        {
+          "key": "en->tur_Latn",
+          "tag": "tur",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Günaydın.",
+            "Yakındaki farmatik nerede?",
+            "Kahve isterim lütfen.",
+            "Tren on günden önce gidiyor.",
+            "Bunu yukarıda taşıma yardım edebilir misin?",
+            "Kız kardeşim gelecek hafta ziyaret etmeye geliyor.",
+            "Bugün hava çok güzel.",
+            "Ofisideki şekildeki şekilde unuttum.",
+            "Trafiği kaçırmak için erken gitmeliyiz.",
+            "Çocuklar pencereden bakıyorken bahçede oynayıyordular."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            124,
+            278,
+            263,
+            251,
+            452,
+            475,
+            254,
+            444,
+            412,
+            507
+          ]
+        },
+        {
+          "key": "en->urd_Arab",
+          "tag": "urd",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "صبح.",
+            "قریبی افسطی کہاں ہے؟",
+            "مجھے ایک پیالہ کافی چاہتا ہے، براہِ‌برکت.",
+            "ٹرین کو دس شام کے وقت جاتا ہے ۔",
+            "آپ مجھے اس پر سوار کر سکتے ہیں؟",
+            "میری بہن اگلے ہفتے ملاقات کرنے کے لئے آ رہا ہے",
+            "آج موسم بہت اچھا ہے.",
+            "میں نے اپس میں اپنی ٹیپی بھول گیا ۔",
+            "ہمیں ٹراپیف سے بچنے کیلئے شروع نکلنا چاہئے ۔",
+            "بچے باغ میں کھیل رہے تھے جبکہ اُن کی دادا نے کھیل دی ۔"
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            103,
+            294,
+            459,
+            364,
+            251,
+            551,
+            236,
+            380,
+            455,
+            575
+          ]
+        },
+        {
+          "key": "en->yor_Latn",
+          "tag": "yor",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Àárọ̀ jíròrò.",
+            "Ibo ni oògùn tó wà nítòsí?",
+            "Màá fẹ́ kí ife kọfí kan, jọ̀wọ́.",
+            "Irin náà kúrò ní ọjọ́ mẹ́wàá.",
+            "Ǹjẹ́ o lè ran mi lọ́wọ́ láti gbé èyí lókè?",
+            "Ẹ̀gbọ́n mi arábìnrin ń wá lọ sí ọ̀sẹ̀ tó tẹ̀ lé e.",
+            "Ojú ọjọ́ ńlá lóde òní máa ń dùn.",
+            "Mo gbàgbé ṣíṣírí mi ní ọ̀fììsì.",
+            "A gbọ́dọ̀ jáde níbẹ̀rẹ̀ láti yẹra fún ọkọ̀ òfuuruf",
+            "Àwọn ọmọ náà ń ṣẹ̀dá ní ọgbà náà nígbà tí màmá wọn ń wò láti ọ̀dọ̀ fèrèsé."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            239,
+            341,
+            449,
+            377,
+            425,
+            552,
+            390,
+            442,
+            542,
+            703
+          ]
+        },
+        {
+          "key": "en->zul_Latn",
+          "tag": "zul",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Kusemini kuhle.",
+            "Kukhonaphi isifo esiseduze?",
+            "Ngiyakuthanda inkomo yekhofi.",
+            "Isitimela siyahamba ngesikhathi esiyishumi edlule.",
+            "Ungangisiza yini ngiphatha lokhu ngaphezulu?",
+            "Udadewethu uyazovakashela isonto elilandelayo.",
+            "Imoya kuhle namuhla.",
+            "Ngakhohlwa i - paple yami ehofisini.",
+            "Kufanele sihambe sishe ukuze sigweme umzila.",
+            "Izingane zazidlala ensimini lapho umakhulu wazo ebukela efasiteleni."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            170,
+            228,
+            291,
+            371,
+            377,
+            435,
+            233,
+            363,
+            375,
+            539
+          ]
+        },
+        {
+          "key": "en->jpn_Jpan",
+          "tag": "jpn",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "おはよう",
+            "近くの医学はどこだ?",
+            "コーヒーがいいわ",
+            "火車は10日前に出る",
+            "上に連れてくれたのか?",
+            "私の妹は来週に来る",
+            "今日の天気は美しい",
+            "オフィスには 私のシャープルを忘れた",
+            "交通を避けるために早く出て行けばならない",
+            "子供 たち は, 花園 で, 母親 が ウィンドウ から 見 て い た 時"
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            100,
+            277,
+            239,
+            259,
+            300,
+            263,
+            230,
+            455,
+            456,
+            774
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 118280506,
+      "complete": true,
+      "warmLoadMs": 2876
+    },
+    "opus-en-romance": {
+      "id": "opus-en-romance",
+      "modelId": "Xenova/opus-mt-en-ROMANCE",
+      "pairs": [
+        {
+          "key": "en->cat_Latn",
+          "tag": "ca",
+          "loadMs": 13096,
+          "warmup": false,
+          "outputs": [
+            "Bom dia.",
+            "On és la farmacia més prxima?",
+            "M'agradaria una taça de cafè, si us plau.",
+            "El tren part a les deu pàs de mitjana.",
+            "Podria ajudar-me a portar això arriba?",
+            "La meva germana va venir a visitar la setmana que va seguir.",
+            "El temps està adorant avui.",
+            "He olvidat el meu paraguas a l'oficina.",
+            "Hauriem d'abanar ara per evitar el traffic.",
+            "Els nens jugaren al jardí mentre la seva nena veia des de la finestra."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            291,
+            612,
+            826,
+            470,
+            425,
+            585,
+            290,
+            502,
+            524,
+            692
+          ]
+        },
+        {
+          "key": "en->por_Latn",
+          "tag": "pt",
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Bom dia.",
+            "Onde fica a farmácia mais próxima?",
+            "Gostaria de uma xícara de café, por favor.",
+            "O trem sai às 10h00.",
+            "Pode ajudar-me a levar isto para cima?",
+            "A minha irmã vem visitar-nos na próxima semana.",
+            "O tempo está adorável hoje.",
+            "Esqueci-me do meu guarda-chuva no escritório.",
+            "Devemos partir cedo para evitar o trânsito.",
+            "As crianças estavam brincando no jardim enquanto a avó observava pela janela."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            123,
+            337,
+            373,
+            285,
+            312,
+            339,
+            260,
+            405,
+            296,
+            494
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 119232541,
+      "complete": true,
+      "warmLoadMs": 2919
+    },
+    "opus-af-en": {
+      "id": "opus-af-en",
+      "modelId": "Xenova/opus-mt-af-en",
+      "pairs": [
+        {
+          "key": "afr_Latn->en",
+          "tag": null,
+          "loadMs": 13320,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten hours.",
+            "Can you help me to carry it up?",
+            "My sister comes to visit me next week.",
+            "The weather is delicious today.",
+            "I forgot my pararaplu at the office.",
+            "To avoid traffic, we must leave early.",
+            "The children were playing in the garden as their grandmother looked through the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            365,
+            354,
+            560,
+            327,
+            277,
+            273,
+            223,
+            292,
+            267,
+            432
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 110916295,
+      "complete": true,
+      "warmLoadMs": 1404
+    },
+    "opus-cs-en": {
+      "id": "opus-cs-en",
+      "modelId": "Xenova/opus-mt-cs-en",
+      "pairs": [
+        {
+          "key": "ces_Latn->en",
+          "tag": null,
+          "loadMs": 14203,
+          "warmup": false,
+          "outputs": [
+            "- Good morning.",
+            "Where's the nearest pharmacy?",
+            "I'd like a cup of coffee, please.",
+            "Train leaves at 10 noon.",
+            "Will you help me carry it upstairs?",
+            "My sister's coming to visit next week.",
+            "It's beautiful weather today.",
+            "I left my umbrella in my office.",
+            "We should leave early to avoid traffic.",
+            "The kids play in the garden while their grandmother watches out the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            259,
+            434,
+            502,
+            256,
+            303,
+            274,
+            196,
+            280,
+            262,
+            455
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 116695526,
+      "complete": true,
+      "warmLoadMs": 3190
+    },
+    "opus-da-en": {
+      "id": "opus-da-en",
+      "modelId": "Xenova/opus-mt-da-en",
+      "pairs": [
+        {
+          "key": "dan_Latn->en",
+          "tag": null,
+          "loadMs": 13994,
+          "warmup": false,
+          "outputs": [
+            "- Good morning.",
+            "Where's the nearest pharmacy?",
+            "I'd like a cup of coffee.",
+            "The train leaves at 10:00 after dinner.",
+            "Can you help me carry it up?",
+            "My sister's gonna be visiting next week.",
+            "The weather is nice today.",
+            "I left the parajenet in the office.",
+            "We have to leave early to avoid traffic.",
+            "The kids were playing in the garden while their grandmother looked out the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            334,
+            476,
+            437,
+            524,
+            262,
+            349,
+            192,
+            319,
+            289,
+            535
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 112558989,
+      "complete": true,
+      "warmLoadMs": 3015
+    },
+    "opus-fi-en": {
+      "id": "opus-fi-en",
+      "modelId": "Xenova/opus-mt-fi-en",
+      "pairs": [
+        {
+          "key": "fin_Latn->en",
+          "tag": null,
+          "loadMs": 13452,
+          "warmup": false,
+          "outputs": [
+            "- Good morning.",
+            "Where's the nearest pharmacy?",
+            "I'd like a cup of coffee.",
+            "The train leaves at 10 a.m.",
+            "Could you help me carry this upstairs?",
+            "My sister's coming next week.",
+            "The climate is beautiful today.",
+            "I forgot the umbrella in the office.",
+            "We should leave early so we don't have traffic.",
+            "The kids were playing in the garden when Grandma looked out the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            374,
+            419,
+            405,
+            444,
+            327,
+            244,
+            195,
+            246,
+            370,
+            407
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 113395364,
+      "complete": true,
+      "warmLoadMs": 2984
+    },
+    "opus-hu-en": {
+      "id": "opus-hu-en",
+      "modelId": "Xenova/opus-mt-hu-en",
+      "pairs": [
+        {
+          "key": "hun_Latn->en",
+          "tag": null,
+          "loadMs": 13455,
+          "warmup": false,
+          "outputs": [
+            "- Morning.",
+            "Where's the nearest pharmacy?",
+            "I'd like a cup of coffee, please.",
+            "The train leaves at 10:00 p.m.",
+            "Can you help me bring it up?",
+            "My sister's coming to visit next week.",
+            "The sun's nice weather.",
+            "I forgot my umbrella at the office.",
+            "We have to leave early to avoid traffic.",
+            "The kids were playing in the garden while their grandmother looked out the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            169,
+            457,
+            523,
+            456,
+            258,
+            312,
+            223,
+            252,
+            289,
+            455
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 116699316,
+      "complete": true,
+      "warmLoadMs": 3292
+    },
+    "opus-id-en": {
+      "id": "opus-id-en",
+      "modelId": "Xenova/opus-mt-id-en",
+      "pairs": [
+        {
+          "key": "ind_Latn->en",
+          "tag": null,
+          "loadMs": 13223,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the nearest pharmacy?",
+            "I'd like a cup of coffee, please.",
+            "The train leaves at ten o'clock.",
+            "Can you help me get this upstairs?",
+            "My sister's coming to visit next week.",
+            "The weather today is beautiful.",
+            "I forgot my umbrella at work.",
+            "We have to go early to avoid traffic.",
+            "The kids play in the park while their grandmothers watch from the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            275,
+            345,
+            469,
+            405,
+            408,
+            328,
+            186,
+            216,
+            257,
+            406
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 107915093,
+      "complete": true,
+      "warmLoadMs": 2761
+    },
+    "opus-sv-en": {
+      "id": "opus-sv-en",
+      "modelId": "Xenova/opus-mt-sv-en",
+      "pairs": [
+        {
+          "key": "swe_Latn->en",
+          "tag": null,
+          "loadMs": 12882,
+          "warmup": false,
+          "outputs": [
+            "- Good morning.",
+            "Where's the nearest pharmacy?",
+            "I want a cup of coffee, please.",
+            "Train leaves at 10 after midnight.",
+            "Can you help me carry this up?",
+            "My sister's coming to visit next week.",
+            "The weather is beautiful today.",
+            "I left an umbrella in the office.",
+            "We should leave early to avoid traffic.",
+            "The kids were playing in the garden while their grandmother was looking through the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            217,
+            356,
+            391,
+            348,
+            391,
+            314,
+            193,
+            239,
+            201,
+            370
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 109758413,
+      "complete": true,
+      "warmLoadMs": 3239
+    },
+    "opus-uk-en": {
+      "id": "opus-uk-en",
+      "modelId": "Xenova/opus-mt-uk-en",
+      "pairs": [
+        {
+          "key": "ukr_Cyrl->en",
+          "tag": null,
+          "loadMs": 14044,
+          "warmup": false,
+          "outputs": [
+            "Good daughter.",
+            "Where's the nearest pharmacy?",
+            "I'd like a cup of coffee, please.",
+            "The train leaves at 10 pl ilviu.",
+            "Can you help me bring this to the surface?",
+            "My sister will be at the visit next week.",
+            "The weather is beautiful today.",
+            "I forgot the umbrella in the office.",
+            "We have to go early to avoid moving.",
+            "The children were playing in the garden, and their grandmother was watching from the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            197,
+            399,
+            540,
+            519,
+            312,
+            309,
+            195,
+            258,
+            277,
+            509
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 116526929,
+      "complete": true,
+      "warmLoadMs": 3154
+    },
+    "opus-vi-en": {
+      "id": "opus-vi-en",
+      "modelId": "Xenova/opus-mt-vi-en",
+      "pairs": [
+        {
+          "key": "vie_Latn->en",
+          "tag": null,
+          "loadMs": 12381,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the nearest pharmacy?",
+            "I'd like a cup of coffee, please.",
+            "The train leaves at ten o'clock.",
+            "Can you help me bring this up?",
+            "My sister's coming over next week.",
+            "The weather is beautiful today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid traffic.",
+            "Children were playing in the garden while their grandmother looked out the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            221,
+            381,
+            571,
+            475,
+            235,
+            247,
+            181,
+            231,
+            226,
+            375
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 106706880,
+      "complete": true,
+      "warmLoadMs": 2814
+    },
+    "opus-ko-en": {
+      "id": "opus-ko-en",
+      "modelId": "Xenova/opus-mt-ko-en",
+      "pairs": [
+        {
+          "key": "kor_Hang->en",
+          "tag": null,
+          "loadMs": 14043,
+          "warmup": false,
+          "outputs": [
+            "Hello.",
+            "Where's the closest line to the weak?",
+            "Have a cup of coffee.",
+            "The train starts at 10 o'clock in the day.",
+            "Can you help me up here?",
+            "My brother's gonna come and visit next week.",
+            "It's a nice day.",
+            "I forgot my parachute in the office.",
+            "You have to leave early to avoid traffic.",
+            "Children were playing in the garden, and the grandmother was watching from the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            163,
+            521,
+            309,
+            487,
+            231,
+            379,
+            231,
+            256,
+            285,
+            479
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 119601552,
+      "complete": true,
+      "warmLoadMs": 3180
+    },
+    "opus-pl-en": {
+      "id": "opus-pl-en",
+      "modelId": "Xenova/opus-mt-pl-en",
+      "pairs": [
+        {
+          "key": "pol_Latn->en",
+          "tag": null,
+          "loadMs": 14124,
+          "warmup": false,
+          "outputs": [
+            "- Good morning.",
+            "Where's the nearest pharmacy?",
+            "I'd like a cup of coffee, please.",
+            "The train leaves at ten noon.",
+            "Can you help me upstairs with this?",
+            "My sister's coming to visit next week.",
+            "The weather is beautiful today.",
+            "I forgot my umbrella in the office.",
+            "We should leave early to avoid movement.",
+            "The kids were playing in the garden, and their grandmother was looking out the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            444,
+            536,
+            697,
+            347,
+            348,
+            321,
+            203,
+            291,
+            264,
+            557
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 117618083,
+      "complete": true,
+      "warmLoadMs": 2721
+    },
+    "opus-th-en": {
+      "id": "opus-th-en",
+      "modelId": "Xenova/opus-mt-th-en",
+      "pairs": [
+        {
+          "key": "tha_Thai->en",
+          "tag": null,
+          "loadMs": 13146,
+          "warmup": false,
+          "outputs": [
+            "Hello?",
+            "Where's the nearest pharmacy?",
+            "I need coffee.",
+            "Train leaves at 10:00.",
+            "Can you take me up?",
+            "My sister's coming to visit next week.",
+            "It's a nice day.",
+            "I forgot my umbrella at work.",
+            "We should leave early to avoid traffic.",
+            "The kids were playing in the garden as their grandmother looked out the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            206,
+            440,
+            307,
+            308,
+            218,
+            326,
+            251,
+            242,
+            264,
+            473
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 117356323,
+      "complete": true,
+      "warmLoadMs": 1886
+    },
+    "opus-mul-en": {
+      "id": "opus-mul-en",
+      "modelId": "Xenova/opus-mt-mul-en",
+      "pairs": [
+        {
+          "key": "amh_Ethi->en",
+          "tag": null,
+          "loadMs": 14484,
+          "warmup": false,
+          "outputs": [
+            "Good day.",
+            "What is the medical center of our neighborhood?",
+            "I will make you a nation, and I will bless you.",
+            "The train will be up at 10 a.m. on the day.",
+            "Can you help me carry this on?",
+            "She will come to visit the next week.",
+            "And this day is the heaven.",
+            "I forgot my cover in the office.",
+            "We must go before we can get a traffic.",
+            "The boys were watching them play in the garden while they were playing."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            290,
+            491,
+            667,
+            486,
+            300,
+            290,
+            216,
+            237,
+            296,
+            404
+          ]
+        },
+        {
+          "key": "asm_Beng->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good news.",
+            "Where's the nearest suspect?",
+            "I'm gonna make a cup of coffee, please.",
+            "Ten days of rest day, on the average.",
+            "Will you help me to get to that destination? ’",
+            "My sister will come to me in the week.",
+            "It's beautiful today.",
+            "My shirt was worn in my office.",
+            "We must leave this town soon to be removed from the jungle.",
+            "The children were playing in the garden even though they wanted to tell their daughters."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            109,
+            220,
+            335,
+            282,
+            312,
+            293,
+            183,
+            242,
+            366,
+            452
+          ]
+        },
+        {
+          "key": "ben_Beng->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the nearest farm?",
+            "I want a coffee, please.",
+            "The train goes to the 10th.",
+            "Can you help me get this up?",
+            "My sister will come to me next week.",
+            "The air is beautiful today.",
+            "I forgot my face in the office.",
+            "We should be out of traffic fast.",
+            "The kids were playing in the garden when they saw their grandmother."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            106,
+            207,
+            203,
+            238,
+            236,
+            267,
+            178,
+            232,
+            253,
+            371
+          ]
+        },
+        {
+          "key": "bul_Cyrl->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "- Hey.",
+            "Where's the nearest appetite?",
+            "I'd like a cup of coffee, please.",
+            "The train goes to ten at lunch.",
+            "Will you help me carry it up?",
+            "My sister's coming to visit next week.",
+            "Today's a beautiful time.",
+            "I forgot my desk in the office.",
+            "We need to get out of here early to avoid traffic.",
+            "The kids play in the garden while Grandma looks out the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            117,
+            215,
+            301,
+            225,
+            227,
+            272,
+            202,
+            223,
+            329,
+            360
+          ]
+        },
+        {
+          "key": "cat_Latn->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "- Good morning.",
+            "Where's the most advanced medication?",
+            "I'd like a coffee cup, please.",
+            "The train is part of the ten of the media.",
+            "Can I help you bring this on?",
+            "My sister is above to ask her the gift she comes.",
+            "Time is wonderful today.",
+            "I forgot about my paraplete at the office.",
+            "We have to go ahead to avoid traffic.",
+            "The kids were playing in the garden while their grandmother looked from the Vustra."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            127,
+            218,
+            285,
+            294,
+            232,
+            326,
+            154,
+            300,
+            256,
+            444
+          ]
+        },
+        {
+          "key": "zho_Hant->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Your location:",
+            "Where's the nearby drugstore?",
+            "I'd like a cup of coffee.",
+            "This time the train is working at 10 p.m.",
+            "Please help me get up on this building?",
+            "My sister came to visit.",
+            "It's a good day.",
+            "I forgot about the office.",
+            "We should get out early. Avoid traffic.",
+            "And their grandmothers looked out the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            104,
+            225,
+            245,
+            314,
+            250,
+            182,
+            198,
+            174,
+            245,
+            243
+          ]
+        },
+        {
+          "key": "hrv_Latn->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the closest apothecary?",
+            "I'd like a cup of coffee, please.",
+            "The train goes to 10 p.m.",
+            "Can you help me carry this up?",
+            "My sister's coming to visit next week.",
+            "Today is a wonderful time.",
+            "I forgot 16 Saturdays in the office.",
+            "We should go early to avoid traffic.",
+            "The kids were playing in the garden while their grandmother looked through the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            111,
+            289,
+            290,
+            257,
+            232,
+            277,
+            177,
+            243,
+            228,
+            435
+          ]
+        },
+        {
+          "key": "ell_Grek->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the nearest medicine?",
+            "I'd like a flier of coffee, please.",
+            "The train goes to the 10th half of the afternoon.",
+            "Can you help me get it up?",
+            "My sister is here to visit you next week.",
+            "Time is great today.",
+            "I forgot my umbrella at the office.",
+            "We have to leave early to avoid traffic.",
+            "The kids played in the field while their grandmother watched from the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            131,
+            247,
+            389,
+            388,
+            277,
+            349,
+            184,
+            282,
+            311,
+            457
+          ]
+        },
+        {
+          "key": "guj_Gujr->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "What is the most common form of growth?",
+            "I want a cup of coffee, please.",
+            "The train is on its way out.",
+            "Can you help me to get on this?",
+            "I am now married to one of the brothers who visited me.",
+            "The air is beautiful.",
+            "I forgot my picture at the office.",
+            "We must take time to avoid the practice of stealing.",
+            "The children were playing in the kitchen when they watched from the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            126,
+            300,
+            306,
+            273,
+            305,
+            422,
+            179,
+            276,
+            363,
+            467
+          ]
+        },
+        {
+          "key": "hau_Latn->en",
+          "tag": null,
+          "loadMs": 2,
+          "warmup": false,
+          "outputs": [
+            "I'm sorry.",
+            "Where is the closest neighbor to the story?",
+            "I like coffee, for God.",
+            "The drought was about ten days gone by.",
+            "Could you help me with this challenge?",
+            "My brother! He will come to visit me on some other occasion.",
+            "Things are not very different today.",
+            "I forgot my address in the office.",
+            "We must rise up early to prevent the waves from falling.",
+            "Children are being raised in a garden when their father saw them."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            175,
+            288,
+            239,
+            306,
+            269,
+            437,
+            236,
+            264,
+            396,
+            408
+          ]
+        },
+        {
+          "key": "heb_Hebr->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "- Good morning.",
+            "Where's the closest fighter?",
+            "I want a cup of coffee, please.",
+            "The car will be out in 10 hours after today.",
+            "Can you help me put it up?",
+            "My sister's here to visit next week.",
+            "The air's fine today.",
+            "I forgot my job.",
+            "We should leave early to prevent movement.",
+            "The kids played in the pool, while their grandmother was watching the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            150,
+            270,
+            301,
+            360,
+            264,
+            328,
+            249,
+            189,
+            287,
+            501
+          ]
+        },
+        {
+          "key": "kan_Knda->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good luck.",
+            "What Is the Answer?",
+            "I want a cup of coffee, please.",
+            "The train takes ten hours.",
+            "Can you help in this regard?",
+            "My sister comes to visit next week.",
+            "The air is beautiful today.",
+            "I forgot my address in the church.",
+            "We must quickly get out of the way.",
+            "The children were playing in the morning and were watching their video games."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            126,
+            189,
+            312,
+            217,
+            239,
+            276,
+            214,
+            277,
+            299,
+            450
+          ]
+        },
+        {
+          "key": "zsm_Latn->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the closest drug?",
+            "I wanted to make up my mind to smoke.",
+            "The fireman released ten minutes of sleep.",
+            "Boleh help me get this up?",
+            "My brother's gonna be on the front of the show.",
+            "It's so beautiful today.",
+            "I forgot my address in the office.",
+            "We have to go first to avoid getting stuck.",
+            "The kids gathered in their grandparents' lunch gardens watching from the roof."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            125,
+            232,
+            320,
+            299,
+            271,
+            412,
+            232,
+            274,
+            344,
+            447
+          ]
+        },
+        {
+          "key": "mal_Mlym->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the closest farm?",
+            "I need a cup of coffee.",
+            "The train leaves at ten hours.",
+            "Can you help me get this up?",
+            "My sister's coming next week.",
+            "It's a good time.",
+            "I forgot my baby in the office.",
+            "We need to get out of here to avoid traffic.",
+            "The kids were playing in the garden, and the grandmother looked through the hall."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            128,
+            247,
+            242,
+            241,
+            284,
+            277,
+            243,
+            268,
+            376,
+            517
+          ]
+        },
+        {
+          "key": "mar_Deva->en",
+          "tag": null,
+          "loadMs": 1,
+          "warmup": false,
+          "outputs": [
+            "- Good morning.",
+            "What is the most important benefit of taking in medical care?",
+            "I want a cup of coffee, please.",
+            "The train departed at ten o’clock.",
+            "Can you help me to get up? ’",
+            "I am going to make a helper for him, as a complement of him. ”",
+            "The air is now in the air.",
+            "I forgot my workmates.",
+            "We will soon be on our way to get to know the people of God better.",
+            "The children were playing in the garden, and their mother played outside the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            152,
+            387,
+            303,
+            308,
+            308,
+            533,
+            269,
+            244,
+            532,
+            509
+          ]
+        },
+        {
+          "key": "npi_Deva->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "The good news is being preached.",
+            "Where Is the Family Neighbor?",
+            "Please, please.",
+            "The train day is 10.",
+            "And when the people of the land had gathered their stuff together, they cast lots, and they gathered together their very much.",
+            "My sister Arche has been visiting us for weeks.",
+            "Today, the weather is six.",
+            "The base branch of the office of Jehovah’s Witnesses is a small two - story building.",
+            "Hami traffic boat boy is known as the logger.",
+            "The children were playing Bhaglama, while their son-in-law, Heirah, was a Hindu."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            238,
+            219,
+            165,
+            226,
+            770,
+            364,
+            239,
+            581,
+            392,
+            783
+          ]
+        },
+        {
+          "key": "nob_Latn->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "- Good morning.",
+            "Where is the nearest apothecary?",
+            "I want a cup of coffee. Be so quick.",
+            "The train goes out at ten o'clock after dinner.",
+            "Can you help me carry this up?",
+            "Sisters will visit next week.",
+            "We're here today.",
+            "I forgot my paraplenic at the office.",
+            "We should go early to avoid traffic.",
+            "The children play in the yard while the destination is visible through the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            151,
+            319,
+            354,
+            379,
+            273,
+            261,
+            214,
+            325,
+            270,
+            472
+          ]
+        },
+        {
+          "key": "ory_Orya->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good evening.",
+            "Where is the most direct evidence?",
+            "Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Think Others Others Others Others Others Others Others Others Others Others Others Others Others Others Others Others Others Others Possible Possible Possible Possible Possible Possible Possible",
+            "The train will exit after 10 days.",
+            "What can you do to help me raise this generation?",
+            "My sister came in next week.",
+            "The flag is now OK.",
+            "I forgot my address at the office.",
+            "We must go fast to give up the statistics.",
+            "The kids played in the garden, when they saw their jemma tree."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            126,
+            251,
+            7797,
+            283,
+            393,
+            256,
+            216,
+            277,
+            346,
+            508
+          ]
+        },
+        {
+          "key": "pbt_Arab->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good day.",
+            "The location of the mount point.",
+            "Za-A-Qaa-A-A-A-A-A-A-A-A-A-A-A-A-A",
+            "And the gadgets are running through the game.",
+            "Would you like to help us get this over the phone?",
+            "The next week of the week on which the bready-beep is eaten.",
+            "Today's weather is cold.",
+            "I did my best in writing.",
+            "Mouse must be aware of how much delay should be handled.",
+            "The mouse pointer can be over the garden, especially if the two hands are above the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            122,
+            246,
+            972,
+            394,
+            407,
+            548,
+            242,
+            249,
+            438,
+            605
+          ]
+        },
+        {
+          "key": "pes_Arab->en",
+          "tag": null,
+          "loadMs": 4,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where is the next ward?",
+            "I sleep, but I eat the flesh of bulls, and I desire to drink it.",
+            "The harvest is already late in the morning, and the workers are at their service.",
+            "Do I have to wear a low-level en-suite?",
+            "My sister saw a woman who was a widow by a week.",
+            "This day is the heaven of the congregation.",
+            "I have forgotten thy book, O thou most precious.",
+            "Let us go on our way speedily, that we may be ready at the revelation of our mouth.",
+            "The little ones were in the field. The elder's mother kept them from the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            126,
+            217,
+            561,
+            530,
+            441,
+            416,
+            298,
+            356,
+            635,
+            614
+          ]
+        },
+        {
+          "key": "por_Latn->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning, man.",
+            "Where's the nearest medication?",
+            "I'd like a king's guitar, please.",
+            "The train is at ten in the afternoon.",
+            "Can you help me get this up?",
+            "My sister's coming to see me next week.",
+            "Time is beautiful today.",
+            "I forgot about the wedding ring in the office.",
+            "We were supposed to get out of here early to avoid the transit.",
+            "The kids were staring at their grandmother's window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            181,
+            246,
+            382,
+            301,
+            277,
+            359,
+            186,
+            327,
+            436,
+            364
+          ]
+        },
+        {
+          "key": "pan_Guru->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where is the closest form of communication?",
+            "I want a cup of coffee, please.",
+            "The train is about ten years old.",
+            "Can you help me to get this up?",
+            "My sister's coming next week to see.",
+            "The weather is very good.",
+            "I forgot my address at the office.",
+            "We must get out of traffic as soon as possible.",
+            "The children were playing in the garden when their mother saw them from the garden."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            124,
+            286,
+            307,
+            281,
+            303,
+            326,
+            218,
+            267,
+            357,
+            530
+          ]
+        },
+        {
+          "key": "ron_Latn->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the closest medication?",
+            "I'd like a glass of the egg, please.",
+            "The train takes ten.",
+            "Can you help me get this up?",
+            "My sister never goes to visit me next week.",
+            "Time is great today.",
+            "I forgot my office hat.",
+            "We should go sooner to avoid traffic.",
+            "Pumpii played in the garden, while their grandmother looked at the farm."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            130,
+            246,
+            377,
+            180,
+            263,
+            326,
+            181,
+            213,
+            269,
+            499
+          ]
+        },
+        {
+          "key": "srp_Cyrl->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the closest appetizer?",
+            "I'd like a cup of coffee, please.",
+            "The train's leaving at ten on Saturday.",
+            "Can you help me carry it up here?",
+            "My sister's coming to visit next week.",
+            "It's a nice time today.",
+            "I forgot the card at the office.",
+            "We should get out early to avoid traffic.",
+            "The kids were playing in the garden while their grandmother looked out of the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            132,
+            287,
+            347,
+            322,
+            294,
+            327,
+            258,
+            266,
+            301,
+            492
+          ]
+        },
+        {
+          "key": "sin_Sinh->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the closest famous?",
+            "Can I have a cup of coffee?",
+            "The train is going to ten.",
+            "Can you help bring this up?",
+            "My brother's coming next week.",
+            "Today, the time is beautiful.",
+            "I forgot my job.",
+            "We need to get out of the car first.",
+            "The kids were playing him, and the grandmother was watching."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            128,
+            295,
+            276,
+            242,
+            250,
+            270,
+            249,
+            192,
+            334,
+            401
+          ]
+        },
+        {
+          "key": "swh_Latn->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "The ransom.",
+            "What about all the other four horsemen?",
+            "I looked at the sky just as if it were a cloud.",
+            "Trains must be ten.",
+            "Well, did you give me a kiss to fuck this guy up?",
+            "My father was so proud to be the one who took the week off.",
+            "The situation is different.",
+            "My health deteriorated while I was in the office.",
+            "They are often caught in the snare of materialism.",
+            "A ship that was caught by a boat came by and hit the main dock."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            120,
+            265,
+            404,
+            212,
+            440,
+            467,
+            185,
+            321,
+            323,
+            512
+          ]
+        },
+        {
+          "key": "tam_Taml->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "The early worship.",
+            "Where is the nearest hospital?",
+            "I want a cup of coffee, please.",
+            "The train is released at ten hours.",
+            "Can you help us with this?",
+            "I am so grateful to Jehovah for giving me the strength to endure. ”",
+            "Today, the time is beautiful.",
+            "I forgot my address at the branch.",
+            "We must be on guard to avoid the trap of seeking prominence.",
+            "The children were playing in the field, and Father looked on as a window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            158,
+            220,
+            304,
+            266,
+            247,
+            485,
+            238,
+            278,
+            412,
+            525
+          ]
+        },
+        {
+          "key": "tel_Telu->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good luck.",
+            "Where are the drugs?",
+            "I want a cup of coffee, please.",
+            "The train may take ten hours.",
+            "Can you take this up and help me?",
+            "My brother is coming to visit.",
+            "Today, the environment is very much better.",
+            "I forgot my work experience.",
+            "We have to get out before we stop the traffic.",
+            "The children are playing in the garden, and their mother is watching from the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            129,
+            184,
+            305,
+            252,
+            307,
+            252,
+            314,
+            224,
+            366,
+            549
+          ]
+        },
+        {
+          "key": "urd_Arab->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the nearest second house?",
+            "I want a cup of coffee, please.",
+            "The train is running ten times a year.",
+            "Can you help me get it up?",
+            "My sister's coming to the next circuit the other week.",
+            "It's a good time today.",
+            "I forgot my six in the book.",
+            "To avoid traffic, we must go fast.",
+            "The kids saw them playing in the garden as they watched their performance from a distance."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            125,
+            279,
+            307,
+            299,
+            281,
+            414,
+            258,
+            273,
+            304,
+            539
+          ]
+        },
+        {
+          "key": "yor_Latn->en",
+          "tag": null,
+          "loadMs": 4,
+          "warmup": false,
+          "outputs": [
+            "A lot of people.",
+            "Where is the most effective hospital treatment available?",
+            "I'm gonna have a coffee, now.",
+            "The name is also used when calling to the home folder.",
+            "Could you help me get this up?",
+            "My sister would come and pick me up at the beach.",
+            "It is a time of great prosperity.",
+            "I forgot my address at the office.",
+            "We must leave town immediately so that we do not allow people to go.",
+            "The children play in the garden while their mother watches the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            192,
+            303,
+            327,
+            396,
+            276,
+            381,
+            277,
+            286,
+            480,
+            430
+          ]
+        },
+        {
+          "key": "zul_Latn->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "We did.",
+            "What is the chemical code of AIDS?",
+            "I would like a cup of coffee, please.",
+            "The lamp rises at ten o’clock in the evening.",
+            "Can you help me carry this?",
+            "Our sister will visit the next week.",
+            "The weather is different today.",
+            "I forgot my umbrella at the office.",
+            "We must walk in the morning to avoid being distracted by efforts.",
+            "The children played in the garden while their grandmother looked out at the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            123,
+            271,
+            336,
+            383,
+            241,
+            268,
+            215,
+            333,
+            413,
+            481
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 118351723,
+      "complete": true,
+      "warmLoadMs": 1487
+    },
+    "opus-romance-en": {
+      "id": "opus-romance-en",
+      "modelId": "Xenova/opus-mt-ROMANCE-en",
+      "pairs": [
+        {
+          "key": "cat_Latn->en",
+          "tag": null,
+          "loadMs": 13750,
+          "warmup": false,
+          "outputs": [
+            "- Good morning.",
+            "Where's the most suitable pharmacy?",
+            "I'd like a coffee tax, please.",
+            "The train leaves at noon.",
+            "Can you help me get this to the stairwell?",
+            "My German girl upstairs to visit her the week she sees.",
+            "Time is worth it today.",
+            "I forgot my umbrella at the office.",
+            "We have to leave before we can avoid the traffic.",
+            "The children were joining the jardí while their avi was looking from the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            294,
+            399,
+            410,
+            321,
+            331,
+            333,
+            172,
+            228,
+            289,
+            461
+          ]
+        },
+        {
+          "key": "por_Latn->en",
+          "tag": null,
+          "loadMs": 4,
+          "warmup": false,
+          "outputs": [
+            "Good morning, man.",
+            "Where's the nearest pharmacy?",
+            "I'd like a cup of coffee, please.",
+            "The train leaves at ten o'clock in the afternoon.",
+            "Can you help me get this up?",
+            "My sister's coming to visit me next week.",
+            "The weather is beautiful today.",
+            "I forgot about the umbrella in the office.",
+            "We should get out early to avoid traffic.",
+            "The kids were playing in the garden while your grandmother was looking out the window."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            141,
+            207,
+            272,
+            296,
+            209,
+            276,
+            175,
+            262,
+            251,
+            384
+          ]
+        },
+        {
+          "key": "ron_Latn->en",
+          "tag": null,
+          "loadMs": 0,
+          "warmup": false,
+          "outputs": [
+            "Good morning.",
+            "Where's the nearest pharmacy?",
+            "I'd like a cup of coffee, please.",
+            "Train's at 10.",
+            "Can you help me get this up?",
+            "My sister's coming to visit me next week.",
+            "The weather is great today.",
+            "I forgot my umbrella at the office.",
+            "We should get out early to avoid traffic.",
+            "Copiii played in the garden, while their grandmother looked on the iron 107ra."
+          ],
+          "errors": [],
+          "perSentenceMs": [
+            94,
+            183,
+            269,
+            159,
+            207,
+            273,
+            164,
+            206,
+            231,
+            410
+          ]
+        }
+      ],
+      "notes": [],
+      "workerBytesStart": null,
+      "filesBytes": 119234852,
+      "complete": true,
+      "warmLoadMs": 2673
+    }
+  }
+}

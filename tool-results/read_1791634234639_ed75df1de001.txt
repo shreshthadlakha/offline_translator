@@ -1,0 +1,786 @@
+     1→"use client";
+     2→
+     3→/**
+     4→ * The engine: one translation worker, shared by the translate view and batch
+     5→ * mode. Owns setup state, the single aggregated progress value, the message
+     6→ * protocol, and the engine switching for fast pairs.
+     7→ *
+     8→ * The state machine runs idle, checking (storage and lock prechecks), the
+     9→ * worker's own stages (downloading, reading into memory, checking that
+    10→ * translation works), ready, and error. Requests that arrive before the
+    11→ * engine is ready are held and sent the moment it is, so nothing typed during
+    12→ * setup is lost.
+    13→ *
+    14→ * Protection against silent failure: a version handshake with the worker, a
+    15→ * heartbeat with a death watch, a crash flag that survives reloads, one tab
+    16→ * at a time through Web Locks, and a storage quota check before every
+    17→ * download.
+    18→ */
+    19→
+    20→import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+    21→import { PROTOCOL_VERSION, type EngineDevice, type EngineErrorCode, type EngineSpec, type Priority, type WorkerToMain } from "@/workers/protocol";
+    22→import { BUILD_ID } from "@/workers/build-id";
+    23→import { STORAGE_KEYS, storageGet, storageRemove, storageSet } from "@/lib/storage";
+    24→import { netlog } from "@/lib/netlog";
+    25→import { engineForPair, type EngineDescriptor } from "@/lib/engines";
+    26→import { cachedModelFiles, modelFilesCached } from "@/lib/model-cache";
+    27→import { recordTiming } from "@/lib/speed-metrics";
+    28→import { useSettings } from "@/hooks/use-settings";
+    29→import { SPEED_CONFIG } from "@/lib/speed-config";
+    30→import { languageByCode } from "@/lib/languages";
+    31→
+    32→export type EngineStatus = "idle" | "checking" | "downloading" | "initializing" | "testing" | "ready" | "error";
+    33→
+    34→export type EngineError = {
+    35→  code: EngineErrorCode;
+    36→  message: string;
+    37→  /** For quota errors: what the window can store, and what the model needs. */
+    38→  quota?: number;
+    39→  needed?: number;
+    40→};
+    41→
+    42→export type EngineProgress = {
+    43→  loaded: number;
+    44→  total: number;
+    45→  /** Fraction of 0 to 1, never allowed to go backwards. */
+    46→  fraction: number;
+    47→  /** Transfer speed in bytes per second, measured over recent samples. */
+    48→  bps: number;
+    49→  /** Estimated time left in ms, when a speed is measurable. */
+    50→  etaMs: number | null;
+    51→  /** Time since the download stage began. */
+    52→  elapsedMs: number;
+    53→};
+    54→
+    55→export type FileRow = {
+    56→  file: string;
+    57→  status: "waiting" | "downloading" | "done";
+    58→  loaded: number;
+    59→  total: number;
+    60→  /** True when this file was already saved on this device before this load. */
+    61→  fromCache: boolean;
+    62→};
+    63→
+    64→export type StageTimings = {
+    65→  checkingMs?: number;
+    66→  downloadingMs?: number;
+    67→  initializingMs?: number;
+    68→  testingMs?: number;
+    69→};
+    70→
+    71→export type EngineNotes = {
+    72→  /** The device reports little memory. A note, not a block. */
+    73→  memoryWarning: boolean;
+    74→  /** The reported memory in GB, when the browser says. */
+    75→  memoryGB: number | null;
+    76→  /** Storage is unavailable, so nothing can be saved for next time. */
+    77→  storageDisabled: boolean;
+    78→  /** WebGPU was wanted and the engine fell back to WebAssembly. */
+    79→  webgpuFellBack: boolean;
+    80→};
+    81→
+    82→type Listener = (message: WorkerToMain) => void;
+    83→
+    84→const LOCK_NAME = "pt-engine";
+    85→
+    86→/** Bytes per second over the last few seconds of progress samples. */
+    87→function measureBps(samples: { at: number; loaded: number }[]): number {
+    88→  if (samples.length < 2) return 0;
+    89→  const first = samples[0]!;
+    90→  const last = samples[samples.length - 1]!;
+    91→  const seconds = (last.at - first.at) / 1000;
+    92→  if (seconds <= 0.3) return 0;
+    93→  return Math.max(0, (last.loaded - first.loaded) / seconds);
+    94→}
+    95→
+    96→export function useEngine() {
+    97→  const { settings, loaded: settingsLoaded } = useSettings();
+    98→
+    99→  const [status, setStatus] = useState<EngineStatus>("idle");
+   100→  const [device, setDevice] = useState<EngineDevice | null>(null);
+   101→  const [error, setError] = useState<EngineError | null>(null);
+   102→  const [progress, setProgress] = useState<EngineProgress>({ loaded: 0, total: 0, fraction: 0, bps: 0, etaMs: null, elapsedMs: 0 });
+   103→  const [readyTick, setReadyTick] = useState(0);
+   104→  /** True when this load began on its own from files already saved here. */
+   105→  const [autoStarted, setAutoStarted] = useState(false);
+   106→  /** True when the selected pair's engine model is saved on this device. */
+   107→  const [modelPresent, setModelPresent] = useState(false);
+   108→  /** The engine currently loaded or being loaded. */
+   109→  const [engineInfo, setEngineInfo] = useState<EngineDescriptor | null>(null);
+   110→  /** True while a loaded engine is being swapped for a different one. */
+   111→  const [switching, setSwitching] = useState(false);
+   112→  const [fileRows, setFileRows] = useState<FileRow[]>([]);
+   113→  const [stageTimings, setStageTimings] = useState<StageTimings>({});
+   114→  const [notes, setNotes] = useState<EngineNotes>({ memoryWarning: false, memoryGB: null, storageDisabled: false, webgpuFellBack: false });
+   115→  const [crashNotice, setCrashNotice] = useState<string | null>(null);
+   116→  /** Seconds since data last arrived, while downloading. */
+   117→  const [stallSeconds, setStallSeconds] = useState<number | null>(null);
+   118→  const [heap, setHeap] = useState<{ used: number | null; limit: number | null }>({ used: null, limit: null });
+   119→  const [lastSwitchMs, setLastSwitchMs] = useState<number | null>(null);
+   120→
+   121→  const workerRef = useRef<Worker | null>(null);
+   122→  const listenersRef = useRef(new Set<Listener>());
+   123→  const fractionRef = useRef(0);
+   124→  const wasReadyBeforeRef = useRef(false);
+   125→  const statusRef = useRef<EngineStatus>("idle");
+   126→  const activeSpecRef = useRef<EngineSpec | null>(null);
+   127→  const heldQueueRef = useRef<{ id: string; message: Record<string, unknown> }[]>([]);
+   128→  const preExistingFilesRef = useRef<Set<string>>(new Set());
+   129→  const stageStartRef = useRef<{ checking?: number; downloading?: number; initializing?: number; testing?: number }>({});
+   130→  const progressSamplesRef = useRef<{ at: number; loaded: number }[]>([]);
+   131→  const downloadStartRef = useRef<number | null>(null);
+   132→  const lastProgressAtRef = useRef<number | null>(null);
+   133→  const lastPongRef = useRef<number | null>(null);
+   134→  const heartbeatTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+   135→  const stallTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+   136→  const helloTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+   137→  const lockReleaseRef = useRef<(() => void) | null>(null);
+   138→  const desiredRef = useRef<EngineDescriptor | null>(null);
+   139→  const switchStartRef = useRef<number | null>(null);
+   140→  const lastErrorRef = useRef<EngineError | null>(null);
+   141→  const fileRowOrderRef = useRef<string[]>([]);
+   142→
+   143→  const setStatusSafe = useCallback((next: EngineStatus) => {
+   144→    statusRef.current = next;
+   145→    setStatus(next);
+   146→  }, []);
+   147→
+   148→  // The pair and the engine it needs, from the stored settings. The first
+   149→  // render matches the server; the stored pair arrives right after hydration.
+   150→  const srcCode = languageByCode(settings.lastSrc)?.code ?? "eng_Latn";
+   151→  const tgtCode = languageByCode(settings.lastTgt)?.code ?? "fra_Latn";
+   152→  const desired = useMemo(() => engineForPair(srcCode, tgtCode, settings.useFastModels), [srcCode, tgtCode, settings.useFastModels]);
+   153→  desiredRef.current = desired;
+   154→
+   155→  const post = useCallback((message: Record<string, unknown>) => {
+   156→    workerRef.current?.postMessage(message);
+   157→  }, []);
+   158→
+   159→  const releaseLock = useCallback(() => {
+   160→    lockReleaseRef.current?.();
+   161→    lockReleaseRef.current = null;
+   162→  }, []);
+   163→
+   164→  const stopTimers = useCallback(() => {
+   165→    if (heartbeatTimerRef.current !== null) {
+   166→      clearInterval(heartbeatTimerRef.current);
+   167→      heartbeatTimerRef.current = null;
+   168→    }
+   169→    if (stallTimerRef.current !== null) {
+   170→      clearInterval(stallTimerRef.current);
+   171→      stallTimerRef.current = null;
+   172→    }
+   173→    if (helloTimeoutRef.current !== null) {
+   174→      clearTimeout(helloTimeoutRef.current);
+   175→      helloTimeoutRef.current = null;
+   176→    }
+   177→  }, []);
+   178→
+   179→  const terminate = useCallback(() => {
+   180→    stopTimers();
+   181→    releaseLock();
+   182→    workerRef.current?.terminate();
+   183→    workerRef.current = null;
+   184→    activeSpecRef.current = null;
+   185→    heldQueueRef.current = [];
+   186→    netlog.setEngineReady(false);
+   187→  }, [stopTimers, releaseLock]);
+   188→
+   189→  // --- stage bookkeeping ---------------------------------------------------------
+   190→
+   191→  const finishStage = useCallback((stage: "checking" | "downloading" | "initializing" | "testing") => {
+   192→    const start = stageStartRef.current[stage];
+   193→    if (start == null) return;
+   194→    const ms = performance.now() - start;
+   195→    stageStartRef.current[stage] = undefined;
+   196→    setStageTimings((prev) => ({ ...prev, [`${stage}Ms`]: Math.round(ms) }));
+   197→  }, []);
+   198→
+   199→  const onStage = useCallback(
+   200→    (stage: "downloading" | "initializing" | "testing") => {
+   201→      if (stage === "downloading" && stageStartRef.current.downloading == null) {
+   202→        finishStage("checking");
+   203→        stageStartRef.current.downloading = performance.now();
+   204→        if (downloadStartRef.current == null) downloadStartRef.current = performance.now();
+   205→        lastProgressAtRef.current = performance.now();
+   206→        setStatusSafe("downloading");
+   207→        // Watch for a stalled download: no bytes for 15 seconds gets an
+   208→        // honest note, not a silent bar.
+   209→        if (stallTimerRef.current === null) {
+   210→          stallTimerRef.current = setInterval(() => {
+   211→            const last = lastProgressAtRef.current;
+   212→            if (statusRef.current !== "downloading" || last == null) {
+   213→              setStallSeconds(null);
+   214→              return;
+   215→            }
+   216→            const stalledFor = performance.now() - last;
+   217→            setStallSeconds(stalledFor > SPEED_CONFIG.downloadStallMs ? Math.floor(stalledFor / 1000) : null);
+   218→          }, 1000);
+   219→        }
+   220→      } else if (stage === "initializing" && stageStartRef.current.initializing == null) {
+   221→        finishStage("downloading");
+   222→        stageStartRef.current.initializing = performance.now();
+   223→        setStatusSafe("initializing");
+   224→        setStallSeconds(null);
+   225→        if (stallTimerRef.current !== null) {
+   226→          clearInterval(stallTimerRef.current);
+   227→          stallTimerRef.current = null;
+   228→        }
+   229→      } else if (stage === "testing" && stageStartRef.current.testing == null) {
+   230→        finishStage("initializing");
+   231→        stageStartRef.current.testing = performance.now();
+   232→        setStatusSafe("testing");
+   233→      }
+   234→    },
+   235→    [finishStage, setStatusSafe],
+   236→  );
+   237→
+   238→  // --- worker messages ---------------------------------------------------------------
+   239→
+   240→  const handleWorkerMessage = useCallback(
+   241→    (message: WorkerToMain) => {
+   242→      switch (message.type) {
+   243→        case "hello": {
+   244→          if (helloTimeoutRef.current !== null) {
+   245→            clearTimeout(helloTimeoutRef.current);
+   246→            helloTimeoutRef.current = null;
+   247→          }
+   248→          if (message.protocolVersion !== PROTOCOL_VERSION || message.buildId !== BUILD_ID) {
+   249→            // The app files on this device don't match each other. Say so,
+   250→            // instead of failing in a way that looks like anything else.
+   251→            terminate();
+   252→            setStatusSafe("error");
+   253→            const err = { code: "stale-code" as EngineErrorCode, message: "version handshake failed" };
+   254→            setError(err);
+   255→            lastErrorRef.current = err;
+   256→          }
+   257→          break;
+   258→        }
+   259→        case "stage": {
+   260→          onStage(message.stage);
+   261→          break;
+   262→        }
+   263→        case "progress": {
+   264→          const now = performance.now();
+   265→          lastProgressAtRef.current = now;
+   266→          const fraction = message.total > 0 ? Math.min(1, message.loaded / message.total) : 0;
+   267→          // The displayed value never goes backwards, even when the known
+   268→          // total grows as more files start downloading.
+   269→          fractionRef.current = Math.max(fractionRef.current, fraction);
+   270→          const samples = progressSamplesRef.current;
+   271→          samples.push({ at: now, loaded: message.loaded });
+   272→          while (samples.length > 2 && now - (samples[0]?.at ?? now) > 6000) samples.shift();
+   273→          const bps = measureBps(samples);
+   274→          const remaining = message.total > message.loaded ? message.total - message.loaded : 0;
+   275→          const downloadStart = downloadStartRef.current ?? now;
+   276→          setProgress({
+   277→            loaded: message.loaded,
+   278→            total: message.total,
+   279→            fraction: fractionRef.current,
+   280→            bps,
+   281→            etaMs: bps > 0 && remaining > 0 ? (remaining / bps) * 1000 : null,
+   282→            elapsedMs: now - downloadStart,
+   283→          });
+   284→          break;
+   285→        }
+   286→        case "file": {
+   287→          const fromCache = preExistingFilesRef.current.has(message.file);
+   288→          setFileRows((prev) => {
+   289→            const index = fileRowOrderRef.current.indexOf(message.file);
+   290→            if (index === -1) {
+   291→              fileRowOrderRef.current.push(message.file);
+   292→              return [
+   293→                ...prev,
+   294→                { file: message.file, status: message.status, loaded: message.loaded, total: message.total, fromCache },
+   295→              ];
+   296→            }
+   297→            const next = [...prev];
+   298→            next[index] = {
+   299→              file: message.file,
+   300→              status: message.status,
+   301→              loaded: message.loaded,
+   302→              total: message.total,
+   303→              fromCache: fromCache || (next[index]?.fromCache ?? false),
+   304→            };
+   305→            return next;
+   306→          });
+   307→          break;
+   308→        }
+   309→        case "ready": {
+   310→          // Setup finished. Clear the crash flag and remember that setup has
+   311→          // been completed once, for the compact hero on return visits.
+   312→          storageRemove(STORAGE_KEYS.setupCrash);
+   313→          setCrashNotice(null);
+   314→          if (!wasReadyBeforeRef.current) storageSet(STORAGE_KEYS.modelReady, "1");
+   315→          wasReadyBeforeRef.current = true;
+   316→          finishStage("testing");
+   317→          if (switchStartRef.current != null) {
+   318→            setLastSwitchMs(Math.round(performance.now() - switchStartRef.current));
+   319→            switchStartRef.current = null;
+   320→          }
+   321→          setSwitching(false);
+   322→          setDevice(message.device);
+   323→          setEngineInfo(desiredRef.current);
+   324→          setError(null);
+   325→          setStatusSafe("ready");
+   326→          setReadyTick((t) => t + 1);
+   327→          netlog.setEngineReady(true);
+   328→          // Requests that arrived while setup ran are sent now, in order.
+   329→          const held = heldQueueRef.current;
+   330→          heldQueueRef.current = [];
+   331→          for (const { message: heldMessage } of held) post(heldMessage);
+   332→          break;
+   333→        }
+   334→        case "result": {
+   335→          recordTiming({
+   336→            chars: message.chars,
+   337→            queueMs: message.queueMs,
+   338→            translateMs: message.ms,
+   339→            engineId: message.engineId,
+   340→          });
+   341→          netlog.countTranslation();
+   342→          netlog.markTranslateSettled(message.id);
+   343→          break;
+   344→        }
+   345→        case "error": {
+   346→          if (message.id === undefined) {
+   347→            // A setup level failure. Recreate the worker on retry.
+   348→            lastErrorRef.current = { code: message.code, message: message.message };
+   349→            terminate();
+   350→            setSwitching(false);
+   351→            setStatusSafe("error");
+   352→            setError({ code: message.code, message: message.message });
+   353→            netlog.setEngineReady(false);
+   354→          }
+   355→          break;
+   356→        }
+   357→        case "netlog": {
+   358→          netlog.recordWorkerFetch(message.url, message.finalUrl, message.size);
+   359→          break;
+   360→        }
+   361→        case "stats": {
+   362→          setHeap({ used: message.used, limit: message.limit });
+   363→          if (message.device) setDevice(message.device);
+   364→          break;
+   365→        }
+   366→        case "pong": {
+   367→          lastPongRef.current = performance.now();
+   368→          break;
+   369→        }
+   370→      }
+   371→      for (const listener of listenersRef.current) listener(message);
+   372→    },
+   373→    [finishStage, netlog, onStage, post, setStatusSafe, terminate],
+   374→  );
+   375→
+   376→  const wireWorker = useCallback(
+   377→    (worker: Worker) => {
+   378→      worker.onmessage = (event: MessageEvent<WorkerToMain>) => handleWorkerMessage(event.data);
+   379→      worker.onerror = () => {
+   380→        terminate();
+   381→        setSwitching(false);
+   382→        setStatusSafe("error");
+   383→        const err = { code: "download" as EngineErrorCode, message: "The worker could not be started." };
+   384→        setError(err);
+   385→        lastErrorRef.current = err;
+   386→        netlog.setEngineReady(false);
+   387→      };
+   388→      worker.onmessageerror = () => {
+   389→        terminate();
+   390→        setSwitching(false);
+   391→        setStatusSafe("error");
+   392→        const err = { code: "download" as EngineErrorCode, message: "The worker could not be started." };
+   393→        setError(err);
+   394→        lastErrorRef.current = err;
+   395→        netlog.setEngineReady(false);
+   396→      };
+   397→    },
+   398→    [handleWorkerMessage, netlog, setStatusSafe, terminate],
+   399→  );
+   400→
+   401→  // Heartbeat: the worker answers pings unless it died. While an engine is
+   402→  // ready, 15 seconds without an answer means dead. While loading, WebAssembly
+   403→  // session creation can legitimately block the worker's thread for a long
+   404→  // stretch, so the watch is wider there and worker errors do the fast work.
+   405→  const startHeartbeat = useCallback(() => {
+   406→    if (heartbeatTimerRef.current !== null) return;
+   407→    lastPongRef.current = performance.now();
+   408→    heartbeatTimerRef.current = setInterval(() => {
+   409→      const worker = workerRef.current;
+   410→      if (!worker) return;
+   411→      worker.postMessage({ type: "ping" });
+   412→      worker.postMessage({ type: "stats" });
+   413→      const last = lastPongRef.current ?? performance.now();
+   414→      const silent = performance.now() - last;
+   415→      const limit = statusRef.current === "ready" ? SPEED_CONFIG.heartbeat.timeoutMs : 90_000;
+   416→      if (silent > limit) {
+   417→        terminate();
+   418→        setSwitching(false);
+   419→        setStatusSafe("error");
+   420→        const err = { code: "download" as EngineErrorCode, message: "The engine stopped responding." };
+   421→        setError(err);
+   422→        lastErrorRef.current = err;
+   423→        netlog.setEngineReady(false);
+   424→      }
+   425→    }, SPEED_CONFIG.heartbeat.intervalMs);
+   426→  }, [netlog, setStatusSafe, terminate]);
+   427→
+   428→  // --- prechecks and loading -----------------------------------------------------------
+   429→
+   430→  /** One tab at a time. Returns false when another tab holds the engine. */
+   431→  const acquireLock = useCallback(async (): Promise<boolean> => {
+   432→    if (typeof navigator === "undefined" || !("locks" in navigator) || !navigator.locks?.request) return true;
+   433→    try {
+   434→      return await new Promise<boolean>((resolve) => {
+   435→        void navigator.locks!.request(LOCK_NAME, { ifAvailable: true }, (lock) => {
+   436→          if (!lock) {
+   437→            resolve(false);
+   438→            return undefined;
+   439→          }
+   440→          const held = new Promise<void>((release) => {
+   441→            lockReleaseRef.current = release;
+   442→          });
+   443→          resolve(true);
+   444→          return held;
+   445→        });
+   446→      });
+   447→    } catch {
+   448→      // Locks misbehaving shouldn't block translation.
+   449→      return true;
+   450→    }
+   451→  }, []);
+   452→
+   453→  /**
+   454→   * Send init for an engine, after the prechecks. Shared by the first start
+   455→   * and by switches, so every download gets the storage check and the crash
+   456→   * flag, whatever came before it.
+   457→   */
+   458→  const beginLoad = useCallback(
+   459→    async (engine: EngineDescriptor): Promise<boolean> => {
+   460→      // Storage prechecks. A window whose quota can't hold the model is told
+   461→      // so plainly. Storage that can't be read at all is a note, not a block:
+   462→      // translating still works, it just can't be saved for next time.
+   463→      let storageDisabled = false;
+   464→      try {
+   465→        const estimate = await navigator.storage?.estimate?.();
+   466→        if (estimate && typeof estimate.quota === "number" && estimate.quota > 0 && estimate.quota < engine.expectedBytes) {
+   467→          const err: EngineError = {
+   468→            code: "quota",
+   469→            message: `quota ${estimate.quota} < ${engine.expectedBytes}`,
+   470→            quota: estimate.quota,
+   471→            needed: engine.expectedBytes,
+   472→          };
+   473→          setError(err);
+   474→          lastErrorRef.current = err;
+   475→          setStatusSafe("error");
+   476→          return false;
+   477→        }
+   478→      } catch {
+   479→        storageDisabled = true;
+   480→      }
+   481→      if (typeof caches === "undefined") storageDisabled = true;
+   482→
+   483→      const deviceMemory = (navigator as { deviceMemory?: number }).deviceMemory;
+   484→      const memoryWarning = engine.kind === "nllb" && typeof deviceMemory === "number" && deviceMemory <= 4;
+   485→      setNotes((prev) => ({ ...prev, storageDisabled, memoryWarning, memoryGB: typeof deviceMemory === "number" ? deviceMemory : null }));
+   486→
+   487→      // Which files are already saved here, so Details can tell saved this
+   488→      // visit apart from loaded from saved files.
+   489→      preExistingFilesRef.current = await cachedModelFiles(engine.modelId);
+   490→
+   491→      // The crash flag: set while setup runs, cleared when it finishes.
+   492→      storageSet(STORAGE_KEYS.setupCrash, String(Date.now()));
+   493→
+   494→      stageStartRef.current = { checking: performance.now() };
+   495→      fileRowOrderRef.current = [];
+   496→      setFileRows([]);
+   497→      setStageTimings({});
+   498→      fractionRef.current = 0;
+   499→      progressSamplesRef.current = [];
+   500→      downloadStartRef.current = null;
+   501→      setProgress({ loaded: 0, total: 0, fraction: 0, bps: 0, etaMs: null, elapsedMs: 0 });
+   502→
+   503→      const spec: EngineSpec = { id: engine.id, kind: engine.kind, modelId: engine.modelId };
+   504→      activeSpecRef.current = spec;
+   505→      setEngineInfo(engine);
+   506→      setStatusSafe("checking");
+   507→      post({ type: "init", engine: spec, src: srcCode, tgt: tgtCode, device: settings.useWebGPU ? "webgpu" : "wasm" });
+   508→      startHeartbeat();
+   509→      return true;
+   510→    },
+   511→    [post, setStatusSafe, srcCode, tgtCode, startHeartbeat, settings.useWebGPU],
+   512→  );
+   513→
+   514→  const start = useCallback(
+   515→    (options?: { auto?: boolean }) => {
+   516→      if (workerRef.current) return;
+   517→      const engine = desiredRef.current;
+   518→      if (!engine) return;
+   519→      setError(null);
+   520→      setDevice(null);
+   521→      setSwitching(false);
+   522→      switchStartRef.current = null;
+   523→      setAutoStarted(options?.auto === true);
+   524→      void (async () => {
+   525→        // One tab at a time.
+   526→        const locked = await acquireLock();
+   527→        if (!locked) {
+   528→          const err = { code: "another-tab" as EngineErrorCode, message: "another tab holds the engine" };
+   529→          setError(err);
+   530→          lastErrorRef.current = err;
+   531→          setStatusSafe("error");
+   532→          return;
+   533→        }
+   534→        if (workerRef.current) return; // A second start raced in.
+   535→        const worker = new Worker("/translator.worker.js", { type: "module" });
+   536→        workerRef.current = worker;
+   537→        wireWorker(worker);
+   538→        // The version handshake. No hello in time means files that don't
+   539→        // belong together.
+   540→        helloTimeoutRef.current = setTimeout(() => {
+   541→          if (statusRef.current === "checking" || statusRef.current === "idle") {
+   542→            terminate();
+   543→            setStatusSafe("error");
+   544→            const err = { code: "stale-code" as EngineErrorCode, message: "no hello from the worker" };
+   545→            setError(err);
+   546→            lastErrorRef.current = err;
+   547→          }
+   548→        }, 5000);
+   549→        worker.postMessage({ type: "hello" });
+   550→        await beginLoad(engine);
+   551→        // The pair may have changed while the prechecks ran. The desired
+   552→        // engine effect re-runs on every status change and will catch it,
+   553→        // because activeSpecRef is set before the first status update.
+   554→      })();
+   555→    },
+   556→    [acquireLock, beginLoad, setStatusSafe, terminate, wireWorker],
+   557→  );
+   558→
+   559→  // --- switching engines -----------------------------------------------------------
+   560→
+   561→  const switchTo = useCallback(
+   562→    (engine: EngineDescriptor) => {
+   563→      if (!workerRef.current || activeSpecRef.current?.id === engine.id) return;
+   564→      setSwitching(true);
+   565→      switchStartRef.current = performance.now();
+   566→      heldQueueRef.current = [];
+   567→      void beginLoad(engine);
+   568→    },
+   569→    [beginLoad],
+   570→  );
+   571→
+   572→  // The desired engine, followed. Loading starts early when the model is
+   573→  // already saved here, during idle time. A pair change inside the same
+   574→  // engine never reloads anything. A change to a different engine switches.
+   575→  useEffect(() => {
+   576→    if (!settingsLoaded) return;
+   577→    const engine = desiredRef.current;
+   578→    if (!engine) return;
+   579→
+   580→    let cancelled = false;
+   581→    void (async () => {
+   582→      const saved = await modelFilesCached(engine.modelId);
+   583→      if (cancelled) return;
+   584→      setModelPresent(saved);
+   585→
+   586→      if (workerRef.current) {
+   587→        // An engine is loaded or loading. Follow the selection.
+   588→        if (activeSpecRef.current && activeSpecRef.current.id !== engine.id && statusRef.current !== "error") {
+   589→          const online = typeof navigator === "undefined" ? true : navigator.onLine;
+   590→          if (!online && !saved) {
+   591→            // The pair changed to an engine that isn't on this device, and
+   592→            // there's no connection to get it. Say so, instead of starting a
+   593→            // download that can only fail. The old engine can't translate
+   594→            // the new pair, so it goes too.
+   595→            terminate();
+   596→            setSwitching(false);
+   597→            setStatusSafe("idle");
+   598→            return;
+   599→          }
+   600→          if (statusRef.current === "ready") {
+   601→            switchTo(engine);
+   602→          } else {
+   603→            // A different engine was wanted mid load. Starting clean is
+   604→            // quicker than waiting out a load nobody needs.
+   605→            terminate();
+   606→            setAutoStarted(false);
+   607→            setSwitching(false);
+   608→            setStatusSafe("idle");
+   609→            start({ auto: true });
+   610→          }
+   611→        }
+   612→        return;
+   613→      }
+   614→
+   615→      if (statusRef.current !== "idle" && statusRef.current !== "error") return;
+   616→      if (!saved) return;
+   617→      // Saved already: begin loading during idle time, without delaying
+   618→      // first paint. Don't repeat this for the same engine.
+   619→      setAutoStarted(true);
+   620→      const begin = () => {
+   621→        if (cancelled || workerRef.current) return;
+   622→        start({ auto: true });
+   623→      };
+   624→      if (typeof requestIdleCallback === "function") {
+   625→        const handle = requestIdleCallback(begin, { timeout: 2000 });
+   626→        void handle;
+   627→      } else {
+   628→        setTimeout(begin, 300);
+   629→      }
+   630→    })();
+   631→    return () => {
+   632→      cancelled = true;
+   633→    };
+   634→    // The engine identity (not every pair) is what triggers this, plus the
+   635→    // status changes of a load in progress, so a pair change during the
+   636→    // prechecks is still caught once the spec is known.
+   637→  }, [desired.id, settingsLoaded, settings.useFastModels, status]);
+   638→
+   639→  // A crash flag left behind means the last setup stopped before finishing.
+   640→  // Say so once, on load, while nothing is running.
+   641→  useEffect(() => {
+   642→    try {
+   643→      const raw = storageGet(STORAGE_KEYS.setupCrash);
+   644→      if (!raw) return;
+   645→      const at = Number(raw);
+   646→      if (Number.isFinite(at) && Date.now() - at < SPEED_CONFIG.crashFlagMaxAgeMs) {
+   647→        setCrashNotice("crash");
+   648→      }
+   649→    } catch {
+   650→      // Reading storage is best effort.
+   651→    }
+   652→  }, []);
+   653→
+   654→  // The WebGPU note: wanted, and the engine came back on WebAssembly.
+   655→  useEffect(() => {
+   656→    if (status !== "ready" || !device) return;
+   657→    setNotes((prev) => ({ ...prev, webgpuFellBack: settings.useWebGPU && device === "wasm" }));
+   658→  }, [status, device, settings.useWebGPU]);
+   659→
+   660→  const reset = useCallback(() => {
+   661→    terminate();
+   662→    setStatusSafe("idle");
+   663→    setDevice(null);
+   664→    setError(null);
+   665→    setEngineInfo(null);
+   666→    setModelPresent(false);
+   667→    setProgress({ loaded: 0, total: 0, fraction: 0, bps: 0, etaMs: null, elapsedMs: 0 });
+   668→    setFileRows([]);
+   669→    setStageTimings({});
+   670→    setSwitching(false);
+   671→    setAutoStarted(false);
+   672→    setStallSeconds(null);
+   673→    setHeap({ used: null, limit: null });
+   674→    netlog.setEngineReady(false);
+   675→  }, [netlog, setStatusSafe, terminate]);
+   676→
+   677→  // --- the public surface ------------------------------------------------------------
+   678→
+   679→  const translate = useCallback(
+   680→    (id: string, text: string | string[], src: string, tgt: string, priority: Priority) => {
+   681→      const message: Record<string, unknown> =
+   682→        Array.isArray(text)
+   683→          ? { type: "translate", id, texts: text, src, tgt, priority }
+   684→          : { type: "translate", id, text, src, tgt, priority };
+   685→      netlog.markTranslateSent(id);
+   686→      if (workerRef.current && statusRef.current === "ready") {
+   687→        workerRef.current.postMessage(message);
+   688→      } else {
+   689→        // Held, not dropped. Sent the moment the engine is ready.
+   690→        heldQueueRef.current.push({ id, message });
+   691→      }
+   692→    },
+   693→    [netlog],
+   694→  );
+   695→
+   696→  const cancel = useCallback(
+   697→    (id: string) => {
+   698→      const heldIndex = heldQueueRef.current.findIndex((entry) => entry.id === id);
+   699→      if (heldIndex >= 0) heldQueueRef.current.splice(heldIndex, 1);
+   700→      post({ type: "cancel", id });
+   701→    },
+   702→    [post],
+   703→  );
+   704→
+   705→  const subscribe = useCallback((listener: Listener) => {
+   706→    listenersRef.current.add(listener);
+   707→    return () => {
+   708→      listenersRef.current.delete(listener);
+   709→    };
+   710→  }, []);
+   711→
+   712→  useEffect(() => {
+   713→    return () => {
+   714→      terminate();
+   715→    };
+   716→  }, [terminate]);
+   717→
+   718→  return useMemo(
+   719→    () => ({
+   720→      status,
+   721→      device,
+   722→      error,
+   723→      progress,
+   724→      readyTick,
+   725→      autoStarted,
+   726→      modelPresent,
+   727→      engineInfo,
+   728→      desiredEngine: desired,
+   729→      switching,
+   730→      fileRows,
+   731→      stageTimings,
+   732→      notes,
+   733→      crashNotice,
+   734→      stallSeconds,
+   735→      heap,
+   736→      lastSwitchMs,
+   737→      lastError: lastErrorRef.current,
+   738→      start,
+   739→      reset,
+   740→      translate,
+   741→      cancel,
+   742→      subscribe,
+   743→      clearCrashNotice: () => setCrashNotice(null),
+   744→    }),
+   745→    [
+   746→      status,
+   747→      device,
+   748→      error,
+   749→      progress,
+   750→      readyTick,
+   751→      autoStarted,
+   752→      modelPresent,
+   753→      engineInfo,
+   754→      desired,
+   755→      switching,
+   756→      fileRows,
+   757→      stageTimings,
+   758→      notes,
+   759→      crashNotice,
+   760→      stallSeconds,
+   761→      heap,
+   762→      lastSwitchMs,
+   763→      start,
+   764→      reset,
+   765→      translate,
+   766→      cancel,
+   767→      subscribe,
+   768→    ],
+   769→  );
+   770→}
+   771→
+   772→export type Engine = ReturnType<typeof useEngine>;
+   773→
+   774→const EngineContext = createContext<Engine | null>(null);
+   775→
+   776→export function EngineProvider({ children }: { children: React.ReactNode }) {
+   777→  const engine = useEngine();
+   778→  return <EngineContext.Provider value={engine}>{children}</EngineContext.Provider>;
+   779→}
+   780→
+   781→export function useEngineContext(): Engine {
+   782→  const engine = useContext(EngineContext);
+   783→  if (!engine) throw new Error("useEngineContext must be used inside EngineProvider");
+   784→  return engine;
+   785→}
+   786→

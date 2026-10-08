@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/*
+  Keep Tailwind v4 automatic source detection away from directories that hold
+  no class candidates: scripts/ carries a ~3 GB local model cache (quality-gate
+  .cache) and scanning it exhausts memory and kills the PostCSS worker.
+*/
+@source not "../../scripts";
+@source not "../../skills";
+
 @custom-variant dark (&:is([data-theme="dark"] *));
 
 /*
@@ -78,6 +86,9 @@
   --motion-fast: 150ms;
   --motion-base: 200ms;
   --ease-quiet: cubic-bezier(0, 0, 0.2, 1);
+
+  /* Section rhythm: generous space between the page's sections. */
+  --section-gap: clamp(72px, 10vw, 128px);
 }
 
 [data-theme="dark"] {
@@ -164,6 +175,7 @@
   }
   html {
     @apply bg-background;
+    scroll-padding-top: 5rem;
   }
   body {
     @apply bg-background text-foreground;
@@ -182,22 +194,44 @@
   ::selection {
     background: color-mix(in srgb, var(--accent) 28%, transparent);
   }
+  summary {
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
 }
 
 @layer utilities {
-  /* Four type sizes only: wordmark, heading, body, small. Panes use body at a
-     slightly larger responsive size for comfortable reading. */
+  /*
+    Type scale: display 48, heading 28, lead 20, body 16, small 13. The serif
+    is for the wordmark, the display headline and section headings. Everything
+    else is the sans. Panes read at 18px on mobile, 20 to 22px on desktop.
+  */
   .type-wordmark {
     font-family: var(--app-serif);
-    font-size: 1.375rem;
+    font-size: 1.25rem;
     line-height: 1.25;
     font-weight: 500;
     letter-spacing: -0.01em;
   }
+  .type-display {
+    font-family: var(--app-serif);
+    font-size: 2rem;
+    line-height: 1.14;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
   .type-heading {
-    font-size: 1.125rem;
-    line-height: 1.4;
+    font-family: var(--app-serif);
+    font-size: 1.5rem;
+    line-height: 1.25;
     font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .type-lead {
+    font-size: 1.125rem;
+    line-height: 1.55;
   }
   .type-body {
     font-size: 1rem;
@@ -208,12 +242,36 @@
     line-height: 1.45;
   }
   .type-pane {
-    font-size: 1.0625rem;
+    font-size: 1.125rem;
     line-height: 1.65;
   }
+  .type-figure {
+    font-family: var(--app-sans);
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
   @media (min-width: 768px) {
+    .type-display {
+      font-size: 2.5rem;
+    }
+    .type-heading {
+      font-size: 1.75rem;
+    }
+    .type-lead {
+      font-size: 1.25rem;
+    }
     .type-pane {
-      font-size: 1.125rem;
+      font-size: 1.25rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .type-display {
+      font-size: 3rem;
+    }
+    .type-pane {
+      font-size: 1.375rem;
     }
   }
 
@@ -230,6 +288,102 @@
     box-shadow: var(--shadow-layer);
   }
 
+  /* Section spacing and columns. */
+  .section-gap {
+    margin-top: var(--section-gap);
+  }
+  .text-column {
+    max-width: 62ch;
+  }
+
+  /* Diagram labels read small on phones and at body size up from sm. */
+  .diagram-label {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+  }
+  @media (min-width: 640px) {
+    .diagram-label {
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+  }
+
+  /*
+    The returning visitor hero. The inline script in the document head sets
+    data-hero="compact" on the root before first paint, so the smaller
+    headline and the missing subline are there at the first frame: no flash,
+    no layout shift, and no hydration mismatch, because the markup is the same.
+  */
+  [data-hero="compact"] .hero-headline {
+    font-size: 1.75rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  [data-hero="compact"] .hero-subline {
+    display: none;
+  }
+
+  /*
+    The navy band. In light mode the band is the primary navy; in dark mode it
+    is the surface colour with a hairline border, so it still reads as a band.
+  */
+  .band {
+    background: var(--primary);
+    color: var(--on-primary);
+  }
+  .band-muted {
+    color: #9db7d3;
+  }
+  .band-line {
+    border-color: color-mix(in srgb, var(--on-primary) 22%, transparent);
+  }
+  [data-theme="dark"] .band {
+    background: var(--surface);
+    color: var(--text);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  [data-theme="dark"] .band-muted {
+    color: var(--text-muted);
+  }
+  [data-theme="dark"] .band-line {
+    border-color: var(--border);
+  }
+
+  /* Sections below the tool settle in once as they enter the screen. The
+     hidden state only applies when JavaScript is running, so content is never
+     lost without it. Reduced motion turns it off entirely. */
+  html.js .reveal {
+    opacity: 0;
+  }
+  html.js .reveal.reveal-visible {
+    animation: reveal-rise 200ms var(--ease-quiet) both;
+  }
+  @keyframes reveal-rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Keyboard shortcut hint on the target language picker. Display is left to
+     the utilities that place it (hidden below md, inline-flex above). */
+  .kbd-hint {
+    padding: 3px 5px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--text-muted);
+    font-family: var(--app-sans);
+    font-size: 0.6875rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
   /* Newly arrived text settles in gently: a soft fade with a tiny rise. */
   @keyframes arrive {
     from {
@@ -243,6 +397,18 @@
   }
   .arrive {
     animation: arrive var(--motion-base) var(--ease-quiet) both;
+  }
+
+  /* The small check that draws in when setup finishes. */
+  @keyframes draw-check {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  .check-draw {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: draw-check 350ms var(--ease-quiet) 120ms forwards;
   }
 
   /* Hide input: a strong blur so text can't be read at a glance. Typing, the
@@ -280,5 +446,11 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  html.js .reveal {
+    opacity: 1;
+  }
+  html.js .reveal.reveal-visible {
+    animation: none;
   }
 }

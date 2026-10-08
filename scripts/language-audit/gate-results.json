@@ -1,0 +1,1075 @@
+{
+  "generatedAt": "2026-10-10T21:27:54.245Z",
+  "models": [
+    {
+      "id": "opus-en-af",
+      "modelId": "Xenova/opus-mt-en-af",
+      "pairs": [
+        {
+          "key": "en->afr_Latn",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 14100,
+          "medianMs": 316
+        }
+      ]
+    },
+    {
+      "id": "opus-en-cs",
+      "modelId": "Xenova/opus-mt-en-cs",
+      "pairs": [
+        {
+          "key": "en->ces_Latn",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13744,
+          "medianMs": 330
+        }
+      ]
+    },
+    {
+      "id": "opus-en-da",
+      "modelId": "Xenova/opus-mt-en-da",
+      "pairs": [
+        {
+          "key": "en->dan_Latn",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 18199,
+          "medianMs": 376
+        }
+      ]
+    },
+    {
+      "id": "opus-en-fi",
+      "modelId": "Xenova/opus-mt-en-fi",
+      "pairs": [
+        {
+          "key": "en->fin_Latn",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13890,
+          "medianMs": 292
+        }
+      ]
+    },
+    {
+      "id": "opus-en-hu",
+      "modelId": "Xenova/opus-mt-en-hu",
+      "pairs": [
+        {
+          "key": "en->hun_Latn",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13910,
+          "medianMs": 320
+        }
+      ]
+    },
+    {
+      "id": "opus-en-id",
+      "modelId": "Xenova/opus-mt-en-id",
+      "pairs": [
+        {
+          "key": "en->ind_Latn",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 12650,
+          "medianMs": 274
+        }
+      ]
+    },
+    {
+      "id": "opus-en-ro",
+      "modelId": "Xenova/opus-mt-en-ro",
+      "pairs": [
+        {
+          "key": "en->ron_Latn",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13497,
+          "medianMs": 314
+        }
+      ]
+    },
+    {
+      "id": "opus-en-sv",
+      "modelId": "Xenova/opus-mt-en-sv",
+      "pairs": [
+        {
+          "key": "en->swe_Latn",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 12818,
+          "medianMs": 275
+        }
+      ]
+    },
+    {
+      "id": "opus-en-uk",
+      "modelId": "Xenova/opus-mt-en-uk",
+      "pairs": [
+        {
+          "key": "en->ukr_Cyrl",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13171,
+          "medianMs": 336
+        }
+      ]
+    },
+    {
+      "id": "opus-en-vi",
+      "modelId": "Xenova/opus-mt-en-vi",
+      "pairs": [
+        {
+          "key": "en->vie_Latn",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 12080,
+          "medianMs": 274
+        }
+      ]
+    },
+    {
+      "id": "opus-en-mul",
+      "modelId": "Xenova/opus-mt-en-mul",
+      "pairs": [
+        {
+          "key": "en->amh_Ethi",
+          "tag": "amh",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13396,
+          "medianMs": 496
+        },
+        {
+          "key": "en->asm_Beng",
+          "tag": "asm",
+          "pass": false,
+          "failures": [
+            {
+              "criterion": "TRUNCATED",
+              "sentenceIndex": 9,
+              "detail": "27/53 chars, no terminal punct"
+            }
+          ],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 493
+        },
+        {
+          "key": "en->ben_Beng",
+          "tag": "ben",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 571
+        },
+        {
+          "key": "en->bul_Cyrl",
+          "tag": "bul",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 563
+        },
+        {
+          "key": "en->cat_Latn",
+          "tag": "cat",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 481
+        },
+        {
+          "key": "en->zho_Hant",
+          "tag": "zho_Hant",
+          "pass": false,
+          "failures": [
+            {
+              "criterion": "REPEATED",
+              "sentenceIndex": 2,
+              "detail": "char phrase (2 chars) repeated 7x"
+            },
+            {
+              "criterion": "REPEATED",
+              "sentenceIndex": 8,
+              "detail": "char phrase (2 chars) repeated 10x"
+            },
+            {
+              "criterion": "REPEATED",
+              "sentenceIndex": 9,
+              "detail": "word phrase (1) repeated 4x"
+            },
+            {
+              "criterion": "REPEATED",
+              "sentenceIndex": 10,
+              "detail": "char phrase (2 chars) repeated 16x"
+            },
+            {
+              "criterion": "WRONG_LANGUAGE",
+              "sentenceIndex": 1,
+              "detail": "han 0% < 50%"
+            },
+            {
+              "criterion": "WRONG_LANGUAGE",
+              "sentenceIndex": 2,
+              "detail": "han 0% < 50%"
+            },
+            {
+              "criterion": "WRONG_LANGUAGE",
+              "sentenceIndex": 3,
+              "detail": "han 0% < 50%"
+            },
+            {
+              "criterion": "WRONG_LANGUAGE",
+              "sentenceIndex": 4,
+              "detail": "han 0% < 50%"
+            },
+            {
+              "criterion": "WRONG_LANGUAGE",
+              "sentenceIndex": 5,
+              "detail": "han 0% < 50%"
+            },
+            {
+              "criterion": "WRONG_LANGUAGE",
+              "sentenceIndex": 6,
+              "detail": "han 0% < 50%"
+            },
+            {
+              "criterion": "WRONG_LANGUAGE",
+              "sentenceIndex": 7,
+              "detail": "han 0% < 50%"
+            },
+            {
+              "criterion": "WRONG_LANGUAGE",
+              "sentenceIndex": 8,
+              "detail": "han 0% < 50%"
+            },
+            {
+              "criterion": "WRONG_LANGUAGE",
+              "sentenceIndex": 9,
+              "detail": "han 0% < 50%"
+            },
+            {
+              "criterion": "WRONG_LANGUAGE",
+              "sentenceIndex": 10,
+              "detail": "han 0% < 50%"
+            }
+          ],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 515
+        },
+        {
+          "key": "en->hrv_Latn",
+          "tag": "hrv",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 381
+        },
+        {
+          "key": "en->ell_Grek",
+          "tag": "ell",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 452
+        },
+        {
+          "key": "en->guj_Gujr",
+          "tag": "guj",
+          "pass": false,
+          "failures": [
+            {
+              "criterion": "TRUNCATED",
+              "sentenceIndex": 9,
+              "detail": "26/45 chars, no terminal punct"
+            }
+          ],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 508
+        },
+        {
+          "key": "en->hau_Latn",
+          "tag": "hau_Latn",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 367
+        },
+        {
+          "key": "en->heb_Hebr",
+          "tag": "heb",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 409
+        },
+        {
+          "key": "en->kan_Knda",
+          "tag": "kan",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 497
+        },
+        {
+          "key": "en->zsm_Latn",
+          "tag": "zlm_Latn",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 342
+        },
+        {
+          "key": "en->mal_Mlym",
+          "tag": "mal",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 477
+        },
+        {
+          "key": "en->mar_Deva",
+          "tag": "mar",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 2,
+          "medianMs": 382
+        },
+        {
+          "key": "en->nob_Latn",
+          "tag": "nob",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 365
+        },
+        {
+          "key": "en->ory_Orya",
+          "tag": "ori",
+          "pass": false,
+          "failures": [
+            {
+              "criterion": "TRUNCATED",
+              "sentenceIndex": 5,
+              "detail": "28/56 chars, no terminal punct"
+            },
+            {
+              "criterion": "TRUNCATED",
+              "sentenceIndex": 10,
+              "detail": "34/71 chars, no terminal punct"
+            }
+          ],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 507
+        },
+        {
+          "key": "en->pbt_Arab",
+          "tag": "pus",
+          "pass": false,
+          "failures": [
+            {
+              "criterion": "REPEATED",
+              "sentenceIndex": 4,
+              "detail": "word phrase (1) repeated 3x"
+            },
+            {
+              "criterion": "REPEATED",
+              "sentenceIndex": 8,
+              "detail": "word phrase (1) repeated 4x"
+            },
+            {
+              "criterion": "TRUNCATED",
+              "sentenceIndex": 8,
+              "detail": "19/32 chars, no terminal punct"
+            }
+          ],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 502
+        },
+        {
+          "key": "en->pes_Arab",
+          "tag": "pes",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 402
+        },
+        {
+          "key": "en->por_Latn",
+          "tag": "por",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 2,
+          "medianMs": 367
+        },
+        {
+          "key": "en->pan_Guru",
+          "tag": "pan_Guru",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 1,
+          "medianMs": 469
+        },
+        {
+          "key": "en->srp_Cyrl",
+          "tag": "srp_Cyrl",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 436
+        },
+        {
+          "key": "en->sin_Sinh",
+          "tag": "sin",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 2,
+          "medianMs": 477
+        },
+        {
+          "key": "en->tam_Taml",
+          "tag": "tam",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 441
+        },
+        {
+          "key": "en->tel_Telu",
+          "tag": "tel",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 3,
+          "medianMs": 431
+        },
+        {
+          "key": "en->tur_Latn",
+          "tag": "tur",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 412
+        },
+        {
+          "key": "en->urd_Arab",
+          "tag": "urd",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 380
+        },
+        {
+          "key": "en->yor_Latn",
+          "tag": "yor",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 442
+        },
+        {
+          "key": "en->zul_Latn",
+          "tag": "zul",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 371
+        },
+        {
+          "key": "en->jpn_Jpan",
+          "tag": "jpn",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 277
+        }
+      ]
+    },
+    {
+      "id": "opus-en-romance",
+      "modelId": "Xenova/opus-mt-en-ROMANCE",
+      "pairs": [
+        {
+          "key": "en->cat_Latn",
+          "tag": "ca",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13096,
+          "medianMs": 524
+        },
+        {
+          "key": "en->por_Latn",
+          "tag": "pt",
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 337
+        }
+      ]
+    },
+    {
+      "id": "opus-af-en",
+      "modelId": "Xenova/opus-mt-af-en",
+      "pairs": [
+        {
+          "key": "afr_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13320,
+          "medianMs": 327
+        }
+      ]
+    },
+    {
+      "id": "opus-cs-en",
+      "modelId": "Xenova/opus-mt-cs-en",
+      "pairs": [
+        {
+          "key": "ces_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 14203,
+          "medianMs": 280
+        }
+      ]
+    },
+    {
+      "id": "opus-da-en",
+      "modelId": "Xenova/opus-mt-da-en",
+      "pairs": [
+        {
+          "key": "dan_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13994,
+          "medianMs": 349
+        }
+      ]
+    },
+    {
+      "id": "opus-fi-en",
+      "modelId": "Xenova/opus-mt-fi-en",
+      "pairs": [
+        {
+          "key": "fin_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13452,
+          "medianMs": 374
+        }
+      ]
+    },
+    {
+      "id": "opus-hu-en",
+      "modelId": "Xenova/opus-mt-hu-en",
+      "pairs": [
+        {
+          "key": "hun_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13455,
+          "medianMs": 312
+        }
+      ]
+    },
+    {
+      "id": "opus-id-en",
+      "modelId": "Xenova/opus-mt-id-en",
+      "pairs": [
+        {
+          "key": "ind_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13223,
+          "medianMs": 345
+        }
+      ]
+    },
+    {
+      "id": "opus-sv-en",
+      "modelId": "Xenova/opus-mt-sv-en",
+      "pairs": [
+        {
+          "key": "swe_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 12882,
+          "medianMs": 348
+        }
+      ]
+    },
+    {
+      "id": "opus-uk-en",
+      "modelId": "Xenova/opus-mt-uk-en",
+      "pairs": [
+        {
+          "key": "ukr_Cyrl->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 14044,
+          "medianMs": 312
+        }
+      ]
+    },
+    {
+      "id": "opus-vi-en",
+      "modelId": "Xenova/opus-mt-vi-en",
+      "pairs": [
+        {
+          "key": "vie_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 12381,
+          "medianMs": 247
+        }
+      ]
+    },
+    {
+      "id": "opus-ko-en",
+      "modelId": "Xenova/opus-mt-ko-en",
+      "pairs": [
+        {
+          "key": "kor_Hang->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 14043,
+          "medianMs": 309
+        }
+      ]
+    },
+    {
+      "id": "opus-pl-en",
+      "modelId": "Xenova/opus-mt-pl-en",
+      "pairs": [
+        {
+          "key": "pol_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 14124,
+          "medianMs": 348
+        }
+      ]
+    },
+    {
+      "id": "opus-th-en",
+      "modelId": "Xenova/opus-mt-th-en",
+      "pairs": [
+        {
+          "key": "tha_Thai->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13146,
+          "medianMs": 307
+        }
+      ]
+    },
+    {
+      "id": "opus-mul-en",
+      "modelId": "Xenova/opus-mt-mul-en",
+      "pairs": [
+        {
+          "key": "amh_Ethi->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 14484,
+          "medianMs": 300
+        },
+        {
+          "key": "asm_Beng->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 293
+        },
+        {
+          "key": "ben_Beng->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 236
+        },
+        {
+          "key": "bul_Cyrl->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 227
+        },
+        {
+          "key": "cat_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 285
+        },
+        {
+          "key": "zho_Hant->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 243
+        },
+        {
+          "key": "hrv_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 257
+        },
+        {
+          "key": "ell_Grek->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 311
+        },
+        {
+          "key": "guj_Gujr->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 305
+        },
+        {
+          "key": "hau_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 2,
+          "medianMs": 288
+        },
+        {
+          "key": "heb_Hebr->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 287
+        },
+        {
+          "key": "kan_Knda->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 276
+        },
+        {
+          "key": "zsm_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 299
+        },
+        {
+          "key": "mal_Mlym->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 268
+        },
+        {
+          "key": "mar_Deva->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 1,
+          "medianMs": 308
+        },
+        {
+          "key": "npi_Deva->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 364
+        },
+        {
+          "key": "nob_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 319
+        },
+        {
+          "key": "ory_Orya->en",
+          "tag": null,
+          "pass": false,
+          "failures": [
+            {
+              "criterion": "REPEATED",
+              "sentenceIndex": 3,
+              "detail": "word phrase (1) repeated 174x"
+            }
+          ],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 283
+        },
+        {
+          "key": "pbt_Arab->en",
+          "tag": null,
+          "pass": false,
+          "failures": [
+            {
+              "criterion": "REPEATED",
+              "sentenceIndex": 3,
+              "detail": "char phrase (2 chars) repeated 13x"
+            }
+          ],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 407
+        },
+        {
+          "key": "pes_Arab->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 4,
+          "medianMs": 441
+        },
+        {
+          "key": "por_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 327
+        },
+        {
+          "key": "pan_Guru->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 303
+        },
+        {
+          "key": "ron_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 263
+        },
+        {
+          "key": "srp_Cyrl->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 301
+        },
+        {
+          "key": "sin_Sinh->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 270
+        },
+        {
+          "key": "swh_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 323
+        },
+        {
+          "key": "tam_Taml->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 278
+        },
+        {
+          "key": "tel_Telu->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 305
+        },
+        {
+          "key": "urd_Arab->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 299
+        },
+        {
+          "key": "yor_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 4,
+          "medianMs": 327
+        },
+        {
+          "key": "zul_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 333
+        }
+      ]
+    },
+    {
+      "id": "opus-romance-en",
+      "modelId": "Xenova/opus-mt-ROMANCE-en",
+      "pairs": [
+        {
+          "key": "cat_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 13750,
+          "medianMs": 331
+        },
+        {
+          "key": "por_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 4,
+          "medianMs": 262
+        },
+        {
+          "key": "ron_Latn->en",
+          "tag": null,
+          "pass": true,
+          "failures": [],
+          "hasReference": true,
+          "loadMs": 0,
+          "medianMs": 207
+        }
+      ]
+    }
+  ]
+}

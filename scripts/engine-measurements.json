@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-10-10T11:17:07.695Z",
+  "machine": "sandbox 4GB, wasm/numa vCPU",
+  "opusEnFr": {
+    "loadSeconds": 0.69,
+    "rssAfterLoadMB": 490,
+    "one": {
+      "perSentenceSeconds": [
+        0.19,
+        0.47,
+        0.69,
+        0.69,
+        1.27
+      ],
+      "medianSecondsPerSentence": 0.69
+    },
+    "batch4": {
+      "perCallSeconds": [
+        0.95,
+        1.63
+      ],
+      "perSentenceSeconds": 0.368
+    },
+    "batch8": {
+      "perCallSeconds": [
+        1.87
+      ],
+      "perSentenceSeconds": 0.268
+    },
+    "rssAfterDisposeMB": 460
+  },
+  "nllb": {
+    "loadFromCacheSeconds": 6.31,
+    "rssAfterLoadMB": 2259,
+    "old": {
+      "perSentenceSeconds": [
+        4.5,
+        5.4,
+        5.5,
+        6.92,
+        12.87
+      ],
+      "medianSecondsPerSentence": 5.5
+    },
+    "new": {
+      "perSentenceSeconds": [
+        4.4,
+        5.41,
+        5.29,
+        6.95,
+        12.84
+      ],
+      "medianSecondsPerSentence": 5.41
+    },
+    "rssAfterDisposeMB": 932
+  }
+}

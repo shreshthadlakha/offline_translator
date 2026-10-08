@@ -6,7 +6,7 @@
   Hub and every other cross origin request pass straight through untouched.
 */
 
-const SHELL_CACHE = "pt-shell-v1";
+const SHELL_CACHE = "pt-shell-v2";
 
 const PRECACHE = [
   "/",

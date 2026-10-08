@@ -1,0 +1,287 @@
+{
+  "model": "facebook/nllb-200-distilled-600M",
+  "metric": "chrF++ on FLORES-200 devtest (published, corpus level)",
+  "source": {
+    "url": "https://dl.fbaipublicfiles.com/large_objects/nllb/models/nllb_200_dense_distill_600m/metrics.csv",
+    "via": "linked from the model card as https://tinyurl.com/nllb200densedst600mmetrics",
+    "fetchedAt": "2026-10-11T07:57:48.006Z",
+    "rows": 602
+  },
+  "languages": {
+    "afr_Latn": {
+      "english": "Afrikaans",
+      "engToX": 62.4,
+      "xToEn": 72.9
+    },
+    "amh_Ethi": {
+      "english": "Amharic",
+      "engToX": 37.2,
+      "xToEn": 54.9
+    },
+    "arb_Arab": {
+      "english": "Arabic",
+      "engToX": 51.4,
+      "xToEn": 62.2
+    },
+    "asm_Beng": {
+      "english": "Assamese",
+      "engToX": 34.6,
+      "xToEn": 52.7
+    },
+    "ben_Beng": {
+      "english": "Bengali",
+      "engToX": 46.2,
+      "xToEn": 57.9
+    },
+    "bul_Cyrl": {
+      "english": "Bulgarian",
+      "engToX": 60.4,
+      "xToEn": 63.4
+    },
+    "cat_Latn": {
+      "english": "Catalan",
+      "engToX": 61.2,
+      "xToEn": 66.6
+    },
+    "zho_Hans": {
+      "english": "Chinese (Simplified)",
+      "engToX": 19.6,
+      "xToEn": 52.9
+    },
+    "zho_Hant": {
+      "english": "Chinese (Traditional)",
+      "engToX": 13.3,
+      "xToEn": 49.7
+    },
+    "hrv_Latn": {
+      "english": "Croatian",
+      "engToX": 52.2,
+      "xToEn": 59.5
+    },
+    "ces_Latn": {
+      "english": "Czech",
+      "engToX": 52.7,
+      "xToEn": 61.5
+    },
+    "dan_Latn": {
+      "english": "Danish",
+      "engToX": 63.2,
+      "xToEn": 67.7
+    },
+    "nld_Latn": {
+      "english": "Dutch",
+      "engToX": 53.1,
+      "xToEn": 56.9
+    },
+    "fin_Latn": {
+      "english": "Finnish",
+      "engToX": 48.8,
+      "xToEn": 56.6
+    },
+    "fra_Latn": {
+      "english": "French",
+      "engToX": 67,
+      "xToEn": 65.4
+    },
+    "deu_Latn": {
+      "english": "German",
+      "engToX": 59.4,
+      "xToEn": 65.3
+    },
+    "ell_Grek": {
+      "english": "Greek",
+      "engToX": 48.5,
+      "xToEn": 58.4
+    },
+    "guj_Gujr": {
+      "english": "Gujarati",
+      "engToX": 50.4,
+      "xToEn": 62.5
+    },
+    "hau_Latn": {
+      "english": "Hausa",
+      "engToX": 49,
+      "xToEn": 52.6
+    },
+    "heb_Hebr": {
+      "english": "Hebrew",
+      "engToX": 50.8,
+      "xToEn": 61.8
+    },
+    "hin_Deva": {
+      "english": "Hindi",
+      "engToX": 54.2,
+      "xToEn": 62.5
+    },
+    "hun_Latn": {
+      "english": "Hungarian",
+      "engToX": 50.6,
+      "xToEn": 58
+    },
+    "ind_Latn": {
+      "english": "Indonesian",
+      "engToX": 66.6,
+      "xToEn": 63.9
+    },
+    "ita_Latn": {
+      "english": "Italian",
+      "engToX": 54.6,
+      "xToEn": 59.3
+    },
+    "jpn_Jpan": {
+      "english": "Japanese",
+      "engToX": 23.6,
+      "xToEn": 50.2
+    },
+    "kan_Knda": {
+      "english": "Kannada",
+      "engToX": 50.2,
+      "xToEn": 57
+    },
+    "kor_Hang": {
+      "english": "Korean",
+      "engToX": 32.1,
+      "xToEn": 52.5
+    },
+    "zsm_Latn": {
+      "english": "Malay",
+      "engToX": 63.5,
+      "xToEn": 64.3
+    },
+    "mal_Mlym": {
+      "english": "Malayalam",
+      "engToX": 47.2,
+      "xToEn": 59
+    },
+    "mar_Deva": {
+      "english": "Marathi",
+      "engToX": 44.6,
+      "xToEn": 58.9
+    },
+    "npi_Deva": {
+      "english": "Nepali",
+      "engToX": 49,
+      "xToEn": 62.5
+    },
+    "nob_Latn": {
+      "english": "Norwegian Bokmål",
+      "engToX": 56.8,
+      "xToEn": 62.9
+    },
+    "ory_Orya": {
+      "english": "Odia",
+      "engToX": 44.9,
+      "xToEn": 58.5
+    },
+    "pbt_Arab": {
+      "english": "Pashto",
+      "engToX": 36.9,
+      "xToEn": 54.5
+    },
+    "pes_Arab": {
+      "english": "Persian",
+      "engToX": 47.4,
+      "xToEn": 58.7
+    },
+    "pol_Latn": {
+      "english": "Polish",
+      "engToX": 45.3,
+      "xToEn": 54.3
+    },
+    "por_Latn": {
+      "english": "Portuguese",
+      "engToX": 67.4,
+      "xToEn": 69
+    },
+    "pan_Guru": {
+      "english": "Punjabi",
+      "engToX": 46.7,
+      "xToEn": 61.5
+    },
+    "ron_Latn": {
+      "english": "Romanian",
+      "engToX": 58.2,
+      "xToEn": 65.9
+    },
+    "rus_Cyrl": {
+      "english": "Russian",
+      "engToX": 52.5,
+      "xToEn": 58.6
+    },
+    "srp_Cyrl": {
+      "english": "Serbian",
+      "engToX": 53.3,
+      "xToEn": 63.5
+    },
+    "sin_Sinh": {
+      "english": "Sinhala",
+      "engToX": 42.4,
+      "xToEn": 56.5
+    },
+    "spa_Latn": {
+      "english": "Spanish",
+      "engToX": 52.6,
+      "xToEn": 57.1
+    },
+    "swh_Latn": {
+      "english": "Swahili",
+      "engToX": 58,
+      "xToEn": 60.7
+    },
+    "swe_Latn": {
+      "english": "Swedish",
+      "engToX": 62.7,
+      "xToEn": 67
+    },
+    "tgl_Latn": {
+      "english": "Tagalog",
+      "engToX": 56.4,
+      "xToEn": 63.7
+    },
+    "tam_Taml": {
+      "english": "Tamil",
+      "engToX": 51.1,
+      "xToEn": 55.8
+    },
+    "tel_Telu": {
+      "english": "Telugu",
+      "engToX": 51.8,
+      "xToEn": 61.2
+    },
+    "tha_Thai": {
+      "english": "Thai",
+      "engToX": 36,
+      "xToEn": 52.7
+    },
+    "tur_Latn": {
+      "english": "Turkish",
+      "engToX": 52.9,
+      "xToEn": 60
+    },
+    "ukr_Cyrl": {
+      "english": "Ukrainian",
+      "engToX": 50.5,
+      "xToEn": 61.1
+    },
+    "urd_Arab": {
+      "english": "Urdu",
+      "engToX": 46.6,
+      "xToEn": 57.8
+    },
+    "vie_Latn": {
+      "english": "Vietnamese",
+      "engToX": 56.4,
+      "xToEn": 58.1
+    },
+    "yor_Latn": {
+      "english": "Yoruba",
+      "engToX": 22.9,
+      "xToEn": 39.9
+    },
+    "zul_Latn": {
+      "english": "Zulu",
+      "engToX": 51,
+      "xToEn": 56.8
+    }
+  }
+}

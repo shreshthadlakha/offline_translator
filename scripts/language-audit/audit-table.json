@@ -1,0 +1,1215 @@
+{
+  "generatedAt": "2026-10-10T22:13:48.221Z",
+  "languages": 55,
+  "fastBoth": [
+    "afr_Latn",
+    "arb_Arab",
+    "bul_Cyrl",
+    "zho_Hans",
+    "hrv_Latn",
+    "ces_Latn",
+    "dan_Latn",
+    "nld_Latn",
+    "fin_Latn",
+    "fra_Latn",
+    "deu_Latn",
+    "hin_Deva",
+    "hun_Latn",
+    "ind_Latn",
+    "ita_Latn",
+    "nob_Latn",
+    "por_Latn",
+    "ron_Latn",
+    "rus_Cyrl",
+    "srp_Cyrl",
+    "spa_Latn",
+    "swe_Latn",
+    "ukr_Cyrl",
+    "vie_Latn"
+  ],
+  "fastOneDirection": [
+    "ell_Grek",
+    "jpn_Jpan",
+    "kor_Hang",
+    "pol_Latn",
+    "tha_Thai",
+    "tur_Latn"
+  ],
+  "fullModelOnly": [
+    "amh_Ethi",
+    "asm_Beng",
+    "ben_Beng",
+    "cat_Latn",
+    "zho_Hant",
+    "guj_Gujr",
+    "hau_Latn",
+    "heb_Hebr",
+    "kan_Knda",
+    "zsm_Latn",
+    "mal_Mlym",
+    "mar_Deva",
+    "npi_Deva",
+    "ory_Orya",
+    "pbt_Arab",
+    "pes_Arab",
+    "pan_Guru",
+    "sin_Sinh",
+    "swh_Latn",
+    "tgl_Latn",
+    "tam_Taml",
+    "tel_Telu",
+    "urd_Arab",
+    "yor_Latn",
+    "zul_Latn"
+  ],
+  "gatedDirections": 34,
+  "rows": [
+    {
+      "code": "afr_Latn",
+      "english": "Afrikaans",
+      "native": "Afrikaans",
+      "enToThis": {
+        "engineId": "opus-en-af",
+        "modelId": "Xenova/opus-mt-en-af",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 110916369,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-af-en",
+        "modelId": "Xenova/opus-mt-af-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 110916369,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "amh_Ethi",
+      "english": "Amharic",
+      "native": "አማርኛ",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "arb_Arab",
+      "english": "Arabic",
+      "native": "العربية",
+      "enToThis": {
+        "engineId": "opus-en-ar",
+        "modelId": "Xenova/opus-mt-en-ar",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 117602860
+      },
+      "thisToEn": {
+        "engineId": "opus-ar-en",
+        "modelId": "Xenova/opus-mt-ar-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 117621540
+      }
+    },
+    {
+      "code": "asm_Beng",
+      "english": "Assamese",
+      "native": "অসমীয়া",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "ben_Beng",
+      "english": "Bengali",
+      "native": "বাংলা",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "bul_Cyrl",
+      "english": "Bulgarian",
+      "native": "Български",
+      "enToThis": {
+        "engineId": "opus-en-mul",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "kind": "group",
+        "tag": "bul",
+        "expectedBytes": 118280580,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-mul-en",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "kind": "group",
+        "tag": null,
+        "expectedBytes": 118351797,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "cat_Latn",
+      "english": "Catalan",
+      "native": "Català",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "zho_Hans",
+      "english": "Chinese (Simplified)",
+      "native": "简体中文",
+      "enToThis": {
+        "engineId": "opus-en-zh",
+        "modelId": "Xenova/opus-mt-en-zh",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 119495650
+      },
+      "thisToEn": {
+        "engineId": "opus-zh-en",
+        "modelId": "Xenova/opus-mt-zh-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 119495923
+      }
+    },
+    {
+      "code": "zho_Hant",
+      "english": "Chinese (Traditional)",
+      "native": "繁體中文",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "hrv_Latn",
+      "english": "Croatian",
+      "native": "Hrvatski",
+      "enToThis": {
+        "engineId": "opus-en-mul",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "kind": "group",
+        "tag": "hrv",
+        "expectedBytes": 118280580,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-mul-en",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "kind": "group",
+        "tag": null,
+        "expectedBytes": 118351797,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "ces_Latn",
+      "english": "Czech",
+      "native": "Čeština",
+      "enToThis": {
+        "engineId": "opus-en-cs",
+        "modelId": "Xenova/opus-mt-en-cs",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 116695600,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-cs-en",
+        "modelId": "Xenova/opus-mt-cs-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 116695600,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "dan_Latn",
+      "english": "Danish",
+      "native": "Dansk",
+      "enToThis": {
+        "engineId": "opus-en-da",
+        "modelId": "Xenova/opus-mt-en-da",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 112559065,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-da-en",
+        "modelId": "Xenova/opus-mt-da-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 112559063,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "nld_Latn",
+      "english": "Dutch",
+      "native": "Nederlands",
+      "enToThis": {
+        "engineId": "opus-en-nl",
+        "modelId": "Xenova/opus-mt-en-nl",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 121631490
+      },
+      "thisToEn": {
+        "engineId": "opus-nl-en",
+        "modelId": "Xenova/opus-mt-nl-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 121631492
+      }
+    },
+    {
+      "code": "fin_Latn",
+      "english": "Finnish",
+      "native": "Suomi",
+      "enToThis": {
+        "engineId": "opus-en-fi",
+        "modelId": "Xenova/opus-mt-en-fi",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 119430062,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-fi-en",
+        "modelId": "Xenova/opus-mt-fi-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 113395438,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "fra_Latn",
+      "english": "French",
+      "native": "Français",
+      "enToThis": {
+        "engineId": "opus-en-fr",
+        "modelId": "Xenova/opus-mt-en-fr",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 113111807
+      },
+      "thisToEn": {
+        "engineId": "opus-fr-en",
+        "modelId": "Xenova/opus-mt-fr-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 113111807
+      }
+    },
+    {
+      "code": "deu_Latn",
+      "english": "German",
+      "native": "Deutsch",
+      "enToThis": {
+        "engineId": "opus-en-de",
+        "modelId": "Xenova/opus-mt-en-de",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 111519854
+      },
+      "thisToEn": {
+        "engineId": "opus-de-en",
+        "modelId": "Xenova/opus-mt-de-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 111519819
+      }
+    },
+    {
+      "code": "ell_Grek",
+      "english": "Greek",
+      "native": "Ελληνικά",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "opus-mul-en",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "kind": "group",
+        "tag": null,
+        "expectedBytes": 118351797,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "guj_Gujr",
+      "english": "Gujarati",
+      "native": "ગુજરાતી",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "hau_Latn",
+      "english": "Hausa",
+      "native": "Hausa",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "heb_Hebr",
+      "english": "Hebrew",
+      "native": "עברית",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "hin_Deva",
+      "english": "Hindi",
+      "native": "हिन्दी",
+      "enToThis": {
+        "engineId": "opus-en-hi",
+        "modelId": "Xenova/opus-mt-en-hi",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 116657716
+      },
+      "thisToEn": {
+        "engineId": "opus-hi-en",
+        "modelId": "Xenova/opus-mt-hi-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 115710250
+      }
+    },
+    {
+      "code": "hun_Latn",
+      "english": "Hungarian",
+      "native": "Magyar",
+      "enToThis": {
+        "engineId": "opus-en-hu",
+        "modelId": "Xenova/opus-mt-en-hu",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 116699390,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-hu-en",
+        "modelId": "Xenova/opus-mt-hu-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 116699390,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "ind_Latn",
+      "english": "Indonesian",
+      "native": "Bahasa Indonesia",
+      "enToThis": {
+        "engineId": "opus-en-id",
+        "modelId": "Xenova/opus-mt-en-id",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 107915165,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-id-en",
+        "modelId": "Xenova/opus-mt-id-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 107915167,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "ita_Latn",
+      "english": "Italian",
+      "native": "Italiano",
+      "enToThis": {
+        "engineId": "opus-en-it",
+        "modelId": "Xenova/opus-mt-en-it",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 136474118
+      },
+      "thisToEn": {
+        "engineId": "opus-it-en",
+        "modelId": "Xenova/opus-mt-it-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 136865467
+      }
+    },
+    {
+      "code": "jpn_Jpan",
+      "english": "Japanese",
+      "native": "日本語",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "opus-ja-en",
+        "modelId": "Xenova/opus-mt-ja-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 114701074
+      }
+    },
+    {
+      "code": "kan_Knda",
+      "english": "Kannada",
+      "native": "ಕನ್ನಡ",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "kor_Hang",
+      "english": "Korean",
+      "native": "한국어",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "opus-ko-en",
+        "modelId": "Xenova/opus-mt-ko-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 119601626,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "zsm_Latn",
+      "english": "Malay",
+      "native": "Bahasa Melayu",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "mal_Mlym",
+      "english": "Malayalam",
+      "native": "മലയാളം",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "mar_Deva",
+      "english": "Marathi",
+      "native": "मराठी",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "npi_Deva",
+      "english": "Nepali",
+      "native": "नेपाली",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "nob_Latn",
+      "english": "Norwegian Bokmål",
+      "native": "Norsk bokmål",
+      "enToThis": {
+        "engineId": "opus-en-mul",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "kind": "group",
+        "tag": "nob",
+        "expectedBytes": 118280580,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-mul-en",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "kind": "group",
+        "tag": null,
+        "expectedBytes": 118351797,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "ory_Orya",
+      "english": "Odia",
+      "native": "ଓଡ଼ିଆ",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "pbt_Arab",
+      "english": "Pashto",
+      "native": "پښتو",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "pes_Arab",
+      "english": "Persian",
+      "native": "فارسی",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "pol_Latn",
+      "english": "Polish",
+      "native": "Polski",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "opus-pl-en",
+        "modelId": "Xenova/opus-mt-pl-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 117618157,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "por_Latn",
+      "english": "Portuguese",
+      "native": "Português",
+      "enToThis": {
+        "engineId": "opus-en-romance",
+        "modelId": "Xenova/opus-mt-en-ROMANCE",
+        "kind": "group",
+        "tag": "pt",
+        "expectedBytes": 119232615,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-romance-en",
+        "modelId": "Xenova/opus-mt-ROMANCE-en",
+        "kind": "group",
+        "tag": null,
+        "expectedBytes": 119234926,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "pan_Guru",
+      "english": "Punjabi",
+      "native": "ਪੰਜਾਬੀ",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "ron_Latn",
+      "english": "Romanian",
+      "native": "Română",
+      "enToThis": {
+        "engineId": "opus-en-ro",
+        "modelId": "Xenova/opus-mt-en-ro",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 113247080,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-romance-en",
+        "modelId": "Xenova/opus-mt-ROMANCE-en",
+        "kind": "group",
+        "tag": null,
+        "expectedBytes": 119234926,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "rus_Cyrl",
+      "english": "Russian",
+      "native": "Русский",
+      "enToThis": {
+        "engineId": "opus-en-ru",
+        "modelId": "Xenova/opus-mt-en-ru",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 117767433
+      },
+      "thisToEn": {
+        "engineId": "opus-ru-en",
+        "modelId": "Xenova/opus-mt-ru-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 117767433
+      }
+    },
+    {
+      "code": "srp_Cyrl",
+      "english": "Serbian",
+      "native": "Српски",
+      "enToThis": {
+        "engineId": "opus-en-mul",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "kind": "group",
+        "tag": "srp_Cyrl",
+        "expectedBytes": 118280580,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-mul-en",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "kind": "group",
+        "tag": null,
+        "expectedBytes": 118351797,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "sin_Sinh",
+      "english": "Sinhala",
+      "native": "සිංහල",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "spa_Latn",
+      "english": "Spanish",
+      "native": "Español",
+      "enToThis": {
+        "engineId": "opus-en-es",
+        "modelId": "Xenova/opus-mt-en-es",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 119377345
+      },
+      "thisToEn": {
+        "engineId": "opus-es-en",
+        "modelId": "Xenova/opus-mt-es-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 119377310
+      }
+    },
+    {
+      "code": "swh_Latn",
+      "english": "Swahili",
+      "native": "Kiswahili",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "swe_Latn",
+      "english": "Swedish",
+      "native": "Svenska",
+      "enToThis": {
+        "engineId": "opus-en-sv",
+        "modelId": "Xenova/opus-mt-en-sv",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 109758487,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-sv-en",
+        "modelId": "Xenova/opus-mt-sv-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 109758487,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "tgl_Latn",
+      "english": "Tagalog",
+      "native": "Tagalog",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "tam_Taml",
+      "english": "Tamil",
+      "native": "தமிழ்",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "tel_Telu",
+      "english": "Telugu",
+      "native": "తెలుగు",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "tha_Thai",
+      "english": "Thai",
+      "native": "ไทย",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "opus-th-en",
+        "modelId": "Xenova/opus-mt-th-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 117356397,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "tur_Latn",
+      "english": "Turkish",
+      "native": "Türkçe",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "opus-tr-en",
+        "modelId": "Xenova/opus-mt-tr-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 116553011
+      }
+    },
+    {
+      "code": "ukr_Cyrl",
+      "english": "Ukrainian",
+      "native": "Українська",
+      "enToThis": {
+        "engineId": "opus-en-uk",
+        "modelId": "Xenova/opus-mt-en-uk",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 116527003,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-uk-en",
+        "modelId": "Xenova/opus-mt-uk-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 116527003,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "urd_Arab",
+      "english": "Urdu",
+      "native": "اردو",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "vie_Latn",
+      "english": "Vietnamese",
+      "native": "Tiếng Việt",
+      "enToThis": {
+        "engineId": "opus-en-vi",
+        "modelId": "Xenova/opus-mt-en-vi",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 106645280,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      },
+      "thisToEn": {
+        "engineId": "opus-vi-en",
+        "modelId": "Xenova/opus-mt-vi-en",
+        "kind": "single",
+        "tag": null,
+        "expectedBytes": 106706954,
+        "gate": "pass",
+        "gateFailures": 0,
+        "hasReference": true
+      }
+    },
+    {
+      "code": "yor_Latn",
+      "english": "Yoruba",
+      "native": "Yorùbá",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    },
+    {
+      "code": "zul_Latn",
+      "english": "Zulu",
+      "native": "isiZulu",
+      "enToThis": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      },
+      "thisToEn": {
+        "engineId": "nllb-200-distilled-600M",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "kind": "full",
+        "tag": null,
+        "expectedBytes": 911962632
+      }
+    }
+  ]
+}

@@ -1,13 +1,18 @@
 "use client";
 
 /**
- * Real time translation. Scheduling and output assembly follow sections 6.5
- * and 6.6 of the technical design:
+ * Real time translation. Scheduling and output assembly follow the technical
+ * design:
  * - every sentence except the trailing fragment queues straight away
- * - the trailing fragment is debounced about 200ms and replaces older ones
- * - Enter or the Translate button queues everything at manual priority
+ * - the trailing fragment waits, and the wait adapts to the engine's measured
+ *   speed (see lib/speed-config.ts), so a slow engine never wastes work on
+ *   every keystroke burst
+ * - Enter or the Translate button queues everything at manual priority, the
+ *   fragment included, immediately
  * - the output is derived from the current sentences and the cache, never from
  *   the order results arrive in, so a late result can't overwrite a newer one
+ * - requests sent before the engine is ready are held by the engine and run
+ *   the moment setup finishes, so nothing typed during setup is lost
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -15,6 +20,8 @@ import { useEngineContext } from "@/hooks/use-engine";
 import { translationCache } from "@/lib/cache";
 import { languageByCode } from "@/lib/languages";
 import { flatSentences, isCJKBoundary, joinLines, segmentText, trailingFragment } from "@/lib/segment";
+import { fragmentWaitMs } from "@/lib/speed-config";
+import { medianTranslateMs } from "@/lib/speed-metrics";
 
 export type OutputSpan = {
   text: string;
@@ -30,11 +37,12 @@ export type OutputModel = {
   plainText: string;
   pendingCount: number;
   failedCount: number;
+  doneCount: number;
   totalSentences: number;
   hasAnyOutput: boolean;
+  /** Wall time of the most recent translation burst, once it finished. */
+  lastTranslatedMs: number | null;
 };
-
-const FRAGMENT_DEBOUNCE_MS = 200;
 
 let idCounter = 0;
 function nextId(): string {
@@ -47,6 +55,7 @@ export function useTranslator(srcCode: string, tgtCode: string) {
   const [input, setInput] = useState("");
   const [cacheVersion, setCacheVersion] = useState(0);
   const [manualTick, setManualTick] = useState(0);
+  const [lastTranslatedMs, setLastTranslatedMs] = useState<number | null>(null);
 
   const srcLang = languageByCode(srcCode);
   const tgtLang = languageByCode(tgtCode);
@@ -63,6 +72,9 @@ export function useTranslator(srcCode: string, tgtCode: string) {
   const fragmentTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const fragmentIdRef = useRef<string | null>(null);
   const lastShownRef = useRef<string[]>([]);
+  const burstStartRef = useRef<number | null>(null);
+  const settledRef = useRef(false);
+  const engineIdRef = useRef<string | null>(null);
 
   const pairKey = useCallback(
     (src: string, tgt: string, sentence: string) => `${src}|${tgt}|${sentence}`,
@@ -76,7 +88,7 @@ export function useTranslator(srcCode: string, tgtCode: string) {
       if (message.type === "result") {
         const pending = pendingRef.current.get(message.id);
         if (pending) {
-          translationCache.set(pending.src, pending.tgt, pending.sentence, message.text);
+          translationCache.set(pending.src, pending.tgt, pending.sentence, message.texts[0] ?? "");
           pendingRef.current.delete(message.id);
           pendingBySentenceRef.current.delete(pairKey(pending.src, pending.tgt, pending.sentence));
           failuresRef.current.delete(pairKey(pending.src, pending.tgt, pending.sentence));
@@ -129,10 +141,42 @@ export function useTranslator(srcCode: string, tgtCode: string) {
     [engine, pairKey, srcCode, tgtCode],
   );
 
-  // Reschedule whenever the input, the pair, or engine readiness changes.
+  // When the engine fails or is switched, in flight requests are gone with
+  // it. Clear them so everything still needed re-queues once it's back.
   useEffect(() => {
-    if (engine.status !== "ready") return;
+    if (engine.status === "error") {
+      clearFragmentTimer();
+      fragmentIdRef.current = null;
+      for (const id of Array.from(pendingRef.current.keys())) {
+        engine.cancel(id);
+      }
+      pendingRef.current.clear();
+      pendingBySentenceRef.current.clear();
+      setCacheVersion((v) => v + 1);
+    }
+  }, [engine, clearFragmentTimer]);
 
+  const engineId = engine.engineInfo?.id ?? null;
+  useEffect(() => {
+    if (engineIdRef.current !== null && engineIdRef.current !== engineId) {
+      // A different engine took over: the old one's jobs were disposed with
+      // it and will never land. Cancel them so nothing is left pending.
+      clearFragmentTimer();
+      dropFragmentRequest();
+      for (const id of Array.from(pendingRef.current.keys())) {
+        engine.cancel(id);
+      }
+      pendingRef.current.clear();
+      pendingBySentenceRef.current.clear();
+      failuresRef.current.clear();
+      setCacheVersion((v) => v + 1);
+    }
+    engineIdRef.current = engineId;
+  }, [engineId, engine, clearFragmentTimer, dropFragmentRequest]);
+
+  // Reschedule whenever the input or the pair changes. Requests sent before
+  // the engine is ready are held by the engine and run when setup finishes.
+  useEffect(() => {
     // Drop requests for sentences that no longer exist, and anything left over
     // from a previous language pair.
     const needed = new Set(sentences.map((s) => s.text));
@@ -146,13 +190,15 @@ export function useTranslator(srcCode: string, tgtCode: string) {
       }
     }
 
-    // The trailing fragment is debounced, and a newer fragment replaces any
-    // older one still waiting.
+    // The trailing fragment waits, for as long as the engine's measured
+    // speed says it should. A newer fragment replaces any older one still
+    // waiting, and cancels one already running: the result wouldn't be shown.
     clearFragmentTimer();
     dropFragmentRequest();
     const fragment = trailingFragment(segments);
     if (fragment) {
       const text = fragment.text;
+      const waitMs = fragmentWaitMs(medianTranslateMs());
       fragmentTimerRef.current = setTimeout(() => {
         fragmentTimerRef.current = null;
         const id = nextId();
@@ -163,7 +209,7 @@ export function useTranslator(srcCode: string, tgtCode: string) {
         pendingBySentenceRef.current.set(key, id);
         fragmentIdRef.current = id;
         engine.translate(id, text, srcCode, tgtCode, "fragment");
-      }, FRAGMENT_DEBOUNCE_MS);
+      }, waitMs);
     }
 
     // Complete sentences queue straight away, unless they already failed.
@@ -177,7 +223,6 @@ export function useTranslator(srcCode: string, tgtCode: string) {
     segments,
     srcCode,
     tgtCode,
-    engine.status,
     engine.readyTick,
     engine,
     clearFragmentTimer,
@@ -194,6 +239,7 @@ export function useTranslator(srcCode: string, tgtCode: string) {
     const flatValues: string[] = [];
     let pendingCount = 0;
     let failedCount = 0;
+    let doneCount = 0;
     let hasAnyOutput = false;
 
     segments.lines.forEach((line, lineIndex) => {
@@ -205,6 +251,7 @@ export function useTranslator(srcCode: string, tgtCode: string) {
         if (cached !== undefined) {
           const changed = cached !== prev[flatIndex];
           if (cached.length > 0) hasAnyOutput = true;
+          doneCount += 1;
           flatValues.push(cached);
           spans.push({
             text: cached,
@@ -241,11 +288,27 @@ export function useTranslator(srcCode: string, tgtCode: string) {
       plainText,
       pendingCount,
       failedCount,
+      doneCount,
       totalSentences: flatValues.length,
       hasAnyOutput,
+      lastTranslatedMs,
     };
     // cacheVersion and the pair drive recomputation when results arrive.
-  }, [segments, srcCode, tgtCode, cacheVersion]);
+  }, [segments, srcCode, tgtCode, cacheVersion, lastTranslatedMs, pairKey]);
+
+  // The translating burst: from the first sentence that goes pending to the
+  // moment everything has landed. Measured outside the render itself.
+  useEffect(() => {
+    if (output.pendingCount > 0) {
+      if (burstStartRef.current == null) burstStartRef.current = performance.now();
+      settledRef.current = false;
+    } else if (output.hasAnyOutput && burstStartRef.current != null && !settledRef.current) {
+      settledRef.current = true;
+      const duration = performance.now() - burstStartRef.current;
+      burstStartRef.current = null;
+      setLastTranslatedMs(Math.round(duration));
+    }
+  }, [output.pendingCount, output.hasAnyOutput]);
 
   // Remember what was shown so pending lines can keep their last known text.
   useEffect(() => {
@@ -277,6 +340,7 @@ export function useTranslator(srcCode: string, tgtCode: string) {
     pendingBySentenceRef.current.clear();
     failuresRef.current.clear();
     lastShownRef.current = [];
+    burstStartRef.current = null;
     setInput("");
     setCacheVersion((v) => v + 1);
   }, [engine, clearFragmentTimer, dropFragmentRequest]);

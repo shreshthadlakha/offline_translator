@@ -1,0 +1,846 @@
+{
+  "round": "round1",
+  "generatedAt": "2026-10-10T19:06:33.674Z",
+  "tests": [
+    {
+      "id": "opus-en-af",
+      "modelId": "Xenova/opus-mt-en-af",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->afr_Latn",
+          "src": "eng_Latn",
+          "tgt": "afr_Latn",
+          "tag": null,
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-en-cs",
+      "modelId": "Xenova/opus-mt-en-cs",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->ces_Latn",
+          "src": "eng_Latn",
+          "tgt": "ces_Latn",
+          "tag": null,
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-en-da",
+      "modelId": "Xenova/opus-mt-en-da",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->dan_Latn",
+          "src": "eng_Latn",
+          "tgt": "dan_Latn",
+          "tag": null,
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-en-fi",
+      "modelId": "Xenova/opus-mt-en-fi",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->fin_Latn",
+          "src": "eng_Latn",
+          "tgt": "fin_Latn",
+          "tag": null,
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-en-hu",
+      "modelId": "Xenova/opus-mt-en-hu",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->hun_Latn",
+          "src": "eng_Latn",
+          "tgt": "hun_Latn",
+          "tag": null,
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-en-id",
+      "modelId": "Xenova/opus-mt-en-id",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->ind_Latn",
+          "src": "eng_Latn",
+          "tgt": "ind_Latn",
+          "tag": null,
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-en-ro",
+      "modelId": "Xenova/opus-mt-en-ro",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->ron_Latn",
+          "src": "eng_Latn",
+          "tgt": "ron_Latn",
+          "tag": null,
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-en-sv",
+      "modelId": "Xenova/opus-mt-en-sv",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->swe_Latn",
+          "src": "eng_Latn",
+          "tgt": "swe_Latn",
+          "tag": null,
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-en-uk",
+      "modelId": "Xenova/opus-mt-en-uk",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->ukr_Cyrl",
+          "src": "eng_Latn",
+          "tgt": "ukr_Cyrl",
+          "tag": null,
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-en-vi",
+      "modelId": "Xenova/opus-mt-en-vi",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->vie_Latn",
+          "src": "eng_Latn",
+          "tgt": "vie_Latn",
+          "tag": null,
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-en-mul",
+      "modelId": "Xenova/opus-mt-en-mul",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->amh_Ethi",
+          "src": "eng_Latn",
+          "tgt": "amh_Ethi",
+          "tag": "amh",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->asm_Beng",
+          "src": "eng_Latn",
+          "tgt": "asm_Beng",
+          "tag": "asm",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->ben_Beng",
+          "src": "eng_Latn",
+          "tgt": "ben_Beng",
+          "tag": "ben",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->bul_Cyrl",
+          "src": "eng_Latn",
+          "tgt": "bul_Cyrl",
+          "tag": "bul",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->cat_Latn",
+          "src": "eng_Latn",
+          "tgt": "cat_Latn",
+          "tag": "cat",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->zho_Hant",
+          "src": "eng_Latn",
+          "tgt": "zho_Hant",
+          "tag": "zho_Hant",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->hrv_Latn",
+          "src": "eng_Latn",
+          "tgt": "hrv_Latn",
+          "tag": "hrv",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->ell_Grek",
+          "src": "eng_Latn",
+          "tgt": "ell_Grek",
+          "tag": "ell",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->guj_Gujr",
+          "src": "eng_Latn",
+          "tgt": "guj_Gujr",
+          "tag": "guj",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->hau_Latn",
+          "src": "eng_Latn",
+          "tgt": "hau_Latn",
+          "tag": "hau_Latn",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->heb_Hebr",
+          "src": "eng_Latn",
+          "tgt": "heb_Hebr",
+          "tag": "heb",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->kan_Knda",
+          "src": "eng_Latn",
+          "tgt": "kan_Knda",
+          "tag": "kan",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->zsm_Latn",
+          "src": "eng_Latn",
+          "tgt": "zsm_Latn",
+          "tag": "zlm_Latn",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->mal_Mlym",
+          "src": "eng_Latn",
+          "tgt": "mal_Mlym",
+          "tag": "mal",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->mar_Deva",
+          "src": "eng_Latn",
+          "tgt": "mar_Deva",
+          "tag": "mar",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->nob_Latn",
+          "src": "eng_Latn",
+          "tgt": "nob_Latn",
+          "tag": "nob",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->ory_Orya",
+          "src": "eng_Latn",
+          "tgt": "ory_Orya",
+          "tag": "ori",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->pbt_Arab",
+          "src": "eng_Latn",
+          "tgt": "pbt_Arab",
+          "tag": "pus",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->pes_Arab",
+          "src": "eng_Latn",
+          "tgt": "pes_Arab",
+          "tag": "pes",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->por_Latn",
+          "src": "eng_Latn",
+          "tgt": "por_Latn",
+          "tag": "por",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->pan_Guru",
+          "src": "eng_Latn",
+          "tgt": "pan_Guru",
+          "tag": "pan_Guru",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->srp_Cyrl",
+          "src": "eng_Latn",
+          "tgt": "srp_Cyrl",
+          "tag": "srp_Cyrl",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->sin_Sinh",
+          "src": "eng_Latn",
+          "tgt": "sin_Sinh",
+          "tag": "sin",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->tam_Taml",
+          "src": "eng_Latn",
+          "tgt": "tam_Taml",
+          "tag": "tam",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->tel_Telu",
+          "src": "eng_Latn",
+          "tgt": "tel_Telu",
+          "tag": "tel",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->tur_Latn",
+          "src": "eng_Latn",
+          "tgt": "tur_Latn",
+          "tag": "tur",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->urd_Arab",
+          "src": "eng_Latn",
+          "tgt": "urd_Arab",
+          "tag": "urd",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->yor_Latn",
+          "src": "eng_Latn",
+          "tgt": "yor_Latn",
+          "tag": "yor",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->zul_Latn",
+          "src": "eng_Latn",
+          "tgt": "zul_Latn",
+          "tag": "zul",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->jpn_Jpan",
+          "src": "eng_Latn",
+          "tgt": "jpn_Jpan",
+          "tag": "jpn",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-en-romance",
+      "modelId": "Xenova/opus-mt-en-ROMANCE",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "en->cat_Latn",
+          "src": "eng_Latn",
+          "tgt": "cat_Latn",
+          "tag": "ca",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        },
+        {
+          "key": "en->por_Latn",
+          "src": "eng_Latn",
+          "tgt": "por_Latn",
+          "tag": "pt",
+          "sentences": [
+            "Good morning.",
+            "Where is the nearest pharmacy?",
+            "I would like a cup of coffee, please.",
+            "The train leaves at ten past noon.",
+            "Could you help me carry this upstairs?",
+            "My sister is coming to visit next week.",
+            "The weather is lovely today.",
+            "I forgot my umbrella at the office.",
+            "We should leave early to avoid the traffic.",
+            "The children were playing in the garden while their grandmother watched from the window."
+          ]
+        }
+      ]
+    }
+  ]
+}

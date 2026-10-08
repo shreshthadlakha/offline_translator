@@ -1,0 +1,1395 @@
+{
+  "checkedAt": "2026-10-10T08:26:22.398Z",
+  "fullModel": {
+    "modelId": "Xenova/nllb-200-distilled-600M",
+    "license": "cc-by-nc-4.0",
+    "licenseSource": "tag on Xenova/nllb-200-distilled-600M",
+    "pipelineTag": "translation",
+    "hasQuantized": true,
+    "q8Bytes": 911962632,
+    "q8Bundle": [
+      "onnx/encoder_model_quantized.onnx",
+      "onnx/decoder_model_merged_quantized.onnx",
+      "tokenizer.json",
+      "config.json",
+      "generation_config.json",
+      "tokenizer_config.json",
+      "special_tokens_map.json"
+    ],
+    "tags": [
+      "base_model:facebook/nllb-200-distilled-600M",
+      "base_model:quantized:facebook/nllb-200-distilled-600M",
+      "license:cc-by-nc-4.0"
+    ],
+    "originalModel": "facebook/nllb-200-distilled-600M"
+  },
+  "pairs": [
+    {
+      "src": "eng_Latn",
+      "tgt": "fra_Latn",
+      "modelId": "Xenova/opus-mt-en-fr",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 113111807,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-en-fr",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-en-fr",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "fra_Latn",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-fr-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 113111807,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-fr-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-fr-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "spa_Latn",
+      "modelId": "Xenova/opus-mt-en-es",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 119377345,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-en-es",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-en-es",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "spa_Latn",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-es-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 119377310,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-es-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-es-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "deu_Latn",
+      "modelId": "Xenova/opus-mt-en-de",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 111519854,
+      "license": "cc-by-4.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-en-de",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-en-de",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "cc-by-4.0"
+    },
+    {
+      "src": "deu_Latn",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-de-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 111519819,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-de-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-de-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "ita_Latn",
+      "modelId": "Xenova/opus-mt-en-it",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 136474118,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-en-it",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-en-it",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "ita_Latn",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-it-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 136865467,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-it-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-it-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "por_Latn",
+      "modelId": "Xenova/opus-mt-en-pt",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist.",
+        "No Xenova/onnx-community conversion. Upstream single-pair en->pt exists only as Helsinki-NLP/opus-mt-tc-big-en-pt (cc-by-4.0), unconverted for transformers.js. Other options are multi-target (opus-mt-en-ROMANCE) which we skip."
+      ]
+    },
+    {
+      "src": "por_Latn",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-pt-en",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist.",
+        "NO single-pair pt->en model exists anywhere in the opus-mt family (upstream Helsinki-NLP has none; only multi-target opus-mt-ROMANCE-en). Pair must stay on the full NLLB model."
+      ]
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "nld_Latn",
+      "modelId": "Xenova/opus-mt-en-nl",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 121631490,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-en-nl",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-en-nl",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "nld_Latn",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-nl-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 121631492,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-nl-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-nl-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "rus_Cyrl",
+      "modelId": "Xenova/opus-mt-en-ru",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 117767433,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-en-ru",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-en-ru",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "rus_Cyrl",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-ru-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 117767433,
+      "license": "cc-by-4.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-ru-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-ru-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "cc-by-4.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "zho_Hans",
+      "modelId": "Xenova/opus-mt-en-zh",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 119495650,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-en-zh",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-en-zh",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "zho_Hans",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-zh-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 119495923,
+      "license": "cc-by-4.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-zh-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-zh-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "cc-by-4.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "jpn_Jpan",
+      "modelId": "Xenova/opus-mt-en-ja",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist.",
+        "Plain \"ja\" naming does not exist; English->Japanese single-pair model exists as Xenova/opus-mt-en-jap (\"jap\" is the Opus-MT code for Japanese)."
+      ]
+    },
+    {
+      "src": "jpn_Jpan",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-ja-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 114701074,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-ja-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-ja-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "arb_Arab",
+      "modelId": "Xenova/opus-mt-en-ar",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 117602860,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-en-ar",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-en-ar",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "arb_Arab",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-ar-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 117621540,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-ar-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-ar-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "hin_Deva",
+      "modelId": "Xenova/opus-mt-en-hi",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 116657716,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-en-hi",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-en-hi",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "hin_Deva",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-hi-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 115710250,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-hi-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-hi-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "urd_Arab",
+      "modelId": "Xenova/opus-mt-en-ur",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist.",
+        "No Xenova/onnx-community conversion. Upstream single-pair Helsinki-NLP/opus-mt-en-ur (apache-2.0) exists, unconverted for transformers.js."
+      ]
+    },
+    {
+      "src": "urd_Arab",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-ur-en",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist.",
+        "No Xenova/onnx-community conversion. Upstream single-pair Helsinki-NLP/opus-mt-ur-en (apache-2.0) exists, unconverted for transformers.js."
+      ]
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "tur_Latn",
+      "modelId": "Xenova/opus-mt-en-tr",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist.",
+        "No Xenova org en->tr. Single-pair en->tr exists only as onnx-community/opus-mt-tc-big-en-tr (tc-big, converted by the successor org). Upstream: Helsinki-NLP/opus-mt-tc-big-en-tr (cc-by-4.0)."
+      ]
+    },
+    {
+      "src": "tur_Latn",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-tr-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 116553011,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-tr-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-tr-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "por_Latn",
+      "modelId": "Xenova/opus-mt-tc-bigg-en-pt",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-bigg"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "por_Latn",
+      "modelId": "Xenova/opus-mt-tc-big-en-pt",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-big"
+    },
+    {
+      "src": "por_Latn",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-tc-bigg-pt-en",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-bigg"
+    },
+    {
+      "src": "por_Latn",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-tc-big-pt-en",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-big"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "jpn_Jpan",
+      "modelId": "Xenova/opus-mt-tc-bigg-en-ja",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-bigg"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "jpn_Jpan",
+      "modelId": "Xenova/opus-mt-tc-big-en-ja",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-big"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "urd_Arab",
+      "modelId": "Xenova/opus-mt-tc-bigg-en-ur",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-bigg"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "urd_Arab",
+      "modelId": "Xenova/opus-mt-tc-big-en-ur",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-big"
+    },
+    {
+      "src": "urd_Arab",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-tc-bigg-ur-en",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-bigg"
+    },
+    {
+      "src": "urd_Arab",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-tc-big-ur-en",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-big"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "tur_Latn",
+      "modelId": "Xenova/opus-mt-tc-bigg-en-tr",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-bigg"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "tur_Latn",
+      "modelId": "Xenova/opus-mt-tc-big-en-tr",
+      "exists": false,
+      "hasQuantized": false,
+      "q8Bytes": null,
+      "license": null,
+      "licenseSource": null,
+      "licenseNote": null,
+      "originalModel": null,
+      "tokenizer": null,
+      "pipelineTag": null,
+      "files": [],
+      "quantizedFiles": [],
+      "notes": [
+        "API 401 {\"error\":\"Invalid username or password.\"} (HF returns 401 for missing repos; a known-nonexistent control also returns 401, existing models return 200). Also absent from the complete author inventory search (76 Xenova opus-mt models / 49 onnx-community opus-mt models), which independently confirms it does not exist."
+      ],
+      "variant": "tc-big"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "jpn_Jpan",
+      "modelId": "Xenova/opus-mt-en-jap",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 98933843,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-en-jap",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-en-jap",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer; source_lang=en, target_lang=jap",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "singlePair": "en -> jap",
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "jpn_Jpan",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-jap-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 98933843,
+      "license": "apache-2.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-jap-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-jap-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer; source_lang=jap, target_lang=en",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json",
+        "Alternative to Xenova/opus-mt-ja-en (same direction); prefer opus-mt-ja-en."
+      ],
+      "alternative": true,
+      "singlePair": "jap -> en",
+      "upstreamLicense": "apache-2.0"
+    },
+    {
+      "src": "tur_Latn",
+      "tgt": "eng_Latn",
+      "modelId": "Xenova/opus-mt-tc-big-tr-en",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 303407630,
+      "license": "cc-by-4.0",
+      "licenseSource": "tag on original Helsinki-NLP/opus-mt-tc-big-tr-en",
+      "licenseNote": "README has no license line",
+      "originalModel": "Helsinki-NLP/opus-mt-tc-big-tr-en",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer; source_lang=tr, target_lang=en",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json",
+        "Variant of the plain Xenova/opus-mt-tr-en (which exists and is preferred)."
+      ],
+      "variant": "tc-big",
+      "singlePair": "tr -> en",
+      "upstreamLicense": "cc-by-4.0"
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "tur_Latn",
+      "modelId": "onnx-community/opus-mt-tc-big-en-tr",
+      "exists": true,
+      "hasQuantized": true,
+      "q8Bytes": 537056149,
+      "license": "cc-by-4.0",
+      "licenseSource": "tag on onnx-community/opus-mt-tc-big-en-tr",
+      "licenseNote": null,
+      "originalModel": "Helsinki-NLP/opus-mt-tc-big-en-tr",
+      "tokenizer": "marian",
+      "pipelineTag": "translation",
+      "files": [
+        "onnx/encoder_model_quantized.onnx",
+        "onnx/decoder_model_merged_quantized.onnx",
+        "tokenizer.json",
+        "config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json"
+      ],
+      "quantizedFiles": [
+        "onnx/decoder_model_merged_quantized.onnx",
+        "onnx/decoder_model_quantized.onnx",
+        "onnx/decoder_with_past_model_quantized.onnx",
+        "onnx/encoder_model_quantized.onnx"
+      ],
+      "notes": [
+        "tokenizer_class: MarianTokenizer; source_lang=en, target_lang=tr",
+        "marian files present: vocab.json, source.spm, target.spm",
+        "model_type: marian",
+        "q8 bundle: onnx/encoder_model_quantized.onnx + onnx/decoder_model_merged_quantized.onnx + tokenizer.json + config.json + generation_config.json + tokenizer_config.json + special_tokens_map.json"
+      ],
+      "variant": "tc-big",
+      "singlePair": "en -> tr"
+    }
+  ],
+  "upstreamOptions": {
+    "Helsinki-NLP/opus-mt-tc-big-en-pt": {
+      "modelId": "Helsinki-NLP/opus-mt-tc-big-en-pt",
+      "exists": true,
+      "pipelineTag": "translation",
+      "license": "cc-by-4.0",
+      "downloads": 20484,
+      "likes": 34,
+      "tags": [
+        "transformers",
+        "pytorch",
+        "tf",
+        "safetensors",
+        "marian",
+        "text2text-generation",
+        "translation",
+        "opus-mt-tc",
+        "tc",
+        "big",
+        "en",
+        "pt",
+        "license:cc-by-4.0",
+        "model-index"
+      ]
+    },
+    "Helsinki-NLP/opus-mt-en-ur": {
+      "modelId": "Helsinki-NLP/opus-mt-en-ur",
+      "exists": true,
+      "pipelineTag": "translation",
+      "license": "apache-2.0",
+      "downloads": 1618,
+      "likes": 9,
+      "tags": [
+        "transformers",
+        "pytorch",
+        "tf",
+        "marian",
+        "text2text-generation",
+        "translation",
+        "en",
+        "ur",
+        "license:apache-2.0"
+      ]
+    },
+    "Helsinki-NLP/opus-mt-ur-en": {
+      "modelId": "Helsinki-NLP/opus-mt-ur-en",
+      "exists": true,
+      "pipelineTag": "translation",
+      "license": "apache-2.0",
+      "downloads": 10007,
+      "likes": 3,
+      "tags": [
+        "transformers",
+        "pytorch",
+        "tf",
+        "marian",
+        "text2text-generation",
+        "translation",
+        "ur",
+        "en",
+        "license:apache-2.0"
+      ]
+    },
+    "Helsinki-NLP/opus-mt-tc-big-en-tr": {
+      "modelId": "Helsinki-NLP/opus-mt-tc-big-en-tr",
+      "exists": true,
+      "pipelineTag": "translation",
+      "license": "cc-by-4.0",
+      "downloads": 96412,
+      "likes": 59,
+      "tags": [
+        "transformers",
+        "pytorch",
+        "tf",
+        "marian",
+        "text2text-generation",
+        "translation",
+        "opus-mt-tc",
+        "en",
+        "tr",
+        "license:cc-by-4.0",
+        "model-index"
+      ]
+    },
+    "Helsinki-NLP/opus-mt-en-jap": {
+      "modelId": "Helsinki-NLP/opus-mt-en-jap",
+      "exists": true,
+      "pipelineTag": "translation",
+      "license": "apache-2.0",
+      "downloads": 9899,
+      "likes": 12,
+      "tags": [
+        "transformers",
+        "pytorch",
+        "tf",
+        "marian",
+        "text2text-generation",
+        "translation",
+        "en",
+        "jap",
+        "license:apache-2.0"
+      ]
+    },
+    "Helsinki-NLP/opus-mt-jap-en": {
+      "modelId": "Helsinki-NLP/opus-mt-jap-en",
+      "exists": true,
+      "pipelineTag": "translation",
+      "license": "apache-2.0",
+      "downloads": 3102,
+      "likes": 11,
+      "tags": [
+        "transformers",
+        "pytorch",
+        "tf",
+        "marian",
+        "text2text-generation",
+        "translation",
+        "jap",
+        "en",
+        "license:apache-2.0"
+      ]
+    }
+  },
+  "inventory": {
+    "xenovaOpusMt": {
+      "url": "https://huggingface.co/api/models?author=Xenova&search=opus-mt&limit=1000",
+      "count": 76,
+      "note": "Complete inventory of Xenova org opus-mt conversions, fetched at checkedAt. No pt, ur, or en-tr models; en->ja only as opus-mt-en-jap; only tc- variant in the org is opus-mt-tc-big-tr-en."
+    },
+    "onnxCommunityOpusMt": {
+      "url": "https://huggingface.co/api/models?author=onnx-community&search=opus-mt&limit=200",
+      "count": 49,
+      "note": "Successor conversion org (transformers.js compatible). Adds opus-mt-tc-big-en-tr and opus-mt-tc-big-tr-en beyond the Xenova set; still no pt or ur."
+    }
+  }
+}

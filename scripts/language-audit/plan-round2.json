@@ -1,0 +1,932 @@
+{
+  "round": "round2",
+  "generatedAt": "2026-10-10T20:06:20.408Z",
+  "tests": [
+    {
+      "id": "opus-af-en",
+      "modelId": "Xenova/opus-mt-af-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "afr_Latn->en",
+          "src": "afr_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Goeie môre.",
+            "Waar is die naaste apteek?",
+            "Ek wil graag 'n koppie koffie hê, asseblief.",
+            "Die trein vertrek om tien uur.",
+            "Kan jy my help om dit op te dra?",
+            "My suster kom volgende week by my kom kuier.",
+            "Die weer is vandag heerlik.",
+            "Ek het my paraplu by die kantoor vergeet.",
+            "Ons moet vroeg vertrek om die verkeer te vermy.",
+            "Die kinders het in die tuin gespeel terwyl hulle ouma deur die venster gekyk het."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-cs-en",
+      "modelId": "Xenova/opus-mt-cs-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "ces_Latn->en",
+          "src": "ces_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "- Dobré ráno. - Dobré ráno.",
+            "Kde je nejbližší lékárna?",
+            "Chtěl bych šálek kávy, prosím.",
+            "Vlak odjíždí o deset hodin poledne.",
+            "Pomůžeš mi to nosit nahoru?",
+            "Moje sestra přijde příští týden na návštěvu.",
+            "Dnes je krásné počasí.",
+            "Zapomněl jsem si deštník v kanceláři.",
+            "Měli bychom odjet dřív, abychom se vyhnuli dopravě.",
+            "Děti se hrají v zahradě, zatímco jejich babička sleduje z okna."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-da-en",
+      "modelId": "Xenova/opus-mt-da-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "dan_Latn->en",
+          "src": "dan_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "- Godmorgen. - Godmorgen.",
+            "Hvor er det nærmeste apotek?",
+            "Jeg vil gerne have en kop kaffe.",
+            "Toget kører kl. ti efter middag.",
+            "Kan du hjælpe mig med at bære det op?",
+            "Min søster kommer til at besøge næste uge.",
+            "Vejret er dejligt i dag.",
+            "Jeg glemte paraplyet på kontoret.",
+            "Vi skal af sted tidligt for at undgå trafikken.",
+            "Børnene legede i haven, mens deres bedstemor kiggede ud af vinduet."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-fi-en",
+      "modelId": "Xenova/opus-mt-fi-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "fin_Latn->en",
+          "src": "fin_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "- Hyvää huomenta.",
+            "Missä on lähin apteekki?",
+            "Haluaisin kupin kahvia.",
+            "Juna lähtee kymmeneltä keskipäivällä.",
+            "Voisitko auttaa kantamaan tämän yläkertaan?",
+            "Siskoni tulee ensi viikolla.",
+            "Ilmasto on kaunis tänään.",
+            "Unohdin sateenvarjon toimistossa.",
+            "Meidän pitäisi lähteä aikaisin, jotta liikenne ei liene.",
+            "Lapset leikkivät puutarhassa, kun isoäiti katsoi ikkunasta."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-hu-en",
+      "modelId": "Xenova/opus-mt-hu-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "hun_Latn->en",
+          "src": "hun_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "- Jó reggelt!",
+            "Hol van a legközelebbi gyógyszertár?",
+            "Kérnék egy csésze kávét, kérem.",
+            "A vonat délután tízkor indul.",
+            "Segíthetnél felhozni?",
+            "A húgom jövő héten látogatásra jön.",
+            "A nap szép időjárás.",
+            "Elfelejtettem az esernyőmet az irodában.",
+            "Korán kell indulnunk, hogy elkerüljük a forgalmat.",
+            "A gyerekek játszottak a kertben, míg a nagymamuk az ablakon nézett."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-id-en",
+      "modelId": "Xenova/opus-mt-id-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "ind_Latn->en",
+          "src": "ind_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Selamat pagi.",
+            "Dimana apotek terdekat?",
+            "Aku ingin secangkir kopi, tolong.",
+            "Kereta berangkat pukul sepuluh siang.",
+            "Bisakah kau membantuku membawa ini ke atas?",
+            "Adikku akan datang mengunjungi minggu depan.",
+            "Cuaca hari ini indah.",
+            "Aku lupa payungku di kantor.",
+            "Kita harus pergi lebih awal untuk menghindari lalu lintas.",
+            "Anak-anak bermain di taman sementara nenek mereka menonton dari jendela."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-sv-en",
+      "modelId": "Xenova/opus-mt-sv-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "swe_Latn->en",
+          "src": "swe_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "- God morgon. - Ja.",
+            "Var är närmaste apotek?",
+            "Jag vill ha en kopp kaffe, tack.",
+            "Tåget går klockan tio efter midnatt.",
+            "Kan du hjälpa mig att bära det här upp?",
+            "Min syster kommer på besök nästa vecka.",
+            "Vädret är vackert idag.",
+            "Jag glömde paraply på kontoret.",
+            "Vi borde gå tidigt för att undvika trafiken.",
+            "Barnen lekte i trädgården medan deras mormor tittade genom fönstret."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-uk-en",
+      "modelId": "Xenova/opus-mt-uk-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "ukr_Cyrl->en",
+          "src": "ukr_Cyrl",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Добра донька.",
+            "Де найближча аптека?",
+            "Я хотів би чашку кави, будь ласка.",
+            "Поїзд поїзд виходить в десять по południu.",
+            "Чи можете допомогти мені перенести це на поверхню?",
+            "Моя сестра приїде на візит наступного тижня.",
+            "Сьогодні погода прекрасна.",
+            "Я забував зонтик у офісі.",
+            "Ми повинні піти раніше, щоб уникнути руху.",
+            "Діти гралися в саді, а їхня бабуся дивилася з вікна."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-vi-en",
+      "modelId": "Xenova/opus-mt-vi-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "vie_Latn->en",
+          "src": "vie_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Chào buổi sáng.",
+            "Phòng thuốc gần nhất ở đâu?",
+            "Tôi muốn một tách cà phê, xin vui lòng.",
+            "Tàu khởi hành lúc mười giờ trưa.",
+            "Anh có thể giúp tôi mang này lên không?",
+            "Chị tôi sẽ đến thăm vào tuần tới.",
+            "Thời tiết hôm nay rất đẹp.",
+            "Tôi quên chiếc dù của mình ở văn phòng.",
+            "Chúng ta nên đi sớm để tránh giao thông.",
+            "Trẻ em đang chơi trong vườn trong khi bà ngoại của họ nhìn qua cửa sổ."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-ko-en",
+      "modelId": "Xenova/opus-mt-ko-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "kor_Hang->en",
+          "src": "kor_Hang",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "안녕하세요",
+            "가장 가까운 약관은 어디 있어요?",
+            "커피 한 잔 좀 드세요.",
+            "열차는 낮 10시에 출발합니다.",
+            "이걸 위로 올려서 도와줄래?",
+            "내 동생이 다음 주에 방문하러 올 거야",
+            "날씨가 좋네요.",
+            "사무실에서 내 낙하산을 잊었어요.",
+            "교통을 피하기 위해 일찍 출발해야 합니다.",
+            "아이들은 정원에서 놀고 있었는데 할머니는 창문에서 지켜보고 있었다."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-pl-en",
+      "modelId": "Xenova/opus-mt-pl-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "pol_Latn->en",
+          "src": "pol_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "- Dzień dobry. - Dzień dobry.",
+            "Gdzie jest najbliższa apteka?",
+            "Chciałbym filiżankę kawy, proszę.",
+            "Pociąg odjeżdża o dziesięciu w południe.",
+            "Pomożesz mi z tym na górę?",
+            "Moja siostra przyjdzie na wizytę w przyszłym tygodniu.",
+            "Dziś pogoda jest piękna.",
+            "Zapomniałem parasola w biurze.",
+            "Powinniśmy wyjść wcześniej, żeby uniknąć ruchu.",
+            "Dzieci bawiły się w ogrodzie, a ich babcia patrzyła przez okno."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-th-en",
+      "modelId": "Xenova/opus-mt-th-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "tha_Thai->en",
+          "src": "tha_Thai",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "สวัสดีครับ",
+            "ร้านขายยาใกล้ที่สุดอยู่ไหน?",
+            "ฉันอยากดื่มกาแฟด้วย",
+            "รถไฟออกเวลาสิบโมงกลางวัน",
+            "ช่วยพาฉันขึ้นไปหน่อยได้ไหม",
+            "น้องสาวฉันจะมาเยี่ยมในสัปดาห์หน้า",
+            "วันนี้อากาศดี",
+            "ฉันลืมร่มที่ทํางาน",
+            "เราควรออกเร็วๆ เพื่อหลีกเลี่ยงการจราจร",
+            "เด็กๆกําลังเล่นในสวน ขณะที่ยายของพวกเขามองจากหน้าต่าง"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-mul-en",
+      "modelId": "Xenova/opus-mt-mul-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "amh_Ethi->en",
+          "src": "amh_Ethi",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "መልካም ቀን.",
+            "በአቅራቢያችን ያለው የመድኃኒት ቤት የት ነው?",
+            "አንድ ቡና እፈልጋለሁ፣ እባክህ።",
+            "ባቡሩ ከቀኑ 10 ሰዓት ላይ ይነሳል።",
+            "ይህንን ወደ ላይ እንድሸከም ልትረዱኝ ትችላላችሁ?",
+            "እህቴ በሚቀጥለው ሳምንት ለመጎብኘት ትመጣለች ።",
+            "ዛሬ ጥሩ የአየር ሁኔታ አለ።",
+            "በቢሮው ውስጥ ሽፋንዬን ረሳሁ.",
+            "ትራፊክ እንዳይኖርብን ቀደም ብለን መሄድ አለብን።",
+            "ልጆቹ በአትክልት ስፍራው ውስጥ ሲጫወቱ አያታቸው በመስኮት በኩል እየተመለከቱ ነበር."
+          ]
+        },
+        {
+          "key": "asm_Beng->en",
+          "src": "asm_Beng",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "শুভবাৰ্তা।",
+            "নিকটতম ঔষধালয়টো ক'ত আছে?",
+            "মই এটা কাপ কফি পাম, অনুগ্ৰহ কৰি।",
+            "ৰেলখন দিনৰ দহ বজাত যাতায়াত কৰে।",
+            "তুমি মোক ওপৰৰলৈ এইখিনি লৈ যাবলৈ সহায় কৰিবা নে?",
+            "মোৰ ভগ্নী অহা সপ্তাহত মোৰ ওচৰলৈ আহিব।",
+            "আজি বতৰ সুন্দৰ।",
+            "মই অফিচত মোৰ চামুচটো পাহৰি গ'লো।",
+            "আমি যান-জঁটৰ পৰা আঁতৰি থাকিবলৈ সোনকালে ওলাই যাব লাগে।",
+            "শিশুসকলে বাগানত খেলি আছিল যদিও তেওঁলোকৰ নানী জানালাৰ পৰা চাই আছিল।"
+          ]
+        },
+        {
+          "key": "ben_Beng->en",
+          "src": "ben_Beng",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "শুভ সকাল।",
+            "নিকটতম ফার্মেসী কোথায়?",
+            "আমি একটা কফি চাই, প্লিজ।",
+            "ট্রেনটা দুপুরের দশটাতে চলে যায়।",
+            "তুমি কি আমাকে এটা উপরে নিয়ে যেতে সাহায্য করতে পার?",
+            "আমার বোন আগামী সপ্তাহে আমার কাছে আসবে।",
+            "আবহাওয়া আজ সুন্দর।",
+            "আমি অফিসে আমার চামচ ভুলে গেছি।",
+            "ট্রাফিক এড়াতে আমাদের তাড়াতাড়ি বের হওয়া উচিত।",
+            "বাচ্চারা বাগানে খেলছিল, যখন তাদের নানী জানালা থেকে দেখছিল।"
+          ]
+        },
+        {
+          "key": "bul_Cyrl->en",
+          "src": "bul_Cyrl",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "- Здравейте. - Здравейте.",
+            "Къде е най-близката аптека?",
+            "Бих искал чаша кафе, моля.",
+            "Влакът тръгва в десет по обяд.",
+            "Ще ми помогнеш ли да го нося горе?",
+            "Сестра ми идва на посещение следващата седмица.",
+            "Днес времето е прекрасно.",
+            "Забравих чадъра си в офиса.",
+            "Трябва да тръгнем по-рано, за да избегнем трафика.",
+            "Децата играят в градината, докато баба им гледа от прозореца."
+          ]
+        },
+        {
+          "key": "cat_Latn->en",
+          "src": "cat_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "- Bona matinada.",
+            "On és la farmacia més propera?",
+            "M'agradaria una tassa de cafè, si us plau.",
+            "El tren parti a les deu del mediodía.",
+            "Em pots ajudar a portar això a l'escalon?",
+            "La meva germana arriba a visitar-la la setmana que ve.",
+            "El temps és meravellós avui.",
+            "Em vaig oblidar del meu parapluí a l'oficina.",
+            "Hem de marxar abans per evitar el trànsit.",
+            "Els nens estaven jugant al jardí mentre la seva àvia mirava des de la finestra."
+          ]
+        },
+        {
+          "key": "zho_Hant->en",
+          "src": "zho_Hant",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "您的位置:",
+            "附近的藥店在哪裡?",
+            "我會想要一杯咖啡,",
+            "這次的列車上午十點上班.",
+            "請您幫我抬起這個樓上?",
+            "我妹妹下周來拜訪.",
+            "這天天氣很好.",
+            "我在辦公室忘了傘.",
+            "我們應該早出,避免交通.",
+            "他們的祖母從窗口觀看,"
+          ]
+        },
+        {
+          "key": "hrv_Latn->en",
+          "src": "hrv_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "-Dobro jutro. -Dobro jutro.",
+            "Gdje je najbliža apoteka?",
+            "Volio bih šalicu kave, molim.",
+            "Vlak odlazi u deset po podne.",
+            "Možeš li mi pomoći da ovo nosim gore?",
+            "Moja sestra dolazi u posjet sljedeći tjedan.",
+            "Danas je vrijeme divno.",
+            "Zaboravio sam šumor u uredu.",
+            "Trebali bismo krenuti rano da izbjegnemo promet.",
+            "Djeca su se igrala u vrtu dok je njihova baka gledala kroz prozor."
+          ]
+        },
+        {
+          "key": "ell_Grek->en",
+          "src": "ell_Grek",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Καλημέρα. - Καλημέρα.",
+            "Πού είναι το κοντινότερο φαρμακείο;",
+            "Θα ήθελα ένα φλιτζάνι καφέ, παρακαλώ.",
+            "Το τρένο φεύγει στις δέκα το μεσημέρι.",
+            "Μπορείς να με βοηθήσεις να το ανεβάσω επάνω;",
+            "Η αδερφή μου έρχεται να σε επισκεφτεί την επόμενη εβδομάδα.",
+            "Το καιρό είναι υπέροχο σήμερα.",
+            "Ξέχασα την ομπρέλα μου στο γραφείο.",
+            "Πρέπει να φύγουμε νωρίς για να αποφύγουμε την κυκλοφορία.",
+            "Τα παιδιά έπαιζαν στον κήπο ενώ η γιαγιά τους παρακολουθούσε από το παράθυρο."
+          ]
+        },
+        {
+          "key": "guj_Gujr->en",
+          "src": "guj_Gujr",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "ગુડ મોર્નિંગ.",
+            "સૌથી નજીકની ફાર્મસી ક્યાં છે?",
+            "હું એક કપ કોફી માંગો છો, કૃપા કરીને.",
+            "ટ્રેન દસ વાગ્યે બહાર નીકળે છે.",
+            "શું તમે આને ઉપર લઈ જવા માટે મને મદદ કરી શકો છો?",
+            "મારી બહેન આવતા અઠવાડિયે મુલાકાત માટે આવે છે.",
+            "હવામાન આજે સુંદર છે.",
+            "મેં ઓફિસમાં મારો છત્રી ભૂલી ગયો.",
+            "ટ્રાફિકને ટાળવા માટે આપણે વહેલી નીકળવું જોઈએ.",
+            "બાળકો બગીચામાં રમી રહ્યા હતા જ્યારે તેમની દાદી વિંડોમાંથી જોઈ રહી હતી."
+          ]
+        },
+        {
+          "key": "hau_Latn->en",
+          "src": "hau_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Barka da safe.",
+            "A ina ne kantin magani mafi kusa?",
+            "Ina son kofi, don Allah.",
+            "Jirgin kasa ya tashi da karfe goma na rana.",
+            "Za ka iya taimaka mini in ɗauke wannan sama?",
+            "'Yar'uwata za ta zo ta ziyarce ni mako mai zuwa.",
+            "Yanayi yana da kyau a yau.",
+            "Na manta da kyandirina a ofis.",
+            "Ya kamata mu tashi da wuri don kauce wa zirga-zirga.",
+            "Yara suna wasa a cikin lambu yayin da kakarsu ta kalli ta taga."
+          ]
+        },
+        {
+          "key": "heb_Hebr->en",
+          "src": "heb_Hebr",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "-בוקר טוב.",
+            "איפה המרקחת הקרובה ביותר?",
+            "אני רוצה כוס קפה, בבקשה.",
+            "הרכבת יוצאת בשעה עשר אחר הצהריים.",
+            "אתה יכול לעזור לי לשאת את זה למעלה?",
+            "אחותי באה לבקר בשבוע הבא.",
+            "מזג האוויר הוא נפלא היום.",
+            "שכחתי את המטרייה שלי במשרד.",
+            "כדאי שנעזוב מוקדם כדי להימנע מהנועה.",
+            "הילדים שיחקו בגינה, בעוד סבתא שלהם צופה מהחלון."
+          ]
+        },
+        {
+          "key": "kan_Knda->en",
+          "src": "kan_Knda",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "ಶುಭೋದಯ.",
+            "ಹತ್ತಿರದ ಔಷಧಾಲಯ ಎಲ್ಲಿದೆ?",
+            "ನಾನು ಒಂದು ಕಪ್ ಕಾಫಿ ಬಯಸುತ್ತೇನೆ, ದಯವಿಟ್ಟು.",
+            "ರೈಲು ಹತ್ತು ಗಂಟೆಗೆ ಹೊರಡುತ್ತದೆ.",
+            "ನೀವು ಈ ಮೇಲಕ್ಕೆ ಸಾಗಿಸಲು ಸಹಾಯ ಮಾಡಬಹುದು?",
+            "ನನ್ನ ಸಹೋದರಿ ಮುಂದಿನ ವಾರ ಭೇಟಿ ನೀಡಲು ಬರುತ್ತಾಳೆ.",
+            "ಇಂದು ಹವಾಮಾನವು ಸುಂದರವಾಗಿರುತ್ತದೆ.",
+            "ನಾನು ಕಚೇರಿಯಲ್ಲಿ ನನ್ನ ಛತ್ರಿ ಮರೆತು.",
+            "ಸಂಚಾರವನ್ನು ತಪ್ಪಿಸಲು ನಾವು ಬೇಗ ಹೊರಡಬೇಕು.",
+            "ಮಕ್ಕಳು ಉದ್ಯಾನದಲ್ಲಿ ಆಟವಾಡುತ್ತಿದ್ದರು, ಅವರ ಅಜ್ಜಿ ಕಿಟಕಿಯಿಂದ ನೋಡುತ್ತಿದ್ದರು."
+          ]
+        },
+        {
+          "key": "zsm_Latn->en",
+          "src": "zsm_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Selamat pagi.",
+            "Di mana farmasi terdekat?",
+            "Saya mahu secangkir kopi, sila.",
+            "Kereta api berlepas pukul sepuluh tengah hari.",
+            "Boleh tolong saya bawa ini ke atas?",
+            "Adikku akan datang melawat minggu depan.",
+            "Cuaca hari ini indah.",
+            "Saya lupa payung saya di pejabat.",
+            "Kita harus pergi lebih awal untuk mengelakkan lalu lintas.",
+            "Kanak-kanak bermain di taman sementara nenek mereka menonton dari tingkap."
+          ]
+        },
+        {
+          "key": "mal_Mlym->en",
+          "src": "mal_Mlym",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "സുപ്രഭാതം.",
+            "ഏറ്റവും അടുത്തുള്ള ഫാർമസി എവിടെയാണ്?",
+            "എനിക്ക് ഒരു കപ്പ് കാപ്പി വേണം.",
+            "ട്രെയിൻ പത്തു മണിക്ക് പുറപ്പെടുന്നു.",
+            "ഇത് മുകളിലേക്ക് കൊണ്ടുപോകാൻ സഹായിക്കാമോ?",
+            "എന്റെ സഹോദരി അടുത്തയാഴ്ച വന്ന് കാണും.",
+            "ഇന്ന് നല്ല കാലാവസ്ഥയാണ്.",
+            "ഓഫീസിൽ എന്റെ കുട മറന്നു.",
+            "ട്രാഫിക് ഒഴിവാക്കാൻ നമുക്ക് നേരത്തെ പുറപ്പെടണം.",
+            "കുട്ടികൾ തോട്ടത്തിൽ കളിച്ചുകൊണ്ടിരിക്കുകയായിരുന്നു. മുത്തശ്ശി ജനാലയിലൂടെ നോക്കി."
+          ]
+        },
+        {
+          "key": "mar_Deva->en",
+          "src": "mar_Deva",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "- सुप्रभात.",
+            "जवळची औषधविक्रेता कुठे आहे?",
+            "मला एक कप कॉफी हवी आहे, कृपया.",
+            "ट्रेन दुपारी दहा वाजता निघते.",
+            "तुम्ही मला वर घेऊन जाण्यास मदत करू शकता का?",
+            "माझी बहीण पुढच्या आठवड्यात भेट देण्यासाठी येणार आहे.",
+            "आज हवामान छान आहे.",
+            "मी कार्यालयात माझा छत्र विसरलो.",
+            "आपण वाहतूक टाळण्यासाठी लवकर निघून जाऊ.",
+            "मुले बागेत खेळत होती, तर त्यांच्या आजी खिडकीतून पहात होती."
+          ]
+        },
+        {
+          "key": "npi_Deva->en",
+          "src": "npi_Deva",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "शुभ प्रभात.",
+            "सबैभन्दा नजिकको औषधालय कहाँ छ?",
+            "म कफी चाहान्छु, कृपया।",
+            "ट्रेन दिउँसो १० बजे जान्छ।",
+            "के तपाई मलाई यो माथि उठाउन मद्दत गर्न सक्नुहुन्छ?",
+            "मेरी बहिनी अर्को हप्ता भेट्न आउँछिन्।",
+            "आज मौसम राम्रो छ।",
+            "मैले कार्यालयमा छाता बिर्सें।",
+            "हामी ट्राफिकबाट बच्नको लागि छिटो जानुपर्छ।",
+            "बच्चाहरू बगैंचामा खेल्दै थिए जबकि उनकी हजुरआमाले झ्यालबाट हेरिरहेकी थिइन्।"
+          ]
+        },
+        {
+          "key": "nob_Latn->en",
+          "src": "nob_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "- Godmorgen.",
+            "Hvor er nærmeste apotek?",
+            "Jeg vil ha en kopp kaffe, vær så snill.",
+            "Toget går ut kl. ti etter middag.",
+            "Kan du hjelpe meg med å bære dette oppover?",
+            "Søster kommer til å besøke neste uke.",
+            "Veider er vakkert i dag.",
+            "Jeg glemte paraplyen min på kontoret.",
+            "Vi bør gå tidlig for å unngå trafikken.",
+            "Barna leker i hagen mens bestemoren ser ut gjennom vinduet."
+          ]
+        },
+        {
+          "key": "ory_Orya->en",
+          "src": "ory_Orya",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "ଶୁଭ ସକାଳ ।",
+            "ନିକଟତମ ଔଷଧ ଦୋକାନ କେଉଁଠାରେ ଅଛି?",
+            "ମୁଁ କଫି ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା' ଚା'",
+            "ଟ୍ରେନ୍ ଦିନ ୧୦ଟା ପରେ ବାହାରିଥାଏ ।",
+            "ଆପଣ କ'ଣ ମୋତେ ଏହି ଜିନିଷକୁ ଉପରକୁ ନେବାକୁ ସାହାଯ୍ୟ କରିପାରିବେ?",
+            "ମୋ ଭଉଣୀ ଆସନ୍ତା ସପ୍ତାହରେ ଆସୁଛନ୍ତି।",
+            "ଆଜି ପାଗ ଭଲ ଅଛି ।",
+            "ମୁଁ ଅଫିସରେ ମୋ ଛତା ଭୁଲିଗଲି ।",
+            "ଆମେ ଯାତାୟାତକୁ ଏଡ଼ାଇବା ପାଇଁ ଶୀଘ୍ର ଯିବା ଉଚିତ୍ ।",
+            "ପିଲାମାନେ ବଗିଚାରେ ଖେଳୁଥିଲେ, ଯେତେବେଳେ ସେମାନଙ୍କ ଜେଜେମା ଝରକା ଦେଇ ଦେଖୁଥିଲେ ।"
+          ]
+        },
+        {
+          "key": "pbt_Arab->en",
+          "src": "pbt_Arab",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "ښه ورځ.",
+            "د درملتون نږدې ځای چیرته دی؟",
+            "زه غواړم یو پیاله قهوه، لطفا.",
+            "اورګاډي د غرمې په لس بجې روان دی.",
+            "ایا تاسو کولی شئ ما سره مرسته وکړئ چې دا پورته پورته وسپم؟",
+            "زما خور راتلونکې اونۍ د لیدو لپاره راځي.",
+            "نن ورځ هوا ښکلې ده.",
+            "ما په دفتر کې خپل چتر هیر کړی و.",
+            "موږ باید ژر ولاړ شو ترڅو د ترافیک څخه مخنیوی وکړو.",
+            "ماشومان په باغ کې لوبې کولې، پداسې حال کې چې د دوی ننه له کړکۍ څخه ګوري."
+          ]
+        },
+        {
+          "key": "pes_Arab->en",
+          "src": "pes_Arab",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "صبح بخیر",
+            "نزدیکترين داروخانه کجاست؟",
+            "من ميخوام يه فنجان قهوه بخورم، خواهش ميکنم.",
+            "قطار ساعت ده بعد از ظهر می رود.",
+            "ميشه کمکم کني اينو بالا ببرم؟",
+            "خواهرم هفته بعد میاد دیدن",
+            "امروز هوا خوشحال است.",
+            "من چترم رو توي دفتر فراموش کردم",
+            "بايد زودتر بريم تا از ترافیک اجتناب کنيم",
+            "بچه ها در باغ بازی می کردند و مادربزرگشان از پنجره نگاه می کرد."
+          ]
+        },
+        {
+          "key": "por_Latn->en",
+          "src": "por_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Bom dia, meu.",
+            "Onde está a farmácia mais próxima?",
+            "Gostaria de uma xícara de café, por favor.",
+            "O trem parte às dez da tarde.",
+            "Podes ajudar-me a levar isto para cima?",
+            "A minha irmã vem visitar-me na próxima semana.",
+            "O tempo é lindo hoje.",
+            "Esqueci-me do guarda-chuva no escritório.",
+            "Devíamos sair cedo para evitar o trânsito.",
+            "As crianças estavam brincando no jardim enquanto sua avó olhava pela janela."
+          ]
+        },
+        {
+          "key": "pan_Guru->en",
+          "src": "pan_Guru",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "ਸ਼ੁਭ ਸਵੇਰ.",
+            "ਸਭ ਤੋਂ ਨਜ਼ਦੀਕੀ ਫਾਰਮੇਸੀ ਕਿੱਥੇ ਹੈ?",
+            "ਮੈਂ ਇੱਕ ਕੱਪ ਕੌਫੀ ਚਾਹੁੰਦਾ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ.",
+            "ਟ੍ਰੇਨ ਦੁਪਹਿਰ ਦਸ ਵਜੇ ਰਵਾਨਾ ਹੁੰਦਾ ਹੈ।",
+            "ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਉੱਪਰ ਚੁੱਕਣ ਵਿੱਚ ਮੇਰੀ ਮਦਦ ਕਰ ਸਕਦੇ ਹੋ?",
+            "ਮੇਰੀ ਭੈਣ ਅਗਲੇ ਹਫਤੇ ਆ ਕੇ ਦੇਖਣ ਆ ਰਹੀ ਹੈ।",
+            "ਅੱਜ ਮੌਸਮ ਬਹੁਤ ਵਧੀਆ ਹੈ।",
+            "ਮੈਂ ਦਫ਼ਤਰ ਵਿਚ ਆਪਣਾ ਛਤਰੀ ਭੁੱਲ ਗਿਆ ਸੀ।",
+            "ਸਾਨੂੰ ਟ੍ਰੈਫਿਕ ਤੋਂ ਬਚਣ ਲਈ ਜਲਦੀ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ.",
+            "ਬੱਚੇ ਬਾਗ਼ ਵਿੱਚ ਖੇਡ ਰਹੇ ਸਨ ਜਦੋਂ ਕਿ ਉਨ੍ਹਾਂ ਦੀ ਦਾਦੀ ਖਿੜਕੀ ਤੋਂ ਦੇਖ ਰਹੀ ਸੀ।"
+          ]
+        },
+        {
+          "key": "ron_Latn->en",
+          "src": "ron_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Bună dimineaţa.",
+            "Unde este cea mai apropiată farmacie?",
+            "Aş vrea o ceaşcă de cafea, vă rog.",
+            "Trenul pleacă la ora 10.",
+            "Poţi să mă ajuţi să duc asta sus?",
+            "Sora mea vine să mă viziteze săptămâna viitoare.",
+            "Vremea e minunată azi.",
+            "Mi-am uitat umbrela la birou.",
+            "Ar trebui să plecăm mai devreme pentru a evita traficul.",
+            "Copiii se jucau în grădină, în timp ce bunica lor privi de pe fereastră."
+          ]
+        },
+        {
+          "key": "srp_Cyrl->en",
+          "src": "srp_Cyrl",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Добро утро. - Добро утро.",
+            "Где је најближа аптека?",
+            "Желео бих чашу кафе, молим вас.",
+            "Влак одлази у десет по суботу.",
+            "Можеш ли ми помоћи да то носим горе?",
+            "Моја сест долази у посету следеће недеље.",
+            "Данас је лепо време.",
+            "Заборавио сам чадър у канцеларији.",
+            "Требало би да изађемо раније да избегнемо саобраћај.",
+            "Деца су се играла у врту док је њихова бака гледала из прозора."
+          ]
+        },
+        {
+          "key": "sin_Sinh->en",
+          "src": "sin_Sinh",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "සුබ උදෑසනක්.",
+            "ළඟම තියෙන ෆාමසිය කොහෙද?",
+            "මට කෝපි කෝප්පයක් ගන්න පුළුවන්ද?",
+            "කෝච්චිය දහවල් දහයට පිටත් වෙනවා.",
+            "ඔයාට පුලුවන්ද මේක උඩට අරන් යන්න උදව් කරන්න?",
+            "මගේ අක්කා ඊළඟ සතියේ එන්නයි යන්නේ.",
+            "අද කාලගුණය සුන්දරයි.",
+            "මම ඔෆිස් එකේ මගේ සාරාංශය අමතක කළා.",
+            "අපි කලින් යන්න ඕන වාහන තදබදය වළක්වන්න.",
+            "ළමයි උයනේ සෙල්ලම් කරමින් හිටියා, එතකොට ආච්චි ජනේලෙන් බලාගෙන හිටියා."
+          ]
+        },
+        {
+          "key": "swh_Latn->en",
+          "src": "swh_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Habari za asubuhi.",
+            "Duka la dawa la karibu zaidi liko wapi?",
+            "Napenda kikombe cha kahawa, tafadhali.",
+            "Treni huondoka saa kumi mchana.",
+            "Je, unaweza kunisaidia kubeba hii juu?",
+            "Dada yangu atakuja kutembelea wiki ijayo.",
+            "Hali ya hewa ni nzuri leo.",
+            "Niliisahau umeme wangu katika ofisi.",
+            "Tunapaswa kuondoka mapema ili kuepuka trafiki.",
+            "Watoto walikuwa wakicheza katika bustani huku nyanya yao akitazama kupitia dirisha."
+          ]
+        },
+        {
+          "key": "tam_Taml->en",
+          "src": "tam_Taml",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "காலை வணக்கம்.",
+            "அருகிலுள்ள மருந்தகம் எங்கே?",
+            "நான் ஒரு கப் காபி விரும்புகிறேன், தயவு செய்து.",
+            "ரயில் பத்து மணிக்கு புறப்படுகிறது.",
+            "நீங்கள் மேலே இந்த கொண்டு உதவ முடியுமா?",
+            "என் சகோதரி அடுத்த வாரம் வருகை தருகிறார்.",
+            "இன்று வானிலை அழகாக இருக்கிறது.",
+            "நான் அலுவலகத்தில் என் ஒட்டகத்தை மறந்துவிட்டேன்.",
+            "போக்குவரத்தை தவிர்க்க நாம் சீக்கிரம் புறப்பட வேண்டும்.",
+            "குழந்தைகள் தோட்டத்தில் விளையாடிக் கொண்டிருந்தனர், தாத்தா ஜன்னல் வழியாக பார்த்துக்கொண்டிருந்தார்."
+          ]
+        },
+        {
+          "key": "tel_Telu->en",
+          "src": "tel_Telu",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "శుభోదయం.",
+            "సమీప మందుల ఎక్కడ ఉంది?",
+            "నేను ఒక కప్పు కాఫీ కోరుకుంటున్నారో, దయచేసి.",
+            "రైలు పగలు పది గంటలకు బయలుదేరుతుంది.",
+            "మీరు ఈ పైకి తీసుకుని నాకు సహాయం చేయగలరా?",
+            "నా సోదరి వచ్చే వారం సందర్శించడానికి వస్తోంది.",
+            "ఈ రోజు వాతావరణం చాలా బాగుంది.",
+            "నేను కార్యాలయంలో నా గొడుగు మర్చిపోయాను.",
+            "మేము ట్రాఫిక్ నివారించేందుకు ముందుగానే బయలుదేరాలి.",
+            "పిల్లలు తోటలో ఆడుతున్నారు, వారి అమ్మమ్మ విండో నుండి చూస్తూ ఉంది."
+          ]
+        },
+        {
+          "key": "urd_Arab->en",
+          "src": "urd_Arab",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "صبح بخیر",
+            "قریب ترین دوائی خانہ کہاں ہے؟",
+            "میں ایک کپ کافی چاہتا ہوں، براہ مہربانی.",
+            "ٹرین دوپہر دس بجے روانہ ہوتی ہے۔",
+            "کیا آپ میری مدد کر سکتے ہیں اس کو اوپر لے جانے کے لئے؟",
+            "میری بہن اگلے ہفتے آنے والے دورے پر آ رہی ہے.",
+            "آج موسم بہت اچھا ہے.",
+            "میں نے دفتر میں اپنے چھتری بھول گئے.",
+            "ٹریفک سے بچنے کے لئے ہمیں جلدی جانا چاہئے.",
+            "بچوں نے باغ میں کھیلتے ہوئے دیکھا جبکہ ان کی دادی کھڑکی سے دیکھ رہی تھی."
+          ]
+        },
+        {
+          "key": "yor_Latn->en",
+          "src": "yor_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Àárọ̀ àárọ̀.",
+            "Ibo ni ilé ìwòsàn tó sún mọ́lé jù lọ wà?",
+            "Mo fẹ́ kọfí kan, jọ̀wọ́.",
+            "Rìn náà máa ń jáde ní aago mẹ́wàá òwúrọ̀.",
+            "Ṣé o lè ràn mí lọ́wọ́ láti gbé èyí lọ sí òkè?",
+            "Arábìnrin mi máa wá kí mi lọ́sẹ̀ tó ń bọ̀.",
+            "Àkókò tó dáa ló ń bọ̀ lónìí.",
+            "Mo gbàgbé òrùlé mi ní ọ́fíìsì.",
+            "Ó yẹ ká tètè kúrò nílùú ká má bàa kó àwọn èèyàn lọ sọ́nà.",
+            "Àwọn ọmọ náà ń ṣeré nínú ọgbà nígbà tí ìyá wọn àgbà ń wojú láti ojú fèrèsé."
+          ]
+        },
+        {
+          "key": "zul_Latn->en",
+          "src": "zul_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Sawubona.",
+            "Likuphi ikhemisi eliseduze?",
+            "Ngingathanda inkomishi yekhofi, sicela.",
+            "Isitimela siyaphuma ngehora leshumi ntambama.",
+            "Ungangisiza yini ngithwale lokhu?",
+            "Udadewethu uzovakashela ngesonto elizayo.",
+            "Isimo sezulu sihle namuhla.",
+            "Ngikhohliwe i-umbrella yami ehhovisi.",
+            "Kufanele sihambe ekuseni ukuze sigweme ukuphazanyiswa yimizamo.",
+            "Izingane zazidlala engadini kuyilapho ugogo wazo ebuka efasiteleni."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opus-romance-en",
+      "modelId": "Xenova/opus-mt-ROMANCE-en",
+      "langTag": null,
+      "pairs": [
+        {
+          "key": "cat_Latn->en",
+          "src": "cat_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "- Bona matinada.",
+            "On és la farmacia més propera?",
+            "M'agradaria una tassa de cafè, si us plau.",
+            "El tren parti a les deu del mediodía.",
+            "Em pots ajudar a portar això a l'escalon?",
+            "La meva germana arriba a visitar-la la setmana que ve.",
+            "El temps és meravellós avui.",
+            "Em vaig oblidar del meu parapluí a l'oficina.",
+            "Hem de marxar abans per evitar el trànsit.",
+            "Els nens estaven jugant al jardí mentre la seva àvia mirava des de la finestra."
+          ]
+        },
+        {
+          "key": "por_Latn->en",
+          "src": "por_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Bom dia, meu.",
+            "Onde está a farmácia mais próxima?",
+            "Gostaria de uma xícara de café, por favor.",
+            "O trem parte às dez da tarde.",
+            "Podes ajudar-me a levar isto para cima?",
+            "A minha irmã vem visitar-me na próxima semana.",
+            "O tempo é lindo hoje.",
+            "Esqueci-me do guarda-chuva no escritório.",
+            "Devíamos sair cedo para evitar o trânsito.",
+            "As crianças estavam brincando no jardim enquanto sua avó olhava pela janela."
+          ]
+        },
+        {
+          "key": "ron_Latn->en",
+          "src": "ron_Latn",
+          "tgt": "eng_Latn",
+          "tag": null,
+          "sentences": [
+            "Bună dimineaţa.",
+            "Unde este cea mai apropiată farmacie?",
+            "Aş vrea o ceaşcă de cafea, vă rog.",
+            "Trenul pleacă la ora 10.",
+            "Poţi să mă ajuţi să duc asta sus?",
+            "Sora mea vine să mă viziteze săptămâna viitoare.",
+            "Vremea e minunată azi.",
+            "Mi-am uitat umbrela la birou.",
+            "Ar trebui să plecăm mai devreme pentru a evita traficul.",
+            "Copiii se jucau în grădină, în timp ce bunica lor privi de pe fereastră."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -7,16 +7,21 @@
  * Rendered in a portal with an opaque surface above everything else. It closes
  * with Escape, an outside click, or a selection, and works fully by keyboard.
  * Choosing the language already set on the other side swaps the two.
+ *
+ * The trigger is a light, text like control in the tool card's top row. On the
+ * target side it shows the Ctrl or Cmd K shortcut hint.
  */
 
-import { memo, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { Check, ChevronDown, Search } from "lucide-react";
 import { Command } from "cmdk";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useSettings } from "@/hooks/use-settings";
 import { searchLanguages, type Language } from "@/lib/languages";
+import { pairCost, resultingPair } from "@/lib/engines";
+import { mbWhole } from "@/lib/format";
 import { copy } from "@/lib/copy";
 import { cn } from "@/lib/utils";
 
@@ -25,15 +30,37 @@ type PickerProps = {
   value: Language | undefined;
   otherValue: Language | undefined;
   onChoose: (code: string) => void;
+  /** Controlled open state, used by the Ctrl or Cmd K shortcut. */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  /** Show the keyboard shortcut hint on the control. */
+  showShortcut?: boolean;
 };
+
+// The shortcut label depends on the keyboard, so it is detected once on the
+// client. Read through an external store: the server snapshot is empty, so
+// the first client render matches the server, and the label arrives right
+// after hydration without a warning.
+let shortcutLabelCache: string | null | undefined;
+function getShortcutLabel(): string | null {
+  if (shortcutLabelCache === undefined) {
+    const platform = `${navigator.platform ?? ""} ${navigator.userAgent ?? ""}`;
+    const isApple = /Mac|iPhone|iPad|iPod/.test(platform);
+    shortcutLabelCache = isApple ? copy.translate.pickerShortcutMac : copy.translate.pickerShortcutOther;
+  }
+  return shortcutLabelCache;
+}
+const subscribeToNothing = () => () => {};
 
 function LanguageRow({
   language,
   selected,
+  note,
   onSelect,
 }: {
   language: Language;
   selected: boolean;
+  note: string | null;
   onSelect: (code: string) => void;
 }) {
   return (
@@ -44,15 +71,20 @@ function LanguageRow({
       aria-label={`${language.english}, ${language.native}`}
     >
       <Check aria-hidden className={cn("size-4 shrink-0 text-accent-green-text", !selected && "invisible")} />
-      <span lang={language.bcp47} dir={language.dir} className="min-w-0 flex-1 truncate">
-        {language.native}
+      <span className="min-w-0 flex-1">
+        <span className="flex items-baseline gap-2">
+          <span lang={language.bcp47} dir={language.dir} className="min-w-0 truncate">
+            {language.native}
+          </span>
+          <span className="type-small shrink-0 text-muted-foreground">{language.english}</span>
+        </span>
+        {note ? <span className="type-small mt-0.5 block text-muted-foreground">{note}</span> : null}
       </span>
-      <span className="type-small shrink-0 text-muted-foreground">{language.english}</span>
     </Command.Item>
   );
 }
 
-function LanguageList({ value, onChoose, side }: PickerProps & { onChoose: (code: string) => void }) {
+function LanguageList({ value, otherValue, onChoose, side, noteFor }: PickerProps & { onChoose: (code: string) => void; noteFor: (code: string) => string | null }) {
   const [query, setQuery] = useState("");
   const results = useMemo(() => searchLanguages(query), [query]);
 
@@ -79,6 +111,7 @@ function LanguageList({ value, onChoose, side }: PickerProps & { onChoose: (code
               key={language.code}
               language={language}
               selected={language.code === value?.code}
+              note={noteFor(language.code)}
               onSelect={onChoose}
             />
           ))
@@ -89,32 +122,66 @@ function LanguageList({ value, onChoose, side }: PickerProps & { onChoose: (code
   );
 }
 
-function LanguagePickerInner({ side, value, otherValue, onChoose }: PickerProps) {
-  const [open, setOpen] = useState(false);
+function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenChange, showShortcut }: PickerProps) {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const isOpen = open ?? uncontrolledOpen;
+  const { settings } = useSettings();
+  const setOpen = useCallback(
+    (next: boolean) => {
+      if (onOpenChange) onOpenChange(next);
+      else setUncontrolledOpen(next);
+    },
+    [onOpenChange],
+  );
+
+  // The quiet cost note for each row: what the pair created by choosing this
+  // language would need. Updates when the other side changes.
+  const noteFor = useCallback(
+    (code: string) => {
+      const src = side === "source" ? (value?.code ?? "eng_Latn") : (otherValue?.code ?? "eng_Latn");
+      const tgt = side === "target" ? (value?.code ?? "fra_Latn") : (otherValue?.code ?? "fra_Latn");
+      const pair = resultingPair(side, code, src, tgt);
+      const cost = pairCost(pair.src, pair.tgt, settings.useFastModels);
+      if (cost.kind === "fast") return copy.translate.costFast(mbWhole(cost.expectedBytes));
+      if (cost.kind === "group") return copy.translate.costGroup(mbWhole(cost.expectedBytes));
+      return copy.translate.costLarge;
+    },
+    [side, value, otherValue, settings.useFastModels],
+  );
+
   const isMobile = useIsMobile();
   const ariaLabel = side === "source" ? copy.translate.chooseSource : copy.translate.chooseTarget;
   // When the native name is the same as the English one, showing both is noise.
-  const sameName =
-    value?.native.trim().toLowerCase() === value?.english.trim().toLowerCase();
+  const sameName = value?.native.trim().toLowerCase() === value?.english.trim().toLowerCase();
 
+  const shortcutLabel = useSyncExternalStore(subscribeToNothing, getShortcutLabel, () => null);
+  const shortcut = showShortcut ? shortcutLabel : null;
+
+  // A light, text like control.
   const trigger = (
-    <Button
-      variant="outline"
-      role="combobox"
-      aria-expanded={open}
+    <button
+      type="button"
+      aria-haspopup="listbox"
+      aria-expanded={isOpen}
       aria-label={ariaLabel}
-      className="h-11 w-full justify-between gap-2 px-3 font-normal"
+      onClick={() => setOpen(true)}
+      className="group flex min-h-11 items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-start transition-colors outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/60"
     >
-      <span className="flex min-w-0 items-center gap-2">
-        {value ? (
-          <span lang={value.bcp47} dir={value.dir} className="truncate font-medium">
-            {value.native}
-          </span>
-        ) : null}
-        {!sameName ? <span className="type-small hidden shrink-0 text-muted-foreground sm:inline">{value?.english}</span> : null}
-      </span>
+      {value ? (
+        <span lang={value.bcp47} dir={value.dir} className="type-body min-w-0 truncate font-medium">
+          {value.native}
+        </span>
+      ) : null}
+      {!sameName ? (
+        <span className="type-small hidden shrink-0 text-muted-foreground sm:inline">{value?.english}</span>
+      ) : null}
+      {showShortcut && shortcut ? (
+        <kbd className="kbd-hint hidden md:inline-flex" aria-hidden="true">
+          {shortcut}
+        </kbd>
+      ) : null}
       <ChevronDown aria-hidden className="size-4 shrink-0 text-muted-foreground" />
-    </Button>
+    </button>
   );
 
   const choose = (code: string) => {
@@ -124,34 +191,17 @@ function LanguagePickerInner({ side, value, otherValue, onChoose }: PickerProps)
 
   if (isMobile) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={isOpen} onOpenChange={setOpen}>
         {/* The sheet variant of the picker */}
-        <button
-          type="button"
-          aria-label={ariaLabel}
-          aria-expanded={open}
-          onClick={() => setOpen(true)}
-          className="flex h-11 w-full items-center justify-between gap-2 rounded-lg border border-border bg-surface px-3 text-sm shadow-xs outline-none transition-colors hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/50"
-        >
-          <span className="flex min-w-0 items-center gap-2">
-            {value ? (
-              <span lang={value.bcp47} dir={value.dir} className="truncate font-medium">
-                {value.native}
-              </span>
-            ) : null}
-            {!sameName ? (
-              <span className="type-small shrink-0 text-muted-foreground">{value?.english}</span>
-            ) : null}
-          </span>
-          <ChevronDown aria-hidden className="size-4 shrink-0 text-muted-foreground" />
-        </button>
+        {trigger}
         <DialogContent
           showCloseButton={false}
           className="top-auto bottom-0 left-0 right-0 h-auto max-h-[80vh] translate-x-0 translate-y-0 gap-0 overflow-hidden rounded-b-none rounded-t-xl border-t p-0 sm:max-w-none"
         >
           <DialogTitle className="sr-only">{ariaLabel}</DialogTitle>
+          <DialogDescription className="sr-only">{copy.translate.searchLanguages}</DialogDescription>
           <div className="max-h-[75vh] overflow-hidden">
-            <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} />
+            <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} noteFor={noteFor} />
           </div>
         </DialogContent>
       </Dialog>
@@ -159,7 +209,7 @@ function LanguagePickerInner({ side, value, otherValue, onChoose }: PickerProps)
   }
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={isOpen} onOpenChange={setOpen}>
       <PopoverTrigger asChild>{trigger}</PopoverTrigger>
       <PopoverContent
         align="start"
@@ -167,7 +217,7 @@ function LanguagePickerInner({ side, value, otherValue, onChoose }: PickerProps)
         // Opaque surface above everything else. Nothing underneath shows through.
         style={{ background: "var(--surface)" }}
       >
-        <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} />
+        <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} noteFor={noteFor} />
       </PopoverContent>
     </Popover>
   );

@@ -1,12 +1,15 @@
 /**
- * Sentence splitting, from section 6.3 of the technical design.
+ * Sentence splitting, from the technical design.
  * Split on line breaks first, then split each line into sentences with
  * Intl.Segmenter. The fallback regular expression covers common terminators
  * across scripts: . ! ? … । ॥ ۔ ؟ 。 ！ ？
  * Line breaks are kept so the output has the same paragraph shape as the input.
- * A sentence longer than about 300 characters is split further at commas or
- * semicolons so it isn't cut off by the model's length limit.
+ * A sentence longer than about 200 characters is split further at commas or
+ * semicolons, so it isn't cut off by the model's length limit and long
+ * clauses translate on their own.
  */
+
+import { SPEED_CONFIG } from "@/lib/speed-config";
 
 export type SegmentedText = {
   /** Each line of the input, split into sentences. Empty lines are []. */
@@ -50,7 +53,7 @@ function splitByRegex(line: string): string[] {
   return parts.map((p) => p.trim()).filter((p) => p.length > 0);
 }
 
-function splitLongSentence(sentence: string, limit = 300): string[] {
+function splitLongSentence(sentence: string, limit = SPEED_CONFIG.sentenceSplitLimit): string[] {
   if (sentence.length <= limit) return [sentence];
   const pieces: string[] = [];
   let current = "";

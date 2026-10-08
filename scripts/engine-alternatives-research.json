@@ -1,0 +1,294 @@
+{
+  "checkedAt": "2026-10-10T18:26:30.829Z",
+  "note": "Research only, no app changes. Sources are URLs in the worklog entry for Task ID 3.",
+  "bergamot": {
+    "firefoxRemoteSettingsLanguages": [
+      "af",
+      "ar",
+      "az",
+      "be",
+      "bg",
+      "bn",
+      "bs",
+      "ca",
+      "cs",
+      "da",
+      "de",
+      "el",
+      "en",
+      "es",
+      "et",
+      "eu",
+      "fa",
+      "fi",
+      "fr",
+      "gl",
+      "gu",
+      "he",
+      "hi",
+      "hr",
+      "hu",
+      "id",
+      "is",
+      "it",
+      "ja",
+      "kn",
+      "ko",
+      "lt",
+      "lv",
+      "ml",
+      "mr",
+      "ms",
+      "nb",
+      "nl",
+      "nn",
+      "pl",
+      "pt",
+      "ro",
+      "ru",
+      "sk",
+      "sl",
+      "sq",
+      "sr",
+      "sv",
+      "ta",
+      "te",
+      "th",
+      "tl",
+      "tr",
+      "ug",
+      "uk",
+      "ur",
+      "vi",
+      "zh-Hans",
+      "zh-Hant"
+    ],
+    "firefoxRemoteSettingsModelRecords": 133,
+    "registryLanguages": 56,
+    "coverage": {
+      "covered": [
+        "afr",
+        "arb",
+        "ben",
+        "bul",
+        "cat",
+        "zho_Hans",
+        "zho_Hant",
+        "hrv",
+        "ces",
+        "dan",
+        "nld",
+        "eng",
+        "fin",
+        "fra",
+        "deu",
+        "ell",
+        "guj",
+        "heb",
+        "hin",
+        "hun",
+        "ind",
+        "ita",
+        "jpn",
+        "kan",
+        "kor",
+        "zsm",
+        "mal",
+        "mar",
+        "nob",
+        "pes",
+        "pol",
+        "por",
+        "ron",
+        "rus",
+        "srp",
+        "spa",
+        "swe",
+        "tgl",
+        "tam",
+        "tel",
+        "tha",
+        "tur",
+        "ukr",
+        "urd",
+        "vie"
+      ],
+      "missing": [
+        "amh",
+        "asm",
+        "hau",
+        "npi",
+        "ory",
+        "pbt",
+        "pan",
+        "sin",
+        "swh",
+        "yor",
+        "zul"
+      ]
+    },
+    "concreteSizes": {
+      "en->hr (base-memory, Release)": {
+        "zstBytes": 23774910,
+        "decompressedBytes": 35615197,
+        "files": {
+          "model": 31561787,
+          "lex": 3232644,
+          "vocab": 820766
+        }
+      },
+      "es->en (base-memory, Release)": {
+        "zstBytes": 25078663,
+        "decompressedBytes": 37014089,
+        "files": {
+          "model": 31561787,
+          "lex": 4636248,
+          "vocab": 816054
+        }
+      },
+      "old browsermt en->de (bergamot-models-sandbox 0.3.1)": {
+        "uncompressedBytes": {
+          "model": 17140835,
+          "lex": 3943644,
+          "vocab": 784269
+        }
+      }
+    },
+    "sizeRangesUncompressedModelBin": {
+      "tiny": [
+        13014176,
+        25480192
+      ],
+      "baseMemory": [
+        31561787,
+        43977787
+      ],
+      "base": [
+        42985216,
+        59504955
+      ]
+    },
+    "npmPackage": {
+      "name": "@browsermt/bergamot-translator",
+      "version": "0.4.9",
+      "published": "2022-10-03",
+      "license": "MPL-2.0",
+      "wasmBytes": 5174294,
+      "bergamotVersionFull": "v0.4.5+4917c11"
+    },
+    "sandboxWasmRun": {
+      "en_de": {
+        "sentenceLatencyMs": [
+          11,
+          20,
+          27,
+          56
+        ],
+        "batch10Sentences127Words": "261 ms = 487 wps",
+        "wasmHeapMiB": 437.9,
+        "nodeRssMiB": 308
+      },
+      "en_hr_currentMozillaModel": {
+        "sentenceLatencyMs": [
+          15,
+          25
+        ],
+        "modelConstructionMs": 90,
+        "wasmHeapMiB": 517.8,
+        "nodeRssMiB": 388
+      },
+      "config": "beam-size 1, workspace 128, gemm-precision int8shiftAll|int8shiftAlphaAll, fallback int8 gemm (no wormhole)"
+    }
+  },
+  "m2m100": {
+    "repo": "Xenova/m2m100_418M",
+    "q8CoreBundleBytes": 639977588,
+    "q8WorstCaseBytes": 646109073,
+    "files": {
+      "encoder_quantized": 287856370,
+      "decoder_merged_quantized": 344128178,
+      "tokenizer_json": 7988527,
+      "sentencepiece_bpe_model": 2423393,
+      "vocab_json": 3708092
+    },
+    "license": "Xenova repo: no license tag; upstream facebook/m2m100_418M: MIT",
+    "upstreamLanguages": 100,
+    "coverage": {
+      "covered": [
+        "afr",
+        "amh",
+        "arb",
+        "ben",
+        "bul",
+        "cat",
+        "zho_Hans",
+        "zho_Hant",
+        "hrv",
+        "ces",
+        "dan",
+        "nld",
+        "eng",
+        "fin",
+        "fra",
+        "deu",
+        "ell",
+        "guj",
+        "hau",
+        "heb",
+        "hin",
+        "hun",
+        "ind",
+        "ita",
+        "jpn",
+        "kan",
+        "kor",
+        "zsm",
+        "mal",
+        "mar",
+        "npi",
+        "nob",
+        "ory",
+        "pbt",
+        "pes",
+        "pol",
+        "por",
+        "pan",
+        "ron",
+        "rus",
+        "srp",
+        "sin",
+        "spa",
+        "swh",
+        "swe",
+        "tgl",
+        "tam",
+        "tha",
+        "tur",
+        "ukr",
+        "urd",
+        "vie",
+        "yor",
+        "zul"
+      ],
+      "missing": [
+        "asm",
+        "tel"
+      ],
+      "note": "M2M100 codes: zh for both zho_Hans/zho_Hant, no for nob (Norwegian Bokmal)"
+    },
+    "config": {
+      "d_model": 1024,
+      "encoder_layers": 12,
+      "decoder_layers": 12,
+      "vocab_size": 128112,
+      "max_position_embeddings": 1024,
+      "default_num_beams": 5,
+      "max_length": 200
+    }
+  },
+  "comparison": {
+    "nllb600M_q8_download_bytes": 911962632,
+    "m2m100_418M_q8_download_bytes": 639977588,
+    "ratio": 0.702
+  }
+}

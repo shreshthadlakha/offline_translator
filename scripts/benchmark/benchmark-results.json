@@ -1,0 +1,378 @@
+{
+  "sample": {
+    "file": "scripts/benchmark/sample.json",
+    "size": 200,
+    "seed": 42,
+    "source": "FLORES-200 devtest (Meta, CC-BY-SA 4.0), line-aligned across languages"
+  },
+  "reference": "FLORES-200 devtest (human professional translations)",
+  "results": [
+    {
+      "runKey": "eng_Latn-fra_Latn#opus-en-fr",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "fra_Latn"
+      },
+      "engine": {
+        "id": "opus-en-fr",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-fr",
+        "name": "Opus-MT English to French",
+        "expectedBytes": 113111807,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 67.18,
+        "corpusLower": 67.61
+      },
+      "published": {
+        "chrfpp": 67,
+        "delta": 0.18
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 2,
+        "flagRate": 0.01,
+        "details": [
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 44.5
+          },
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 52.8
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.718,
+        "p90SecondsPerSentence": 1.103,
+        "loadMsCold": 12484,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 113111733
+      },
+      "completedAt": "2026-10-11T08:12:15.510Z"
+    },
+    {
+      "runKey": "eng_Latn-fra_Latn#nllb-200-distilled-600M",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "fra_Latn"
+      },
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "name": "NLLB-200 (distilled 600M)",
+        "expectedBytes": 911962632,
+        "langTag": null
+      },
+      "mode": "node",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 65.72,
+        "corpusLower": 66.02
+      },
+      "published": {
+        "chrfpp": 67,
+        "delta": -1.28
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 4,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 5,
+        "flagRate": 0.025,
+        "details": [
+          {
+            "id": 166,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 45.6
+          },
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 52
+          },
+          {
+            "id": 538,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 41.1
+          },
+          {
+            "id": 612,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 40.7
+          },
+          {
+            "id": 848,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 14.9
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (the sandbox browser cannot load the full model; small-model speed numbers in this file come from the browser worker path)",
+        "medianSecondsPerSentence": 19.018,
+        "p90SecondsPerSentence": 27.631,
+        "loadSeconds": 5.568,
+        "downloadSeconds": null
+      },
+      "completedAt": "2026-10-11T09:30:20.201Z"
+    },
+    {
+      "runKey": "eng_Latn-hin_Deva#nllb-200-distilled-600M",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "hin_Deva"
+      },
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "name": "NLLB-200 (distilled 600M)",
+        "expectedBytes": 911962632,
+        "langTag": null
+      },
+      "mode": "node",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 52.05,
+        "corpusLower": 52.05
+      },
+      "published": {
+        "chrfpp": 54.2,
+        "delta": -2.15
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 3,
+          "lenRatio": 3,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 7,
+        "flagRate": 0.035,
+        "details": [
+          {
+            "id": 90,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 32.5
+          },
+          {
+            "id": 136,
+            "flags": [
+              "repeatLoop",
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 10.4
+          },
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37.9
+          },
+          {
+            "id": 396,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 22.8
+          },
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 57.4
+          },
+          {
+            "id": 455,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 53.1
+          },
+          {
+            "id": 953,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 20.3
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (the sandbox browser cannot load the full model; small-model speed numbers in this file come from the browser worker path)",
+        "medianSecondsPerSentence": 17.709,
+        "p90SecondsPerSentence": 27.53,
+        "loadSeconds": 6.04,
+        "downloadSeconds": null
+      },
+      "completedAt": "2026-10-11T10:33:50.054Z"
+    },
+    {
+      "runKey": "fra_Latn-eng_Latn#nllb-200-distilled-600M",
+      "pair": {
+        "src": "fra_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "name": "NLLB-200 (distilled 600M)",
+        "expectedBytes": 911962632,
+        "langTag": null
+      },
+      "mode": "node",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 64.56,
+        "corpusLower": 65.31
+      },
+      "published": {
+        "chrfpp": 65.4,
+        "delta": -0.84
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 2,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "details": [
+          {
+            "id": 45,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 68.3
+          },
+          {
+            "id": 166,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 33.7
+          },
+          {
+            "id": 341,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 11
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (the sandbox browser cannot load the full model; small-model speed numbers in this file come from the browser worker path)",
+        "medianSecondsPerSentence": 14.792,
+        "p90SecondsPerSentence": 22.12,
+        "loadSeconds": 6.063,
+        "downloadSeconds": null
+      },
+      "completedAt": "2026-10-11T11:26:50.883Z"
+    },
+    {
+      "runKey": "hin_Deva-eng_Latn#nllb-200-distilled-600M",
+      "pair": {
+        "src": "hin_Deva",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "name": "NLLB-200 (distilled 600M)",
+        "expectedBytes": 911962632,
+        "langTag": null
+      },
+      "mode": "node",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 61.77,
+        "corpusLower": 62.75
+      },
+      "published": {
+        "chrfpp": 62.5,
+        "delta": -0.73
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "node-harness (the sandbox browser cannot load the full model; small-model speed numbers in this file come from the browser worker path)",
+        "medianSecondsPerSentence": 14.244,
+        "p90SecondsPerSentence": 20.581,
+        "loadSeconds": 6.196,
+        "downloadSeconds": null
+      },
+      "completedAt": "2026-10-11T12:18:10.800Z"
+    }
+  ]
+}
