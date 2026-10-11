@@ -1033,6 +1033,6775 @@
         "downloadSeconds": 56.195
       },
       "completedAt": "2026-10-11T16:14:09.217Z"
+    },
+    {
+      "runKey": "eng_Latn-hrv_Latn#opus-en-mul",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "hrv_Latn"
+      },
+      "engine": {
+        "id": "opus-en-mul",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "name": "Opus-MT English to Croatian, Serbian, Bulgarian and Norwegian",
+        "expectedBytes": 118280580,
+        "langTag": "hrv"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 39.17,
+        "corpusLower": 39.75
+      },
+      "published": {
+        "chrfpp": 52.2,
+        "delta": -13.03
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 4,
+          "endsMidWord": 45
+        },
+        "flaggedSentences": 49,
+        "flagRate": 0.245,
+        "details": [
+          {
+            "id": 9,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 31.3
+          },
+          {
+            "id": 59,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.1
+          },
+          {
+            "id": 63,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 44.1
+          },
+          {
+            "id": 77,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.3
+          },
+          {
+            "id": 86,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 17.5
+          },
+          {
+            "id": 87,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39
+          },
+          {
+            "id": 127,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39.8
+          },
+          {
+            "id": 131,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.3
+          },
+          {
+            "id": 141,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37.2
+          },
+          {
+            "id": 155,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 26.5
+          },
+          {
+            "id": 165,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37.2
+          },
+          {
+            "id": 166,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 29.9
+          },
+          {
+            "id": 209,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 53.3
+          },
+          {
+            "id": 215,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.2
+          },
+          {
+            "id": 257,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 50.2
+          },
+          {
+            "id": 322,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43
+          },
+          {
+            "id": 339,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 46.9
+          },
+          {
+            "id": 340,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 52.8
+          },
+          {
+            "id": 365,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 53.8
+          },
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 38.1
+          },
+          {
+            "id": 420,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 55.4
+          },
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 25.9
+          },
+          {
+            "id": 436,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 49.5
+          },
+          {
+            "id": 437,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47
+          },
+          {
+            "id": 455,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 28.4
+          },
+          {
+            "id": 461,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 24.6
+          },
+          {
+            "id": 480,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.4
+          },
+          {
+            "id": 496,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48.7
+          },
+          {
+            "id": 523,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.7
+          },
+          {
+            "id": 529,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 40.1
+          },
+          {
+            "id": 548,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 40.3
+          },
+          {
+            "id": 567,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.4
+          },
+          {
+            "id": 587,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 23.5
+          },
+          {
+            "id": 612,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 24.5
+          },
+          {
+            "id": 615,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 28.9
+          },
+          {
+            "id": 629,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39.3
+          },
+          {
+            "id": 630,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 38.7
+          },
+          {
+            "id": 632,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 53.1
+          },
+          {
+            "id": 633,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 54.6
+          },
+          {
+            "id": 688,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 42.6
+          },
+          {
+            "id": 701,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 58.3
+          },
+          {
+            "id": 793,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 34.8
+          },
+          {
+            "id": 805,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 40.9
+          },
+          {
+            "id": 808,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 25.4
+          },
+          {
+            "id": 809,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.9
+          },
+          {
+            "id": 897,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37
+          },
+          {
+            "id": 914,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30.2
+          },
+          {
+            "id": 934,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30.5
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.3
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.165,
+        "p90SecondsPerSentence": 1.73,
+        "loadMsCold": 14133,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 118280506
+      },
+      "completedAt": "2026-10-11T17:15:37.354Z"
+    },
+    {
+      "runKey": "eng_Latn-bul_Cyrl#opus-en-mul",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "bul_Cyrl"
+      },
+      "engine": {
+        "id": "opus-en-mul",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "name": "Opus-MT English to Croatian, Serbian, Bulgarian and Norwegian",
+        "expectedBytes": 118280580,
+        "langTag": "bul"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 41.42,
+        "corpusLower": 42.1
+      },
+      "published": {
+        "chrfpp": 60.4,
+        "delta": -18.98
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 1,
+          "endsMidWord": 107
+        },
+        "flaggedSentences": 108,
+        "flagRate": 0.54,
+        "details": [
+          {
+            "id": 18,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 46.9
+          },
+          {
+            "id": 32,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.1
+          },
+          {
+            "id": 34,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47.3
+          },
+          {
+            "id": 38,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 46.9
+          },
+          {
+            "id": 40,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 40.3
+          },
+          {
+            "id": 59,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 50
+          },
+          {
+            "id": 63,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39.9
+          },
+          {
+            "id": 77,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33.3
+          },
+          {
+            "id": 87,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 44.2
+          },
+          {
+            "id": 125,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47.2
+          },
+          {
+            "id": 127,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47.2
+          },
+          {
+            "id": 131,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 31.5
+          },
+          {
+            "id": 137,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30.4
+          },
+          {
+            "id": 141,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.2
+          },
+          {
+            "id": 149,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 26.6
+          },
+          {
+            "id": 153,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33.2
+          },
+          {
+            "id": 155,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 26.8
+          },
+          {
+            "id": 165,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.8
+          },
+          {
+            "id": 166,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47.3
+          },
+          {
+            "id": 170,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.7
+          },
+          {
+            "id": 174,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 31.6
+          },
+          {
+            "id": 198,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37.4
+          },
+          {
+            "id": 209,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35
+          },
+          {
+            "id": 215,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.1
+          },
+          {
+            "id": 219,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29.6
+          },
+          {
+            "id": 227,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29
+          },
+          {
+            "id": 246,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33
+          },
+          {
+            "id": 253,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.4
+          },
+          {
+            "id": 257,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48.3
+          },
+          {
+            "id": 259,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 40.1
+          },
+          {
+            "id": 277,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.4
+          },
+          {
+            "id": 292,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 22.4
+          },
+          {
+            "id": 322,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 46.8
+          },
+          {
+            "id": 335,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 31.5
+          },
+          {
+            "id": 339,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 34.6
+          },
+          {
+            "id": 340,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 38.2
+          },
+          {
+            "id": 341,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.7
+          },
+          {
+            "id": 350,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37.5
+          },
+          {
+            "id": 365,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 52.4
+          },
+          {
+            "id": 375,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37.1
+          },
+          {
+            "id": 382,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48.7
+          },
+          {
+            "id": 396,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29.5
+          },
+          {
+            "id": 415,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39.9
+          },
+          {
+            "id": 420,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.8
+          },
+          {
+            "id": 423,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 27.5
+          },
+          {
+            "id": 426,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 51.1
+          },
+          {
+            "id": 436,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47.8
+          },
+          {
+            "id": 437,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 62.6
+          },
+          {
+            "id": 455,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37.1
+          },
+          {
+            "id": 459,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 28.4
+          },
+          {
+            "id": 472,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 21.4
+          },
+          {
+            "id": 480,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30.4
+          },
+          {
+            "id": 496,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.5
+          },
+          {
+            "id": 509,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 42.5
+          },
+          {
+            "id": 511,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.8
+          },
+          {
+            "id": 520,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.1
+          },
+          {
+            "id": 523,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.8
+          },
+          {
+            "id": 529,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.1
+          },
+          {
+            "id": 538,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 44
+          },
+          {
+            "id": 548,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47
+          },
+          {
+            "id": 550,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41
+          },
+          {
+            "id": 553,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33.6
+          },
+          {
+            "id": 567,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.3
+          },
+          {
+            "id": 568,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.4
+          },
+          {
+            "id": 587,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 26.8
+          },
+          {
+            "id": 594,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.1
+          },
+          {
+            "id": 612,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 28.9
+          },
+          {
+            "id": 615,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 23.5
+          },
+          {
+            "id": 625,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.9
+          },
+          {
+            "id": 629,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.8
+          },
+          {
+            "id": 630,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 24.1
+          },
+          {
+            "id": 632,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 50.9
+          },
+          {
+            "id": 633,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.6
+          },
+          {
+            "id": 637,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 53.7
+          },
+          {
+            "id": 641,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.6
+          },
+          {
+            "id": 656,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 53.5
+          },
+          {
+            "id": 688,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 38.7
+          },
+          {
+            "id": 691,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 46.8
+          },
+          {
+            "id": 697,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 51
+          },
+          {
+            "id": 726,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 40.7
+          },
+          {
+            "id": 737,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.5
+          },
+          {
+            "id": 761,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 34.6
+          },
+          {
+            "id": 774,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39
+          },
+          {
+            "id": 793,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30.3
+          },
+          {
+            "id": 799,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 44.7
+          },
+          {
+            "id": 805,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.8
+          },
+          {
+            "id": 808,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 26.6
+          },
+          {
+            "id": 809,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.7
+          },
+          {
+            "id": 815,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 42.5
+          },
+          {
+            "id": 831,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47.8
+          },
+          {
+            "id": 836,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 20.5
+          },
+          {
+            "id": 838,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 53.6
+          },
+          {
+            "id": 840,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 38.4
+          },
+          {
+            "id": 846,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37.4
+          },
+          {
+            "id": 848,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 34.4
+          },
+          {
+            "id": 876,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33.9
+          },
+          {
+            "id": 880,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.9
+          },
+          {
+            "id": 883,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 28.7
+          },
+          {
+            "id": 884,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47.4
+          },
+          {
+            "id": 897,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 55.4
+          },
+          {
+            "id": 919,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 46
+          },
+          {
+            "id": 922,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.3
+          },
+          {
+            "id": 926,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.3
+          },
+          {
+            "id": 931,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29.4
+          },
+          {
+            "id": 958,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.4
+          },
+          {
+            "id": 961,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 28.8
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 42.5
+          },
+          {
+            "id": 978,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 28
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.202,
+        "p90SecondsPerSentence": 1.797,
+        "loadMsCold": 11270,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 118280506
+      },
+      "completedAt": "2026-10-11T17:20:48.679Z"
+    },
+    {
+      "runKey": "eng_Latn-srp_Cyrl#opus-en-mul",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "srp_Cyrl"
+      },
+      "engine": {
+        "id": "opus-en-mul",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "name": "Opus-MT English to Croatian, Serbian, Bulgarian and Norwegian",
+        "expectedBytes": 118280580,
+        "langTag": "srp_Cyrl"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 37.13,
+        "corpusLower": 37.63
+      },
+      "published": {
+        "chrfpp": 53.3,
+        "delta": -16.17
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 93
+        },
+        "flaggedSentences": 94,
+        "flagRate": 0.47,
+        "details": [
+          {
+            "id": 9,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 27.3
+          },
+          {
+            "id": 34,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 24
+          },
+          {
+            "id": 40,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33.7
+          },
+          {
+            "id": 49,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 26
+          },
+          {
+            "id": 59,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 38.7
+          },
+          {
+            "id": 63,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.1
+          },
+          {
+            "id": 77,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 26.1
+          },
+          {
+            "id": 87,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30.5
+          },
+          {
+            "id": 98,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 25.9
+          },
+          {
+            "id": 127,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 28.2
+          },
+          {
+            "id": 131,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.6
+          },
+          {
+            "id": 141,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.2
+          },
+          {
+            "id": 155,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 28.9
+          },
+          {
+            "id": 165,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 31.9
+          },
+          {
+            "id": 166,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 27.8
+          },
+          {
+            "id": 174,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30
+          },
+          {
+            "id": 198,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 55.3
+          },
+          {
+            "id": 209,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 42.2
+          },
+          {
+            "id": 215,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.8
+          },
+          {
+            "id": 219,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 28
+          },
+          {
+            "id": 227,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.1
+          },
+          {
+            "id": 257,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.1
+          },
+          {
+            "id": 259,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30.6
+          },
+          {
+            "id": 277,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 44.8
+          },
+          {
+            "id": 292,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30.9
+          },
+          {
+            "id": 304,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.5
+          },
+          {
+            "id": 322,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.1
+          },
+          {
+            "id": 335,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33.5
+          },
+          {
+            "id": 339,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 27.7
+          },
+          {
+            "id": 340,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.7
+          },
+          {
+            "id": 355,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 46.7
+          },
+          {
+            "id": 365,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39
+          },
+          {
+            "id": 375,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.7
+          },
+          {
+            "id": 382,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 40.8
+          },
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 38.1
+          },
+          {
+            "id": 415,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29.8
+          },
+          {
+            "id": 420,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.8
+          },
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.8
+          },
+          {
+            "id": 436,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.7
+          },
+          {
+            "id": 455,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29.8
+          },
+          {
+            "id": 480,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 22.1
+          },
+          {
+            "id": 496,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.4
+          },
+          {
+            "id": 509,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36
+          },
+          {
+            "id": 513,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 31.9
+          },
+          {
+            "id": 520,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.9
+          },
+          {
+            "id": 523,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.3
+          },
+          {
+            "id": 527,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 42.8
+          },
+          {
+            "id": 529,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.1
+          },
+          {
+            "id": 538,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 51.3
+          },
+          {
+            "id": 548,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37.4
+          },
+          {
+            "id": 550,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48.4
+          },
+          {
+            "id": 567,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48.3
+          },
+          {
+            "id": 568,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.5
+          },
+          {
+            "id": 587,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 57
+          },
+          {
+            "id": 594,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29.9
+          },
+          {
+            "id": 615,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 25.5
+          },
+          {
+            "id": 629,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.3
+          },
+          {
+            "id": 630,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.9
+          },
+          {
+            "id": 632,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.8
+          },
+          {
+            "id": 633,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 71.2
+          },
+          {
+            "id": 637,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 42.3
+          },
+          {
+            "id": 656,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39.1
+          },
+          {
+            "id": 688,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48.3
+          },
+          {
+            "id": 691,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35
+          },
+          {
+            "id": 697,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.5
+          },
+          {
+            "id": 701,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.7
+          },
+          {
+            "id": 726,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 23.9
+          },
+          {
+            "id": 736,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 31.5
+          },
+          {
+            "id": 747,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 38.3
+          },
+          {
+            "id": 761,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 42.4
+          },
+          {
+            "id": 783,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33.8
+          },
+          {
+            "id": 793,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 34.9
+          },
+          {
+            "id": 799,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.5
+          },
+          {
+            "id": 805,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.3
+          },
+          {
+            "id": 808,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29.9
+          },
+          {
+            "id": 809,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29.9
+          },
+          {
+            "id": 832,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.4
+          },
+          {
+            "id": 838,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 40.8
+          },
+          {
+            "id": 846,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 27.2
+          },
+          {
+            "id": 848,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 20.3
+          },
+          {
+            "id": 850,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 31.5
+          },
+          {
+            "id": 876,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 38
+          },
+          {
+            "id": 880,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.5
+          },
+          {
+            "id": 883,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 26.8
+          },
+          {
+            "id": 884,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.4
+          },
+          {
+            "id": 886,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.2
+          },
+          {
+            "id": 894,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30
+          },
+          {
+            "id": 897,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39.8
+          },
+          {
+            "id": 914,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 31.2
+          },
+          {
+            "id": 919,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 46
+          },
+          {
+            "id": 922,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30
+          },
+          {
+            "id": 926,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.7
+          },
+          {
+            "id": 958,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 40.4
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.2
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.244,
+        "p90SecondsPerSentence": 1.881,
+        "loadMsCold": 14313,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 118280506
+      },
+      "completedAt": "2026-10-11T17:25:23.176Z"
+    },
+    {
+      "runKey": "eng_Latn-nob_Latn#opus-en-mul",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "nob_Latn"
+      },
+      "engine": {
+        "id": "opus-en-mul",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "name": "Opus-MT English to Croatian, Serbian, Bulgarian and Norwegian",
+        "expectedBytes": 118280580,
+        "langTag": "nob"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 47.47,
+        "corpusLower": 48.07
+      },
+      "published": {
+        "chrfpp": 56.8,
+        "delta": -9.33
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 2,
+          "endsMidWord": 11
+        },
+        "flaggedSentences": 14,
+        "flagRate": 0.07,
+        "details": [
+          {
+            "id": 77,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47
+          },
+          {
+            "id": 86,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 26.6
+          },
+          {
+            "id": 127,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48.4
+          },
+          {
+            "id": 131,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45
+          },
+          {
+            "id": 137,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 40
+          },
+          {
+            "id": 259,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 38
+          },
+          {
+            "id": 340,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 53.2
+          },
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43
+          },
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.1
+          },
+          {
+            "id": 461,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 28.7
+          },
+          {
+            "id": 615,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 23.6
+          },
+          {
+            "id": 840,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 56.5
+          },
+          {
+            "id": 884,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 61.3
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.5
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.065,
+        "p90SecondsPerSentence": 1.61,
+        "loadMsCold": 11995,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 118280506
+      },
+      "completedAt": "2026-10-11T17:30:05.363Z"
+    },
+    {
+      "runKey": "hrv_Latn-eng_Latn#opus-mul-en",
+      "pair": {
+        "src": "hrv_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-mul-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "name": "Opus-MT Croatian, Serbian, Bulgarian, Norwegian and Greek to English",
+        "expectedBytes": 118351797,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 44.98,
+        "corpusLower": 45.83
+      },
+      "published": {
+        "chrfpp": 59.5,
+        "delta": -14.52
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 6,
+          "lenRatio": 2,
+          "endsMidWord": 3
+        },
+        "flaggedSentences": 10,
+        "flagRate": 0.05,
+        "details": [
+          {
+            "id": 45,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.3
+          },
+          {
+            "id": 49,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48.3
+          },
+          {
+            "id": 286,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 18.4
+          },
+          {
+            "id": 341,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 27.8
+          },
+          {
+            "id": 396,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 12.8
+          },
+          {
+            "id": 615,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 45.1
+          },
+          {
+            "id": 641,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 45.2
+          },
+          {
+            "id": 718,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 42.8
+          },
+          {
+            "id": 831,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 30.6
+          },
+          {
+            "id": 832,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 37.1
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.79,
+        "p90SecondsPerSentence": 1.265,
+        "loadMsCold": 12695,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 118351723
+      },
+      "completedAt": "2026-10-11T17:33:07.262Z"
+    },
+    {
+      "runKey": "bul_Cyrl-eng_Latn#opus-mul-en",
+      "pair": {
+        "src": "bul_Cyrl",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-mul-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "name": "Opus-MT Croatian, Serbian, Bulgarian, Norwegian and Greek to English",
+        "expectedBytes": 118351797,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 51.57,
+        "corpusLower": 52.52
+      },
+      "published": {
+        "chrfpp": 63.4,
+        "delta": -11.83
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 2,
+          "lenRatio": 2,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 4,
+        "flagRate": 0.02,
+        "details": [
+          {
+            "id": 18,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 10.9
+          },
+          {
+            "id": 304,
+            "flags": [
+              "repeatLoop",
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 13.4
+          },
+          {
+            "id": 341,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 20.2
+          },
+          {
+            "id": 781,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29.6
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.857,
+        "p90SecondsPerSentence": 1.32,
+        "loadMsCold": 13111,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 118351723
+      },
+      "completedAt": "2026-10-11T17:36:27.786Z"
+    },
+    {
+      "runKey": "srp_Cyrl-eng_Latn#opus-mul-en",
+      "pair": {
+        "src": "srp_Cyrl",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-mul-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "name": "Opus-MT Croatian, Serbian, Bulgarian, Norwegian and Greek to English",
+        "expectedBytes": 118351797,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 50.44,
+        "corpusLower": 51.24
+      },
+      "published": {
+        "chrfpp": 63.5,
+        "delta": -13.06
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 3
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "details": [
+          {
+            "id": 375,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 49.1
+          },
+          {
+            "id": 773,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 46.4
+          },
+          {
+            "id": 876,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.9
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.735,
+        "p90SecondsPerSentence": 1.186,
+        "loadMsCold": 13595,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 118351723
+      },
+      "completedAt": "2026-10-11T17:39:16.802Z"
+    },
+    {
+      "runKey": "nob_Latn-eng_Latn#opus-mul-en",
+      "pair": {
+        "src": "nob_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-mul-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "name": "Opus-MT Croatian, Serbian, Bulgarian, Norwegian and Greek to English",
+        "expectedBytes": 118351797,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 45.28,
+        "corpusLower": 46.31
+      },
+      "published": {
+        "chrfpp": 62.9,
+        "delta": -17.62
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 4,
+          "lenRatio": 3,
+          "endsMidWord": 4
+        },
+        "flaggedSentences": 9,
+        "flagRate": 0.045,
+        "details": [
+          {
+            "id": 38,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.4
+          },
+          {
+            "id": 131,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 34.5
+          },
+          {
+            "id": 246,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 10
+          },
+          {
+            "id": 268,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 23.2
+          },
+          {
+            "id": 284,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 26
+          },
+          {
+            "id": 382,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 20.1
+          },
+          {
+            "id": 538,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 10.7
+          },
+          {
+            "id": 846,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 31.9
+          },
+          {
+            "id": 876,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 9.5
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.777,
+        "p90SecondsPerSentence": 1.215,
+        "loadMsCold": 13182,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 118351723
+      },
+      "completedAt": "2026-10-11T17:42:18.743Z"
+    },
+    {
+      "runKey": "ell_Grek-eng_Latn#opus-mul-en",
+      "pair": {
+        "src": "ell_Grek",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-mul-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "name": "Opus-MT Croatian, Serbian, Bulgarian, Norwegian and Greek to English",
+        "expectedBytes": 118351797,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 44.7,
+        "corpusLower": 45.29
+      },
+      "published": {
+        "chrfpp": 58.4,
+        "delta": -13.7
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 3,
+          "lenRatio": 0,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 4,
+        "flagRate": 0.02,
+        "details": [
+          {
+            "id": 9,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 15.5
+          },
+          {
+            "id": 305,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 21.8
+          },
+          {
+            "id": 340,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 50.2
+          },
+          {
+            "id": 496,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 16.5
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.893,
+        "p90SecondsPerSentence": 1.413,
+        "loadMsCold": 11995,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 118351723
+      },
+      "completedAt": "2026-10-11T17:45:40.563Z"
+    },
+    {
+      "runKey": "eng_Latn-por_Latn#opus-en-romance",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "por_Latn"
+      },
+      "engine": {
+        "id": "opus-en-romance",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-ROMANCE",
+        "name": "Opus-MT English to Portuguese",
+        "expectedBytes": 119232615,
+        "langTag": "pt"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 64.86,
+        "corpusLower": 65.5
+      },
+      "published": {
+        "chrfpp": 67.4,
+        "delta": -2.54
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 85.9
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.866,
+        "p90SecondsPerSentence": 1.308,
+        "loadMsCold": 14003,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 119232541
+      },
+      "completedAt": "2026-10-11T17:49:00.515Z"
+    },
+    {
+      "runKey": "por_Latn-eng_Latn#opus-romance-en",
+      "pair": {
+        "src": "por_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-romance-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ROMANCE-en",
+        "name": "Opus-MT Portuguese and Romanian to English",
+        "expectedBytes": 119234926,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 64.24,
+        "corpusLower": 64.92
+      },
+      "published": {
+        "chrfpp": 69,
+        "delta": -4.76
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 2,
+          "lenRatio": 0,
+          "endsMidWord": 5
+        },
+        "flaggedSentences": 5,
+        "flagRate": 0.025,
+        "details": [
+          {
+            "id": 34,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30.7
+          },
+          {
+            "id": 86,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 50.4
+          },
+          {
+            "id": 246,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 16.6
+          },
+          {
+            "id": 313,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 50
+          },
+          {
+            "id": 961,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37.5
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.661,
+        "p90SecondsPerSentence": 0.983,
+        "loadMsCold": 13577,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 119234852
+      },
+      "completedAt": "2026-10-11T17:51:36.300Z"
+    },
+    {
+      "runKey": "ron_Latn-eng_Latn#opus-romance-en",
+      "pair": {
+        "src": "ron_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-romance-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ROMANCE-en",
+        "name": "Opus-MT Portuguese and Romanian to English",
+        "expectedBytes": 119234926,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 58.15,
+        "corpusLower": 59.08
+      },
+      "published": {
+        "chrfpp": 65.9,
+        "delta": -7.75
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 1,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 840,
+            "flags": [
+              "repeatLoop",
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 54.1
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.917,
+        "p90SecondsPerSentence": 1.352,
+        "loadMsCold": 12783,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 119234852
+      },
+      "completedAt": "2026-10-11T17:55:03.106Z"
+    },
+    {
+      "runKey": "afr_Latn-eng_Latn#opus-af-en",
+      "pair": {
+        "src": "afr_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-af-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-af-en",
+        "name": "Opus-MT Afrikaans to English",
+        "expectedBytes": 110916369,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 63.47,
+        "corpusLower": 64.03
+      },
+      "published": {
+        "chrfpp": 72.9,
+        "delta": -9.43
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 2,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "details": [
+          {
+            "id": 86,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 27.6
+          },
+          {
+            "id": 773,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 29.5
+          },
+          {
+            "id": 978,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 65.6
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.663,
+        "p90SecondsPerSentence": 1.006,
+        "loadMsCold": 13372,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 110916295
+      },
+      "completedAt": "2026-10-11T17:58:49.969Z"
+    },
+    {
+      "runKey": "arb_Arab-eng_Latn#opus-ar-en",
+      "pair": {
+        "src": "arb_Arab",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-ar-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ar-en",
+        "name": "Opus-MT Arabic to English",
+        "expectedBytes": 117621540,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 58.63,
+        "corpusLower": 59.76
+      },
+      "published": {
+        "chrfpp": 62.2,
+        "delta": -3.57
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 1,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 2,
+        "flagRate": 0.01,
+        "details": [
+          {
+            "id": 127,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 56.8
+          },
+          {
+            "id": 641,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 45.2
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.814,
+        "p90SecondsPerSentence": 1.203,
+        "loadMsCold": 12080,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 117621466
+      },
+      "completedAt": "2026-10-11T18:01:52.820Z"
+    },
+    {
+      "runKey": "ces_Latn-eng_Latn#opus-cs-en",
+      "pair": {
+        "src": "ces_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-cs-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-cs-en",
+        "name": "Opus-MT Czech to English",
+        "expectedBytes": 116695600,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 57.39,
+        "corpusLower": 58.32
+      },
+      "published": {
+        "chrfpp": 61.5,
+        "delta": -4.11
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 2,
+        "flagRate": 0.01,
+        "details": [
+          {
+            "id": 246,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 33.6
+          },
+          {
+            "id": 519,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 71.4
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.798,
+        "p90SecondsPerSentence": 1.184,
+        "loadMsCold": 14592,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 116695526
+      },
+      "completedAt": "2026-10-11T18:05:16.584Z"
+    },
+    {
+      "runKey": "dan_Latn-eng_Latn#opus-da-en",
+      "pair": {
+        "src": "dan_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-da-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-da-en",
+        "name": "Opus-MT Danish to English",
+        "expectedBytes": 112559063,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 65.72,
+        "corpusLower": 66.55
+      },
+      "published": {
+        "chrfpp": 67.7,
+        "delta": -1.98
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.682,
+        "p90SecondsPerSentence": 0.997,
+        "loadMsCold": 14104,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 112558989
+      },
+      "completedAt": "2026-10-11T18:07:50.673Z"
+    },
+    {
+      "runKey": "deu_Latn-eng_Latn#opus-de-en",
+      "pair": {
+        "src": "deu_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-de-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-de-en",
+        "name": "Opus-MT German to English",
+        "expectedBytes": 111519819,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 62.41,
+        "corpusLower": 63.35
+      },
+      "published": {
+        "chrfpp": 65.3,
+        "delta": -2.89
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 3
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "details": [
+          {
+            "id": 522,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 65
+          },
+          {
+            "id": 783,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 79.7
+          },
+          {
+            "id": 805,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 74.9
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.608,
+        "p90SecondsPerSentence": 0.982,
+        "loadMsCold": 11359,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 111519745
+      },
+      "completedAt": "2026-10-11T18:10:16.544Z"
+    },
+    {
+      "runKey": "eng_Latn-afr_Latn#opus-en-af",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "afr_Latn"
+      },
+      "engine": {
+        "id": "opus-en-af",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-af",
+        "name": "Opus-MT English to Afrikaans",
+        "expectedBytes": 110916369,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 58.06,
+        "corpusLower": 58.6
+      },
+      "published": {
+        "chrfpp": 62.4,
+        "delta": -4.34
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 3,
+          "lenRatio": 0,
+          "endsMidWord": 3
+        },
+        "flaggedSentences": 6,
+        "flagRate": 0.03,
+        "details": [
+          {
+            "id": 82,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 25.5
+          },
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 42.8
+          },
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48.9
+          },
+          {
+            "id": 670,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 48.9
+          },
+          {
+            "id": 816,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 71.8
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 67.4
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.678,
+        "p90SecondsPerSentence": 1.04,
+        "loadMsCold": 12598,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 110916295
+      },
+      "completedAt": "2026-10-11T18:12:53.846Z"
+    },
+    {
+      "runKey": "eng_Latn-arb_Arab#opus-en-ar",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "arb_Arab"
+      },
+      "engine": {
+        "id": "opus-en-ar",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-ar",
+        "name": "Opus-MT English to Arabic",
+        "expectedBytes": 117602860,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 49.45,
+        "corpusLower": 49.45
+      },
+      "published": {
+        "chrfpp": 51.4,
+        "delta": -1.95
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 3,
+          "lenRatio": 2,
+          "endsMidWord": 26
+        },
+        "flaggedSentences": 31,
+        "flagRate": 0.155,
+        "details": [
+          {
+            "id": 18,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 57.4
+          },
+          {
+            "id": 34,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.7
+          },
+          {
+            "id": 38,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43
+          },
+          {
+            "id": 45,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 49.6
+          },
+          {
+            "id": 86,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 53.4
+          },
+          {
+            "id": 90,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33.3
+          },
+          {
+            "id": 98,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 51.8
+          },
+          {
+            "id": 104,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 96.4
+          },
+          {
+            "id": 125,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 53.7
+          },
+          {
+            "id": 136,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.2
+          },
+          {
+            "id": 178,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 19.3
+          },
+          {
+            "id": 209,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 59.6
+          },
+          {
+            "id": 227,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 22.3
+          },
+          {
+            "id": 257,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 15.3
+          },
+          {
+            "id": 298,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 31
+          },
+          {
+            "id": 305,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.8
+          },
+          {
+            "id": 459,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 2.5
+          },
+          {
+            "id": 463,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 51.7
+          },
+          {
+            "id": 527,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 42.1
+          },
+          {
+            "id": 630,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 4.3
+          },
+          {
+            "id": 641,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47.6
+          },
+          {
+            "id": 656,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.5
+          },
+          {
+            "id": 661,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 61.2
+          },
+          {
+            "id": 691,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 62.2
+          },
+          {
+            "id": 731,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 51.6
+          },
+          {
+            "id": 800,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 3.4
+          },
+          {
+            "id": 838,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 46.2
+          },
+          {
+            "id": 883,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 65.1
+          },
+          {
+            "id": 961,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48.5
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 44.2
+          },
+          {
+            "id": 978,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 57.5
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.679,
+        "p90SecondsPerSentence": 1.027,
+        "loadMsCold": 13137,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 117602786
+      },
+      "completedAt": "2026-10-11T18:15:35.001Z"
+    },
+    {
+      "runKey": "eng_Latn-ces_Latn#opus-en-cs",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "ces_Latn"
+      },
+      "engine": {
+        "id": "opus-en-cs",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-cs",
+        "name": "Opus-MT English to Czech",
+        "expectedBytes": 116695600,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 51.41,
+        "corpusLower": 52.01
+      },
+      "published": {
+        "chrfpp": 52.7,
+        "delta": -1.29
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 2,
+        "flagRate": 0.01,
+        "details": [
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.1
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.728,
+        "p90SecondsPerSentence": 1.091,
+        "loadMsCold": 12915,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 116695526
+      },
+      "completedAt": "2026-10-11T18:18:21.254Z"
+    },
+    {
+      "runKey": "eng_Latn-dan_Latn#opus-en-da",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "dan_Latn"
+      },
+      "engine": {
+        "id": "opus-en-da",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-da",
+        "name": "Opus-MT English to Danish",
+        "expectedBytes": 112559065,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 64.62,
+        "corpusLower": 65.14
+      },
+      "published": {
+        "chrfpp": 63.2,
+        "delta": 1.42
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 2,
+          "lenRatio": 0,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 4,
+        "flagRate": 0.02,
+        "details": [
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 65.5
+          },
+          {
+            "id": 808,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 63.3
+          },
+          {
+            "id": 859,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 62.7
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 53.6
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.643,
+        "p90SecondsPerSentence": 0.976,
+        "loadMsCold": 13172,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 112558991
+      },
+      "completedAt": "2026-10-11T18:20:54.976Z"
+    },
+    {
+      "runKey": "eng_Latn-deu_Latn#opus-en-de",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "deu_Latn"
+      },
+      "engine": {
+        "id": "opus-en-de",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-de",
+        "name": "Opus-MT English to German",
+        "expectedBytes": 111519854,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 58.65,
+        "corpusLower": 59.48
+      },
+      "published": {
+        "chrfpp": 59.4,
+        "delta": -0.75
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 2,
+        "flagRate": 0.01,
+        "details": [
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 41.2
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 82.4
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.697,
+        "p90SecondsPerSentence": 1.04,
+        "loadMsCold": 12926,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 111519780
+      },
+      "completedAt": "2026-10-11T18:23:33.098Z"
+    },
+    {
+      "runKey": "eng_Latn-fin_Latn#opus-en-fi",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "fin_Latn"
+      },
+      "engine": {
+        "id": "opus-en-fi",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-fi",
+        "name": "Opus-MT English to Finnish",
+        "expectedBytes": 119430062,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 52.6,
+        "corpusLower": 53.15
+      },
+      "published": {
+        "chrfpp": 48.8,
+        "delta": 3.8
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 1,
+          "endsMidWord": 0
+        },
+        "flaggedSentences": 2,
+        "flagRate": 0.01,
+        "details": [
+          {
+            "id": 463,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 16.1
+          },
+          {
+            "id": 630,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 54.8
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.736,
+        "p90SecondsPerSentence": 1.171,
+        "loadMsCold": 13004,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 119429988
+      },
+      "completedAt": "2026-10-11T18:26:23.734Z"
+    },
+    {
+      "runKey": "eng_Latn-hin_Deva#opus-en-hi",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "hin_Deva"
+      },
+      "engine": {
+        "id": "opus-en-hi",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-hi",
+        "name": "Opus-MT English to Hindi",
+        "expectedBytes": 116657716,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 31.27,
+        "corpusLower": 31.27
+      },
+      "published": {
+        "chrfpp": 54.2,
+        "delta": -22.93
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 7,
+          "lenRatio": 27,
+          "endsMidWord": 3
+        },
+        "flaggedSentences": 37,
+        "flagRate": 0.185,
+        "details": [
+          {
+            "id": 18,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 18.5
+          },
+          {
+            "id": 40,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 39.2
+          },
+          {
+            "id": 63,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 9
+          },
+          {
+            "id": 87,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 32
+          },
+          {
+            "id": 125,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 12.3
+          },
+          {
+            "id": 131,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 22.2
+          },
+          {
+            "id": 166,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 10.1
+          },
+          {
+            "id": 302,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 4.8
+          },
+          {
+            "id": 335,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 7.5
+          },
+          {
+            "id": 340,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 18.6
+          },
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29.6
+          },
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33.8
+          },
+          {
+            "id": 423,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 11.7
+          },
+          {
+            "id": 472,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 15.3
+          },
+          {
+            "id": 496,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 9.9
+          },
+          {
+            "id": 511,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 8.8
+          },
+          {
+            "id": 527,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 33.2
+          },
+          {
+            "id": 528,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 22.9
+          },
+          {
+            "id": 548,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 27.9
+          },
+          {
+            "id": 612,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 9.9
+          },
+          {
+            "id": 633,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 21.9
+          },
+          {
+            "id": 641,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 6.6
+          },
+          {
+            "id": 670,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 33.6
+          },
+          {
+            "id": 691,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 38.3
+          },
+          {
+            "id": 736,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 14.3
+          },
+          {
+            "id": 770,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 13.9
+          },
+          {
+            "id": 774,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 34.6
+          },
+          {
+            "id": 783,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 7.7
+          },
+          {
+            "id": 799,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 18.6
+          },
+          {
+            "id": 805,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 20.3
+          },
+          {
+            "id": 838,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 13.8
+          },
+          {
+            "id": 846,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 19.1
+          },
+          {
+            "id": 848,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 7.8
+          },
+          {
+            "id": 874,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 17
+          },
+          {
+            "id": 883,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 26.7
+          },
+          {
+            "id": 886,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 14.3
+          },
+          {
+            "id": 1003,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 7.1
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.686,
+        "p90SecondsPerSentence": 1.165,
+        "loadMsCold": 13339,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 116657642
+      },
+      "completedAt": "2026-10-11T18:29:03.617Z"
+    },
+    {
+      "runKey": "eng_Latn-hun_Latn#opus-en-hu",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "hun_Latn"
+      },
+      "engine": {
+        "id": "opus-en-hu",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-hu",
+        "name": "Opus-MT English to Hungarian",
+        "expectedBytes": 116699390,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 50.81,
+        "corpusLower": 51.53
+      },
+      "published": {
+        "chrfpp": 50.6,
+        "delta": 0.21
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.798,
+        "p90SecondsPerSentence": 1.242,
+        "loadMsCold": 12881,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 116699316
+      },
+      "completedAt": "2026-10-11T18:32:41.669Z"
+    },
+    {
+      "runKey": "eng_Latn-ind_Latn#opus-en-id",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "ind_Latn"
+      },
+      "engine": {
+        "id": "opus-en-id",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-id",
+        "name": "Opus-MT English to Indonesian",
+        "expectedBytes": 107915165,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 62.45,
+        "corpusLower": 62.9
+      },
+      "published": {
+        "chrfpp": 66.6,
+        "delta": -4.15
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 3,
+          "lenRatio": 3,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 8,
+        "flagRate": 0.04,
+        "details": [
+          {
+            "id": 305,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 5.1
+          },
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 64.6
+          },
+          {
+            "id": 435,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 46.5
+          },
+          {
+            "id": 511,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 45.9
+          },
+          {
+            "id": 625,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 49.1
+          },
+          {
+            "id": 737,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 71.2
+          },
+          {
+            "id": 774,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 68.5
+          },
+          {
+            "id": 848,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 17.3
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.569,
+        "p90SecondsPerSentence": 0.902,
+        "loadMsCold": 12417,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 107915091
+      },
+      "completedAt": "2026-10-11T18:34:54.807Z"
+    },
+    {
+      "runKey": "eng_Latn-ita_Latn#opus-en-it",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "ita_Latn"
+      },
+      "engine": {
+        "id": "opus-en-it",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-it",
+        "name": "Opus-MT English to Italian",
+        "expectedBytes": 136474118,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 54.73,
+        "corpusLower": 55.48
+      },
+      "published": {
+        "chrfpp": 54.6,
+        "delta": 0.13
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 1,
+          "endsMidWord": 3
+        },
+        "flaggedSentences": 4,
+        "flagRate": 0.02,
+        "details": [
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.1
+          },
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33.5
+          },
+          {
+            "id": 781,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 24
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 55.9
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.109,
+        "p90SecondsPerSentence": 1.73,
+        "loadMsCold": 15905,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 136474044
+      },
+      "completedAt": "2026-10-11T18:39:10.929Z"
+    },
+    {
+      "runKey": "eng_Latn-nld_Latn#opus-en-nl",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "nld_Latn"
+      },
+      "engine": {
+        "id": "opus-en-nl",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-nl",
+        "name": "Opus-MT English to Dutch",
+        "expectedBytes": 121631490,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 53.51,
+        "corpusLower": 54.4
+      },
+      "published": {
+        "chrfpp": 53.1,
+        "delta": 0.41
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "details": [
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 54.1
+          },
+          {
+            "id": 800,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 48.8
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39.9
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.75,
+        "p90SecondsPerSentence": 1.134,
+        "loadMsCold": 14849,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 121631416
+      },
+      "completedAt": "2026-10-11T18:42:13.948Z"
+    },
+    {
+      "runKey": "eng_Latn-ron_Latn#opus-en-ro",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "ron_Latn"
+      },
+      "engine": {
+        "id": "opus-en-ro",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-ro",
+        "name": "Opus-MT English to Romanian",
+        "expectedBytes": 113247080,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 56.84,
+        "corpusLower": 57.4
+      },
+      "published": {
+        "chrfpp": 58.2,
+        "delta": -1.36
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.1
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.778,
+        "p90SecondsPerSentence": 1.222,
+        "loadMsCold": 13205,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 113247006
+      },
+      "completedAt": "2026-10-11T18:45:13.782Z"
+    },
+    {
+      "runKey": "eng_Latn-rus_Cyrl#opus-en-ru",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "rus_Cyrl"
+      },
+      "engine": {
+        "id": "opus-en-ru",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-ru",
+        "name": "Opus-MT English to Russian",
+        "expectedBytes": 117767433,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 50.16,
+        "corpusLower": 50.83
+      },
+      "published": {
+        "chrfpp": 52.5,
+        "delta": -2.34
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 1,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "details": [
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.8
+          },
+          {
+            "id": 520,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 34.3
+          },
+          {
+            "id": 848,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 8.6
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.777,
+        "p90SecondsPerSentence": 1.148,
+        "loadMsCold": 15169,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 117767359
+      },
+      "completedAt": "2026-10-11T18:48:12.122Z"
+    },
+    {
+      "runKey": "eng_Latn-spa_Latn#opus-en-es",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "spa_Latn"
+      },
+      "engine": {
+        "id": "opus-en-es",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-es",
+        "name": "Opus-MT English to Spanish",
+        "expectedBytes": 119377345,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 52.92,
+        "corpusLower": 53.73
+      },
+      "published": {
+        "chrfpp": 52.6,
+        "delta": 0.32
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 3
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "details": [
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39.3
+          },
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39.9
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 44
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.722,
+        "p90SecondsPerSentence": 1.106,
+        "loadMsCold": 13260,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 119377271
+      },
+      "completedAt": "2026-10-11T18:50:58.675Z"
+    },
+    {
+      "runKey": "eng_Latn-swe_Latn#opus-en-sv",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "swe_Latn"
+      },
+      "engine": {
+        "id": "opus-en-sv",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-sv",
+        "name": "Opus-MT English to Swedish",
+        "expectedBytes": 109758487,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 63.52,
+        "corpusLower": 63.96
+      },
+      "published": {
+        "chrfpp": 62.7,
+        "delta": 0.82
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 2,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 4,
+        "flagRate": 0.02,
+        "details": [
+          {
+            "id": 63,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 9.4
+          },
+          {
+            "id": 284,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 30.7
+          },
+          {
+            "id": 385,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 62
+          },
+          {
+            "id": 422,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.646,
+        "p90SecondsPerSentence": 0.972,
+        "loadMsCold": 13946,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 109758413
+      },
+      "completedAt": "2026-10-11T18:53:41.771Z"
+    },
+    {
+      "runKey": "eng_Latn-ukr_Cyrl#opus-en-uk",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "ukr_Cyrl"
+      },
+      "engine": {
+        "id": "opus-en-uk",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-uk",
+        "name": "Opus-MT English to Ukrainian",
+        "expectedBytes": 116527003,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 43.91,
+        "corpusLower": 44.51
+      },
+      "published": {
+        "chrfpp": 50.5,
+        "delta": -6.59
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 3,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 4,
+        "flagRate": 0.02,
+        "details": [
+          {
+            "id": 259,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 42.6
+          },
+          {
+            "id": 538,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 16.1
+          },
+          {
+            "id": 612,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 24.2
+          },
+          {
+            "id": 848,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 10.4
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.736,
+        "p90SecondsPerSentence": 1.207,
+        "loadMsCold": 11525,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 116526929
+      },
+      "completedAt": "2026-10-11T18:56:28.672Z"
+    },
+    {
+      "runKey": "eng_Latn-vie_Latn#opus-en-vi",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "vie_Latn"
+      },
+      "engine": {
+        "id": "opus-en-vi",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-vi",
+        "name": "Opus-MT English to Vietnamese",
+        "expectedBytes": 106645280,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 42.39,
+        "corpusLower": 43.2
+      },
+      "published": {
+        "chrfpp": 56.4,
+        "delta": -14.01
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 9,
+          "lenRatio": 2,
+          "endsMidWord": 7
+        },
+        "flaggedSentences": 15,
+        "flagRate": 0.075,
+        "details": [
+          {
+            "id": 66,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 24.4
+          },
+          {
+            "id": 166,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 15.2
+          },
+          {
+            "id": 259,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 49.3
+          },
+          {
+            "id": 304,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 40.9
+          },
+          {
+            "id": 335,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 59
+          },
+          {
+            "id": 382,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 34.1
+          },
+          {
+            "id": 422,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 36.5
+          },
+          {
+            "id": 423,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 38.4
+          },
+          {
+            "id": 426,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 13.3
+          },
+          {
+            "id": 522,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 51.6
+          },
+          {
+            "id": 612,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 17.9
+          },
+          {
+            "id": 691,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.3
+          },
+          {
+            "id": 738,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 34
+          },
+          {
+            "id": 740,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.6
+          },
+          {
+            "id": 975,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.2
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.692,
+        "p90SecondsPerSentence": 1.08,
+        "loadMsCold": 11362,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 106645206
+      },
+      "completedAt": "2026-10-11T18:59:11.976Z"
+    },
+    {
+      "runKey": "eng_Latn-zho_Hans#opus-en-zh",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "zho_Hans"
+      },
+      "engine": {
+        "id": "opus-en-zh",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-zh",
+        "name": "Opus-MT English to Chinese",
+        "expectedBytes": 119495650,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 22.32,
+        "corpusLower": 22.32
+      },
+      "published": {
+        "chrfpp": 19.6,
+        "delta": 2.72
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 3,
+          "repeatLoop": 1,
+          "lenRatio": 7,
+          "endsMidWord": 30
+        },
+        "flaggedSentences": 35,
+        "flagRate": 0.175,
+        "details": [
+          {
+            "id": 38,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 16.7
+          },
+          {
+            "id": 45,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 9
+          },
+          {
+            "id": 66,
+            "flags": [
+              "wrongScript"
+            ],
+            "error": null,
+            "score": 2.4
+          },
+          {
+            "id": 82,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 18.3
+          },
+          {
+            "id": 90,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 21.6
+          },
+          {
+            "id": 125,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 29.3
+          },
+          {
+            "id": 136,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.8
+          },
+          {
+            "id": 153,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 3.4
+          },
+          {
+            "id": 170,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 20.4
+          },
+          {
+            "id": 174,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 10.4
+          },
+          {
+            "id": 178,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 3.6
+          },
+          {
+            "id": 189,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30.6
+          },
+          {
+            "id": 194,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 15.9
+          },
+          {
+            "id": 209,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 22.2
+          },
+          {
+            "id": 227,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 8
+          },
+          {
+            "id": 253,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 42.5
+          },
+          {
+            "id": 268,
+            "flags": [
+              "wrongScript"
+            ],
+            "error": null,
+            "score": 29.9
+          },
+          {
+            "id": 298,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 13.8
+          },
+          {
+            "id": 304,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 13.5
+          },
+          {
+            "id": 348,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 34
+          },
+          {
+            "id": 459,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 9
+          },
+          {
+            "id": 472,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 14.1
+          },
+          {
+            "id": 553,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 35.1
+          },
+          {
+            "id": 554,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 21.6
+          },
+          {
+            "id": 711,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 14.6
+          },
+          {
+            "id": 731,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 32.7
+          },
+          {
+            "id": 747,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 12.8
+          },
+          {
+            "id": 776,
+            "flags": [
+              "wrongScript",
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 16.3
+          },
+          {
+            "id": 799,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 28
+          },
+          {
+            "id": 815,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 19
+          },
+          {
+            "id": 816,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 19.6
+          },
+          {
+            "id": 850,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 15.8
+          },
+          {
+            "id": 901,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 11.9
+          },
+          {
+            "id": 934,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 5.7
+          },
+          {
+            "id": 961,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 12.8
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.609,
+        "p90SecondsPerSentence": 0.985,
+        "loadMsCold": 13722,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 119495576
+      },
+      "completedAt": "2026-10-11T19:01:36.372Z"
+    },
+    {
+      "runKey": "fin_Latn-eng_Latn#opus-fi-en",
+      "pair": {
+        "src": "fin_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-fi-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-fi-en",
+        "name": "Opus-MT Finnish to English",
+        "expectedBytes": 113395438,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 54.01,
+        "corpusLower": 55.23
+      },
+      "published": {
+        "chrfpp": 56.6,
+        "delta": -2.59
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 0
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 934,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 54.6
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.608,
+        "p90SecondsPerSentence": 1.022,
+        "loadMsCold": 12952,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 113395364
+      },
+      "completedAt": "2026-10-11T19:04:20.236Z"
+    },
+    {
+      "runKey": "fra_Latn-eng_Latn#opus-fr-en",
+      "pair": {
+        "src": "fra_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-fr-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-fr-en",
+        "name": "Opus-MT French to English",
+        "expectedBytes": 113111807,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 64.1,
+        "corpusLower": 64.79
+      },
+      "published": {
+        "chrfpp": 65.4,
+        "delta": -1.3
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 341,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37.5
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.721,
+        "p90SecondsPerSentence": 1.131,
+        "loadMsCold": 12339,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 113111733
+      },
+      "completedAt": "2026-10-11T19:07:04.348Z"
+    },
+    {
+      "runKey": "hin_Deva-eng_Latn#opus-hi-en",
+      "pair": {
+        "src": "hin_Deva",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-hi-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-hi-en",
+        "name": "Opus-MT Hindi to English",
+        "expectedBytes": 115710250,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 44.32,
+        "corpusLower": 45.5
+      },
+      "published": {
+        "chrfpp": 62.5,
+        "delta": -18.18
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 3,
+          "lenRatio": 3,
+          "endsMidWord": 6
+        },
+        "flaggedSentences": 11,
+        "flagRate": 0.055,
+        "details": [
+          {
+            "id": 49,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 55.3
+          },
+          {
+            "id": 125,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.5
+          },
+          {
+            "id": 170,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 36.2
+          },
+          {
+            "id": 284,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 15.1
+          },
+          {
+            "id": 523,
+            "flags": [
+              "repeatLoop",
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 1.8
+          },
+          {
+            "id": 538,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 23.5
+          },
+          {
+            "id": 550,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 37
+          },
+          {
+            "id": 670,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 49.1
+          },
+          {
+            "id": 704,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 39.8
+          },
+          {
+            "id": 722,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 57.8
+          },
+          {
+            "id": 880,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 69.6
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.662,
+        "p90SecondsPerSentence": 1.099,
+        "loadMsCold": 13338,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 115710176
+      },
+      "completedAt": "2026-10-11T19:09:47.572Z"
+    },
+    {
+      "runKey": "hun_Latn-eng_Latn#opus-hu-en",
+      "pair": {
+        "src": "hun_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-hu-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-hu-en",
+        "name": "Opus-MT Hungarian to English",
+        "expectedBytes": 116699390,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 54.74,
+        "corpusLower": 55.77
+      },
+      "published": {
+        "chrfpp": 58,
+        "delta": -3.26
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 1,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "details": [
+          {
+            "id": 335,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 13.1
+          },
+          {
+            "id": 523,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 42.6
+          },
+          {
+            "id": 589,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 83.3
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.733,
+        "p90SecondsPerSentence": 1.146,
+        "loadMsCold": 12438,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 116699316
+      },
+      "completedAt": "2026-10-11T19:12:37.025Z"
+    },
+    {
+      "runKey": "ind_Latn-eng_Latn#opus-id-en",
+      "pair": {
+        "src": "ind_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-id-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-id-en",
+        "name": "Opus-MT Indonesian to English",
+        "expectedBytes": 107915167,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 57.41,
+        "corpusLower": 57.9
+      },
+      "published": {
+        "chrfpp": 63.9,
+        "delta": -6.49
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 1,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "details": [
+          {
+            "id": 641,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 51.4
+          },
+          {
+            "id": 919,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48
+          },
+          {
+            "id": 934,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 54
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.544,
+        "p90SecondsPerSentence": 0.876,
+        "loadMsCold": 13332,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 107915093
+      },
+      "completedAt": "2026-10-11T19:14:56.257Z"
+    },
+    {
+      "runKey": "ita_Latn-eng_Latn#opus-it-en",
+      "pair": {
+        "src": "ita_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-it-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-it-en",
+        "name": "Opus-MT Italian to English",
+        "expectedBytes": 136865467,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 56.73,
+        "corpusLower": 57.66
+      },
+      "published": {
+        "chrfpp": 59.3,
+        "delta": -2.57
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 1,
+          "endsMidWord": 0
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 155,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 27.2
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.957,
+        "p90SecondsPerSentence": 1.495,
+        "loadMsCold": 14491,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 136865393
+      },
+      "completedAt": "2026-10-11T19:18:33.195Z"
+    },
+    {
+      "runKey": "jpn_Jpan-eng_Latn#opus-ja-en",
+      "pair": {
+        "src": "jpn_Jpan",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-ja-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ja-en",
+        "name": "Opus-MT Japanese to English",
+        "expectedBytes": 114701074,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 43.87,
+        "corpusLower": 45.01
+      },
+      "published": {
+        "chrfpp": 50.2,
+        "delta": -6.33
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 2,
+          "endsMidWord": 0
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "details": [
+          {
+            "id": 66,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 7.3
+          },
+          {
+            "id": 426,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 16.2
+          },
+          {
+            "id": 776,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 41.7
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.599,
+        "p90SecondsPerSentence": 0.916,
+        "loadMsCold": 13436,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 114701000
+      },
+      "completedAt": "2026-10-11T19:21:00.705Z"
+    },
+    {
+      "runKey": "kor_Hang-eng_Latn#opus-ko-en",
+      "pair": {
+        "src": "kor_Hang",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-ko-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ko-en",
+        "name": "Opus-MT Korean to English",
+        "expectedBytes": 119601626,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 44.49,
+        "corpusLower": 45.47
+      },
+      "published": {
+        "chrfpp": 52.5,
+        "delta": -8.01
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 2,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 4,
+        "flagRate": 0.02,
+        "details": [
+          {
+            "id": 131,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 33.6
+          },
+          {
+            "id": 170,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 38.7
+          },
+          {
+            "id": 234,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 6.9
+          },
+          {
+            "id": 704,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 31.1
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.734,
+        "p90SecondsPerSentence": 1.127,
+        "loadMsCold": 12500,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 119601552
+      },
+      "completedAt": "2026-10-11T19:23:46.239Z"
+    },
+    {
+      "runKey": "nld_Latn-eng_Latn#opus-nl-en",
+      "pair": {
+        "src": "nld_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-nl-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-nl-en",
+        "name": "Opus-MT Dutch to English",
+        "expectedBytes": 121631492,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 54.28,
+        "corpusLower": 55.47
+      },
+      "published": {
+        "chrfpp": 56.9,
+        "delta": -2.62
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 268,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 0
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.76,
+        "p90SecondsPerSentence": 1.179,
+        "loadMsCold": 13744,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 121631418
+      },
+      "completedAt": "2026-10-11T19:26:43.172Z"
+    },
+    {
+      "runKey": "pol_Latn-eng_Latn#opus-pl-en",
+      "pair": {
+        "src": "pol_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-pl-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-pl-en",
+        "name": "Opus-MT Polish to English",
+        "expectedBytes": 117618157,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 49.37,
+        "corpusLower": 50.38
+      },
+      "published": {
+        "chrfpp": 54.3,
+        "delta": -4.93
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 77,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 53.4
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.728,
+        "p90SecondsPerSentence": 1.106,
+        "loadMsCold": 13732,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 117618083
+      },
+      "completedAt": "2026-10-11T19:29:30.842Z"
+    },
+    {
+      "runKey": "rus_Cyrl-eng_Latn#opus-ru-en",
+      "pair": {
+        "src": "rus_Cyrl",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-ru-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ru-en",
+        "name": "Opus-MT Russian to English",
+        "expectedBytes": 117767433,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 53.16,
+        "corpusLower": 54.11
+      },
+      "published": {
+        "chrfpp": 58.6,
+        "delta": -5.44
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 1,
+          "endsMidWord": 3
+        },
+        "flaggedSentences": 4,
+        "flagRate": 0.02,
+        "details": [
+          {
+            "id": 340,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30
+          },
+          {
+            "id": 519,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 52.1
+          },
+          {
+            "id": 612,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 26.4
+          },
+          {
+            "id": 691,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 53.5
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.704,
+        "p90SecondsPerSentence": 1.123,
+        "loadMsCold": 13901,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 117767359
+      },
+      "completedAt": "2026-10-11T19:32:21.262Z"
+    },
+    {
+      "runKey": "spa_Latn-eng_Latn#opus-es-en",
+      "pair": {
+        "src": "spa_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-es-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-es-en",
+        "name": "Opus-MT Spanish to English",
+        "expectedBytes": 119377310,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 54.68,
+        "corpusLower": 55.48
+      },
+      "published": {
+        "chrfpp": 57.1,
+        "delta": -2.42
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.833,
+        "p90SecondsPerSentence": 1.266,
+        "loadMsCold": 14129,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 119377236
+      },
+      "completedAt": "2026-10-11T19:35:29.381Z"
+    },
+    {
+      "runKey": "swe_Latn-eng_Latn#opus-sv-en",
+      "pair": {
+        "src": "swe_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-sv-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-sv-en",
+        "name": "Opus-MT Swedish to English",
+        "expectedBytes": 109758487,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 64.3,
+        "corpusLower": 65.16
+      },
+      "published": {
+        "chrfpp": 67,
+        "delta": -2.7
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 2,
+        "flagRate": 0.01,
+        "details": [
+          {
+            "id": 39,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 14.9
+          },
+          {
+            "id": 127,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 56.6
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.769,
+        "p90SecondsPerSentence": 1.148,
+        "loadMsCold": 12552,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 109758413
+      },
+      "completedAt": "2026-10-11T19:38:47.400Z"
+    },
+    {
+      "runKey": "tha_Thai-eng_Latn#opus-th-en",
+      "pair": {
+        "src": "tha_Thai",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-th-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-th-en",
+        "name": "Opus-MT Thai to English",
+        "expectedBytes": 117356397,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 44.49,
+        "corpusLower": 45.46
+      },
+      "published": {
+        "chrfpp": 52.7,
+        "delta": -8.21
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 1,
+          "endsMidWord": 5
+        },
+        "flaggedSentences": 5,
+        "flagRate": 0.025,
+        "details": [
+          {
+            "id": 194,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 34.9
+          },
+          {
+            "id": 298,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 3.8
+          },
+          {
+            "id": 436,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47.6
+          },
+          {
+            "id": 726,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 23.7
+          },
+          {
+            "id": 831,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 30.3
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.752,
+        "p90SecondsPerSentence": 1.186,
+        "loadMsCold": 13076,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 117356323
+      },
+      "completedAt": "2026-10-11T19:41:38.663Z"
+    },
+    {
+      "runKey": "tur_Latn-eng_Latn#opus-tr-en",
+      "pair": {
+        "src": "tur_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-tr-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-tr-en",
+        "name": "Opus-MT Turkish to English",
+        "expectedBytes": 116553011,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 53.4,
+        "corpusLower": 54.15
+      },
+      "published": {
+        "chrfpp": 60,
+        "delta": -6.6
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 2,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 2,
+        "flagRate": 0.01,
+        "details": [
+          {
+            "id": 704,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 19.8
+          },
+          {
+            "id": 776,
+            "flags": [
+              "repeatLoop",
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 13.6
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.666,
+        "p90SecondsPerSentence": 0.999,
+        "loadMsCold": 14651,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 116552937
+      },
+      "completedAt": "2026-10-11T19:44:19.192Z"
+    },
+    {
+      "runKey": "ukr_Cyrl-eng_Latn#opus-uk-en",
+      "pair": {
+        "src": "ukr_Cyrl",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-uk-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-uk-en",
+        "name": "Opus-MT Ukrainian to English",
+        "expectedBytes": 116527003,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 54.08,
+        "corpusLower": 54.9
+      },
+      "published": {
+        "chrfpp": 61.1,
+        "delta": -7.02
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 2
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "details": [
+          {
+            "id": 246,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 45.2
+          },
+          {
+            "id": 335,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 53.3
+          },
+          {
+            "id": 831,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 44.3
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.667,
+        "p90SecondsPerSentence": 0.988,
+        "loadMsCold": 13138,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 116526929
+      },
+      "completedAt": "2026-10-11T19:46:53.253Z"
+    },
+    {
+      "runKey": "vie_Latn-eng_Latn#opus-vi-en",
+      "pair": {
+        "src": "vie_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-vi-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-vi-en",
+        "name": "Opus-MT Vietnamese to English",
+        "expectedBytes": 106706954,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 49.98,
+        "corpusLower": 50.56
+      },
+      "published": {
+        "chrfpp": 58.1,
+        "delta": -8.12
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 2,
+        "flagRate": 0.01,
+        "details": [
+          {
+            "id": 39,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 25.7
+          },
+          {
+            "id": 472,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 48.9
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.56,
+        "p90SecondsPerSentence": 0.816,
+        "loadMsCold": 11659,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 106706880
+      },
+      "completedAt": "2026-10-11T19:49:05.730Z"
+    },
+    {
+      "runKey": "zho_Hans-eng_Latn#opus-zh-en",
+      "pair": {
+        "src": "zho_Hans",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-zh-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-zh-en",
+        "name": "Opus-MT Chinese to English",
+        "expectedBytes": 119495923,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 48.86,
+        "corpusLower": 50.01
+      },
+      "published": {
+        "chrfpp": 52.9,
+        "delta": -4.04
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 2,
+          "lenRatio": 6,
+          "endsMidWord": 1
+        },
+        "flaggedSentences": 9,
+        "flagRate": 0.045,
+        "details": [
+          {
+            "id": 87,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 20.6
+          },
+          {
+            "id": 166,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 39.2
+          },
+          {
+            "id": 189,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 45.8
+          },
+          {
+            "id": 298,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 43.9
+          },
+          {
+            "id": 340,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 56.7
+          },
+          {
+            "id": 704,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 32.6
+          },
+          {
+            "id": 799,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 22.1
+          },
+          {
+            "id": 816,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 23.1
+          },
+          {
+            "id": 864,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 28.8
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.655,
+        "p90SecondsPerSentence": 1.035,
+        "loadMsCold": 13559,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 119495849
+      },
+      "completedAt": "2026-10-11T19:51:36.905Z"
     }
   ]
 }

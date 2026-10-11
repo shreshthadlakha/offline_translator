@@ -35326,7 +35326,7 @@ var PRIORITY_RANK = {
 };
 
 // src/workers/build-id.ts
-var BUILD_ID = "202610111614-38ss7k";
+var BUILD_ID = "202610142312-cm5d8t";
 
 // src/lib/speed-config.ts
 var SPEED_CONFIG = {

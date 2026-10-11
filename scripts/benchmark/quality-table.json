@@ -1,0 +1,4524 @@
+{
+  "generatedAt": "2026-10-11T19:56:00.636Z",
+  "bar": {
+    "file": "scripts/benchmark/quality-bar.mjs",
+    "constants": {
+      "PASS_WITHIN_CHRF": 2,
+      "BORDERLINE_WITHIN_CHRF": 5,
+      "MAX_FLAG_RATE": 0.02,
+      "CALIBRATION_OFFSET": 0
+    },
+    "rule": "pass: gap >= -2 AND flagRate <= 0.02; fail: gap < -5; otherwise borderline (including a chrF-pass gap with a flag breach); gap = local chrF++ + CALIBRATION_OFFSET - published baseline; full-model rows are 'baseline' (the bar itself)",
+    "calibrationNote": "P1 measured the local harness vs published on the same full model at a stable -1.38 chrF++ (greedy q8, 200 of 1012 sentences vs Meta full-devtest eval); CALIBRATION_OFFSET=0 keeps the literal published comparison"
+  },
+  "sample": {
+    "size": 200,
+    "seed": 42,
+    "source": "FLORES-200 devtest (Meta, CC-BY-SA 4.0), fixed ids shared across every language and direction"
+  },
+  "reference": "FLORES-200 devtest professional human translations",
+  "rows": [
+    {
+      "language": {
+        "code": "afr_Latn",
+        "english": "Afrikaans"
+      },
+      "direction": "afr_Latn->en",
+      "src": "afr_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-af-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-af-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 110916369,
+      "chrfpp": 63.47,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 72.9,
+      "baselineSource": "published",
+      "gap": -9.43,
+      "flagRate": 0.015,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 2,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 3,
+      "nSentences": 200,
+      "loadColdSeconds": 13.4,
+      "medianSecondsPerSentence": 0.663,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -9.43 (more than 5 of the bar); flags 1.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "afr_Latn",
+        "english": "Afrikaans"
+      },
+      "direction": "en->afr_Latn",
+      "src": "eng_Latn",
+      "tgt": "afr_Latn",
+      "engine": {
+        "id": "opus-en-af",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-af",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 110916369,
+      "chrfpp": 58.06,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 62.4,
+      "baselineSource": "published",
+      "gap": -4.34,
+      "flagRate": 0.03,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 3,
+        "lenRatio": 0,
+        "endsMidWord": 3
+      },
+      "flaggedSentences": 6,
+      "nSentences": 200,
+      "loadColdSeconds": 12.6,
+      "medianSecondsPerSentence": 0.678,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -4.34 (within 5 of the bar); flags 3.0% > 2% (repeatLoop 3, endsMidWord 3)"
+    },
+    {
+      "language": {
+        "code": "amh_Ethi",
+        "english": "Amharic"
+      },
+      "direction": "amh_Ethi->en",
+      "src": "amh_Ethi",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 54.9,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 54.9,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "amh_Ethi",
+        "english": "Amharic"
+      },
+      "direction": "en->amh_Ethi",
+      "src": "eng_Latn",
+      "tgt": "amh_Ethi",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 37.2,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 37.2,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "arb_Arab",
+        "english": "Arabic"
+      },
+      "direction": "arb_Arab->en",
+      "src": "arb_Arab",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-ar-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ar-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 117621540,
+      "chrfpp": 58.63,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 62.2,
+      "baselineSource": "published",
+      "gap": -3.57,
+      "flagRate": 0.01,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 1,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 2,
+      "nSentences": 200,
+      "loadColdSeconds": 12.1,
+      "medianSecondsPerSentence": 0.814,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -3.57 (within 5 of the bar); flags 1.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "arb_Arab",
+        "english": "Arabic"
+      },
+      "direction": "en->arb_Arab",
+      "src": "eng_Latn",
+      "tgt": "arb_Arab",
+      "engine": {
+        "id": "opus-en-ar",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-ar",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 117602860,
+      "chrfpp": 49.45,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 51.4,
+      "baselineSource": "published",
+      "gap": -1.95,
+      "flagRate": 0.155,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 3,
+        "lenRatio": 2,
+        "endsMidWord": 26
+      },
+      "flaggedSentences": 31,
+      "nSentences": 200,
+      "loadColdSeconds": 13.1,
+      "medianSecondsPerSentence": 0.679,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -1.95 (within 2 of the bar); flags 15.5% > 2% (repeatLoop 3, lenRatio 2, endsMidWord 26)"
+    },
+    {
+      "language": {
+        "code": "asm_Beng",
+        "english": "Assamese"
+      },
+      "direction": "asm_Beng->en",
+      "src": "asm_Beng",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 52.7,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 52.7,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "asm_Beng",
+        "english": "Assamese"
+      },
+      "direction": "en->asm_Beng",
+      "src": "eng_Latn",
+      "tgt": "asm_Beng",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 34.6,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 34.6,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "ben_Beng",
+        "english": "Bengali"
+      },
+      "direction": "ben_Beng->en",
+      "src": "ben_Beng",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 57.9,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 57.9,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "ben_Beng",
+        "english": "Bengali"
+      },
+      "direction": "en->ben_Beng",
+      "src": "eng_Latn",
+      "tgt": "ben_Beng",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 46.2,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 46.2,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "bul_Cyrl",
+        "english": "Bulgarian"
+      },
+      "direction": "bul_Cyrl->en",
+      "src": "bul_Cyrl",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-mul-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "group": true,
+        "langTag": null
+      },
+      "modelSizeBytes": 118351797,
+      "chrfpp": 51.57,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 63.4,
+      "baselineSource": "published",
+      "gap": -11.83,
+      "flagRate": 0.02,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 2,
+        "lenRatio": 2,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 4,
+      "nSentences": 200,
+      "loadColdSeconds": 13.1,
+      "medianSecondsPerSentence": 0.857,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -11.83 (more than 5 of the bar); flags 2.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "bul_Cyrl",
+        "english": "Bulgarian"
+      },
+      "direction": "en->bul_Cyrl",
+      "src": "eng_Latn",
+      "tgt": "bul_Cyrl",
+      "engine": {
+        "id": "opus-en-mul",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "group": true,
+        "langTag": "bul"
+      },
+      "modelSizeBytes": 118280580,
+      "chrfpp": 41.42,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 60.4,
+      "baselineSource": "published",
+      "gap": -18.98,
+      "flagRate": 0.54,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 1,
+        "endsMidWord": 107
+      },
+      "flaggedSentences": 108,
+      "nSentences": 200,
+      "loadColdSeconds": 11.3,
+      "medianSecondsPerSentence": 1.202,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -18.98 (more than 5 of the bar); flags 54.0% > 2% (lenRatio 1, endsMidWord 107)"
+    },
+    {
+      "language": {
+        "code": "cat_Latn",
+        "english": "Catalan"
+      },
+      "direction": "cat_Latn->en",
+      "src": "cat_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 66.6,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 66.6,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "cat_Latn",
+        "english": "Catalan"
+      },
+      "direction": "en->cat_Latn",
+      "src": "eng_Latn",
+      "tgt": "cat_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 61.2,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 61.2,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "zho_Hans",
+        "english": "Chinese (Simplified)"
+      },
+      "direction": "zho_Hans->en",
+      "src": "zho_Hans",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-zh-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-zh-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 119495923,
+      "chrfpp": 48.86,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 52.9,
+      "baselineSource": "published",
+      "gap": -4.04,
+      "flagRate": 0.045,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 2,
+        "lenRatio": 6,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 9,
+      "nSentences": 200,
+      "loadColdSeconds": 13.6,
+      "medianSecondsPerSentence": 0.655,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -4.04 (within 5 of the bar); flags 4.5% > 2% (repeatLoop 2, lenRatio 6, endsMidWord 1)"
+    },
+    {
+      "language": {
+        "code": "zho_Hans",
+        "english": "Chinese (Simplified)"
+      },
+      "direction": "en->zho_Hans",
+      "src": "eng_Latn",
+      "tgt": "zho_Hans",
+      "engine": {
+        "id": "opus-en-zh",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-zh",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 119495650,
+      "chrfpp": 22.32,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 19.6,
+      "baselineSource": "published",
+      "gap": 2.72,
+      "flagRate": 0.175,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 3,
+        "repeatLoop": 1,
+        "lenRatio": 7,
+        "endsMidWord": 30
+      },
+      "flaggedSentences": 35,
+      "nSentences": 200,
+      "loadColdSeconds": 13.7,
+      "medianSecondsPerSentence": 0.609,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ +2.72 vs published baseline; flags 17.5% > 2% (wrongScript 3, repeatLoop 1, lenRatio 7, endsMidWord 30)"
+    },
+    {
+      "language": {
+        "code": "zho_Hant",
+        "english": "Chinese (Traditional)"
+      },
+      "direction": "zho_Hant->en",
+      "src": "zho_Hant",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 49.7,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 49.7,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "zho_Hant",
+        "english": "Chinese (Traditional)"
+      },
+      "direction": "en->zho_Hant",
+      "src": "eng_Latn",
+      "tgt": "zho_Hant",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 13.3,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 13.3,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "hrv_Latn",
+        "english": "Croatian"
+      },
+      "direction": "hrv_Latn->en",
+      "src": "hrv_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-mul-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "group": true,
+        "langTag": null
+      },
+      "modelSizeBytes": 118351797,
+      "chrfpp": 44.98,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 59.5,
+      "baselineSource": "published",
+      "gap": -14.52,
+      "flagRate": 0.05,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 6,
+        "lenRatio": 2,
+        "endsMidWord": 3
+      },
+      "flaggedSentences": 10,
+      "nSentences": 200,
+      "loadColdSeconds": 12.7,
+      "medianSecondsPerSentence": 0.79,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -14.52 (more than 5 of the bar); flags 5.0% > 2% (repeatLoop 6, lenRatio 2, endsMidWord 3)"
+    },
+    {
+      "language": {
+        "code": "hrv_Latn",
+        "english": "Croatian"
+      },
+      "direction": "en->hrv_Latn",
+      "src": "eng_Latn",
+      "tgt": "hrv_Latn",
+      "engine": {
+        "id": "opus-en-mul",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "group": true,
+        "langTag": "hrv"
+      },
+      "modelSizeBytes": 118280580,
+      "chrfpp": 39.17,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 52.2,
+      "baselineSource": "published",
+      "gap": -13.03,
+      "flagRate": 0.245,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 4,
+        "endsMidWord": 45
+      },
+      "flaggedSentences": 49,
+      "nSentences": 200,
+      "loadColdSeconds": 14.1,
+      "medianSecondsPerSentence": 1.165,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -13.03 (more than 5 of the bar); flags 24.5% > 2% (lenRatio 4, endsMidWord 45)"
+    },
+    {
+      "language": {
+        "code": "ces_Latn",
+        "english": "Czech"
+      },
+      "direction": "ces_Latn->en",
+      "src": "ces_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-cs-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-cs-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 116695600,
+      "chrfpp": 57.39,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 61.5,
+      "baselineSource": "published",
+      "gap": -4.11,
+      "flagRate": 0.01,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 2,
+      "nSentences": 200,
+      "loadColdSeconds": 14.6,
+      "medianSecondsPerSentence": 0.798,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -4.11 (within 5 of the bar); flags 1.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "ces_Latn",
+        "english": "Czech"
+      },
+      "direction": "en->ces_Latn",
+      "src": "eng_Latn",
+      "tgt": "ces_Latn",
+      "engine": {
+        "id": "opus-en-cs",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-cs",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 116695600,
+      "chrfpp": 51.41,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 52.7,
+      "baselineSource": "published",
+      "gap": -1.29,
+      "flagRate": 0.01,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 2,
+      "nSentences": 200,
+      "loadColdSeconds": 12.9,
+      "medianSecondsPerSentence": 0.728,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ -1.29 (within 2 of the bar); flags 1.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "dan_Latn",
+        "english": "Danish"
+      },
+      "direction": "dan_Latn->en",
+      "src": "dan_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-da-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-da-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 112559063,
+      "chrfpp": 65.72,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 67.7,
+      "baselineSource": "published",
+      "gap": -1.98,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 14.1,
+      "medianSecondsPerSentence": 0.682,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ -1.98 (within 2 of the bar); flags 0.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "dan_Latn",
+        "english": "Danish"
+      },
+      "direction": "en->dan_Latn",
+      "src": "eng_Latn",
+      "tgt": "dan_Latn",
+      "engine": {
+        "id": "opus-en-da",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-da",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 112559065,
+      "chrfpp": 64.62,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 63.2,
+      "baselineSource": "published",
+      "gap": 1.42,
+      "flagRate": 0.02,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 2,
+        "lenRatio": 0,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 4,
+      "nSentences": 200,
+      "loadColdSeconds": 13.2,
+      "medianSecondsPerSentence": 0.643,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +1.42 vs published baseline; flags 2.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "nld_Latn",
+        "english": "Dutch"
+      },
+      "direction": "nld_Latn->en",
+      "src": "nld_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-nl-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-nl-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 121631492,
+      "chrfpp": 54.28,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 56.9,
+      "baselineSource": "published",
+      "gap": -2.62,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 13.7,
+      "medianSecondsPerSentence": 0.76,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -2.62 (within 5 of the bar); flags 0.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "nld_Latn",
+        "english": "Dutch"
+      },
+      "direction": "en->nld_Latn",
+      "src": "eng_Latn",
+      "tgt": "nld_Latn",
+      "engine": {
+        "id": "opus-en-nl",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-nl",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 121631490,
+      "chrfpp": 53.51,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 53.1,
+      "baselineSource": "published",
+      "gap": 0.41,
+      "flagRate": 0.015,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 3,
+      "nSentences": 200,
+      "loadColdSeconds": 14.8,
+      "medianSecondsPerSentence": 0.75,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +0.41 vs published baseline; flags 1.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "fin_Latn",
+        "english": "Finnish"
+      },
+      "direction": "fin_Latn->en",
+      "src": "fin_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-fi-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-fi-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 113395438,
+      "chrfpp": 54.01,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 56.6,
+      "baselineSource": "published",
+      "gap": -2.59,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 0
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 13,
+      "medianSecondsPerSentence": 0.608,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -2.59 (within 5 of the bar); flags 0.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "fin_Latn",
+        "english": "Finnish"
+      },
+      "direction": "en->fin_Latn",
+      "src": "eng_Latn",
+      "tgt": "fin_Latn",
+      "engine": {
+        "id": "opus-en-fi",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-fi",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 119430062,
+      "chrfpp": 52.6,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 48.8,
+      "baselineSource": "published",
+      "gap": 3.8,
+      "flagRate": 0.01,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 1,
+        "endsMidWord": 0
+      },
+      "flaggedSentences": 2,
+      "nSentences": 200,
+      "loadColdSeconds": 13,
+      "medianSecondsPerSentence": 0.736,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +3.8 vs published baseline; flags 1.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "fra_Latn",
+        "english": "French"
+      },
+      "direction": "fra_Latn->en",
+      "src": "fra_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-fr-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-fr-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 113111807,
+      "chrfpp": 64.1,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 65.4,
+      "baselineSource": "published",
+      "gap": -1.3,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 12.3,
+      "medianSecondsPerSentence": 0.721,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ -1.3 (within 2 of the bar); flags 0.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "fra_Latn",
+        "english": "French"
+      },
+      "direction": "en->fra_Latn",
+      "src": "eng_Latn",
+      "tgt": "fra_Latn",
+      "engine": {
+        "id": "opus-en-fr",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-fr",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 113111807,
+      "chrfpp": 67.18,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 67,
+      "baselineSource": "published",
+      "gap": 0.18,
+      "flagRate": 0.01,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 2,
+      "nSentences": 200,
+      "loadColdSeconds": 12.5,
+      "medianSecondsPerSentence": 0.718,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +0.18 vs published baseline; flags 1.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "deu_Latn",
+        "english": "German"
+      },
+      "direction": "deu_Latn->en",
+      "src": "deu_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-de-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-de-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 111519819,
+      "chrfpp": 62.41,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 65.3,
+      "baselineSource": "published",
+      "gap": -2.89,
+      "flagRate": 0.015,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 3
+      },
+      "flaggedSentences": 3,
+      "nSentences": 200,
+      "loadColdSeconds": 11.4,
+      "medianSecondsPerSentence": 0.608,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -2.89 (within 5 of the bar); flags 1.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "deu_Latn",
+        "english": "German"
+      },
+      "direction": "en->deu_Latn",
+      "src": "eng_Latn",
+      "tgt": "deu_Latn",
+      "engine": {
+        "id": "opus-en-de",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-de",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 111519854,
+      "chrfpp": 58.65,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 59.4,
+      "baselineSource": "published",
+      "gap": -0.75,
+      "flagRate": 0.01,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 2,
+      "nSentences": 200,
+      "loadColdSeconds": 12.9,
+      "medianSecondsPerSentence": 0.697,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ -0.75 (within 2 of the bar); flags 1.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "ell_Grek",
+        "english": "Greek"
+      },
+      "direction": "ell_Grek->en",
+      "src": "ell_Grek",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-mul-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "group": true,
+        "langTag": null
+      },
+      "modelSizeBytes": 118351797,
+      "chrfpp": 44.7,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 58.4,
+      "baselineSource": "published",
+      "gap": -13.7,
+      "flagRate": 0.02,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 3,
+        "lenRatio": 0,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 4,
+      "nSentences": 200,
+      "loadColdSeconds": 12,
+      "medianSecondsPerSentence": 0.893,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -13.7 (more than 5 of the bar); flags 2.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "ell_Grek",
+        "english": "Greek"
+      },
+      "direction": "en->ell_Grek",
+      "src": "eng_Latn",
+      "tgt": "ell_Grek",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 48.5,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 48.5,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "guj_Gujr",
+        "english": "Gujarati"
+      },
+      "direction": "guj_Gujr->en",
+      "src": "guj_Gujr",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 62.5,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 62.5,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "guj_Gujr",
+        "english": "Gujarati"
+      },
+      "direction": "en->guj_Gujr",
+      "src": "eng_Latn",
+      "tgt": "guj_Gujr",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 50.4,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 50.4,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "hau_Latn",
+        "english": "Hausa"
+      },
+      "direction": "hau_Latn->en",
+      "src": "hau_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 52.6,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 52.6,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "hau_Latn",
+        "english": "Hausa"
+      },
+      "direction": "en->hau_Latn",
+      "src": "eng_Latn",
+      "tgt": "hau_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 49,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 49,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "heb_Hebr",
+        "english": "Hebrew"
+      },
+      "direction": "heb_Hebr->en",
+      "src": "heb_Hebr",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 61.8,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 61.8,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "heb_Hebr",
+        "english": "Hebrew"
+      },
+      "direction": "en->heb_Hebr",
+      "src": "eng_Latn",
+      "tgt": "heb_Hebr",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 50.8,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 50.8,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "hin_Deva",
+        "english": "Hindi"
+      },
+      "direction": "hin_Deva->en",
+      "src": "hin_Deva",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-hi-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-hi-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 115710250,
+      "chrfpp": 44.32,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 62.5,
+      "baselineSource": "published",
+      "gap": -18.18,
+      "flagRate": 0.055,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 3,
+        "lenRatio": 3,
+        "endsMidWord": 6
+      },
+      "flaggedSentences": 11,
+      "nSentences": 200,
+      "loadColdSeconds": 13.3,
+      "medianSecondsPerSentence": 0.662,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -18.18 (more than 5 of the bar); flags 5.5% > 2% (repeatLoop 3, lenRatio 3, endsMidWord 6)"
+    },
+    {
+      "language": {
+        "code": "hin_Deva",
+        "english": "Hindi"
+      },
+      "direction": "en->hin_Deva",
+      "src": "eng_Latn",
+      "tgt": "hin_Deva",
+      "engine": {
+        "id": "opus-en-hi",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-hi",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 116657716,
+      "chrfpp": 31.27,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 54.2,
+      "baselineSource": "published",
+      "gap": -22.93,
+      "flagRate": 0.185,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 7,
+        "lenRatio": 27,
+        "endsMidWord": 3
+      },
+      "flaggedSentences": 37,
+      "nSentences": 200,
+      "loadColdSeconds": 13.3,
+      "medianSecondsPerSentence": 0.686,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -22.93 (more than 5 of the bar); flags 18.5% > 2% (repeatLoop 7, lenRatio 27, endsMidWord 3)"
+    },
+    {
+      "language": {
+        "code": "hun_Latn",
+        "english": "Hungarian"
+      },
+      "direction": "hun_Latn->en",
+      "src": "hun_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-hu-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-hu-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 116699390,
+      "chrfpp": 54.74,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 58,
+      "baselineSource": "published",
+      "gap": -3.26,
+      "flagRate": 0.015,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 1,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 3,
+      "nSentences": 200,
+      "loadColdSeconds": 12.4,
+      "medianSecondsPerSentence": 0.733,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -3.26 (within 5 of the bar); flags 1.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "hun_Latn",
+        "english": "Hungarian"
+      },
+      "direction": "en->hun_Latn",
+      "src": "eng_Latn",
+      "tgt": "hun_Latn",
+      "engine": {
+        "id": "opus-en-hu",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-hu",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 116699390,
+      "chrfpp": 50.81,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 50.6,
+      "baselineSource": "published",
+      "gap": 0.21,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 12.9,
+      "medianSecondsPerSentence": 0.798,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +0.21 vs published baseline; flags 0.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "ind_Latn",
+        "english": "Indonesian"
+      },
+      "direction": "ind_Latn->en",
+      "src": "ind_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-id-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-id-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 107915167,
+      "chrfpp": 57.41,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 63.9,
+      "baselineSource": "published",
+      "gap": -6.49,
+      "flagRate": 0.015,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 1,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 3,
+      "nSentences": 200,
+      "loadColdSeconds": 13.3,
+      "medianSecondsPerSentence": 0.544,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -6.49 (more than 5 of the bar); flags 1.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "ind_Latn",
+        "english": "Indonesian"
+      },
+      "direction": "en->ind_Latn",
+      "src": "eng_Latn",
+      "tgt": "ind_Latn",
+      "engine": {
+        "id": "opus-en-id",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-id",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 107915165,
+      "chrfpp": 62.45,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 66.6,
+      "baselineSource": "published",
+      "gap": -4.15,
+      "flagRate": 0.04,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 3,
+        "lenRatio": 3,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 8,
+      "nSentences": 200,
+      "loadColdSeconds": 12.4,
+      "medianSecondsPerSentence": 0.569,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -4.15 (within 5 of the bar); flags 4.0% > 2% (repeatLoop 3, lenRatio 3, endsMidWord 2)"
+    },
+    {
+      "language": {
+        "code": "ita_Latn",
+        "english": "Italian"
+      },
+      "direction": "ita_Latn->en",
+      "src": "ita_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-it-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-it-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 136865467,
+      "chrfpp": 56.73,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 59.3,
+      "baselineSource": "published",
+      "gap": -2.57,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 1,
+        "endsMidWord": 0
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 14.5,
+      "medianSecondsPerSentence": 0.957,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -2.57 (within 5 of the bar); flags 0.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "ita_Latn",
+        "english": "Italian"
+      },
+      "direction": "en->ita_Latn",
+      "src": "eng_Latn",
+      "tgt": "ita_Latn",
+      "engine": {
+        "id": "opus-en-it",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-it",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 136474118,
+      "chrfpp": 54.73,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 54.6,
+      "baselineSource": "published",
+      "gap": 0.13,
+      "flagRate": 0.02,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 1,
+        "endsMidWord": 3
+      },
+      "flaggedSentences": 4,
+      "nSentences": 200,
+      "loadColdSeconds": 15.9,
+      "medianSecondsPerSentence": 1.109,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +0.13 vs published baseline; flags 2.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "jpn_Jpan",
+        "english": "Japanese"
+      },
+      "direction": "jpn_Jpan->en",
+      "src": "jpn_Jpan",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-ja-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ja-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 114701074,
+      "chrfpp": 43.87,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 50.2,
+      "baselineSource": "published",
+      "gap": -6.33,
+      "flagRate": 0.015,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 2,
+        "endsMidWord": 0
+      },
+      "flaggedSentences": 3,
+      "nSentences": 200,
+      "loadColdSeconds": 13.4,
+      "medianSecondsPerSentence": 0.599,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -6.33 (more than 5 of the bar); flags 1.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "jpn_Jpan",
+        "english": "Japanese"
+      },
+      "direction": "en->jpn_Jpan",
+      "src": "eng_Latn",
+      "tgt": "jpn_Jpan",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 23.6,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 23.6,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "kan_Knda",
+        "english": "Kannada"
+      },
+      "direction": "kan_Knda->en",
+      "src": "kan_Knda",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 57,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 57,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "kan_Knda",
+        "english": "Kannada"
+      },
+      "direction": "en->kan_Knda",
+      "src": "eng_Latn",
+      "tgt": "kan_Knda",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 50.2,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 50.2,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "kor_Hang",
+        "english": "Korean"
+      },
+      "direction": "kor_Hang->en",
+      "src": "kor_Hang",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-ko-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ko-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 119601626,
+      "chrfpp": 44.49,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 52.5,
+      "baselineSource": "published",
+      "gap": -8.01,
+      "flagRate": 0.02,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 2,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 4,
+      "nSentences": 200,
+      "loadColdSeconds": 12.5,
+      "medianSecondsPerSentence": 0.734,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -8.01 (more than 5 of the bar); flags 2.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "kor_Hang",
+        "english": "Korean"
+      },
+      "direction": "en->kor_Hang",
+      "src": "eng_Latn",
+      "tgt": "kor_Hang",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 32.1,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 32.1,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "zsm_Latn",
+        "english": "Malay"
+      },
+      "direction": "zsm_Latn->en",
+      "src": "zsm_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 64.3,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 64.3,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "zsm_Latn",
+        "english": "Malay"
+      },
+      "direction": "en->zsm_Latn",
+      "src": "eng_Latn",
+      "tgt": "zsm_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 63.5,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 63.5,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "mal_Mlym",
+        "english": "Malayalam"
+      },
+      "direction": "mal_Mlym->en",
+      "src": "mal_Mlym",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 59,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 59,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "mal_Mlym",
+        "english": "Malayalam"
+      },
+      "direction": "en->mal_Mlym",
+      "src": "eng_Latn",
+      "tgt": "mal_Mlym",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 47.2,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 47.2,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "mar_Deva",
+        "english": "Marathi"
+      },
+      "direction": "mar_Deva->en",
+      "src": "mar_Deva",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 58.9,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 58.9,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "mar_Deva",
+        "english": "Marathi"
+      },
+      "direction": "en->mar_Deva",
+      "src": "eng_Latn",
+      "tgt": "mar_Deva",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 44.6,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 44.6,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "npi_Deva",
+        "english": "Nepali"
+      },
+      "direction": "npi_Deva->en",
+      "src": "npi_Deva",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 62.5,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 62.5,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "npi_Deva",
+        "english": "Nepali"
+      },
+      "direction": "en->npi_Deva",
+      "src": "eng_Latn",
+      "tgt": "npi_Deva",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 49,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 49,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "nob_Latn",
+        "english": "Norwegian Bokmål"
+      },
+      "direction": "nob_Latn->en",
+      "src": "nob_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-mul-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "group": true,
+        "langTag": null
+      },
+      "modelSizeBytes": 118351797,
+      "chrfpp": 45.28,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 62.9,
+      "baselineSource": "published",
+      "gap": -17.62,
+      "flagRate": 0.045,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 4,
+        "lenRatio": 3,
+        "endsMidWord": 4
+      },
+      "flaggedSentences": 9,
+      "nSentences": 200,
+      "loadColdSeconds": 13.2,
+      "medianSecondsPerSentence": 0.777,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -17.62 (more than 5 of the bar); flags 4.5% > 2% (repeatLoop 4, lenRatio 3, endsMidWord 4)"
+    },
+    {
+      "language": {
+        "code": "nob_Latn",
+        "english": "Norwegian Bokmål"
+      },
+      "direction": "en->nob_Latn",
+      "src": "eng_Latn",
+      "tgt": "nob_Latn",
+      "engine": {
+        "id": "opus-en-mul",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "group": true,
+        "langTag": "nob"
+      },
+      "modelSizeBytes": 118280580,
+      "chrfpp": 47.47,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 56.8,
+      "baselineSource": "published",
+      "gap": -9.33,
+      "flagRate": 0.07,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 2,
+        "endsMidWord": 11
+      },
+      "flaggedSentences": 14,
+      "nSentences": 200,
+      "loadColdSeconds": 12,
+      "medianSecondsPerSentence": 1.065,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -9.33 (more than 5 of the bar); flags 7.0% > 2% (repeatLoop 1, lenRatio 2, endsMidWord 11)"
+    },
+    {
+      "language": {
+        "code": "ory_Orya",
+        "english": "Odia"
+      },
+      "direction": "ory_Orya->en",
+      "src": "ory_Orya",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 58.5,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 58.5,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "ory_Orya",
+        "english": "Odia"
+      },
+      "direction": "en->ory_Orya",
+      "src": "eng_Latn",
+      "tgt": "ory_Orya",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 44.9,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 44.9,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "pbt_Arab",
+        "english": "Pashto"
+      },
+      "direction": "pbt_Arab->en",
+      "src": "pbt_Arab",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 54.5,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 54.5,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "pbt_Arab",
+        "english": "Pashto"
+      },
+      "direction": "en->pbt_Arab",
+      "src": "eng_Latn",
+      "tgt": "pbt_Arab",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 36.9,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 36.9,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "pes_Arab",
+        "english": "Persian"
+      },
+      "direction": "pes_Arab->en",
+      "src": "pes_Arab",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 58.7,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 58.7,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "pes_Arab",
+        "english": "Persian"
+      },
+      "direction": "en->pes_Arab",
+      "src": "eng_Latn",
+      "tgt": "pes_Arab",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 47.4,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 47.4,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "pol_Latn",
+        "english": "Polish"
+      },
+      "direction": "pol_Latn->en",
+      "src": "pol_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-pl-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-pl-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 117618157,
+      "chrfpp": 49.37,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 54.3,
+      "baselineSource": "published",
+      "gap": -4.93,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 13.7,
+      "medianSecondsPerSentence": 0.728,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -4.93 (within 5 of the bar); flags 0.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "pol_Latn",
+        "english": "Polish"
+      },
+      "direction": "en->pol_Latn",
+      "src": "eng_Latn",
+      "tgt": "pol_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 45.3,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 45.3,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "por_Latn",
+        "english": "Portuguese"
+      },
+      "direction": "por_Latn->en",
+      "src": "por_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-romance-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ROMANCE-en",
+        "group": true,
+        "langTag": null
+      },
+      "modelSizeBytes": 119234926,
+      "chrfpp": 64.24,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 69,
+      "baselineSource": "published",
+      "gap": -4.76,
+      "flagRate": 0.025,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 2,
+        "lenRatio": 0,
+        "endsMidWord": 5
+      },
+      "flaggedSentences": 5,
+      "nSentences": 200,
+      "loadColdSeconds": 13.6,
+      "medianSecondsPerSentence": 0.661,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -4.76 (within 5 of the bar); flags 2.5% > 2% (repeatLoop 2, endsMidWord 5)"
+    },
+    {
+      "language": {
+        "code": "por_Latn",
+        "english": "Portuguese"
+      },
+      "direction": "en->por_Latn",
+      "src": "eng_Latn",
+      "tgt": "por_Latn",
+      "engine": {
+        "id": "opus-en-romance",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-ROMANCE",
+        "group": true,
+        "langTag": "pt"
+      },
+      "modelSizeBytes": 119232615,
+      "chrfpp": 64.86,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 67.4,
+      "baselineSource": "published",
+      "gap": -2.54,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 14,
+      "medianSecondsPerSentence": 0.866,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -2.54 (within 5 of the bar); flags 0.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "pan_Guru",
+        "english": "Punjabi"
+      },
+      "direction": "pan_Guru->en",
+      "src": "pan_Guru",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 61.5,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 61.5,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "pan_Guru",
+        "english": "Punjabi"
+      },
+      "direction": "en->pan_Guru",
+      "src": "eng_Latn",
+      "tgt": "pan_Guru",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 46.7,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 46.7,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "ron_Latn",
+        "english": "Romanian"
+      },
+      "direction": "ron_Latn->en",
+      "src": "ron_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-romance-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ROMANCE-en",
+        "group": true,
+        "langTag": null
+      },
+      "modelSizeBytes": 119234926,
+      "chrfpp": 58.15,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 65.9,
+      "baselineSource": "published",
+      "gap": -7.75,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 1,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 12.8,
+      "medianSecondsPerSentence": 0.917,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -7.75 (more than 5 of the bar); flags 0.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "ron_Latn",
+        "english": "Romanian"
+      },
+      "direction": "en->ron_Latn",
+      "src": "eng_Latn",
+      "tgt": "ron_Latn",
+      "engine": {
+        "id": "opus-en-ro",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-ro",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 113247080,
+      "chrfpp": 56.84,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 58.2,
+      "baselineSource": "published",
+      "gap": -1.36,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 13.2,
+      "medianSecondsPerSentence": 0.778,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ -1.36 (within 2 of the bar); flags 0.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "rus_Cyrl",
+        "english": "Russian"
+      },
+      "direction": "rus_Cyrl->en",
+      "src": "rus_Cyrl",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-ru-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-ru-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 117767433,
+      "chrfpp": 53.16,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 58.6,
+      "baselineSource": "published",
+      "gap": -5.44,
+      "flagRate": 0.02,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 1,
+        "endsMidWord": 3
+      },
+      "flaggedSentences": 4,
+      "nSentences": 200,
+      "loadColdSeconds": 13.9,
+      "medianSecondsPerSentence": 0.704,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -5.44 (more than 5 of the bar); flags 2.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "rus_Cyrl",
+        "english": "Russian"
+      },
+      "direction": "en->rus_Cyrl",
+      "src": "eng_Latn",
+      "tgt": "rus_Cyrl",
+      "engine": {
+        "id": "opus-en-ru",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-ru",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 117767433,
+      "chrfpp": 50.16,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 52.5,
+      "baselineSource": "published",
+      "gap": -2.34,
+      "flagRate": 0.015,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 1,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 3,
+      "nSentences": 200,
+      "loadColdSeconds": 15.2,
+      "medianSecondsPerSentence": 0.777,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -2.34 (within 5 of the bar); flags 1.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "srp_Cyrl",
+        "english": "Serbian"
+      },
+      "direction": "srp_Cyrl->en",
+      "src": "srp_Cyrl",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-mul-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-mul-en",
+        "group": true,
+        "langTag": null
+      },
+      "modelSizeBytes": 118351797,
+      "chrfpp": 50.44,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 63.5,
+      "baselineSource": "published",
+      "gap": -13.06,
+      "flagRate": 0.015,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 3
+      },
+      "flaggedSentences": 3,
+      "nSentences": 200,
+      "loadColdSeconds": 13.6,
+      "medianSecondsPerSentence": 0.735,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -13.06 (more than 5 of the bar); flags 1.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "srp_Cyrl",
+        "english": "Serbian"
+      },
+      "direction": "en->srp_Cyrl",
+      "src": "eng_Latn",
+      "tgt": "srp_Cyrl",
+      "engine": {
+        "id": "opus-en-mul",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-mul",
+        "group": true,
+        "langTag": "srp_Cyrl"
+      },
+      "modelSizeBytes": 118280580,
+      "chrfpp": 37.13,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 53.3,
+      "baselineSource": "published",
+      "gap": -16.17,
+      "flagRate": 0.47,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 93
+      },
+      "flaggedSentences": 94,
+      "nSentences": 200,
+      "loadColdSeconds": 14.3,
+      "medianSecondsPerSentence": 1.244,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -16.17 (more than 5 of the bar); flags 47.0% > 2% (repeatLoop 1, endsMidWord 93)"
+    },
+    {
+      "language": {
+        "code": "sin_Sinh",
+        "english": "Sinhala"
+      },
+      "direction": "sin_Sinh->en",
+      "src": "sin_Sinh",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 56.5,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 56.5,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "sin_Sinh",
+        "english": "Sinhala"
+      },
+      "direction": "en->sin_Sinh",
+      "src": "eng_Latn",
+      "tgt": "sin_Sinh",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 42.4,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 42.4,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "spa_Latn",
+        "english": "Spanish"
+      },
+      "direction": "spa_Latn->en",
+      "src": "spa_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-es-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-es-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 119377310,
+      "chrfpp": 54.68,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 57.1,
+      "baselineSource": "published",
+      "gap": -2.42,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 14.1,
+      "medianSecondsPerSentence": 0.833,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -2.42 (within 5 of the bar); flags 0.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "spa_Latn",
+        "english": "Spanish"
+      },
+      "direction": "en->spa_Latn",
+      "src": "eng_Latn",
+      "tgt": "spa_Latn",
+      "engine": {
+        "id": "opus-en-es",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-es",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 119377345,
+      "chrfpp": 52.92,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 52.6,
+      "baselineSource": "published",
+      "gap": 0.32,
+      "flagRate": 0.015,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 3
+      },
+      "flaggedSentences": 3,
+      "nSentences": 200,
+      "loadColdSeconds": 13.3,
+      "medianSecondsPerSentence": 0.722,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +0.32 vs published baseline; flags 1.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "swh_Latn",
+        "english": "Swahili"
+      },
+      "direction": "swh_Latn->en",
+      "src": "swh_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 60.7,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 60.7,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "swh_Latn",
+        "english": "Swahili"
+      },
+      "direction": "en->swh_Latn",
+      "src": "eng_Latn",
+      "tgt": "swh_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 58,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 58,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "swe_Latn",
+        "english": "Swedish"
+      },
+      "direction": "swe_Latn->en",
+      "src": "swe_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-sv-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-sv-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 109758487,
+      "chrfpp": 64.3,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 67,
+      "baselineSource": "published",
+      "gap": -2.7,
+      "flagRate": 0.01,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 2,
+      "nSentences": 200,
+      "loadColdSeconds": 12.6,
+      "medianSecondsPerSentence": 0.769,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -2.7 (within 5 of the bar); flags 1.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "swe_Latn",
+        "english": "Swedish"
+      },
+      "direction": "en->swe_Latn",
+      "src": "eng_Latn",
+      "tgt": "swe_Latn",
+      "engine": {
+        "id": "opus-en-sv",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-sv",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 109758487,
+      "chrfpp": 63.52,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 62.7,
+      "baselineSource": "published",
+      "gap": 0.82,
+      "flagRate": 0.02,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 2,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 4,
+      "nSentences": 200,
+      "loadColdSeconds": 13.9,
+      "medianSecondsPerSentence": 0.646,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +0.82 vs published baseline; flags 2.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "tgl_Latn",
+        "english": "Tagalog"
+      },
+      "direction": "tgl_Latn->en",
+      "src": "tgl_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 63.7,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 63.7,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "tgl_Latn",
+        "english": "Tagalog"
+      },
+      "direction": "en->tgl_Latn",
+      "src": "eng_Latn",
+      "tgt": "tgl_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 56.4,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 56.4,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "tam_Taml",
+        "english": "Tamil"
+      },
+      "direction": "tam_Taml->en",
+      "src": "tam_Taml",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 55.8,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 55.8,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "tam_Taml",
+        "english": "Tamil"
+      },
+      "direction": "en->tam_Taml",
+      "src": "eng_Latn",
+      "tgt": "tam_Taml",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 51.1,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 51.1,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "tel_Telu",
+        "english": "Telugu"
+      },
+      "direction": "tel_Telu->en",
+      "src": "tel_Telu",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 61.2,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 61.2,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "tel_Telu",
+        "english": "Telugu"
+      },
+      "direction": "en->tel_Telu",
+      "src": "eng_Latn",
+      "tgt": "tel_Telu",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 51.8,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 51.8,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "tha_Thai",
+        "english": "Thai"
+      },
+      "direction": "tha_Thai->en",
+      "src": "tha_Thai",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-th-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-th-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 117356397,
+      "chrfpp": 44.49,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 52.7,
+      "baselineSource": "published",
+      "gap": -8.21,
+      "flagRate": 0.025,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 1,
+        "endsMidWord": 5
+      },
+      "flaggedSentences": 5,
+      "nSentences": 200,
+      "loadColdSeconds": 13.1,
+      "medianSecondsPerSentence": 0.752,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -8.21 (more than 5 of the bar); flags 2.5% > 2% (lenRatio 1, endsMidWord 5)"
+    },
+    {
+      "language": {
+        "code": "tha_Thai",
+        "english": "Thai"
+      },
+      "direction": "en->tha_Thai",
+      "src": "eng_Latn",
+      "tgt": "tha_Thai",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 36,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 36,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "tur_Latn",
+        "english": "Turkish"
+      },
+      "direction": "tur_Latn->en",
+      "src": "tur_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-tr-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-tr-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 116553011,
+      "chrfpp": 53.4,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 60,
+      "baselineSource": "published",
+      "gap": -6.6,
+      "flagRate": 0.01,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 2,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 2,
+      "nSentences": 200,
+      "loadColdSeconds": 14.7,
+      "medianSecondsPerSentence": 0.666,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -6.6 (more than 5 of the bar); flags 1.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "tur_Latn",
+        "english": "Turkish"
+      },
+      "direction": "en->tur_Latn",
+      "src": "eng_Latn",
+      "tgt": "tur_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 52.9,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 52.9,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "ukr_Cyrl",
+        "english": "Ukrainian"
+      },
+      "direction": "ukr_Cyrl->en",
+      "src": "ukr_Cyrl",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-uk-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-uk-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 116527003,
+      "chrfpp": 54.08,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 61.1,
+      "baselineSource": "published",
+      "gap": -7.02,
+      "flagRate": 0.015,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 2
+      },
+      "flaggedSentences": 3,
+      "nSentences": 200,
+      "loadColdSeconds": 13.1,
+      "medianSecondsPerSentence": 0.667,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -7.02 (more than 5 of the bar); flags 1.5% <= 2%"
+    },
+    {
+      "language": {
+        "code": "ukr_Cyrl",
+        "english": "Ukrainian"
+      },
+      "direction": "en->ukr_Cyrl",
+      "src": "eng_Latn",
+      "tgt": "ukr_Cyrl",
+      "engine": {
+        "id": "opus-en-uk",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-uk",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 116527003,
+      "chrfpp": 43.91,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 50.5,
+      "baselineSource": "published",
+      "gap": -6.59,
+      "flagRate": 0.02,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 3,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 4,
+      "nSentences": 200,
+      "loadColdSeconds": 11.5,
+      "medianSecondsPerSentence": 0.736,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -6.59 (more than 5 of the bar); flags 2.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "urd_Arab",
+        "english": "Urdu"
+      },
+      "direction": "urd_Arab->en",
+      "src": "urd_Arab",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 57.8,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 57.8,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "urd_Arab",
+        "english": "Urdu"
+      },
+      "direction": "en->urd_Arab",
+      "src": "eng_Latn",
+      "tgt": "urd_Arab",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 46.6,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 46.6,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "vie_Latn",
+        "english": "Vietnamese"
+      },
+      "direction": "vie_Latn->en",
+      "src": "vie_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "opus-vi-en",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-vi-en",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 106706954,
+      "chrfpp": 49.98,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 58.1,
+      "baselineSource": "published",
+      "gap": -8.12,
+      "flagRate": 0.01,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 1
+      },
+      "flaggedSentences": 2,
+      "nSentences": 200,
+      "loadColdSeconds": 11.7,
+      "medianSecondsPerSentence": 0.56,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -8.12 (more than 5 of the bar); flags 1.0% <= 2%"
+    },
+    {
+      "language": {
+        "code": "vie_Latn",
+        "english": "Vietnamese"
+      },
+      "direction": "en->vie_Latn",
+      "src": "eng_Latn",
+      "tgt": "vie_Latn",
+      "engine": {
+        "id": "opus-en-vi",
+        "kind": "opus",
+        "modelId": "Xenova/opus-mt-en-vi",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 106645280,
+      "chrfpp": 42.39,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "baselineChrfpp": 56.4,
+      "baselineSource": "published",
+      "gap": -14.01,
+      "flagRate": 0.075,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 9,
+        "lenRatio": 2,
+        "endsMidWord": 7
+      },
+      "flaggedSentences": 15,
+      "nSentences": 200,
+      "loadColdSeconds": 11.4,
+      "medianSecondsPerSentence": 0.692,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "fail",
+      "verdictReason": "chrF++ -14.01 (more than 5 of the bar); flags 7.5% > 2% (repeatLoop 9, lenRatio 2, endsMidWord 7)"
+    },
+    {
+      "language": {
+        "code": "yor_Latn",
+        "english": "Yoruba"
+      },
+      "direction": "yor_Latn->en",
+      "src": "yor_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 39.9,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 39.9,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "yor_Latn",
+        "english": "Yoruba"
+      },
+      "direction": "en->yor_Latn",
+      "src": "eng_Latn",
+      "tgt": "yor_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 22.9,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 22.9,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "zul_Latn",
+        "english": "Zulu"
+      },
+      "direction": "zul_Latn->en",
+      "src": "zul_Latn",
+      "tgt": "eng_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 56.8,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 56.8,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    },
+    {
+      "language": {
+        "code": "zul_Latn",
+        "english": "Zulu"
+      },
+      "direction": "en->zul_Latn",
+      "src": "eng_Latn",
+      "tgt": "zul_Latn",
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
+      },
+      "modelSizeBytes": 911962632,
+      "chrfpp": 51,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "baselineChrfpp": 51,
+      "baselineSource": "published",
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+    }
+  ],
+  "counts": {
+    "pass": 13,
+    "borderline": 18,
+    "fail": 23,
+    "error": 0,
+    "baseline": 56,
+    "totalSmallDirections": 54
+  },
+  "list1BorderlineOrFailOnSmallModels": [
+    {
+      "code": "afr_Latn",
+      "english": "Afrikaans",
+      "directions": [
+        {
+          "direction": "afr_Latn->en",
+          "engine": "opus-af-en",
+          "verdict": "fail",
+          "chrfpp": 63.47,
+          "baseline": 72.9,
+          "gap": -9.43,
+          "flagRate": 0.015,
+          "flagged": 3,
+          "n": 200
+        },
+        {
+          "direction": "en->afr_Latn",
+          "engine": "opus-en-af",
+          "verdict": "borderline",
+          "chrfpp": 58.06,
+          "baseline": 62.4,
+          "gap": -4.34,
+          "flagRate": 0.03,
+          "flagged": 6,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "arb_Arab",
+      "english": "Arabic",
+      "directions": [
+        {
+          "direction": "arb_Arab->en",
+          "engine": "opus-ar-en",
+          "verdict": "borderline",
+          "chrfpp": 58.63,
+          "baseline": 62.2,
+          "gap": -3.57,
+          "flagRate": 0.01,
+          "flagged": 2,
+          "n": 200
+        },
+        {
+          "direction": "en->arb_Arab",
+          "engine": "opus-en-ar",
+          "verdict": "borderline",
+          "chrfpp": 49.45,
+          "baseline": 51.4,
+          "gap": -1.95,
+          "flagRate": 0.155,
+          "flagged": 31,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "bul_Cyrl",
+      "english": "Bulgarian",
+      "directions": [
+        {
+          "direction": "bul_Cyrl->en",
+          "engine": "opus-mul-en",
+          "verdict": "fail",
+          "chrfpp": 51.57,
+          "baseline": 63.4,
+          "gap": -11.83,
+          "flagRate": 0.02,
+          "flagged": 4,
+          "n": 200
+        },
+        {
+          "direction": "en->bul_Cyrl",
+          "engine": "opus-en-mul",
+          "verdict": "fail",
+          "chrfpp": 41.42,
+          "baseline": 60.4,
+          "gap": -18.98,
+          "flagRate": 0.54,
+          "flagged": 108,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "zho_Hans",
+      "english": "Chinese (Simplified)",
+      "directions": [
+        {
+          "direction": "en->zho_Hans",
+          "engine": "opus-en-zh",
+          "verdict": "borderline",
+          "chrfpp": 22.32,
+          "baseline": 19.6,
+          "gap": 2.72,
+          "flagRate": 0.175,
+          "flagged": 35,
+          "n": 200
+        },
+        {
+          "direction": "zho_Hans->en",
+          "engine": "opus-zh-en",
+          "verdict": "borderline",
+          "chrfpp": 48.86,
+          "baseline": 52.9,
+          "gap": -4.04,
+          "flagRate": 0.045,
+          "flagged": 9,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "hrv_Latn",
+      "english": "Croatian",
+      "directions": [
+        {
+          "direction": "en->hrv_Latn",
+          "engine": "opus-en-mul",
+          "verdict": "fail",
+          "chrfpp": 39.17,
+          "baseline": 52.2,
+          "gap": -13.03,
+          "flagRate": 0.245,
+          "flagged": 49,
+          "n": 200
+        },
+        {
+          "direction": "hrv_Latn->en",
+          "engine": "opus-mul-en",
+          "verdict": "fail",
+          "chrfpp": 44.98,
+          "baseline": 59.5,
+          "gap": -14.52,
+          "flagRate": 0.05,
+          "flagged": 10,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "ces_Latn",
+      "english": "Czech",
+      "directions": [
+        {
+          "direction": "ces_Latn->en",
+          "engine": "opus-cs-en",
+          "verdict": "borderline",
+          "chrfpp": 57.39,
+          "baseline": 61.5,
+          "gap": -4.11,
+          "flagRate": 0.01,
+          "flagged": 2,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "nld_Latn",
+      "english": "Dutch",
+      "directions": [
+        {
+          "direction": "nld_Latn->en",
+          "engine": "opus-nl-en",
+          "verdict": "borderline",
+          "chrfpp": 54.28,
+          "baseline": 56.9,
+          "gap": -2.62,
+          "flagRate": 0.005,
+          "flagged": 1,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "fin_Latn",
+      "english": "Finnish",
+      "directions": [
+        {
+          "direction": "fin_Latn->en",
+          "engine": "opus-fi-en",
+          "verdict": "borderline",
+          "chrfpp": 54.01,
+          "baseline": 56.6,
+          "gap": -2.59,
+          "flagRate": 0.005,
+          "flagged": 1,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "deu_Latn",
+      "english": "German",
+      "directions": [
+        {
+          "direction": "deu_Latn->en",
+          "engine": "opus-de-en",
+          "verdict": "borderline",
+          "chrfpp": 62.41,
+          "baseline": 65.3,
+          "gap": -2.89,
+          "flagRate": 0.015,
+          "flagged": 3,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "ell_Grek",
+      "english": "Greek",
+      "directions": [
+        {
+          "direction": "ell_Grek->en",
+          "engine": "opus-mul-en",
+          "verdict": "fail",
+          "chrfpp": 44.7,
+          "baseline": 58.4,
+          "gap": -13.7,
+          "flagRate": 0.02,
+          "flagged": 4,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "hin_Deva",
+      "english": "Hindi",
+      "directions": [
+        {
+          "direction": "en->hin_Deva",
+          "engine": "opus-en-hi",
+          "verdict": "fail",
+          "chrfpp": 31.27,
+          "baseline": 54.2,
+          "gap": -22.93,
+          "flagRate": 0.185,
+          "flagged": 37,
+          "n": 200
+        },
+        {
+          "direction": "hin_Deva->en",
+          "engine": "opus-hi-en",
+          "verdict": "fail",
+          "chrfpp": 44.32,
+          "baseline": 62.5,
+          "gap": -18.18,
+          "flagRate": 0.055,
+          "flagged": 11,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "hun_Latn",
+      "english": "Hungarian",
+      "directions": [
+        {
+          "direction": "hun_Latn->en",
+          "engine": "opus-hu-en",
+          "verdict": "borderline",
+          "chrfpp": 54.74,
+          "baseline": 58,
+          "gap": -3.26,
+          "flagRate": 0.015,
+          "flagged": 3,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "ind_Latn",
+      "english": "Indonesian",
+      "directions": [
+        {
+          "direction": "en->ind_Latn",
+          "engine": "opus-en-id",
+          "verdict": "borderline",
+          "chrfpp": 62.45,
+          "baseline": 66.6,
+          "gap": -4.15,
+          "flagRate": 0.04,
+          "flagged": 8,
+          "n": 200
+        },
+        {
+          "direction": "ind_Latn->en",
+          "engine": "opus-id-en",
+          "verdict": "fail",
+          "chrfpp": 57.41,
+          "baseline": 63.9,
+          "gap": -6.49,
+          "flagRate": 0.015,
+          "flagged": 3,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "ita_Latn",
+      "english": "Italian",
+      "directions": [
+        {
+          "direction": "ita_Latn->en",
+          "engine": "opus-it-en",
+          "verdict": "borderline",
+          "chrfpp": 56.73,
+          "baseline": 59.3,
+          "gap": -2.57,
+          "flagRate": 0.005,
+          "flagged": 1,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "jpn_Jpan",
+      "english": "Japanese",
+      "directions": [
+        {
+          "direction": "jpn_Jpan->en",
+          "engine": "opus-ja-en",
+          "verdict": "fail",
+          "chrfpp": 43.87,
+          "baseline": 50.2,
+          "gap": -6.33,
+          "flagRate": 0.015,
+          "flagged": 3,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "kor_Hang",
+      "english": "Korean",
+      "directions": [
+        {
+          "direction": "kor_Hang->en",
+          "engine": "opus-ko-en",
+          "verdict": "fail",
+          "chrfpp": 44.49,
+          "baseline": 52.5,
+          "gap": -8.01,
+          "flagRate": 0.02,
+          "flagged": 4,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "nob_Latn",
+      "english": "Norwegian Bokmål",
+      "directions": [
+        {
+          "direction": "en->nob_Latn",
+          "engine": "opus-en-mul",
+          "verdict": "fail",
+          "chrfpp": 47.47,
+          "baseline": 56.8,
+          "gap": -9.33,
+          "flagRate": 0.07,
+          "flagged": 14,
+          "n": 200
+        },
+        {
+          "direction": "nob_Latn->en",
+          "engine": "opus-mul-en",
+          "verdict": "fail",
+          "chrfpp": 45.28,
+          "baseline": 62.9,
+          "gap": -17.62,
+          "flagRate": 0.045,
+          "flagged": 9,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "pol_Latn",
+      "english": "Polish",
+      "directions": [
+        {
+          "direction": "pol_Latn->en",
+          "engine": "opus-pl-en",
+          "verdict": "borderline",
+          "chrfpp": 49.37,
+          "baseline": 54.3,
+          "gap": -4.93,
+          "flagRate": 0.005,
+          "flagged": 1,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "por_Latn",
+      "english": "Portuguese",
+      "directions": [
+        {
+          "direction": "en->por_Latn",
+          "engine": "opus-en-romance",
+          "verdict": "borderline",
+          "chrfpp": 64.86,
+          "baseline": 67.4,
+          "gap": -2.54,
+          "flagRate": 0.005,
+          "flagged": 1,
+          "n": 200
+        },
+        {
+          "direction": "por_Latn->en",
+          "engine": "opus-romance-en",
+          "verdict": "borderline",
+          "chrfpp": 64.24,
+          "baseline": 69,
+          "gap": -4.76,
+          "flagRate": 0.025,
+          "flagged": 5,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "ron_Latn",
+      "english": "Romanian",
+      "directions": [
+        {
+          "direction": "ron_Latn->en",
+          "engine": "opus-romance-en",
+          "verdict": "fail",
+          "chrfpp": 58.15,
+          "baseline": 65.9,
+          "gap": -7.75,
+          "flagRate": 0.005,
+          "flagged": 1,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "rus_Cyrl",
+      "english": "Russian",
+      "directions": [
+        {
+          "direction": "en->rus_Cyrl",
+          "engine": "opus-en-ru",
+          "verdict": "borderline",
+          "chrfpp": 50.16,
+          "baseline": 52.5,
+          "gap": -2.34,
+          "flagRate": 0.015,
+          "flagged": 3,
+          "n": 200
+        },
+        {
+          "direction": "rus_Cyrl->en",
+          "engine": "opus-ru-en",
+          "verdict": "fail",
+          "chrfpp": 53.16,
+          "baseline": 58.6,
+          "gap": -5.44,
+          "flagRate": 0.02,
+          "flagged": 4,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "srp_Cyrl",
+      "english": "Serbian",
+      "directions": [
+        {
+          "direction": "en->srp_Cyrl",
+          "engine": "opus-en-mul",
+          "verdict": "fail",
+          "chrfpp": 37.13,
+          "baseline": 53.3,
+          "gap": -16.17,
+          "flagRate": 0.47,
+          "flagged": 94,
+          "n": 200
+        },
+        {
+          "direction": "srp_Cyrl->en",
+          "engine": "opus-mul-en",
+          "verdict": "fail",
+          "chrfpp": 50.44,
+          "baseline": 63.5,
+          "gap": -13.06,
+          "flagRate": 0.015,
+          "flagged": 3,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "spa_Latn",
+      "english": "Spanish",
+      "directions": [
+        {
+          "direction": "spa_Latn->en",
+          "engine": "opus-es-en",
+          "verdict": "borderline",
+          "chrfpp": 54.68,
+          "baseline": 57.1,
+          "gap": -2.42,
+          "flagRate": 0,
+          "flagged": 0,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "swe_Latn",
+      "english": "Swedish",
+      "directions": [
+        {
+          "direction": "swe_Latn->en",
+          "engine": "opus-sv-en",
+          "verdict": "borderline",
+          "chrfpp": 64.3,
+          "baseline": 67,
+          "gap": -2.7,
+          "flagRate": 0.01,
+          "flagged": 2,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "tha_Thai",
+      "english": "Thai",
+      "directions": [
+        {
+          "direction": "tha_Thai->en",
+          "engine": "opus-th-en",
+          "verdict": "fail",
+          "chrfpp": 44.49,
+          "baseline": 52.7,
+          "gap": -8.21,
+          "flagRate": 0.025,
+          "flagged": 5,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "tur_Latn",
+      "english": "Turkish",
+      "directions": [
+        {
+          "direction": "tur_Latn->en",
+          "engine": "opus-tr-en",
+          "verdict": "fail",
+          "chrfpp": 53.4,
+          "baseline": 60,
+          "gap": -6.6,
+          "flagRate": 0.01,
+          "flagged": 2,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "ukr_Cyrl",
+      "english": "Ukrainian",
+      "directions": [
+        {
+          "direction": "en->ukr_Cyrl",
+          "engine": "opus-en-uk",
+          "verdict": "fail",
+          "chrfpp": 43.91,
+          "baseline": 50.5,
+          "gap": -6.59,
+          "flagRate": 0.02,
+          "flagged": 4,
+          "n": 200
+        },
+        {
+          "direction": "ukr_Cyrl->en",
+          "engine": "opus-uk-en",
+          "verdict": "fail",
+          "chrfpp": 54.08,
+          "baseline": 61.1,
+          "gap": -7.02,
+          "flagRate": 0.015,
+          "flagged": 3,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "vie_Latn",
+      "english": "Vietnamese",
+      "directions": [
+        {
+          "direction": "en->vie_Latn",
+          "engine": "opus-en-vi",
+          "verdict": "fail",
+          "chrfpp": 42.39,
+          "baseline": 56.4,
+          "gap": -14.01,
+          "flagRate": 0.075,
+          "flagged": 15,
+          "n": 200
+        },
+        {
+          "direction": "vie_Latn->en",
+          "engine": "opus-vi-en",
+          "verdict": "fail",
+          "chrfpp": 49.98,
+          "baseline": 58.1,
+          "gap": -8.12,
+          "flagRate": 0.01,
+          "flagged": 2,
+          "n": 200
+        }
+      ]
+    }
+  ],
+  "list2NoSmallModelAtAll": [
+    {
+      "code": "amh_Ethi",
+      "english": "Amharic"
+    },
+    {
+      "code": "asm_Beng",
+      "english": "Assamese"
+    },
+    {
+      "code": "ben_Beng",
+      "english": "Bengali"
+    },
+    {
+      "code": "cat_Latn",
+      "english": "Catalan"
+    },
+    {
+      "code": "zho_Hant",
+      "english": "Chinese (Traditional)"
+    },
+    {
+      "code": "guj_Gujr",
+      "english": "Gujarati"
+    },
+    {
+      "code": "hau_Latn",
+      "english": "Hausa"
+    },
+    {
+      "code": "heb_Hebr",
+      "english": "Hebrew"
+    },
+    {
+      "code": "kan_Knda",
+      "english": "Kannada"
+    },
+    {
+      "code": "zsm_Latn",
+      "english": "Malay"
+    },
+    {
+      "code": "mal_Mlym",
+      "english": "Malayalam"
+    },
+    {
+      "code": "mar_Deva",
+      "english": "Marathi"
+    },
+    {
+      "code": "npi_Deva",
+      "english": "Nepali"
+    },
+    {
+      "code": "ory_Orya",
+      "english": "Odia"
+    },
+    {
+      "code": "pbt_Arab",
+      "english": "Pashto"
+    },
+    {
+      "code": "pes_Arab",
+      "english": "Persian"
+    },
+    {
+      "code": "pan_Guru",
+      "english": "Punjabi"
+    },
+    {
+      "code": "sin_Sinh",
+      "english": "Sinhala"
+    },
+    {
+      "code": "swh_Latn",
+      "english": "Swahili"
+    },
+    {
+      "code": "tgl_Latn",
+      "english": "Tagalog"
+    },
+    {
+      "code": "tam_Taml",
+      "english": "Tamil"
+    },
+    {
+      "code": "tel_Telu",
+      "english": "Telugu"
+    },
+    {
+      "code": "urd_Arab",
+      "english": "Urdu"
+    },
+    {
+      "code": "yor_Latn",
+      "english": "Yoruba"
+    },
+    {
+      "code": "zul_Latn",
+      "english": "Zulu"
+    }
+  ],
+  "fullModelLocalRuns": [
+    {
+      "pair": "eng_Latn->fra_Latn",
+      "chrfpp": 65.72,
+      "published": 67,
+      "delta": -1.28,
+      "flagRate": 0.025
+    },
+    {
+      "pair": "eng_Latn->hin_Deva",
+      "chrfpp": 52.05,
+      "published": 54.2,
+      "delta": -2.15,
+      "flagRate": 0.035
+    },
+    {
+      "pair": "fra_Latn->eng_Latn",
+      "chrfpp": 64.56,
+      "published": 65.4,
+      "delta": -0.84,
+      "flagRate": 0.015
+    },
+    {
+      "pair": "hin_Deva->eng_Latn",
+      "chrfpp": 61.77,
+      "published": 62.5,
+      "delta": -0.73,
+      "flagRate": 0
+    },
+    {
+      "pair": "eng_Latn->zho_Hans",
+      "chrfpp": 17.72,
+      "published": 19.6,
+      "delta": -1.88,
+      "flagRate": 0.365
+    }
+  ]
+}
