@@ -373,6 +373,666 @@
         "downloadSeconds": null
       },
       "completedAt": "2026-10-11T12:18:10.800Z"
+    },
+    {
+      "runKey": "eng_Latn-zho_Hans#nllb-200-distilled-600M",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "zho_Hans"
+      },
+      "engine": {
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "name": "NLLB-200 (distilled 600M)",
+        "expectedBytes": 911962632,
+        "langTag": null
+      },
+      "mode": "node",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 17.72,
+        "corpusLower": 17.72
+      },
+      "published": {
+        "chrfpp": 19.6,
+        "delta": -1.88
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 1,
+          "repeatLoop": 0,
+          "lenRatio": 37,
+          "endsMidWord": 65
+        },
+        "flaggedSentences": 73,
+        "flagRate": 0.365,
+        "details": [
+          {
+            "id": 32,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 34.5
+          },
+          {
+            "id": 40,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 21.7
+          },
+          {
+            "id": 63,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 11.5
+          },
+          {
+            "id": 66,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 24.8
+          },
+          {
+            "id": 82,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 4.8
+          },
+          {
+            "id": 86,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 8.6
+          },
+          {
+            "id": 87,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 1.8
+          },
+          {
+            "id": 104,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 13.5
+          },
+          {
+            "id": 127,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 16.1
+          },
+          {
+            "id": 131,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 11.1
+          },
+          {
+            "id": 141,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 13.9
+          },
+          {
+            "id": 149,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 9.8
+          },
+          {
+            "id": 155,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 6.4
+          },
+          {
+            "id": 174,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 4.1
+          },
+          {
+            "id": 178,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 2.3
+          },
+          {
+            "id": 194,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 4.1
+          },
+          {
+            "id": 210,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 12.3
+          },
+          {
+            "id": 219,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 2.8
+          },
+          {
+            "id": 246,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 8.2
+          },
+          {
+            "id": 284,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 10.8
+          },
+          {
+            "id": 292,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 25.1
+          },
+          {
+            "id": 298,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 10.3
+          },
+          {
+            "id": 302,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 13.5
+          },
+          {
+            "id": 304,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 7.4
+          },
+          {
+            "id": 335,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 17.7
+          },
+          {
+            "id": 339,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 9.3
+          },
+          {
+            "id": 340,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 28.7
+          },
+          {
+            "id": 350,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 6.3
+          },
+          {
+            "id": 365,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 10.5
+          },
+          {
+            "id": 370,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 9.7
+          },
+          {
+            "id": 372,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 9.7
+          },
+          {
+            "id": 375,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 19.9
+          },
+          {
+            "id": 396,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 5.3
+          },
+          {
+            "id": 415,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 9.4
+          },
+          {
+            "id": 437,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 17.7
+          },
+          {
+            "id": 455,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 5.3
+          },
+          {
+            "id": 472,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 10.9
+          },
+          {
+            "id": 480,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 11.6
+          },
+          {
+            "id": 520,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 11.5
+          },
+          {
+            "id": 523,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 7.2
+          },
+          {
+            "id": 538,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 6.3
+          },
+          {
+            "id": 548,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 9.5
+          },
+          {
+            "id": 550,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 12.8
+          },
+          {
+            "id": 553,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 2.5
+          },
+          {
+            "id": 568,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 14
+          },
+          {
+            "id": 637,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 16.4
+          },
+          {
+            "id": 688,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 11.4
+          },
+          {
+            "id": 697,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 26.1
+          },
+          {
+            "id": 711,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 5.1
+          },
+          {
+            "id": 718,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 12.1
+          },
+          {
+            "id": 731,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 25
+          },
+          {
+            "id": 740,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 9.3
+          },
+          {
+            "id": 747,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 8.1
+          },
+          {
+            "id": 759,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 11.7
+          },
+          {
+            "id": 761,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 18.8
+          },
+          {
+            "id": 773,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 12.1
+          },
+          {
+            "id": 776,
+            "flags": [
+              "wrongScript",
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 7.2
+          },
+          {
+            "id": 783,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 2.1
+          },
+          {
+            "id": 793,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 10.8
+          },
+          {
+            "id": 800,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 13.4
+          },
+          {
+            "id": 809,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 9.8
+          },
+          {
+            "id": 815,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 22.7
+          },
+          {
+            "id": 816,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 31.4
+          },
+          {
+            "id": 832,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 16.9
+          },
+          {
+            "id": 848,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 20.6
+          },
+          {
+            "id": 859,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 10.7
+          },
+          {
+            "id": 874,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 9.3
+          },
+          {
+            "id": 914,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 2.4
+          },
+          {
+            "id": 919,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 14.4
+          },
+          {
+            "id": 926,
+            "flags": [
+              "lenRatio",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 3.1
+          },
+          {
+            "id": 934,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 6.3
+          },
+          {
+            "id": 938,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 47.8
+          },
+          {
+            "id": 997,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 43.2
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (the sandbox browser cannot load the full model; small-model speed numbers in this file come from the browser worker path)",
+        "medianSecondsPerSentence": 12.151,
+        "p90SecondsPerSentence": 19.238,
+        "loadSeconds": 5.684,
+        "downloadSeconds": 56.195
+      },
+      "completedAt": "2026-10-11T16:14:09.217Z"
     }
   ]
 }
