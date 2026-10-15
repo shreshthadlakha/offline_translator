@@ -28,7 +28,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useTranslatorState } from "@/components/translate/translator-provider";
+import { useSettings } from "@/hooks/use-settings";
 import { deleteModelCache, deleteModelEntries, savedModels } from "@/lib/model-cache";
+import { languageByCode } from "@/lib/languages";
 import { useInstallPrompt } from "@/hooks/use-install-prompt";
 import { STORAGE_KEYS, storageRemove } from "@/lib/storage";
 import { formatBytes, mbWhole } from "@/lib/format";
@@ -47,6 +49,21 @@ type SavedModel = { modelId: string; name: string; bytes: number; engineId: stri
 
 function SettingsSheetInner({ open, onOpenChange, onHowItWorks }: Props) {
   const { settings, updateSettings, engine, history } = useTranslatorState();
+  const { removeFullModelFor } = useSettings();
+
+  // Pair keys of the "always use the full model" choices, for the list below.
+  const fullModelChoices = settings.fullModelFor;
+  const onRemoveChoice = useCallback(
+    (pairKey: string) => {
+      removeFullModelFor(pairKey);
+      toast({ description: strings.settings.removedChoice });
+    },
+    [removeFullModelFor],
+  );
+  const pairName = useCallback((pairKey: string) => {
+    const [src, tgt] = pairKey.split("|");
+    return `${languageByCode(src)?.english ?? src} to ${languageByCode(tgt)?.english ?? tgt}`;
+  }, []);
   const install = useInstallPrompt();
 
   // The real numbers for the On this device block, read while the sheet is
@@ -262,6 +279,32 @@ function SettingsSheetInner({ open, onOpenChange, onHowItWorks }: Props) {
                       onClick={() => void onRemoveModel(model)}
                       disabled={removing === model.modelId}
                       aria-label={strings.settings.removeModelAria(model.name)}
+                      className="type-small h-8 shrink-0 text-muted-foreground"
+                    >
+                      <Trash2 aria-hidden className="size-3.5" />
+                      {strings.settings.removeModel}
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <h4 className="type-small mt-5 font-medium text-muted-foreground">{strings.settings.fullModelChoices}</h4>
+            {fullModelChoices.length === 0 ? (
+              <p className="type-small mt-1.5 text-muted-foreground">{strings.settings.fullModelChoicesEmpty}</p>
+            ) : (
+              <ul className="mt-1.5 space-y-1.5">
+                {fullModelChoices.map((pairKey) => (
+                  <li
+                    key={pairKey}
+                    className="flex items-center justify-between gap-3 rounded-lg border border-border bg-surface px-3 py-2"
+                  >
+                    <p className="type-small truncate">{pairName(pairKey)}</p>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => onRemoveChoice(pairKey)}
+                      aria-label={strings.settings.removeModelAria(pairName(pairKey))}
                       className="type-small h-8 shrink-0 text-muted-foreground"
                     >
                       <Trash2 aria-hidden className="size-3.5" />

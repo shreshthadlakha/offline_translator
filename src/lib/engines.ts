@@ -19,6 +19,8 @@
  * plus tokenizer and config files.
  */
 
+import { directionQuality, type QualityTier } from "./quality";
+
 export type EngineKind = "nllb" | "opus" | "indictrans2";
 
 export type EngineDescriptor = {
@@ -398,21 +400,36 @@ export function engineForPair(src: string, tgt: string, fastModelsEnabled: boole
   return NLLB_ENGINE;
 }
 
-/** What a pair costs to set up: which kind of engine and how many bytes. */
+/** What a pair costs to set up: which kind of engine, how many bytes, and
+ * its measured quality tier (the label beside the size in the pickers). */
 export type PairCost = {
   kind: "fast" | "group" | "large";
   expectedBytes: number;
+  /** best: within the bar. good: approximate (borderline). limited:
+   *  measurably weaker, still the best small option found. full: the full
+   *  model serves this pair. */
+  tier: QualityTier;
 };
 
 /**
  * The up front cost of a pair, for the quiet notes beside every language in
  * the picker and the language grid. English on either side can have a small
  * model; a pair of two non English languages always needs the full model.
+ * The tier comes from the measured quality data (lib/quality.ts, regenerated
+ * with the quality table after any route change), so a label is never shown
+ * without data behind it.
  */
 export function pairCost(src: string, tgt: string, fastModelsEnabled: boolean): PairCost {
   const engine = engineForPair(src, tgt, fastModelsEnabled);
-  if (engine.kind === "nllb") return { kind: "large", expectedBytes: engine.expectedBytes };
-  return { kind: engine.group ? "group" : "fast", expectedBytes: engine.expectedBytes };
+  const tier = fastModelsEnabled ? directionQuality(src, tgt)?.tier ?? "full" : "full";
+  if (engine.kind === "nllb") return { kind: "large", expectedBytes: engine.expectedBytes, tier: "full" };
+  return { kind: engine.group ? "group" : "fast", expectedBytes: engine.expectedBytes, tier };
+}
+
+/** True when this pair carries a "use the full model" override in settings. */
+export function hasFullModelOverride(list: string[] | undefined, src: string, tgt: string): boolean {
+  if (!list || list.length === 0) return false;
+  return list.includes(`${src}|${tgt}`);
 }
 
 /**

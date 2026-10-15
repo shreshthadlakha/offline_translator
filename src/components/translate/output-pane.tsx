@@ -19,7 +19,9 @@ import { Button } from "@/components/ui/button";
 import { SetupCard } from "@/components/translate/setup-card";
 import { useTranslatorState } from "@/components/translate/translator-provider";
 import { useSpeech } from "@/hooks/use-speech";
+import { useSettings } from "@/hooks/use-settings";
 import { toast } from "@/hooks/use-toast";
+import { directionQuality } from "@/lib/quality";
 import { secondsPrecise } from "@/lib/format";
 import { copy } from "@/lib/copy";
 
@@ -61,8 +63,19 @@ function ReadyNote() {
 }
 
 function OutputPaneInner() {
-  const { output, tgtLang, srcCode, flagCurrent, engine, heavyAsk } = useTranslatorState();
+  const { output, tgtLang, srcCode, tgtCode, flagCurrent, engine, heavyAsk } = useTranslatorState();
   const speech = useSpeech(tgtLang, output.plainText);
+  const { settings, addFullModelFor } = useSettings();
+
+  // The quiet notice under translations from approximate or limited models,
+  // with the per language way out. It shows while the pair runs on its small
+  // model; choosing the full model (or turning fast models off) removes it.
+  const pairKey = `${srcCode}|${tgtCode}`;
+  const tier = directionQuality(srcCode, tgtCode)?.tier;
+  const overrideActive = settings.fullModelFor.includes(pairKey) || !settings.useFastModels;
+  const onUseFullModel = useCallback(() => {
+    addFullModelFor(pairKey);
+  }, [addFullModelFor, pairKey]);
 
   // When the engine becomes ready, show the quiet confirmation briefly, then
   // fall through to the normal empty state. The note hides itself once the
@@ -104,6 +117,8 @@ function OutputPaneInner() {
 
   const hasOutput = output.hasAnyOutput || output.plainText.trim().length > 0;
   const hasContent = hasOutput || output.totalSentences > 0;
+  const showApproximateNotice =
+    engine.status === "ready" && hasOutput && !overrideActive && engine.desiredEngine?.kind !== "nllb" && (tier === "good" || tier === "limited");
 
   let content: React.ReactNode;
   if (engine.status !== "ready") {
@@ -232,6 +247,15 @@ function OutputPaneInner() {
       >
         {content}
       </div>
+
+      {showApproximateNotice ? (
+        <footer className="border-t px-4 py-2.5" aria-live="polite">
+          <p className="type-small text-muted-foreground">{copy.translate.approximateNotice}</p>
+          <Button variant="ghost" size="sm" className="mt-1 h-8 px-2 text-muted-foreground" onClick={onUseFullModel}>
+            {copy.translate.useFullModel}
+          </Button>
+        </footer>
+      ) : null}
 
       {speech.speechSupported && !speech.hasVoice && hasOutput ? (
         <footer className="border-t px-4 py-3">

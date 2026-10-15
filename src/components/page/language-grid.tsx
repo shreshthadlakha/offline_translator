@@ -17,7 +17,7 @@ import { memo, useCallback } from "react";
 import { usePairState } from "@/components/translate/translator-provider";
 import { useSettings } from "@/hooks/use-settings";
 import { SORTED_LANGUAGES } from "@/lib/languages";
-import { pairCost, resultingPair } from "@/lib/engines";
+import { hasFullModelOverride, pairCost, resultingPair } from "@/lib/engines";
 import { mbWhole } from "@/lib/format";
 import { copy } from "@/lib/copy";
 
@@ -30,12 +30,20 @@ function LanguageGridInner() {
   const noteFor = useCallback(
     (code: string) => {
       const pair = resultingPair("target", code, srcCode, tgtCode);
-      const cost = pairCost(pair.src, pair.tgt, settings.useFastModels);
-      if (cost.kind === "fast") return copy.translate.costFast(mbWhole(cost.expectedBytes));
-      if (cost.kind === "group") return copy.translate.costGroup(mbWhole(cost.expectedBytes));
-      return copy.translate.costLarge;
+      const fastOn = settings.useFastModels && !hasFullModelOverride(settings.fullModelFor, pair.src, pair.tgt);
+      const cost = pairCost(pair.src, pair.tgt, fastOn);
+      if (cost.kind === "large") return copy.translate.costLarge;
+      const t = copy.translate;
+      if (cost.kind === "group") {
+        if (cost.tier === "good") return t.costGroupApproximate(mbWhole(cost.expectedBytes));
+        if (cost.tier === "limited") return t.costGroupLimited(mbWhole(cost.expectedBytes));
+        return t.costGroup(mbWhole(cost.expectedBytes));
+      }
+      if (cost.tier === "good") return t.costFastApproximate(mbWhole(cost.expectedBytes));
+      if (cost.tier === "limited") return t.costFastLimited(mbWhole(cost.expectedBytes));
+      return t.costFast(mbWhole(cost.expectedBytes));
     },
-    [srcCode, tgtCode, settings.useFastModels],
+    [srcCode, tgtCode, settings.useFastModels, settings.fullModelFor],
   );
 
   const onPick = useCallback(

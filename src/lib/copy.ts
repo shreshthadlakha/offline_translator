@@ -156,10 +156,19 @@ export const copy = {
     pickerShortcutOther: "Ctrl K",
     translatedOffline: "Translated with no connection.",
     // Quiet cost notes beside each language, for the pair it would create
-    // with the language on the other side.
+    // with the language on the other side. The tier qualifier comes from the
+    // measured quality data, never a guess.
     costFast: (mb: string) => `Fast, about ${mb} MB`,
+    costFastApproximate: (mb: string) => `Fast, approximate, about ${mb} MB`,
+    costFastLimited: (mb: string) => `Fast, limited, about ${mb} MB`,
     costGroup: (mb: string) => `Fast, about ${mb} MB (one model shared by a few languages)`,
+    costGroupApproximate: (mb: string) => `Fast, approximate, about ${mb} MB (one model shared by a few languages)`,
+    costGroupLimited: (mb: string) => `Fast, limited, about ${mb} MB (one model shared by a few languages)`,
     costLarge: `Large, about ${MODEL_SIZE}`,
+    // The quiet notice under a translation from an approximate or limited
+    // model, with the per language way out.
+    approximateNotice: "This fast model is approximate. For important text, use the full model.",
+    useFullModel: "Use the full model for this language.",
     // Progress while translating, and the quiet timing line afterwards.
     translatingSentence: (index: number, total: number) => `Translating sentence ${index} of ${total}`,
     translatedIn: (seconds: string) => `Translated in ${seconds} s`,
@@ -177,6 +186,14 @@ export const copy = {
     modelId: "Model",
     license: "Licence",
     attribution: "From",
+    // The measured quality of this pair's route, beside its baseline.
+    quality: "Quality",
+    qualityBest: (gap: string) => `Fast, within ${gap} chrF++ of the full model's published score`,
+    qualityBestAbove: (gap: string) => `Fast, ${gap} chrF++ above the full model's published score`,
+    qualityGood: (gap: string) => `Fast, approximate, ${gap} chrF++ below the full model's published score`,
+    qualityLimited: (gap: string) => `Fast, limited, ${gap} chrF++ below the full model's published score`,
+    qualityFull: "The full multilingual model, the reference everything else is measured against",
+    qualityUnmeasured: "Not measured",
     files: "Files",
     fileStatusWaiting: "waiting",
     fileStatusDownloading: "downloading",
@@ -338,6 +355,10 @@ export const copy = {
     onThisDevice: "On this device",
     savedModels: "Saved models",
     savedModelsEmpty: "None yet.",
+    // The per language "use the full model" choices, each with a Remove button.
+    fullModelChoices: "Always use the full model",
+    fullModelChoicesEmpty: "None. The choice appears under translations from approximate models.",
+    removedChoice: "Removed. That pair uses the fast model again.",
     savedModelSize: (mb: string) => `About ${mb} MB`,
     removeModel: "Remove",
     removeModelAria: (name: string) => `Remove ${name}`,

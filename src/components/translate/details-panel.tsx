@@ -15,6 +15,7 @@ import { memo, useCallback, useEffect, useRef, useState, useSyncExternalStore } 
 import { Copy as CopyIcon, Gauge } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslatorState } from "@/components/translate/translator-provider";
+import { directionQuality } from "@/lib/quality";
 import { toast } from "@/hooks/use-toast";
 import { STORAGE_KEYS, storageGet, storageSet } from "@/lib/storage";
 import { getTimings, medianQueueMs, medianTranslateMs, subscribeTimings } from "@/lib/speed-metrics";
@@ -76,6 +77,25 @@ function DetailsPanelInner() {
   const { engine, srcCode, tgtCode, srcLang } = useTranslatorState();
   const timings = useSyncExternalStore(subscribeTimings, getTimings, getTimings);
   const { status, device, engineInfo, desiredEngine, fileRows, stageTimings, heap, lastSwitchMs, notes } = engine;
+
+  // The measured quality of this pair's route: the tier, and for developers
+  // the chrF++ distance to the published full-model score.
+  const quality = directionQuality(srcCode, tgtCode);
+  const absGap = quality?.gap != null ? Math.abs(quality.gap).toFixed(1) : null;
+  const qualityLine =
+    desiredEngine?.kind === "nllb"
+      ? copy.details.qualityFull
+      : quality == null
+        ? copy.details.qualityUnmeasured
+        : quality.tier === "best"
+          ? quality.gap != null && quality.gap > 0
+            ? copy.details.qualityBestAbove(quality.gap.toFixed(1))
+            : copy.details.qualityBest(absGap ?? "0.0")
+          : quality.tier === "good"
+            ? copy.details.qualityGood(absGap ?? "0.0")
+            : quality.tier === "limited"
+              ? copy.details.qualityLimited(absGap ?? "0.0")
+              : copy.details.qualityUnmeasured;
   const lastError = engine.lastError;
 
   const [open, setOpen] = useState(false);
@@ -299,6 +319,7 @@ function DetailsPanelInner() {
               <Row label={copy.details.modelId} value={<span className="break-all">{engineShown.modelId}</span>} />
               <Row label={copy.details.precision} value={`${copy.details.precisionValue}, about ${mbWhole(engineShown.expectedBytes)} MB`} />
               <Row label={copy.details.license} value={`${engineShown.license} · ${engineShown.attribution}`} />
+              <Row label={copy.details.quality} value={qualityLine} />
               <Row label={copy.details.device} value={device === "webgpu" ? copy.details.deviceWebgpu : device === "wasm" ? copy.details.deviceWasm : "—"} />
             </dl>
           ) : null}

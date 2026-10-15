@@ -20,6 +20,10 @@ export type Settings = {
   useFastModels: boolean;
   /** Experimental: try WebGPU instead of WebAssembly. Off by default. */
   useWebGPU: boolean;
+  /** Language pairs ("src|tgt" registry codes) the person chose to always
+   *  run on the full model, from the approximate notice's button. Stored
+   *  separately from useFastModels so the global switch stays untouched. */
+  fullModelFor: string[];
 };
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -30,6 +34,7 @@ export const DEFAULT_SETTINGS: Settings = {
   lastTgt: "fra_Latn",
   useFastModels: true,
   useWebGPU: false,
+  fullModelFor: [],
 };
 
 let snapshot: Settings | null = null;
@@ -46,6 +51,9 @@ function readFromStorage(): Settings {
     lastTgt: typeof stored.lastTgt === "string" ? stored.lastTgt : DEFAULT_SETTINGS.lastTgt,
     useFastModels: typeof stored.useFastModels === "boolean" ? stored.useFastModels : DEFAULT_SETTINGS.useFastModels,
     useWebGPU: typeof stored.useWebGPU === "boolean" ? stored.useWebGPU : DEFAULT_SETTINGS.useWebGPU,
+    fullModelFor: Array.isArray(stored.fullModelFor)
+      ? stored.fullModelFor.filter((k) => typeof k === "string" && k.includes("|")).slice(0, 64)
+      : DEFAULT_SETTINGS.fullModelFor,
   };
 }
 
@@ -99,5 +107,23 @@ export function useSettings() {
     [setTheme],
   );
 
-  return { settings, update, loaded, applyTheme };
+  /** Store "use the full model for this pair" from the notice's button. */
+  const addFullModelFor = useCallback(
+    (pairKey: string) => {
+      const current = getSnapshot().fullModelFor;
+      if (current.includes(pairKey)) return;
+      updateStore({ fullModelFor: [...current, pairKey] });
+    },
+    [],
+  );
+
+  /** Remove one pair override (Settings list). */
+  const removeFullModelFor = useCallback(
+    (pairKey: string) => {
+      updateStore({ fullModelFor: getSnapshot().fullModelFor.filter((k) => k !== pairKey) });
+    },
+    [],
+  );
+
+  return { settings, update, loaded, applyTheme, addFullModelFor, removeFullModelFor };
 }

@@ -198,7 +198,10 @@ export function useEngine(heavyGate?: HeavyGate) {
   // render matches the server; the stored pair arrives right after hydration.
   const srcCode = languageByCode(settings.lastSrc)?.code ?? "eng_Latn";
   const tgtCode = languageByCode(settings.lastTgt)?.code ?? "fra_Latn";
-  const desired = useMemo(() => engineForPair(srcCode, tgtCode, settings.useFastModels), [srcCode, tgtCode, settings.useFastModels]);
+  const desired = useMemo(
+    () => engineForPair(srcCode, tgtCode, settings.useFastModels && !settings.fullModelFor.includes(`${srcCode}|${tgtCode}`)),
+    [srcCode, tgtCode, settings.useFastModels, settings.fullModelFor],
+  );
   desiredRef.current = desired;
 
   const post = useCallback((message: Record<string, unknown>) => {

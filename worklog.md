@@ -535,3 +535,21 @@ Work Log:
 
 Stage Summary:
 - Four community conversions shipped with real, re-measured quality data and pinned revisions; the engine table now matches the final routing truth. The drift check and the notices (which must list the community conversions with their pins and licences) are next in B6, after the labels and the safety net.
+
+---
+Task ID: 14-B4 (P9 Step B4 — quality labels and a choice of model)
+Agent: main (Z.ai Code)
+Task: P9 B4 — honest tier labels in the pickers and the grid, the approximate notice with the per language "use the full model" choice, the Settings list for those choices, and the measured quality in Details.
+
+Work Log:
+- Quality data: lib/quality.ts (recovered, then regenerated in B2/B3 from the re-scored runs) is the single source; pairCost now returns the measured tier beside the size (best / good / limited / full), so no label is ever shown without data behind it.
+- Labels, in the picker and the language grid, from the same helper logic: "Fast, about X MB" (best), "Fast, approximate, about X MB" (good), "Fast, limited, about X MB" (limited — the honest wording for the routes kept live despite failing the bar; the prompts' word), "Fast, approximate, about X MB (one model shared by a few languages)" for the live Romance group, "Large, about 900 MB" for full-model pairs. The note reflects the pair that choosing the language would create, and respects a stored override (the pair then shows Large).
+- The approximate notice: one quiet line under the translation whenever the output comes from an approximate or limited route and no override is active — "This fast model is approximate. For important text, use the full model." with the button "Use the full model for this language."
+- The per language choice: the button stores a "src|tgt" pair override in settings (new fullModelFor list, persisted like the rest of settings); the desired-engine resolution consults it (engineForPair receives fast models on AND no override for this pair), so the pair switches to the full model through the existing heavy download warning exactly as the toggle does. Settings lists every choice by pair name with a Remove button; removing returns the pair to its fast model. The global "Use faster models" switch is untouched and still wins when off.
+- Details gained a Quality row: the tier plus, for developers, the measured chrF++ distance to the published full-model score ("Fast, approximate, 1.8 chrF++ below the full model's published score"); the full model's row says it is the reference.
+- All strings live in the copy file per the voice rules; typecheck and lint clean.
+- Browser-verified: the grid shows French "Fast", Afrikaans/Arabic/Greek "Fast, approximate", Portuguese "Fast, approximate (one model shared...)", Ukrainian "Fast, limited"; a live English->Arabic translation (model already saved) shows the notice and the button; clicking the button stores the override, switches the pair to the full model and fires the honest heavy ask (900 MB / 3 GB / low-memory variant); declining stops the stale engine; Settings lists "English to Arabic" with Remove, and removing empties the list and routes the pair back to its fast model; Details shows the measured quality line; the override persists in localStorage across a reload; zero page errors.
+
+Stage Summary:
+- Every language shows an honest tier, approximate and limited outputs carry the notice, and the override works end to end through the existing heavy warning and Settings.
+- Autonomous decisions recorded: "limited" gets its own picker label ("Fast, limited") rather than being folded into "approximate", because the measured gap is 5+ chrF and the prompts treat it as its own tier; the notice stays visible while a pair runs on an approximate/limited model (no dismissal state exists in the spec, and hiding it on a later visit would hide the honest warning); the heavy dialog keeps its existing wording on the override path (the P4 spec explicitly reuses that warning, and P7 forbids interface changes beyond it).

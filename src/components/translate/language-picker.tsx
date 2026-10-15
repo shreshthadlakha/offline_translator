@@ -20,7 +20,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSettings } from "@/hooks/use-settings";
 import { searchLanguages, type Language } from "@/lib/languages";
-import { pairCost, resultingPair } from "@/lib/engines";
+import { hasFullModelOverride, pairCost, resultingPair } from "@/lib/engines";
 import { mbWhole } from "@/lib/format";
 import { copy } from "@/lib/copy";
 import { cn } from "@/lib/utils";
@@ -141,12 +141,20 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
       const src = side === "source" ? (value?.code ?? "eng_Latn") : (otherValue?.code ?? "eng_Latn");
       const tgt = side === "target" ? (value?.code ?? "fra_Latn") : (otherValue?.code ?? "fra_Latn");
       const pair = resultingPair(side, code, src, tgt);
-      const cost = pairCost(pair.src, pair.tgt, settings.useFastModels);
-      if (cost.kind === "fast") return copy.translate.costFast(mbWhole(cost.expectedBytes));
-      if (cost.kind === "group") return copy.translate.costGroup(mbWhole(cost.expectedBytes));
-      return copy.translate.costLarge;
+      const fastOn = settings.useFastModels && !hasFullModelOverride(settings.fullModelFor, pair.src, pair.tgt);
+      const cost = pairCost(pair.src, pair.tgt, fastOn);
+      if (cost.kind === "large") return copy.translate.costLarge;
+      const t = copy.translate;
+      if (cost.kind === "group") {
+        if (cost.tier === "good") return t.costGroupApproximate(mbWhole(cost.expectedBytes));
+        if (cost.tier === "limited") return t.costGroupLimited(mbWhole(cost.expectedBytes));
+        return t.costGroup(mbWhole(cost.expectedBytes));
+      }
+      if (cost.tier === "good") return t.costFastApproximate(mbWhole(cost.expectedBytes));
+      if (cost.tier === "limited") return t.costFastLimited(mbWhole(cost.expectedBytes));
+      return t.costFast(mbWhole(cost.expectedBytes));
     },
-    [side, value, otherValue, settings.useFastModels],
+    [side, value, otherValue, settings.useFastModels, settings.fullModelFor],
   );
 
   const isMobile = useIsMobile();
