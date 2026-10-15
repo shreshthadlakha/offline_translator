@@ -10,11 +10,21 @@
 //                  word makes up over half of a 12+ word output, or (for
 //                  unspaced scripts) a 2..8 character span repeats 3+ times
 //   lenRatio     - whitespace-stripped length outside 0.5..2.0 x the reference
-//   endsMidWord  - the reference ends with terminal punctuation but the output
-//                  does not, or the output ends with a dangling hyphen
+//   endsMidWord  - the output really stops mid word: it ends with a dangling
+//                  hyphen, or its final token is a proper prefix of a word in
+//                  the reference (and not a word the reference itself uses).
+//                  Skipped for scripts written without spaces, where word
+//                  boundaries cannot be checked.
+//
+// Counted separately, never a flag (P2b): a missing final punctuation mark
+//   missingFinalPunct - the reference ends with a terminal mark and the
+//                       output does not. The app restores the mark where the
+//                       model dropped it on an otherwise complete sentence, so
+//                       this alone says nothing about quality.
 //
 // Usage: node scripts/benchmark/sanity.mjs --test    self test
 // Exports: sanityFlags(hyp, ref, tgtCode) -> string[]
+//          missingFinalPunct(hyp, ref) -> boolean
 
 // Unicode script groups by code point range. Anything unrecognized is 'other'.
 const RANGES = [
@@ -155,12 +165,44 @@ function repeatLoop(text) {
 const TERMINAL = /[.!?\u2026\u3002\uff01\uff1f\u061f\u06d4\u0964\u0965]$/;
 const TRAILING_JUNK = /["'\u201d\u2019\u00bb\u203a)\u3001\uff0c]+$/;
 
-function endsMidWord(hyp, ref) {
+/** Scripts written without spaces: word boundaries cannot be checked there. */
+const UNSPACED_SCRIPTS = new Set(['Thai', 'Laoo', 'Khmr', 'Mymr', 'Hans', 'Hant', 'Jpan', 'Kana']);
+
+function endsMidWord(hyp, ref, tgtCode) {
+  const h = String(hyp ?? '').trim().replace(TRAILING_JUNK, '').trim();
+  if (h.length === 0) return false;
+  if (TERMINAL.test(h)) return false;
+  // A dangling hyphen is always a real cut.
+  if (/[-\u2010\u2011\u2013\u2014]$/.test(h)) return true;
+  const script = String(tgtCode ?? '').includes('_') ? String(tgtCode).split('_')[1] : '';
+  if (UNSPACED_SCRIPTS.has(script)) return false;
+  const tokens = h.split(/\s+/);
+  if (tokens.length < 2) return false; // a lone token carries no boundary evidence
+  const last = tokens[tokens.length - 1].replace(/[^\p{L}\p{N}\u0600-\u06ff]/gu, '');
+  if (last.length < 2) return false;
+  // The reference's own words (punctuation stripped, case folded).
+  const refWords = new Set(
+    String(ref ?? '')
+      .replace(TRAILING_JUNK, '')
+      .split(/\s+/)
+      .map((w) => w.replace(/[^\p{L}\p{N}\u0600-\u06ff]/gu, '').toLowerCase())
+      .filter(Boolean),
+  );
+  if (refWords.has(last.toLowerCase())) return false; // a complete word the reference uses
+  // A proper prefix of a reference word (2+ chars beyond it) = stopped mid word.
+  for (const w of refWords) {
+    if (w.length > last.length + 1 && w.startsWith(last.toLowerCase())) return true;
+  }
+  return false;
+}
+
+/** Counted separately, never a flag: the reference ends with a terminal
+ * mark and the hypothesis does not. The app's punctuation restoration adds
+ * the mark back on complete sentences, so this alone is not a defect. */
+export function missingFinalPunct(hyp, ref) {
   const h = String(hyp ?? '').trim().replace(TRAILING_JUNK, '').trim();
   const r = String(ref ?? '').trim().replace(TRAILING_JUNK, '').trim();
-  if (TERMINAL.test(h)) return false;
-  if (TERMINAL.test(r)) return true;
-  return /[-\u2010\u2011\u2013\u2014]$/.test(h);
+  return TERMINAL.test(r) && !TERMINAL.test(h);
 }
 
 function strippedLen(text) {
@@ -187,7 +229,7 @@ export function sanityFlags(hyp, ref, tgtCode) {
     const ratio = strippedLen(h) / refLen;
     if (ratio < 0.5 || ratio > 2.0) flags.push('lenRatio');
   }
-  if (endsMidWord(h, ref)) flags.push('endsMidWord');
+  if (endsMidWord(h, ref, tgtCode)) flags.push('endsMidWord');
   return flags;
 }
 
@@ -203,10 +245,15 @@ if (process.argv.includes('--test')) {
     ['repeat loop words', sanityFlags('the cat sat the cat sat the cat sat on the mat.', 'The cat sat on the mat.', 'eng_Latn'), ['repeatLoop']],
     ['repeat loop chars (han)', sanityFlags('今天天气很好很好很好很好。', '今天天气很好。', 'zho_Hans'), ['repeatLoop']],
     ['one word dominates', sanityFlags('yes yes yes yes yes yes yes yes yes yes yes yes yes yes.', 'Yes, I would like a coffee please.', 'eng_Latn'), ['repeatLoop']],
-    ['too short', sanityFlags('Hi', 'The committee approved the budget proposal unanimously yesterday.', 'eng_Latn'), ['lenRatio', 'endsMidWord']],
+    ['too short', sanityFlags('Hi', 'The committee approved the budget proposal unanimously yesterday.', 'eng_Latn'), ['lenRatio']],
     ['too long', sanityFlags('The sentence is one that goes on and on and has many more words than anyone would ever need in a single sentence, really.', 'The sentence goes on.', 'eng_Latn'), ['lenRatio']],
-    ['ends mid word', sanityFlags('The committee approved the budg', 'The committee approved the budget.', 'eng_Latn'), ['endsMidWord']],
+    ['ends mid word', sanityFlags('The committee approved the budg', 'The committee approved the budget proposal.', 'eng_Latn'), ['endsMidWord']],
     ['dangling hyphen', sanityFlags('This is incom-', 'This is incomplete.', 'eng_Latn'), ['endsMidWord']],
+    ['missing period only is not a flag', sanityFlags('The committee approved the budget proposal', 'The committee approved the budget proposal unanimously yesterday.', 'eng_Latn'), []],
+    ['complete sentence missing period', sanityFlags('Le temps est beau', "Le temps est beau.", 'fra_Latn'), []],
+    ['missing punct counted separately', missingFinalPunct('Le temps est beau', 'Le temps est beau.', 'fra_Latn'), true],
+    ['kept punct not counted', missingFinalPunct('Le temps est beau.', 'Le temps est beau.', 'fra_Latn'), false],
+    ['word prefix of another word ok', sanityFlags('I saw them', 'I saw the theme.', 'eng_Latn'), []],
     ['thai no punct ok', sanityFlags('สวัสดีครับ วันนี้อากาศดีมาก', 'สวัสดีครับ วันนี้อากาศดีมากครับ', 'tha_Thai'), []],
     ['period before closing quote ok', sanityFlags('Il a dit : « Mike parle beaucoup. »', 'Il a déclaré : « Mike parle beaucoup. ».', 'fra_Latn'), []],
   ];

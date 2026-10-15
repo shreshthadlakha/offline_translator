@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T19:56:00.636Z",
+  "generatedAt": "2026-10-15T09:54:25.632Z",
   "bar": {
     "file": "scripts/benchmark/quality-bar.mjs",
     "constants": {
@@ -39,21 +39,22 @@
       "baselineChrfpp": 72.9,
       "baselineSource": "published",
       "gap": -9.43,
-      "flagRate": 0.015,
+      "flagRate": 0.01,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 2,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 3,
+      "flaggedSentences": 2,
       "nSentences": 200,
       "loadColdSeconds": 13.4,
       "medianSecondsPerSentence": 0.663,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "fail",
-      "verdictReason": "chrF++ -9.43 (more than 5 of the bar); flags 1.5% <= 2%"
+      "verdictReason": "chrF++ -9.43 (more than 5 of the bar); flags 1.0% <= 2%"
     },
     {
       "language": {
@@ -76,21 +77,22 @@
       "baselineChrfpp": 62.4,
       "baselineSource": "published",
       "gap": -4.34,
-      "flagRate": 0.03,
+      "flagRate": 0.015,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 3,
         "lenRatio": 0,
-        "endsMidWord": 3
+        "endsMidWord": 0,
+        "missingFinalPunct": 3
       },
-      "flaggedSentences": 6,
+      "flaggedSentences": 3,
       "nSentences": 200,
       "loadColdSeconds": 12.6,
       "medianSecondsPerSentence": 0.678,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -4.34 (within 5 of the bar); flags 3.0% > 2% (repeatLoop 3, endsMidWord 3)"
+      "verdictReason": "chrF++ -4.34 (within 5 of the bar); flags 1.5% <= 2%"
     },
     {
       "language": {
@@ -175,21 +177,22 @@
       "baselineChrfpp": 62.2,
       "baselineSource": "published",
       "gap": -3.57,
-      "flagRate": 0.01,
+      "flagRate": 0.005,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 1,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 2,
+      "flaggedSentences": 1,
       "nSentences": 200,
       "loadColdSeconds": 12.1,
       "medianSecondsPerSentence": 0.814,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -3.57 (within 5 of the bar); flags 1.0% <= 2%"
+      "verdictReason": "chrF++ -3.57 (within 5 of the bar); flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -207,26 +210,27 @@
         "langTag": null
       },
       "modelSizeBytes": 117602860,
-      "chrfpp": 49.45,
+      "chrfpp": 49.56,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 51.4,
       "baselineSource": "published",
-      "gap": -1.95,
-      "flagRate": 0.155,
+      "gap": -1.84,
+      "flagRate": 0.03,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 3,
         "lenRatio": 2,
-        "endsMidWord": 26
+        "endsMidWord": 1,
+        "missingFinalPunct": 26
       },
-      "flaggedSentences": 31,
+      "flaggedSentences": 6,
       "nSentences": 200,
       "loadColdSeconds": 13.1,
       "medianSecondsPerSentence": 0.679,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -1.95 (within 2 of the bar); flags 15.5% > 2% (repeatLoop 3, lenRatio 2, endsMidWord 26)"
+      "verdictReason": "chrF++ -1.84 (within 2 of the bar); flags 3.0% > 2% (repeatLoop 3, lenRatio 2, endsMidWord 1, missingFinalPunct 26)"
     },
     {
       "language": {
@@ -373,21 +377,22 @@
       "baselineChrfpp": 63.4,
       "baselineSource": "published",
       "gap": -11.83,
-      "flagRate": 0.02,
+      "flagRate": 0.015,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 2,
         "lenRatio": 2,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 4,
+      "flaggedSentences": 3,
       "nSentences": 200,
       "loadColdSeconds": 13.1,
       "medianSecondsPerSentence": 0.857,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "fail",
-      "verdictReason": "chrF++ -11.83 (more than 5 of the bar); flags 2.0% <= 2%"
+      "verdictReason": "chrF++ -11.83 (more than 5 of the bar); flags 1.5% <= 2%"
     },
     {
       "language": {
@@ -398,33 +403,27 @@
       "src": "eng_Latn",
       "tgt": "bul_Cyrl",
       "engine": {
-        "id": "opus-en-mul",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-en-mul",
-        "group": true,
-        "langTag": "bul"
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
       },
-      "modelSizeBytes": 118280580,
-      "chrfpp": 41.42,
-      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "modelSizeBytes": 911962632,
+      "chrfpp": 60.4,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
       "baselineChrfpp": 60.4,
       "baselineSource": "published",
-      "gap": -18.98,
-      "flagRate": 0.54,
-      "flagCounts": {
-        "empty": 0,
-        "wrongScript": 0,
-        "repeatLoop": 0,
-        "lenRatio": 1,
-        "endsMidWord": 107
-      },
-      "flaggedSentences": 108,
-      "nSentences": 200,
-      "loadColdSeconds": 11.3,
-      "medianSecondsPerSentence": 1.202,
-      "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -18.98 (more than 5 of the bar); flags 54.0% > 2% (lenRatio 1, endsMidWord 107)"
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
     },
     {
       "language": {
@@ -504,26 +503,27 @@
         "langTag": null
       },
       "modelSizeBytes": 119495923,
-      "chrfpp": 48.86,
+      "chrfpp": 48.87,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 52.9,
       "baselineSource": "published",
-      "gap": -4.04,
-      "flagRate": 0.045,
+      "gap": -4.03,
+      "flagRate": 0.04,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 2,
         "lenRatio": 6,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 9,
+      "flaggedSentences": 8,
       "nSentences": 200,
       "loadColdSeconds": 13.6,
       "medianSecondsPerSentence": 0.655,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -4.04 (within 5 of the bar); flags 4.5% > 2% (repeatLoop 2, lenRatio 6, endsMidWord 1)"
+      "verdictReason": "chrF++ -4.03 (within 5 of the bar); flags 4.0% > 2% (repeatLoop 2, lenRatio 6, missingFinalPunct 1)"
     },
     {
       "language": {
@@ -541,26 +541,27 @@
         "langTag": null
       },
       "modelSizeBytes": 119495650,
-      "chrfpp": 22.32,
+      "chrfpp": 22.36,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 19.6,
       "baselineSource": "published",
-      "gap": 2.72,
-      "flagRate": 0.175,
+      "gap": 2.76,
+      "flagRate": 0.05,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 3,
         "repeatLoop": 1,
         "lenRatio": 7,
-        "endsMidWord": 30
+        "endsMidWord": 0,
+        "missingFinalPunct": 30
       },
-      "flaggedSentences": 35,
+      "flaggedSentences": 10,
       "nSentences": 200,
       "loadColdSeconds": 13.7,
       "medianSecondsPerSentence": 0.609,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ +2.72 vs published baseline; flags 17.5% > 2% (wrongScript 3, repeatLoop 1, lenRatio 7, endsMidWord 30)"
+      "verdictReason": "chrF++ +2.76 vs published baseline; flags 5.0% > 2% (wrongScript 3, repeatLoop 1, lenRatio 7, missingFinalPunct 30)"
     },
     {
       "language": {
@@ -633,33 +634,27 @@
       "src": "hrv_Latn",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "opus-mul-en",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-mul-en",
-        "group": true,
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 118351797,
-      "chrfpp": 44.98,
-      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "modelSizeBytes": 911962632,
+      "chrfpp": 59.5,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
       "baselineChrfpp": 59.5,
       "baselineSource": "published",
-      "gap": -14.52,
-      "flagRate": 0.05,
-      "flagCounts": {
-        "empty": 0,
-        "wrongScript": 0,
-        "repeatLoop": 6,
-        "lenRatio": 2,
-        "endsMidWord": 3
-      },
-      "flaggedSentences": 10,
-      "nSentences": 200,
-      "loadColdSeconds": 12.7,
-      "medianSecondsPerSentence": 0.79,
-      "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -14.52 (more than 5 of the bar); flags 5.0% > 2% (repeatLoop 6, lenRatio 2, endsMidWord 3)"
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
     },
     {
       "language": {
@@ -670,33 +665,27 @@
       "src": "eng_Latn",
       "tgt": "hrv_Latn",
       "engine": {
-        "id": "opus-en-mul",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-en-mul",
-        "group": true,
-        "langTag": "hrv"
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
       },
-      "modelSizeBytes": 118280580,
-      "chrfpp": 39.17,
-      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "modelSizeBytes": 911962632,
+      "chrfpp": 52.2,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
       "baselineChrfpp": 52.2,
       "baselineSource": "published",
-      "gap": -13.03,
-      "flagRate": 0.245,
-      "flagCounts": {
-        "empty": 0,
-        "wrongScript": 0,
-        "repeatLoop": 0,
-        "lenRatio": 4,
-        "endsMidWord": 45
-      },
-      "flaggedSentences": 49,
-      "nSentences": 200,
-      "loadColdSeconds": 14.1,
-      "medianSecondsPerSentence": 1.165,
-      "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -13.03 (more than 5 of the bar); flags 24.5% > 2% (lenRatio 4, endsMidWord 45)"
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
     },
     {
       "language": {
@@ -719,21 +708,22 @@
       "baselineChrfpp": 61.5,
       "baselineSource": "published",
       "gap": -4.11,
-      "flagRate": 0.01,
+      "flagRate": 0.005,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 0,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 2,
+      "flaggedSentences": 1,
       "nSentences": 200,
       "loadColdSeconds": 14.6,
       "medianSecondsPerSentence": 0.798,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -4.11 (within 5 of the bar); flags 1.0% <= 2%"
+      "verdictReason": "chrF++ -4.11 (within 5 of the bar); flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -756,21 +746,22 @@
       "baselineChrfpp": 52.7,
       "baselineSource": "published",
       "gap": -1.29,
-      "flagRate": 0.01,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 2,
+      "flaggedSentences": 0,
       "nSentences": 200,
       "loadColdSeconds": 12.9,
       "medianSecondsPerSentence": 0.728,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "pass",
-      "verdictReason": "chrF++ -1.29 (within 2 of the bar); flags 1.0% <= 2%"
+      "verdictReason": "chrF++ -1.29 (within 2 of the bar); flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -799,7 +790,8 @@
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 0
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
       },
       "flaggedSentences": 0,
       "nSentences": 200,
@@ -830,21 +822,22 @@
       "baselineChrfpp": 63.2,
       "baselineSource": "published",
       "gap": 1.42,
-      "flagRate": 0.02,
+      "flagRate": 0.01,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 2,
         "lenRatio": 0,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 4,
+      "flaggedSentences": 2,
       "nSentences": 200,
       "loadColdSeconds": 13.2,
       "medianSecondsPerSentence": 0.643,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "pass",
-      "verdictReason": "chrF++ +1.42 vs published baseline; flags 2.0% <= 2%"
+      "verdictReason": "chrF++ +1.42 vs published baseline; flags 1.0% <= 2%"
     },
     {
       "language": {
@@ -873,7 +866,8 @@
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 0,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
       "flaggedSentences": 1,
       "nSentences": 200,
@@ -904,21 +898,22 @@
       "baselineChrfpp": 53.1,
       "baselineSource": "published",
       "gap": 0.41,
-      "flagRate": 0.015,
+      "flagRate": 0.005,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 0,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 3,
+      "flaggedSentences": 1,
       "nSentences": 200,
       "loadColdSeconds": 14.8,
       "medianSecondsPerSentence": 0.75,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "pass",
-      "verdictReason": "chrF++ +0.41 vs published baseline; flags 1.5% <= 2%"
+      "verdictReason": "chrF++ +0.41 vs published baseline; flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -947,7 +942,8 @@
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 0,
-        "endsMidWord": 0
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
       },
       "flaggedSentences": 1,
       "nSentences": 200,
@@ -984,7 +980,8 @@
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 1,
-        "endsMidWord": 0
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
       },
       "flaggedSentences": 2,
       "nSentences": 200,
@@ -1015,21 +1012,22 @@
       "baselineChrfpp": 65.4,
       "baselineSource": "published",
       "gap": -1.3,
-      "flagRate": 0.005,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 1,
+      "flaggedSentences": 0,
       "nSentences": 200,
       "loadColdSeconds": 12.3,
       "medianSecondsPerSentence": 0.721,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "pass",
-      "verdictReason": "chrF++ -1.3 (within 2 of the bar); flags 0.5% <= 2%"
+      "verdictReason": "chrF++ -1.3 (within 2 of the bar); flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1052,21 +1050,22 @@
       "baselineChrfpp": 67,
       "baselineSource": "published",
       "gap": 0.18,
-      "flagRate": 0.01,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 2,
+      "flaggedSentences": 0,
       "nSentences": 200,
       "loadColdSeconds": 12.5,
       "medianSecondsPerSentence": 0.718,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "pass",
-      "verdictReason": "chrF++ +0.18 vs published baseline; flags 1.0% <= 2%"
+      "verdictReason": "chrF++ +0.18 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1089,21 +1088,22 @@
       "baselineChrfpp": 65.3,
       "baselineSource": "published",
       "gap": -2.89,
-      "flagRate": 0.015,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 3
+        "endsMidWord": 0,
+        "missingFinalPunct": 3
       },
-      "flaggedSentences": 3,
+      "flaggedSentences": 0,
       "nSentences": 200,
       "loadColdSeconds": 11.4,
       "medianSecondsPerSentence": 0.608,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -2.89 (within 5 of the bar); flags 1.5% <= 2%"
+      "verdictReason": "chrF++ -2.89 (within 5 of the bar); flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1126,21 +1126,22 @@
       "baselineChrfpp": 59.4,
       "baselineSource": "published",
       "gap": -0.75,
-      "flagRate": 0.01,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 2,
+      "flaggedSentences": 0,
       "nSentences": 200,
       "loadColdSeconds": 12.9,
       "medianSecondsPerSentence": 0.697,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "pass",
-      "verdictReason": "chrF++ -0.75 (within 2 of the bar); flags 1.0% <= 2%"
+      "verdictReason": "chrF++ -0.75 (within 2 of the bar); flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1151,33 +1152,27 @@
       "src": "ell_Grek",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "opus-mul-en",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-mul-en",
-        "group": true,
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 118351797,
-      "chrfpp": 44.7,
-      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "modelSizeBytes": 911962632,
+      "chrfpp": 58.4,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
       "baselineChrfpp": 58.4,
       "baselineSource": "published",
-      "gap": -13.7,
-      "flagRate": 0.02,
-      "flagCounts": {
-        "empty": 0,
-        "wrongScript": 0,
-        "repeatLoop": 3,
-        "lenRatio": 0,
-        "endsMidWord": 2
-      },
-      "flaggedSentences": 4,
-      "nSentences": 200,
-      "loadColdSeconds": 12,
-      "medianSecondsPerSentence": 0.893,
-      "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -13.7 (more than 5 of the bar); flags 2.0% <= 2%"
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
     },
     {
       "language": {
@@ -1417,21 +1412,22 @@
       "baselineChrfpp": 62.5,
       "baselineSource": "published",
       "gap": -18.18,
-      "flagRate": 0.055,
+      "flagRate": 0.025,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 3,
         "lenRatio": 3,
-        "endsMidWord": 6
+        "endsMidWord": 0,
+        "missingFinalPunct": 6
       },
-      "flaggedSentences": 11,
+      "flaggedSentences": 5,
       "nSentences": 200,
       "loadColdSeconds": 13.3,
       "medianSecondsPerSentence": 0.662,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "fail",
-      "verdictReason": "chrF++ -18.18 (more than 5 of the bar); flags 5.5% > 2% (repeatLoop 3, lenRatio 3, endsMidWord 6)"
+      "verdictReason": "chrF++ -18.18 (more than 5 of the bar); flags 2.5% > 2% (repeatLoop 3, lenRatio 3, missingFinalPunct 6)"
     },
     {
       "language": {
@@ -1454,21 +1450,22 @@
       "baselineChrfpp": 54.2,
       "baselineSource": "published",
       "gap": -22.93,
-      "flagRate": 0.185,
+      "flagRate": 0.17,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 7,
         "lenRatio": 27,
-        "endsMidWord": 3
+        "endsMidWord": 0,
+        "missingFinalPunct": 3
       },
-      "flaggedSentences": 37,
+      "flaggedSentences": 34,
       "nSentences": 200,
       "loadColdSeconds": 13.3,
       "medianSecondsPerSentence": 0.686,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "fail",
-      "verdictReason": "chrF++ -22.93 (more than 5 of the bar); flags 18.5% > 2% (repeatLoop 7, lenRatio 27, endsMidWord 3)"
+      "verdictReason": "chrF++ -22.93 (more than 5 of the bar); flags 17.0% > 2% (repeatLoop 7, lenRatio 27, missingFinalPunct 3)"
     },
     {
       "language": {
@@ -1491,21 +1488,22 @@
       "baselineChrfpp": 58,
       "baselineSource": "published",
       "gap": -3.26,
-      "flagRate": 0.015,
+      "flagRate": 0.01,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 1,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 3,
+      "flaggedSentences": 2,
       "nSentences": 200,
       "loadColdSeconds": 12.4,
       "medianSecondsPerSentence": 0.733,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -3.26 (within 5 of the bar); flags 1.5% <= 2%"
+      "verdictReason": "chrF++ -3.26 (within 5 of the bar); flags 1.0% <= 2%"
     },
     {
       "language": {
@@ -1534,7 +1532,8 @@
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 0
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
       },
       "flaggedSentences": 0,
       "nSentences": 200,
@@ -1565,21 +1564,22 @@
       "baselineChrfpp": 63.9,
       "baselineSource": "published",
       "gap": -6.49,
-      "flagRate": 0.015,
+      "flagRate": 0.005,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 1,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 3,
+      "flaggedSentences": 1,
       "nSentences": 200,
       "loadColdSeconds": 13.3,
       "medianSecondsPerSentence": 0.544,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "fail",
-      "verdictReason": "chrF++ -6.49 (more than 5 of the bar); flags 1.5% <= 2%"
+      "verdictReason": "chrF++ -6.49 (more than 5 of the bar); flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -1602,21 +1602,22 @@
       "baselineChrfpp": 66.6,
       "baselineSource": "published",
       "gap": -4.15,
-      "flagRate": 0.04,
+      "flagRate": 0.03,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 3,
         "lenRatio": 3,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 8,
+      "flaggedSentences": 6,
       "nSentences": 200,
       "loadColdSeconds": 12.4,
       "medianSecondsPerSentence": 0.569,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -4.15 (within 5 of the bar); flags 4.0% > 2% (repeatLoop 3, lenRatio 3, endsMidWord 2)"
+      "verdictReason": "chrF++ -4.15 (within 5 of the bar); flags 3.0% > 2% (repeatLoop 3, lenRatio 3, missingFinalPunct 2)"
     },
     {
       "language": {
@@ -1645,7 +1646,8 @@
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 1,
-        "endsMidWord": 0
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
       },
       "flaggedSentences": 1,
       "nSentences": 200,
@@ -1676,21 +1678,22 @@
       "baselineChrfpp": 54.6,
       "baselineSource": "published",
       "gap": 0.13,
-      "flagRate": 0.02,
+      "flagRate": 0.005,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 1,
-        "endsMidWord": 3
+        "endsMidWord": 0,
+        "missingFinalPunct": 3
       },
-      "flaggedSentences": 4,
+      "flaggedSentences": 1,
       "nSentences": 200,
       "loadColdSeconds": 15.9,
       "medianSecondsPerSentence": 1.109,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "pass",
-      "verdictReason": "chrF++ +0.13 vs published baseline; flags 2.0% <= 2%"
+      "verdictReason": "chrF++ +0.13 vs published baseline; flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -1719,7 +1722,8 @@
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 2,
-        "endsMidWord": 0
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
       },
       "flaggedSentences": 3,
       "nSentences": 200,
@@ -1843,21 +1847,22 @@
       "baselineChrfpp": 52.5,
       "baselineSource": "published",
       "gap": -8.01,
-      "flagRate": 0.02,
+      "flagRate": 0.01,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 2,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 4,
+      "flaggedSentences": 2,
       "nSentences": 200,
       "loadColdSeconds": 12.5,
       "medianSecondsPerSentence": 0.734,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "fail",
-      "verdictReason": "chrF++ -8.01 (more than 5 of the bar); flags 2.0% <= 2%"
+      "verdictReason": "chrF++ -8.01 (more than 5 of the bar); flags 1.0% <= 2%"
     },
     {
       "language": {
@@ -2147,33 +2152,27 @@
       "src": "nob_Latn",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "opus-mul-en",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-mul-en",
-        "group": true,
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 118351797,
-      "chrfpp": 45.28,
-      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "modelSizeBytes": 911962632,
+      "chrfpp": 62.9,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
       "baselineChrfpp": 62.9,
       "baselineSource": "published",
-      "gap": -17.62,
-      "flagRate": 0.045,
-      "flagCounts": {
-        "empty": 0,
-        "wrongScript": 0,
-        "repeatLoop": 4,
-        "lenRatio": 3,
-        "endsMidWord": 4
-      },
-      "flaggedSentences": 9,
-      "nSentences": 200,
-      "loadColdSeconds": 13.2,
-      "medianSecondsPerSentence": 0.777,
-      "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -17.62 (more than 5 of the bar); flags 4.5% > 2% (repeatLoop 4, lenRatio 3, endsMidWord 4)"
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
     },
     {
       "language": {
@@ -2184,33 +2183,27 @@
       "src": "eng_Latn",
       "tgt": "nob_Latn",
       "engine": {
-        "id": "opus-en-mul",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-en-mul",
-        "group": true,
-        "langTag": "nob"
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
       },
-      "modelSizeBytes": 118280580,
-      "chrfpp": 47.47,
-      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "modelSizeBytes": 911962632,
+      "chrfpp": 56.8,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
       "baselineChrfpp": 56.8,
       "baselineSource": "published",
-      "gap": -9.33,
-      "flagRate": 0.07,
-      "flagCounts": {
-        "empty": 0,
-        "wrongScript": 0,
-        "repeatLoop": 1,
-        "lenRatio": 2,
-        "endsMidWord": 11
-      },
-      "flaggedSentences": 14,
-      "nSentences": 200,
-      "loadColdSeconds": 12,
-      "medianSecondsPerSentence": 1.065,
-      "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -9.33 (more than 5 of the bar); flags 7.0% > 2% (repeatLoop 1, lenRatio 2, endsMidWord 11)"
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
     },
     {
       "language": {
@@ -2419,21 +2412,22 @@
       "baselineChrfpp": 54.3,
       "baselineSource": "published",
       "gap": -4.93,
-      "flagRate": 0.005,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 1,
+      "flaggedSentences": 0,
       "nSentences": 200,
       "loadColdSeconds": 13.7,
       "medianSecondsPerSentence": 0.728,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -4.93 (within 5 of the bar); flags 0.5% <= 2%"
+      "verdictReason": "chrF++ -4.93 (within 5 of the bar); flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -2482,26 +2476,27 @@
         "langTag": null
       },
       "modelSizeBytes": 119234926,
-      "chrfpp": 64.24,
+      "chrfpp": 64.25,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 69,
       "baselineSource": "published",
-      "gap": -4.76,
-      "flagRate": 0.025,
+      "gap": -4.75,
+      "flagRate": 0.01,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 2,
         "lenRatio": 0,
-        "endsMidWord": 5
+        "endsMidWord": 0,
+        "missingFinalPunct": 5
       },
-      "flaggedSentences": 5,
+      "flaggedSentences": 2,
       "nSentences": 200,
       "loadColdSeconds": 13.6,
       "medianSecondsPerSentence": 0.661,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -4.76 (within 5 of the bar); flags 2.5% > 2% (repeatLoop 2, endsMidWord 5)"
+      "verdictReason": "chrF++ -4.75 (within 5 of the bar); flags 1.0% <= 2%"
     },
     {
       "language": {
@@ -2524,21 +2519,22 @@
       "baselineChrfpp": 67.4,
       "baselineSource": "published",
       "gap": -2.54,
-      "flagRate": 0.005,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 1,
+      "flaggedSentences": 0,
       "nSentences": 200,
       "loadColdSeconds": 14,
       "medianSecondsPerSentence": 0.866,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -2.54 (within 5 of the bar); flags 0.5% <= 2%"
+      "verdictReason": "chrF++ -2.54 (within 5 of the bar); flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -2611,33 +2607,27 @@
       "src": "ron_Latn",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "opus-romance-en",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-ROMANCE-en",
-        "group": true,
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 119234926,
-      "chrfpp": 58.15,
-      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "modelSizeBytes": 911962632,
+      "chrfpp": 65.9,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
       "baselineChrfpp": 65.9,
       "baselineSource": "published",
-      "gap": -7.75,
-      "flagRate": 0.005,
-      "flagCounts": {
-        "empty": 0,
-        "wrongScript": 0,
-        "repeatLoop": 1,
-        "lenRatio": 1,
-        "endsMidWord": 1
-      },
-      "flaggedSentences": 1,
-      "nSentences": 200,
-      "loadColdSeconds": 12.8,
-      "medianSecondsPerSentence": 0.917,
-      "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -7.75 (more than 5 of the bar); flags 0.5% <= 2%"
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
     },
     {
       "language": {
@@ -2660,21 +2650,22 @@
       "baselineChrfpp": 58.2,
       "baselineSource": "published",
       "gap": -1.36,
-      "flagRate": 0.005,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 1,
+      "flaggedSentences": 0,
       "nSentences": 200,
       "loadColdSeconds": 13.2,
       "medianSecondsPerSentence": 0.778,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "pass",
-      "verdictReason": "chrF++ -1.36 (within 2 of the bar); flags 0.5% <= 2%"
+      "verdictReason": "chrF++ -1.36 (within 2 of the bar); flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -2692,26 +2683,27 @@
         "langTag": null
       },
       "modelSizeBytes": 117767433,
-      "chrfpp": 53.16,
+      "chrfpp": 53.17,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 58.6,
       "baselineSource": "published",
-      "gap": -5.44,
-      "flagRate": 0.02,
+      "gap": -5.43,
+      "flagRate": 0.01,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 1,
-        "endsMidWord": 3
+        "endsMidWord": 0,
+        "missingFinalPunct": 3
       },
-      "flaggedSentences": 4,
+      "flaggedSentences": 2,
       "nSentences": 200,
       "loadColdSeconds": 13.9,
       "medianSecondsPerSentence": 0.704,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "fail",
-      "verdictReason": "chrF++ -5.44 (more than 5 of the bar); flags 2.0% <= 2%"
+      "verdictReason": "chrF++ -5.43 (more than 5 of the bar); flags 1.0% <= 2%"
     },
     {
       "language": {
@@ -2734,21 +2726,22 @@
       "baselineChrfpp": 52.5,
       "baselineSource": "published",
       "gap": -2.34,
-      "flagRate": 0.015,
+      "flagRate": 0.01,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 1,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 3,
+      "flaggedSentences": 2,
       "nSentences": 200,
       "loadColdSeconds": 15.2,
       "medianSecondsPerSentence": 0.777,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -2.34 (within 5 of the bar); flags 1.5% <= 2%"
+      "verdictReason": "chrF++ -2.34 (within 5 of the bar); flags 1.0% <= 2%"
     },
     {
       "language": {
@@ -2759,33 +2752,27 @@
       "src": "srp_Cyrl",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "opus-mul-en",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-mul-en",
-        "group": true,
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 118351797,
-      "chrfpp": 50.44,
-      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "modelSizeBytes": 911962632,
+      "chrfpp": 63.5,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
       "baselineChrfpp": 63.5,
       "baselineSource": "published",
-      "gap": -13.06,
-      "flagRate": 0.015,
-      "flagCounts": {
-        "empty": 0,
-        "wrongScript": 0,
-        "repeatLoop": 0,
-        "lenRatio": 0,
-        "endsMidWord": 3
-      },
-      "flaggedSentences": 3,
-      "nSentences": 200,
-      "loadColdSeconds": 13.6,
-      "medianSecondsPerSentence": 0.735,
-      "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -13.06 (more than 5 of the bar); flags 1.5% <= 2%"
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
     },
     {
       "language": {
@@ -2796,33 +2783,27 @@
       "src": "eng_Latn",
       "tgt": "srp_Cyrl",
       "engine": {
-        "id": "opus-en-mul",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-en-mul",
-        "group": true,
-        "langTag": "srp_Cyrl"
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
+        "group": false,
+        "langTag": null
       },
-      "modelSizeBytes": 118280580,
-      "chrfpp": 37.13,
-      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "modelSizeBytes": 911962632,
+      "chrfpp": 53.3,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
       "baselineChrfpp": 53.3,
       "baselineSource": "published",
-      "gap": -16.17,
-      "flagRate": 0.47,
-      "flagCounts": {
-        "empty": 0,
-        "wrongScript": 0,
-        "repeatLoop": 1,
-        "lenRatio": 0,
-        "endsMidWord": 93
-      },
-      "flaggedSentences": 94,
-      "nSentences": 200,
-      "loadColdSeconds": 14.3,
-      "medianSecondsPerSentence": 1.244,
-      "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -16.17 (more than 5 of the bar); flags 47.0% > 2% (repeatLoop 1, endsMidWord 93)"
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
     },
     {
       "language": {
@@ -2913,7 +2894,8 @@
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 0
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
       },
       "flaggedSentences": 0,
       "nSentences": 200,
@@ -2944,21 +2926,22 @@
       "baselineChrfpp": 52.6,
       "baselineSource": "published",
       "gap": 0.32,
-      "flagRate": 0.015,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 3
+        "endsMidWord": 0,
+        "missingFinalPunct": 3
       },
-      "flaggedSentences": 3,
+      "flaggedSentences": 0,
       "nSentences": 200,
       "loadColdSeconds": 13.3,
       "medianSecondsPerSentence": 0.722,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "pass",
-      "verdictReason": "chrF++ +0.32 vs published baseline; flags 1.5% <= 2%"
+      "verdictReason": "chrF++ +0.32 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -3043,21 +3026,22 @@
       "baselineChrfpp": 67,
       "baselineSource": "published",
       "gap": -2.7,
-      "flagRate": 0.01,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 0,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 2,
+      "flaggedSentences": 0,
       "nSentences": 200,
       "loadColdSeconds": 12.6,
       "medianSecondsPerSentence": 0.769,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "borderline",
-      "verdictReason": "chrF++ -2.7 (within 5 of the bar); flags 1.0% <= 2%"
+      "verdictReason": "chrF++ -2.7 (within 5 of the bar); flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -3080,21 +3064,22 @@
       "baselineChrfpp": 62.7,
       "baselineSource": "published",
       "gap": 0.82,
-      "flagRate": 0.02,
+      "flagRate": 0.01,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 2,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 4,
+      "flaggedSentences": 2,
       "nSentences": 200,
       "loadColdSeconds": 13.9,
       "medianSecondsPerSentence": 0.646,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "pass",
-      "verdictReason": "chrF++ +0.82 vs published baseline; flags 2.0% <= 2%"
+      "verdictReason": "chrF++ +0.82 vs published baseline; flags 1.0% <= 2%"
     },
     {
       "language": {
@@ -3303,21 +3288,22 @@
       "baselineChrfpp": 52.7,
       "baselineSource": "published",
       "gap": -8.21,
-      "flagRate": 0.025,
+      "flagRate": 0.005,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 1,
-        "endsMidWord": 5
+        "endsMidWord": 0,
+        "missingFinalPunct": 5
       },
-      "flaggedSentences": 5,
+      "flaggedSentences": 1,
       "nSentences": 200,
       "loadColdSeconds": 13.1,
       "medianSecondsPerSentence": 0.752,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "fail",
-      "verdictReason": "chrF++ -8.21 (more than 5 of the bar); flags 2.5% > 2% (lenRatio 1, endsMidWord 5)"
+      "verdictReason": "chrF++ -8.21 (more than 5 of the bar); flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -3377,7 +3363,8 @@
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 2,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
       "flaggedSentences": 2,
       "nSentences": 200,
@@ -3434,26 +3421,27 @@
         "langTag": null
       },
       "modelSizeBytes": 116527003,
-      "chrfpp": 54.08,
+      "chrfpp": 54.09,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 61.1,
       "baselineSource": "published",
-      "gap": -7.02,
-      "flagRate": 0.015,
+      "gap": -7.01,
+      "flagRate": 0.005,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 0,
-        "endsMidWord": 2
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
       },
-      "flaggedSentences": 3,
+      "flaggedSentences": 1,
       "nSentences": 200,
       "loadColdSeconds": 13.1,
       "medianSecondsPerSentence": 0.667,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "fail",
-      "verdictReason": "chrF++ -7.02 (more than 5 of the bar); flags 1.5% <= 2%"
+      "verdictReason": "chrF++ -7.01 (more than 5 of the bar); flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -3476,21 +3464,22 @@
       "baselineChrfpp": 50.5,
       "baselineSource": "published",
       "gap": -6.59,
-      "flagRate": 0.02,
+      "flagRate": 0.015,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 0,
         "lenRatio": 3,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 4,
+      "flaggedSentences": 3,
       "nSentences": 200,
       "loadColdSeconds": 11.5,
       "medianSecondsPerSentence": 0.736,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "fail",
-      "verdictReason": "chrF++ -6.59 (more than 5 of the bar); flags 2.0% <= 2%"
+      "verdictReason": "chrF++ -6.59 (more than 5 of the bar); flags 1.5% <= 2%"
     },
     {
       "language": {
@@ -3575,21 +3564,22 @@
       "baselineChrfpp": 58.1,
       "baselineSource": "published",
       "gap": -8.12,
-      "flagRate": 0.01,
+      "flagRate": 0.005,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
         "repeatLoop": 1,
         "lenRatio": 0,
-        "endsMidWord": 1
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
       },
-      "flaggedSentences": 2,
+      "flaggedSentences": 1,
       "nSentences": 200,
       "loadColdSeconds": 11.7,
       "medianSecondsPerSentence": 0.56,
       "speedSource": "browser-worker (the real app worker bundle)",
       "verdict": "fail",
-      "verdictReason": "chrF++ -8.12 (more than 5 of the bar); flags 1.0% <= 2%"
+      "verdictReason": "chrF++ -8.12 (more than 5 of the bar); flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -3600,33 +3590,27 @@
       "src": "eng_Latn",
       "tgt": "vie_Latn",
       "engine": {
-        "id": "opus-en-vi",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-en-vi",
+        "id": "nllb-200-distilled-600M",
+        "kind": "nllb",
+        "modelId": "Xenova/nllb-200-distilled-600M",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 106645280,
-      "chrfpp": 42.39,
-      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
+      "modelSizeBytes": 911962632,
+      "chrfpp": 56.4,
+      "chrfppSource": "published-baseline (no run; the full model is the bar)",
       "baselineChrfpp": 56.4,
       "baselineSource": "published",
-      "gap": -14.01,
-      "flagRate": 0.075,
-      "flagCounts": {
-        "empty": 0,
-        "wrongScript": 0,
-        "repeatLoop": 9,
-        "lenRatio": 2,
-        "endsMidWord": 7
-      },
-      "flaggedSentences": 15,
-      "nSentences": 200,
-      "loadColdSeconds": 11.4,
-      "medianSecondsPerSentence": 0.692,
-      "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -14.01 (more than 5 of the bar); flags 7.5% > 2% (repeatLoop 9, lenRatio 2, endsMidWord 7)"
+      "gap": null,
+      "flagRate": null,
+      "flagCounts": null,
+      "flaggedSentences": null,
+      "nSentences": null,
+      "loadColdSeconds": null,
+      "medianSecondsPerSentence": null,
+      "speedSource": null,
+      "verdict": "baseline",
+      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
     },
     {
       "language": {
@@ -3756,10 +3740,10 @@
   "counts": {
     "pass": 13,
     "borderline": 18,
-    "fail": 23,
+    "fail": 13,
     "error": 0,
-    "baseline": 56,
-    "totalSmallDirections": 54
+    "baseline": 66,
+    "totalSmallDirections": 44
   },
   "list1BorderlineOrFailOnSmallModels": [
     {
@@ -3773,8 +3757,8 @@
           "chrfpp": 63.47,
           "baseline": 72.9,
           "gap": -9.43,
-          "flagRate": 0.015,
-          "flagged": 3,
+          "flagRate": 0.01,
+          "flagged": 2,
           "n": 200
         },
         {
@@ -3784,8 +3768,8 @@
           "chrfpp": 58.06,
           "baseline": 62.4,
           "gap": -4.34,
-          "flagRate": 0.03,
-          "flagged": 6,
+          "flagRate": 0.015,
+          "flagged": 3,
           "n": 200
         }
       ]
@@ -3801,19 +3785,19 @@
           "chrfpp": 58.63,
           "baseline": 62.2,
           "gap": -3.57,
-          "flagRate": 0.01,
-          "flagged": 2,
+          "flagRate": 0.005,
+          "flagged": 1,
           "n": 200
         },
         {
           "direction": "en->arb_Arab",
           "engine": "opus-en-ar",
           "verdict": "borderline",
-          "chrfpp": 49.45,
+          "chrfpp": 49.56,
           "baseline": 51.4,
-          "gap": -1.95,
-          "flagRate": 0.155,
-          "flagged": 31,
+          "gap": -1.84,
+          "flagRate": 0.03,
+          "flagged": 6,
           "n": 200
         }
       ]
@@ -3829,19 +3813,8 @@
           "chrfpp": 51.57,
           "baseline": 63.4,
           "gap": -11.83,
-          "flagRate": 0.02,
-          "flagged": 4,
-          "n": 200
-        },
-        {
-          "direction": "en->bul_Cyrl",
-          "engine": "opus-en-mul",
-          "verdict": "fail",
-          "chrfpp": 41.42,
-          "baseline": 60.4,
-          "gap": -18.98,
-          "flagRate": 0.54,
-          "flagged": 108,
+          "flagRate": 0.015,
+          "flagged": 3,
           "n": 200
         }
       ]
@@ -3854,50 +3827,22 @@
           "direction": "en->zho_Hans",
           "engine": "opus-en-zh",
           "verdict": "borderline",
-          "chrfpp": 22.32,
+          "chrfpp": 22.36,
           "baseline": 19.6,
-          "gap": 2.72,
-          "flagRate": 0.175,
-          "flagged": 35,
+          "gap": 2.76,
+          "flagRate": 0.05,
+          "flagged": 10,
           "n": 200
         },
         {
           "direction": "zho_Hans->en",
           "engine": "opus-zh-en",
           "verdict": "borderline",
-          "chrfpp": 48.86,
+          "chrfpp": 48.87,
           "baseline": 52.9,
-          "gap": -4.04,
-          "flagRate": 0.045,
-          "flagged": 9,
-          "n": 200
-        }
-      ]
-    },
-    {
-      "code": "hrv_Latn",
-      "english": "Croatian",
-      "directions": [
-        {
-          "direction": "en->hrv_Latn",
-          "engine": "opus-en-mul",
-          "verdict": "fail",
-          "chrfpp": 39.17,
-          "baseline": 52.2,
-          "gap": -13.03,
-          "flagRate": 0.245,
-          "flagged": 49,
-          "n": 200
-        },
-        {
-          "direction": "hrv_Latn->en",
-          "engine": "opus-mul-en",
-          "verdict": "fail",
-          "chrfpp": 44.98,
-          "baseline": 59.5,
-          "gap": -14.52,
-          "flagRate": 0.05,
-          "flagged": 10,
+          "gap": -4.03,
+          "flagRate": 0.04,
+          "flagged": 8,
           "n": 200
         }
       ]
@@ -3913,8 +3858,8 @@
           "chrfpp": 57.39,
           "baseline": 61.5,
           "gap": -4.11,
-          "flagRate": 0.01,
-          "flagged": 2,
+          "flagRate": 0.005,
+          "flagged": 1,
           "n": 200
         }
       ]
@@ -3964,25 +3909,8 @@
           "chrfpp": 62.41,
           "baseline": 65.3,
           "gap": -2.89,
-          "flagRate": 0.015,
-          "flagged": 3,
-          "n": 200
-        }
-      ]
-    },
-    {
-      "code": "ell_Grek",
-      "english": "Greek",
-      "directions": [
-        {
-          "direction": "ell_Grek->en",
-          "engine": "opus-mul-en",
-          "verdict": "fail",
-          "chrfpp": 44.7,
-          "baseline": 58.4,
-          "gap": -13.7,
-          "flagRate": 0.02,
-          "flagged": 4,
+          "flagRate": 0,
+          "flagged": 0,
           "n": 200
         }
       ]
@@ -3998,8 +3926,8 @@
           "chrfpp": 31.27,
           "baseline": 54.2,
           "gap": -22.93,
-          "flagRate": 0.185,
-          "flagged": 37,
+          "flagRate": 0.17,
+          "flagged": 34,
           "n": 200
         },
         {
@@ -4009,8 +3937,8 @@
           "chrfpp": 44.32,
           "baseline": 62.5,
           "gap": -18.18,
-          "flagRate": 0.055,
-          "flagged": 11,
+          "flagRate": 0.025,
+          "flagged": 5,
           "n": 200
         }
       ]
@@ -4026,8 +3954,8 @@
           "chrfpp": 54.74,
           "baseline": 58,
           "gap": -3.26,
-          "flagRate": 0.015,
-          "flagged": 3,
+          "flagRate": 0.01,
+          "flagged": 2,
           "n": 200
         }
       ]
@@ -4043,8 +3971,8 @@
           "chrfpp": 62.45,
           "baseline": 66.6,
           "gap": -4.15,
-          "flagRate": 0.04,
-          "flagged": 8,
+          "flagRate": 0.03,
+          "flagged": 6,
           "n": 200
         },
         {
@@ -4054,8 +3982,8 @@
           "chrfpp": 57.41,
           "baseline": 63.9,
           "gap": -6.49,
-          "flagRate": 0.015,
-          "flagged": 3,
+          "flagRate": 0.005,
+          "flagged": 1,
           "n": 200
         }
       ]
@@ -4105,36 +4033,8 @@
           "chrfpp": 44.49,
           "baseline": 52.5,
           "gap": -8.01,
-          "flagRate": 0.02,
-          "flagged": 4,
-          "n": 200
-        }
-      ]
-    },
-    {
-      "code": "nob_Latn",
-      "english": "Norwegian Bokmål",
-      "directions": [
-        {
-          "direction": "en->nob_Latn",
-          "engine": "opus-en-mul",
-          "verdict": "fail",
-          "chrfpp": 47.47,
-          "baseline": 56.8,
-          "gap": -9.33,
-          "flagRate": 0.07,
-          "flagged": 14,
-          "n": 200
-        },
-        {
-          "direction": "nob_Latn->en",
-          "engine": "opus-mul-en",
-          "verdict": "fail",
-          "chrfpp": 45.28,
-          "baseline": 62.9,
-          "gap": -17.62,
-          "flagRate": 0.045,
-          "flagged": 9,
+          "flagRate": 0.01,
+          "flagged": 2,
           "n": 200
         }
       ]
@@ -4150,8 +4050,8 @@
           "chrfpp": 49.37,
           "baseline": 54.3,
           "gap": -4.93,
-          "flagRate": 0.005,
-          "flagged": 1,
+          "flagRate": 0,
+          "flagged": 0,
           "n": 200
         }
       ]
@@ -4167,36 +4067,19 @@
           "chrfpp": 64.86,
           "baseline": 67.4,
           "gap": -2.54,
-          "flagRate": 0.005,
-          "flagged": 1,
+          "flagRate": 0,
+          "flagged": 0,
           "n": 200
         },
         {
           "direction": "por_Latn->en",
           "engine": "opus-romance-en",
           "verdict": "borderline",
-          "chrfpp": 64.24,
+          "chrfpp": 64.25,
           "baseline": 69,
-          "gap": -4.76,
-          "flagRate": 0.025,
-          "flagged": 5,
-          "n": 200
-        }
-      ]
-    },
-    {
-      "code": "ron_Latn",
-      "english": "Romanian",
-      "directions": [
-        {
-          "direction": "ron_Latn->en",
-          "engine": "opus-romance-en",
-          "verdict": "fail",
-          "chrfpp": 58.15,
-          "baseline": 65.9,
-          "gap": -7.75,
-          "flagRate": 0.005,
-          "flagged": 1,
+          "gap": -4.75,
+          "flagRate": 0.01,
+          "flagged": 2,
           "n": 200
         }
       ]
@@ -4212,47 +4095,19 @@
           "chrfpp": 50.16,
           "baseline": 52.5,
           "gap": -2.34,
-          "flagRate": 0.015,
-          "flagged": 3,
+          "flagRate": 0.01,
+          "flagged": 2,
           "n": 200
         },
         {
           "direction": "rus_Cyrl->en",
           "engine": "opus-ru-en",
           "verdict": "fail",
-          "chrfpp": 53.16,
+          "chrfpp": 53.17,
           "baseline": 58.6,
-          "gap": -5.44,
-          "flagRate": 0.02,
-          "flagged": 4,
-          "n": 200
-        }
-      ]
-    },
-    {
-      "code": "srp_Cyrl",
-      "english": "Serbian",
-      "directions": [
-        {
-          "direction": "en->srp_Cyrl",
-          "engine": "opus-en-mul",
-          "verdict": "fail",
-          "chrfpp": 37.13,
-          "baseline": 53.3,
-          "gap": -16.17,
-          "flagRate": 0.47,
-          "flagged": 94,
-          "n": 200
-        },
-        {
-          "direction": "srp_Cyrl->en",
-          "engine": "opus-mul-en",
-          "verdict": "fail",
-          "chrfpp": 50.44,
-          "baseline": 63.5,
-          "gap": -13.06,
-          "flagRate": 0.015,
-          "flagged": 3,
+          "gap": -5.43,
+          "flagRate": 0.01,
+          "flagged": 2,
           "n": 200
         }
       ]
@@ -4285,8 +4140,8 @@
           "chrfpp": 64.3,
           "baseline": 67,
           "gap": -2.7,
-          "flagRate": 0.01,
-          "flagged": 2,
+          "flagRate": 0,
+          "flagged": 0,
           "n": 200
         }
       ]
@@ -4302,8 +4157,8 @@
           "chrfpp": 44.49,
           "baseline": 52.7,
           "gap": -8.21,
-          "flagRate": 0.025,
-          "flagged": 5,
+          "flagRate": 0.005,
+          "flagged": 1,
           "n": 200
         }
       ]
@@ -4336,19 +4191,19 @@
           "chrfpp": 43.91,
           "baseline": 50.5,
           "gap": -6.59,
-          "flagRate": 0.02,
-          "flagged": 4,
+          "flagRate": 0.015,
+          "flagged": 3,
           "n": 200
         },
         {
           "direction": "ukr_Cyrl->en",
           "engine": "opus-uk-en",
           "verdict": "fail",
-          "chrfpp": 54.08,
+          "chrfpp": 54.09,
           "baseline": 61.1,
-          "gap": -7.02,
-          "flagRate": 0.015,
-          "flagged": 3,
+          "gap": -7.01,
+          "flagRate": 0.005,
+          "flagged": 1,
           "n": 200
         }
       ]
@@ -4358,25 +4213,14 @@
       "english": "Vietnamese",
       "directions": [
         {
-          "direction": "en->vie_Latn",
-          "engine": "opus-en-vi",
-          "verdict": "fail",
-          "chrfpp": 42.39,
-          "baseline": 56.4,
-          "gap": -14.01,
-          "flagRate": 0.075,
-          "flagged": 15,
-          "n": 200
-        },
-        {
           "direction": "vie_Latn->en",
           "engine": "opus-vi-en",
           "verdict": "fail",
           "chrfpp": 49.98,
           "baseline": 58.1,
           "gap": -8.12,
-          "flagRate": 0.01,
-          "flagged": 2,
+          "flagRate": 0.005,
+          "flagged": 1,
           "n": 200
         }
       ]
@@ -4402,6 +4246,14 @@
     {
       "code": "zho_Hant",
       "english": "Chinese (Traditional)"
+    },
+    {
+      "code": "hrv_Latn",
+      "english": "Croatian"
+    },
+    {
+      "code": "ell_Grek",
+      "english": "Greek"
     },
     {
       "code": "guj_Gujr",
@@ -4436,6 +4288,10 @@
       "english": "Nepali"
     },
     {
+      "code": "nob_Latn",
+      "english": "Norwegian Bokmål"
+    },
+    {
       "code": "ory_Orya",
       "english": "Odia"
     },
@@ -4450,6 +4306,10 @@
     {
       "code": "pan_Guru",
       "english": "Punjabi"
+    },
+    {
+      "code": "srp_Cyrl",
+      "english": "Serbian"
     },
     {
       "code": "sin_Sinh",
@@ -4490,21 +4350,21 @@
       "chrfpp": 65.72,
       "published": 67,
       "delta": -1.28,
-      "flagRate": 0.025
+      "flagRate": 0.02
     },
     {
       "pair": "eng_Latn->hin_Deva",
       "chrfpp": 52.05,
       "published": 54.2,
       "delta": -2.15,
-      "flagRate": 0.035
+      "flagRate": 0.025
     },
     {
       "pair": "fra_Latn->eng_Latn",
       "chrfpp": 64.56,
       "published": 65.4,
       "delta": -0.84,
-      "flagRate": 0.015
+      "flagRate": 0.01
     },
     {
       "pair": "hin_Deva->eng_Latn",
@@ -4518,7 +4378,7 @@
       "chrfpp": 17.72,
       "published": 19.6,
       "delta": -1.88,
-      "flagRate": 0.365
+      "flagRate": 0.185
     }
   ]
 }

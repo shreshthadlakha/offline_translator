@@ -33,6 +33,12 @@ export type EngineSpec = {
   /** For group models: the language tag the worker prepends, e.g. "hrv".
    *  Absent for single pair models and the full model. */
   langTag?: string;
+  /** The route's quality tier, from the measured data in lib/quality.ts.
+   *  "limited" routes are the honest fallback: their model is measurably
+   *  weaker than the full model, so their output is never given the final
+   *  punctuation restoration (a restored full stop must never make a cut
+   *  off sentence look finished) and the UI shows the approximate notice. */
+  tier?: "best" | "good" | "limited";
 };
 
 /** Graph optimization levels the session creation can use. The default is

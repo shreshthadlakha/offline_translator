@@ -103,6 +103,10 @@ export const MODEL_REVISIONS: Record<string, string> = {
 export type PairEngine = EngineDescriptor & {
   /** The ">>tag<<" language code for group models. Absent otherwise. */
   tag?: string;
+  /** Set on quarantined routes: the pair falls back to the full model, and
+   *  the entry stays in the table (with its reason) so a later phase can
+   *  switch the route back on or replace the engine. */
+  disabled?: { reason: string };
 };
 
 export const NLLB_ENGINE: EngineDescriptor = {
@@ -249,15 +253,45 @@ for (const code of ROMANCE_EN_PAIRS) {
   ENGINE_TABLE[`${code}|eng_Latn`] = { ...ROMANCE_EN };
 }
 
+// --- Quarantined routes ------------------------------------------------------------
+//
+// Directions whose small model failed the P2 quality bar on the 200 sentence
+// FLORES-200 sample and were taken off the routing by the P7 safety net:
+// every gap worse than minus 10 chrF++ or with clear cut-off evidence, and
+// every Croatian, Serbian and Norwegian group route (P3d found no passing
+// alternative for any of them). Each pair keeps its entry and its measured
+// reason, so a later phase can bring a better engine back; until then the
+// pair falls back to the full model through the existing heavy download
+// warning.
+const QUARANTINED: Record<string, string> = {
+  "eng_Latn|hrv_Latn": "P2 fail verdict: chrF++ 13.0 below the published full-model score, 24.5% of sentences cut off mid word. Croatian group route removed by the P7 safety net.",
+  "hrv_Latn|eng_Latn": "P2 fail verdict: chrF++ 14.5 below the published full-model score, 5% flagged. Croatian group route removed by the P7 safety net.",
+  "eng_Latn|srp_Cyrl": "P2 fail verdict: chrF++ 16.2 below the published full-model score, 47% of sentences cut off mid word. Serbian group route removed by the P7 safety net.",
+  "srp_Cyrl|eng_Latn": "P2 fail verdict: chrF++ 13.1 below the published full-model score. Serbian group route removed by the P7 safety net.",
+  "eng_Latn|nob_Latn": "P2 fail verdict: chrF++ 9.3 below the published full-model score, 7% flagged. Norwegian group route removed by the P7 safety net.",
+  "nob_Latn|eng_Latn": "P2 fail verdict: chrF++ 17.6 below the published full-model score. Norwegian group route removed by the P7 safety net.",
+  "eng_Latn|bul_Cyrl": "P2 fail verdict: chrF++ 19.0 below the published full-model score, 54% of sentences cut off mid word: the worst measured direction. P3d found no passing alternative (the fintutto en-bg conversion also fails).",
+  "ell_Grek|eng_Latn": "P2 fail verdict: chrF++ 13.7 below the published full-model score. P3d found no passing browser candidate for this direction; English to Greek returns via the fintutto model.",
+  "ron_Latn|eng_Latn": "P2 fail verdict: chrF++ 7.8 below the published full-model score. P3d found no better small candidate; English to Romanian passes and stays.",
+  "eng_Latn|vie_Latn": "P2 fail verdict: chrF++ 14.0 below the published full-model score, 7.5% flagged: removed by the P7 rule (gap worse than minus 10). Vietnamese to English stays live, honestly labelled.",
+};
+
+for (const [pair, reason] of Object.entries(QUARANTINED)) {
+  const entry = ENGINE_TABLE[pair];
+  if (entry) entry.disabled = { reason };
+}
+
 /**
  * The engine to use for a pair. Order of choice: a single pair small model,
- * then a verified group small model, then the full model. A pair of two non
- * English languages uses the full model; nothing pivots through English.
+ * then a verified group small model, then the full model. A quarantined
+ * entry is kept but skipped, so those pairs fall to the full model. A pair
+ * of two non English languages uses the full model; nothing pivots through
+ * English.
  */
 export function engineForPair(src: string, tgt: string, fastModelsEnabled: boolean): PairEngine {
   if (fastModelsEnabled) {
     const fast = ENGINE_TABLE[`${src}|${tgt}`];
-    if (fast) return fast;
+    if (fast && !fast.disabled) return fast;
   }
   return NLLB_ENGINE;
 }
@@ -290,10 +324,13 @@ export function resultingPair(side: "source" | "target", code: string, src: stri
   return code === src ? { src: tgt, tgt: code } : { src, tgt: code };
 }
 
-/** Every engine the app can end up with, for listings and licenses. */
+/** Every engine the app can end up with, for listings and licenses.
+ * Quarantined engines (no live route left) are not listed: they are never
+ * downloaded, so they never appear in Settings or the notices. */
 export function allEngines(): EngineDescriptor[] {
   const seen = new Map<string, EngineDescriptor>();
   for (const pair of Object.values(ENGINE_TABLE)) {
+    if (pair.disabled) continue;
     if (!seen.has(pair.id)) seen.set(pair.id, pair);
   }
   return [NLLB_ENGINE, ...seen.values()];

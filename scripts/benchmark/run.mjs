@@ -23,7 +23,8 @@ import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import { ENGINE_TABLE, NLLB_ENGINE } from '../../src/lib/engines.ts';
 import { chrfppCorpus, chrfppCorpusLower, chrfppSentence } from './chrfpp.mjs';
-import { sanityFlags } from './sanity.mjs';
+import { sanityFlags, missingFinalPunct } from './sanity.mjs';
+import { restoreTerminalPunctuation } from '../../src/lib/terminal-punct.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const HERE = (f) => join(__dirname, f);
@@ -114,20 +115,29 @@ function publishedFor(src, tgt) {
 
 function score(state) {
   const refLines = floresLines(state.tgt);
+  const srcLines = floresLines(state.src);
   const refs = state.ids.map((id) => refLines[id]);
+  const sources = state.ids.map((id) => srcLines[id]);
   const hyps = state.ids.map((id) => state.outputs[id]);
+  // chrF++ is scored on the app-visible text: the worker restores the final
+  // terminal mark the model dropped on complete sentences, so the benchmark
+  // scores the same text the person sees (the exact same shared function).
+  // Sanity flags stay on the raw model output, so a dropped mark is still
+  // visible in the counts and a real cut off sentence still flags.
+  const appHyps = hyps.map((h, i) => restoreTerminalPunctuation(sources[i], h, state.tgt));
 
-  const corpus = chrfppCorpus(hyps, refs);
-  const corpusLower = chrfppCorpusLower(hyps, refs);
+  const corpus = chrfppCorpus(appHyps, refs);
+  const corpusLower = chrfppCorpusLower(appHyps, refs);
 
   const perSentence = [];
-  const flagCounts = { empty: 0, wrongScript: 0, repeatLoop: 0, lenRatio: 0, endsMidWord: 0 };
+  const flagCounts = { empty: 0, wrongScript: 0, repeatLoop: 0, lenRatio: 0, endsMidWord: 0, missingFinalPunct: 0 };
   const flagged = [];
   for (let i = 0; i < state.ids.length; i++) {
     const id = state.ids[i];
     const flags = sanityFlags(hyps[i], refs[i], state.tgt);
     for (const f of flags) flagCounts[f]++;
-    const s = chrfppSentence(hyps[i], refs[i]);
+    if (missingFinalPunct(hyps[i], refs[i])) flagCounts.missingFinalPunct++;
+    const s = chrfppSentence(appHyps[i], refs[i]);
     if (flags.length > 0 || state.errors[id]) flagged.push({ id, flags, error: state.errors[id] ?? null, score: Number(s.toFixed(1)) });
     perSentence.push(s);
   }

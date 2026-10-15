@@ -27,6 +27,7 @@ import { PROTOCOL_VERSION, PRIORITY_RANK } from "./protocol";
 import { BUILD_ID } from "./build-id";
 import { MODEL_REVISIONS } from "../lib/engines";
 import { SPEED_CONFIG } from "../lib/speed-config";
+import { restoreTerminalPunctuation } from "../lib/terminal-punct";
 
 // --- Privacy critical configuration ------------------------------------------
 
@@ -489,9 +490,15 @@ async function pump(): Promise<void> {
         ? generateOptions(taggedTexts[0] ?? "", job.src, job.tgt, interrupt)
         : generateOptionsForGroup(taggedTexts, job.src, job.tgt, interrupt);
     const output = await translator(job.texts.length === 1 ? (taggedTexts[0] ?? "") : taggedTexts, asCallOptions(perCallOptions));
-    const texts = (Array.isArray(output) ? output : [output]).map((o) =>
-      typeof o === "string" ? stripLangTagEcho(o).trim() : String((o as { translation_text?: string }).translation_text ?? "").trim(),
-    );
+    const texts = (Array.isArray(output) ? output : [output]).map((o, i) => {
+      const raw = typeof o === "string" ? stripLangTagEcho(o).trim() : String((o as { translation_text?: string }).translation_text ?? "").trim();
+      // Final punctuation restoration: if the source sentence ended with a
+      // terminal mark and the translation lost it, put the target language's
+      // mark back. Never on limited routes, where a restored full stop must
+      // not make a cut off sentence look finished (the P7 safety net).
+      if (loadedEngine?.tier === "limited") return raw;
+      return restoreTerminalPunctuation(job.texts[i] ?? "", raw, job.tgt);
+    });
     if (!job.cancelled) {
       post({
         type: "result",
