@@ -13,7 +13,7 @@
 //   4. src/generated/worker-build.ts — the app-side stamp of the same id,
 //                                   shown in the Details panel.
 import { spawnSync } from "node:child_process";
-import { readFileSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -27,6 +27,9 @@ const WORKER_BUILD_FILE = join(ROOT, "src/generated/worker-build.ts");
 const buildId = `${new Date().toISOString().replace(/[-:.TZ]/g, "").slice(0, 12)}-${Math.random().toString(36).slice(2, 8)}`;
 
 // --- 1. the shared build id --------------------------------------------------------
+// src/generated does not exist in a fresh checkout (everything in it is
+// generated and gitignored), so it is created here before the first write.
+mkdirSync(dirname(WORKER_BUILD_FILE), { recursive: true });
 writeFileSync(
   BUILD_ID_FILE,
   `/**\n * The build id. scripts/build-worker.mjs rewrites this file every time the\n * worker is bundled, so the worker bundle and the app share one id. The\n * version handshake compares them; a mismatch means the files on the device\n * are out of date with each other.\n */\n\nexport const BUILD_ID = ${JSON.stringify(buildId)};\n`,
