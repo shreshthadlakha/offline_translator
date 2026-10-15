@@ -67,8 +67,8 @@ export const MODEL_REVISIONS: Record<string, string> = {
   "Xenova/opus-mt-zh-en": "39d480d52a9ea3065a1f117adfe4dbc55de10e6f",
   "Xenova/opus-mt-en-ar": "034a684356c19021a187cda4d7f823298b913921",
   "Xenova/opus-mt-ar-en": "09c7556866400dcc53562ba8d7035119e7d9a2c1",
-  "Xenova/opus-mt-en-hi": "7aad72006a1588a9c3485ed6203aed99eebbc872",
-  "Xenova/opus-mt-hi-en": "99853100ed9d932987a6816e8cf7b1b6742a6116",
+  "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8": "1eaa43a3fb76f382f1b22c76e56f6ab4926ad68b",
+  "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8": "a7ecdc0ba73148c6e1d051ca372332471d8aff4f",
   "Xenova/opus-mt-ja-en": "1a906cfaaf7c8f4193f67f5885c082aa6dbd9d16",
   "Xenova/opus-mt-tr-en": "78247f41f354af036d24e6f0f8a3d02c6806f96e",
   "Xenova/opus-mt-en-af": "3d48312617d092d77cb5aef9f9e9636ad639dd8d",
@@ -88,15 +88,16 @@ export const MODEL_REVISIONS: Record<string, string> = {
   "Xenova/opus-mt-sv-en": "63a40256869b6a2b29a84e47aa7f03524fa5f3a2",
   "Xenova/opus-mt-en-uk": "e6ca587292984b343fd829b6430ed55858496525",
   "Xenova/opus-mt-uk-en": "b2ad6afa424aaeff8913ff350860b7a7b7c0a607",
-  "Xenova/opus-mt-en-vi": "30bcd461c0d7338ad106b36314d3eedc2d4e998c",
   "Xenova/opus-mt-vi-en": "541dfd72ec07e8f1563795e0224408ad8d729e80",
   "Xenova/opus-mt-ko-en": "d9fa1ac6008242100fecb4fff9b0a5917a1be81f",
   "Xenova/opus-mt-pl-en": "aeaf0e003b045248c28a559a5ce6027b54ebdaba",
   "Xenova/opus-mt-th-en": "7f0406b972f742985cfbe3be8f61dead9f1bc0e3",
-  "Xenova/opus-mt-en-mul": "e57f9759f8e1e9ed97067bfc11e53e1eab63e57e",
-  "Xenova/opus-mt-mul-en": "72a05e47cee89c718a9db4dc70d02fef3bc39de8",
+  "fintutto/opus-mt-bg-en": "bfb74cefccfa84ef11106da02d2be3d1be05728b",
   "Xenova/opus-mt-en-ROMANCE": "9d2ba69ac80c8e8453c3d9a1e2323a0e7b8ca3cd",
   "Xenova/opus-mt-ROMANCE-en": "f60feaabe8bb435a5871e7702b25f53a01e770f8",
+  "fintutto/opus-mt-en-el": "c7f3135a5779317c85f8e057d13a10d5f2785cc2",
+  "fintutto/opus-mt-en-he": "bf377d21c2aefc17981607c2ce1047db37381f72",
+  "fintutto/opus-mt-en-sw": "b09ff3c6ad57302a497b54ab4f8719324040f635",
 };
 
 /** What a language pair needs: an engine, plus the tag for group models. */
@@ -272,8 +273,8 @@ const QUARANTINED: Record<string, string> = {
   "srp_Cyrl|eng_Latn": "P2 fail verdict: chrF++ 13.1 below the published full-model score. Serbian group route removed by the P7 safety net.",
   "eng_Latn|nob_Latn": "P2 fail verdict: chrF++ 9.3 below the published full-model score, 7% flagged. Norwegian group route removed by the P7 safety net.",
   "nob_Latn|eng_Latn": "P2 fail verdict: chrF++ 17.6 below the published full-model score. Norwegian group route removed by the P7 safety net.",
-  "eng_Latn|bul_Cyrl": "P2 fail verdict: chrF++ 19.0 below the published full-model score, 54% of sentences cut off mid word: the worst measured direction. P3d found no passing alternative (the fintutto en-bg conversion also fails).",
-  "ell_Grek|eng_Latn": "P2 fail verdict: chrF++ 13.7 below the published full-model score. P3d found no passing browser candidate for this direction; English to Greek returns via the fintutto model.",
+  "eng_Latn|bul_Cyrl": "P2 fail verdict: chrF++ 19.0 below the published full-model score, 54% of sentences cut off mid word: the worst measured direction. P3d found no passing alternative (the fintutto en-bg conversion also fails). Bulgarian to English returns via the fintutto model below.",
+  "ell_Grek|eng_Latn": "P2 fail verdict: chrF++ 13.7 below the published full-model score. P3d found no passing browser candidate for this direction; English to Greek returns via the fintutto model below.",
   "ron_Latn|eng_Latn": "P2 fail verdict: chrF++ 7.8 below the published full-model score. P3d found no better small candidate; English to Romanian passes and stays.",
   "eng_Latn|vie_Latn": "P2 fail verdict: chrF++ 14.0 below the published full-model score, 7.5% flagged: removed by the P7 rule (gap worse than minus 10). Vietnamese to English stays live, honestly labelled.",
 };
@@ -282,6 +283,43 @@ for (const [pair, reason] of Object.entries(QUARANTINED)) {
   const entry = ENGINE_TABLE[pair];
   if (entry) entry.disabled = { reason };
 }
+
+// --- Community conversions by fintutto ---------------------------------------------
+//
+// Single pair Opus-MT conversions in the Xenova layout (quantized ONNX
+// encoder + merged decoder under onnx/), verified on the Hub with the q8
+// bundle sizes below and scored on the 200 sentence FLORES-200 sample in the
+// browser through the real worker. Apache-2.0, licensed on the conversion
+// repositories themselves. These routes replace the quarantined Bulgarian
+// group route and bring Greek, Hebrew and Swahili their first small models.
+//
+// Measured: en->el +0.31 chrF vs the published full-model score (borderline),
+// bg->en -3.07 (borderline), en->he +2.49 (pass), en->sw -4.34 (borderline).
+
+function fintutto(
+  id: string,
+  modelId: string,
+  name: string,
+  expectedBytes: number,
+): EngineDescriptor {
+  return {
+    id,
+    kind: "opus",
+    modelId,
+    name,
+    expectedBytes,
+    license: "Apache-2.0",
+    licenseUrl: `https://huggingface.co/${modelId}`,
+    attribution: "Helsinki NLP (original) / fintutto (community conversion)",
+  };
+}
+
+ENGINE_TABLE["eng_Latn|ell_Grek"] = fintutto("opus-en-el", "fintutto/opus-mt-en-el", "Opus-MT English to Greek", 153628535);
+// Replaces the quarantined Bulgarian group route: the pair entry is
+// overwritten, so it is served (and saved, and listed) by this model.
+ENGINE_TABLE["bul_Cyrl|eng_Latn"] = fintutto("opus-bg-en", "fintutto/opus-mt-bg-en", "Opus-MT Bulgarian to English", 148678447);
+ENGINE_TABLE["eng_Latn|heb_Hebr"] = fintutto("opus-en-he", "fintutto/opus-mt-en-he", "Opus-MT English to Hebrew", 154992594);
+ENGINE_TABLE["eng_Latn|swh_Latn"] = fintutto("opus-en-sw", "fintutto/opus-mt-en-sw", "Opus-MT English to Swahili", 143060716);
 
 // --- IndicTrans2 -------------------------------------------------------------------
 //

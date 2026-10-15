@@ -136,7 +136,7 @@ async (engineSpec, srcCode, tgtCode, batch, fresh) => {
     worker.postMessage({ type: 'hello' });
     const helloOk = await new Promise((res) => {
       const t = setTimeout(() => res(false), 8000);
-      const check = () => { if (ctx.hello) { clearTimeout(t); res(ctx.hello.protocolVersion === 5); } else setTimeout(check, 50); };
+      const check = () => { if (ctx.hello) { clearTimeout(t); res(ctx.hello.protocolVersion === 6); } else setTimeout(check, 50); };
       check();
     });
     if (!helloOk) throw new Error('protocol handshake failed (rebuild the worker bundle)');

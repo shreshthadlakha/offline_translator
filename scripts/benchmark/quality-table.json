@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T10:09:27.466Z",
+  "generatedAt": "2026-10-15T10:28:40.966Z",
   "bar": {
     "file": "scripts/benchmark/quality-bar.mjs",
     "constants": {
@@ -393,34 +393,34 @@
       "src": "bul_Cyrl",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "opus-mul-en",
+        "id": "opus-bg-en",
         "kind": "opus",
-        "modelId": "Xenova/opus-mt-mul-en",
-        "group": true,
+        "modelId": "fintutto/opus-mt-bg-en",
+        "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 118351797,
-      "chrfpp": 51.57,
+      "modelSizeBytes": 148678447,
+      "chrfpp": 60.33,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 63.4,
       "baselineSource": "published",
-      "gap": -11.83,
-      "flagRate": 0.015,
+      "gap": -3.07,
+      "flagRate": 0.005,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
-        "repeatLoop": 2,
-        "lenRatio": 2,
+        "repeatLoop": 0,
+        "lenRatio": 1,
         "endsMidWord": 0,
-        "missingFinalPunct": 2
+        "missingFinalPunct": 0
       },
-      "flaggedSentences": 3,
+      "flaggedSentences": 1,
       "nSentences": 200,
-      "loadColdSeconds": 13.1,
-      "medianSecondsPerSentence": 0.857,
+      "loadColdSeconds": 21.9,
+      "medianSecondsPerSentence": 0.472,
       "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -11.83 (more than 5 of the bar); flags 1.5% <= 2%"
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -3.07 (within 5 of the bar); flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -1211,27 +1211,34 @@
       "src": "eng_Latn",
       "tgt": "ell_Grek",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "opus-en-el",
+        "kind": "opus",
+        "modelId": "fintutto/opus-mt-en-el",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 48.5,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 153628535,
+      "chrfpp": 48.81,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 48.5,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 0.31,
+      "flagRate": 0.025,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 4,
+        "endsMidWord": 0,
+        "missingFinalPunct": 3
+      },
+      "flaggedSentences": 5,
+      "nSentences": 200,
+      "loadColdSeconds": 26.5,
+      "medianSecondsPerSentence": 0.603,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ +0.31 vs published baseline; flags 2.5% > 2% (repeatLoop 1, lenRatio 4, missingFinalPunct 3)"
     },
     {
       "language": {
@@ -1411,27 +1418,34 @@
       "src": "eng_Latn",
       "tgt": "heb_Hebr",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "opus-en-he",
+        "kind": "opus",
+        "modelId": "fintutto/opus-mt-en-he",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 50.8,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 154992594,
+      "chrfpp": 53.28,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 50.8,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 2.48,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 3
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 26.1,
+      "medianSecondsPerSentence": 0.465,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +2.48 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -3109,27 +3123,34 @@
       "src": "eng_Latn",
       "tgt": "swh_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "opus-en-sw",
+        "kind": "opus",
+        "modelId": "fintutto/opus-mt-en-sw",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 58,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 143060716,
+      "chrfpp": 53.66,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 58,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": -4.34,
+      "flagRate": 0.03,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 4,
+        "lenRatio": 2,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 6,
+      "nSentences": 200,
+      "loadColdSeconds": 16.3,
+      "medianSecondsPerSentence": 0.458,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ -4.34 (within 5 of the bar); flags 3.0% > 2% (repeatLoop 4, lenRatio 2)"
     },
     {
       "language": {
@@ -3906,12 +3927,12 @@
     }
   ],
   "counts": {
-    "pass": 38,
-    "borderline": 19,
-    "fail": 11,
+    "pass": 39,
+    "borderline": 22,
+    "fail": 10,
     "error": 0,
-    "baseline": 42,
-    "totalSmallDirections": 68
+    "baseline": 39,
+    "totalSmallDirections": 71
   },
   "list1BorderlineOrFailOnSmallModels": [
     {
@@ -3976,13 +3997,13 @@
       "directions": [
         {
           "direction": "bul_Cyrl->en",
-          "engine": "opus-mul-en",
-          "verdict": "fail",
-          "chrfpp": 51.57,
+          "engine": "opus-bg-en",
+          "verdict": "borderline",
+          "chrfpp": 60.33,
           "baseline": 63.4,
-          "gap": -11.83,
-          "flagRate": 0.015,
-          "flagged": 3,
+          "gap": -3.07,
+          "flagRate": 0.005,
+          "flagged": 1,
           "n": 200
         }
       ]
@@ -4079,6 +4100,23 @@
           "gap": -2.89,
           "flagRate": 0,
           "flagged": 0,
+          "n": 200
+        }
+      ]
+    },
+    {
+      "code": "ell_Grek",
+      "english": "Greek",
+      "directions": [
+        {
+          "direction": "en->ell_Grek",
+          "engine": "opus-en-el",
+          "verdict": "borderline",
+          "chrfpp": 48.81,
+          "baseline": 48.5,
+          "gap": 0.31,
+          "flagRate": 0.025,
+          "flagged": 5,
           "n": 200
         }
       ]
@@ -4270,6 +4308,23 @@
       ]
     },
     {
+      "code": "swh_Latn",
+      "english": "Swahili",
+      "directions": [
+        {
+          "direction": "en->swh_Latn",
+          "engine": "opus-en-sw",
+          "verdict": "borderline",
+          "chrfpp": 53.66,
+          "baseline": 58,
+          "gap": -4.34,
+          "flagRate": 0.03,
+          "flagged": 6,
+          "n": 200
+        }
+      ]
+    },
+    {
       "code": "swe_Latn",
       "english": "Swedish",
       "directions": [
@@ -4401,16 +4456,8 @@
       "english": "Croatian"
     },
     {
-      "code": "ell_Grek",
-      "english": "Greek"
-    },
-    {
       "code": "hau_Latn",
       "english": "Hausa"
-    },
-    {
-      "code": "heb_Hebr",
-      "english": "Hebrew"
     },
     {
       "code": "zsm_Latn",
@@ -4435,10 +4482,6 @@
     {
       "code": "sin_Sinh",
       "english": "Sinhala"
-    },
-    {
-      "code": "swh_Latn",
-      "english": "Swahili"
     },
     {
       "code": "tgl_Latn",

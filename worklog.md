@@ -519,3 +519,19 @@ Stage Summary:
 - The 13 Indian languages translate in both directions with English on IndicTrans2 in the browser, with honest setup copy, notes, licences, on-device management and the version handshake bumped.
 - The quality table now carries the 26 measured IndicTrans2 directions; the drift check and the notices regeneration land in B6 once the fintutto routes (B3) complete the engine table.
 - Not done here on purpose: Telugu/Assamese "approximate" marking (B4 tier labels — the measured data decides), notices (B6), the WebGPU dev worker variant (a P5a research artifact, not shipped).
+
+---
+Task ID: 14-B3 (P9 Step B3 — community models)
+Agent: main (Z.ai Code)
+Task: P9 B3 — the fintutto community Opus-MT conversions: routes, pinned revisions, and real re-verified benchmark runs.
+
+Work Log:
+- Verified all four repositories on the Hub before wiring: fintutto/opus-mt-en-el, opus-mt-bg-en, opus-mt-en-he, opus-mt-en-sw, all Apache-2.0 (license tag on the repo, not just upstream), all in the Xenova layout (onnx/encoder_model_quantized.onnx + decoder_model_merged_quantized.onnx). Computed the exact q8 bundle sizes from the Hub API: 153,628,535 / 148,678,447 / 154,992,594 / 143,060,716 bytes.
+- engines.ts: four new single-pair entries (attribution "Helsinki NLP (original) / fintutto (community conversion)"), routing English to Greek (new route for a language that had none in that direction), Bulgarian to English (overwrites the quarantined group route — the pair entry no longer carries the disabled marker), English to Hebrew (new) and English to Swahili (new).
+- Revision pins: re-ran scripts/release/fetch-model-revisions.mjs — model-revisions.json now carries 48 pins including the two hari31416 bundles (their HEAD shas match the bundles.ts pinned commits exactly, so one registry agrees with the checksum-verified downloads) and the four fintutto shas; MODEL_REVISIONS in engines.ts regenerated from it; the worker bundle rebuilt with the new pins.
+- Re-verified cheaply where possible, for real: re-ran all four directions as fresh browser benchmarks through the real worker bundle at the pinned revisions (the agent-browser CDP harness; the driver's protocol expectation bumped 5 -> 6 to match the v6 handshake). Results reproduce the recorded ones almost exactly — en->el +0.31 chrF (recorded +0.31), bg->en -3.07 (recorded -3.07), en->he +2.48 (recorded +2.49), en->sw -4.34 (recorded -4.34); flag rates 2.5% / 0.5% / 0% / 3%; median 0.46-0.60 s/sentence; cold loads 16-26 s; downloads matching the computed sizes to the byte.
+- Regenerated the quality table and quality.ts with the four runs: verdicts borderline / borderline / pass / borderline — exactly the recorded results. The language tiers now stand at best 16, good 16, limited 9, full 14; the full and limited sets match the recovered final state exactly, and the best/good split differs from the old artifact only because the B1 flag fix reclassifies the punctuation-flagged borderlines as passes (the same effect B2 recorded).
+- Browser-verified: the grid shows Greek "Fast, about 147 MB", Hebrew "Fast, about 148 MB", Swahili "Fast, about 136 MB", and Bulgarian honestly as "Large, about 900 MB" (English to Bulgarian is the quarantined direction; Bulgarian to English is the fast one). Typecheck and lint clean, dev server restarted, zero page errors.
+
+Stage Summary:
+- Four community conversions shipped with real, re-measured quality data and pinned revisions; the engine table now matches the final routing truth. The drift check and the notices (which must list the community conversions with their pins and licences) are next in B6, after the labels and the safety net.

@@ -114,11 +114,11 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "bul_Cyrl",
     "english": "Bulgarian",
-    "tier": "limited",
+    "tier": "good",
     "directions": {
       "->en": {
-        "tier": "limited",
-        "gap": -11.83
+        "tier": "good",
+        "gap": -3.07
       },
       "en->": {
         "tier": "full",
@@ -279,15 +279,15 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "ell_Grek",
     "english": "Greek",
-    "tier": "full",
+    "tier": "good",
     "directions": {
       "->en": {
         "tier": "full",
         "gap": null
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "good",
+        "gap": 0.31
       }
     }
   },
@@ -324,15 +324,15 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "heb_Hebr",
     "english": "Hebrew",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
         "tier": "full",
         "gap": null
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 2.48
       }
     }
   },
@@ -684,15 +684,15 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "swh_Latn",
     "english": "Swahili",
-    "tier": "full",
+    "tier": "good",
     "directions": {
       "->en": {
         "tier": "full",
         "gap": null
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "good",
+        "gap": -4.34
       }
     }
   },

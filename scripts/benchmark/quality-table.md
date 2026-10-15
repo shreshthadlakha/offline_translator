@@ -10,7 +10,7 @@ Generated 2026-10-15 from the P1 benchmark: 200 fixed FLORES-200 devtest sentenc
 
 CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs baseline is what counts, never the absolute number.
 
-**Verdicts across the 68 routed small-model directions: 38 pass, 19 borderline, 11 fail.** Plus 42 full-model baseline rows (one per remaining language direction).
+**Verdicts across the 71 routed small-model directions: 39 pass, 22 borderline, 10 fail.** Plus 39 full-model baseline rows (one per remaining language direction).
 
 | Language | Direction | Engine | Model | chrF++ | Baseline | Gap | Flags | Cold load | Median s/sent | Verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -24,7 +24,7 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | Assamese | en->asm_Beng | indictrans2-en-indic | 309 MB | 38.84 | 34.60 | +4.24 | 1.0% (2/200) | 36.7 s | 1.874 | **pass** |
 | Bengali | ben_Beng->en | indictrans2-indic-en | 262 MB | 60.71 | 57.90 | +2.81 | 0.5% (1/200) | 33.2 s | 0.827 | **pass** |
 | Bengali | en->ben_Beng | indictrans2-en-indic | 309 MB | 51.26 | 46.20 | +5.06 | 0.0% (0/200) | 37.2 s | 1.305 | **pass** |
-| Bulgarian | bul_Cyrl->en | opus-mul-en (group) | 118 MB | 51.57 | 63.40 | -11.83 | 1.5% (3/200) | 13.1 s | 0.857 | **fail** |
+| Bulgarian | bul_Cyrl->en | opus-bg-en | 149 MB | 60.33 | 63.40 | -3.07 | 0.5% (1/200) | 21.9 s | 0.472 | **borderline** |
 | Bulgarian | en->bul_Cyrl | nllb-200-distilled-600M | 912 MB | 60.40 | 60.40 | — | — | — | — | **baseline** |
 | Catalan | cat_Latn->en | nllb-200-distilled-600M | 912 MB | 66.60 | 66.60 | — | — | — | — | **baseline** |
 | Catalan | en->cat_Latn | nllb-200-distilled-600M | 912 MB | 61.20 | 61.20 | — | — | — | — | **baseline** |
@@ -47,13 +47,13 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | German | deu_Latn->en | opus-de-en | 112 MB | 62.41 | 65.30 | -2.89 | 0.0% (0/200) | 11.4 s | 0.608 | **borderline** |
 | German | en->deu_Latn | opus-en-de | 112 MB | 58.65 | 59.40 | -0.75 | 0.0% (0/200) | 12.9 s | 0.697 | **pass** |
 | Greek | ell_Grek->en | nllb-200-distilled-600M | 912 MB | 58.40 | 58.40 | — | — | — | — | **baseline** |
-| Greek | en->ell_Grek | nllb-200-distilled-600M | 912 MB | 48.50 | 48.50 | — | — | — | — | **baseline** |
+| Greek | en->ell_Grek | opus-en-el | 154 MB | 48.81 | 48.50 | +0.31 | 2.5% (5/200) | 26.5 s | 0.603 | **borderline** |
 | Gujarati | guj_Gujr->en | indictrans2-indic-en | 262 MB | 64.70 | 62.50 | +2.20 | 0.0% (0/200) | 33.3 s | 0.827 | **pass** |
 | Gujarati | en->guj_Gujr | indictrans2-en-indic | 309 MB | 55.37 | 50.40 | +4.97 | 0.0% (0/200) | 38.5 s | 1.366 | **pass** |
 | Hausa | hau_Latn->en | nllb-200-distilled-600M | 912 MB | 52.60 | 52.60 | — | — | — | — | **baseline** |
 | Hausa | en->hau_Latn | nllb-200-distilled-600M | 912 MB | 49.00 | 49.00 | — | — | — | — | **baseline** |
 | Hebrew | heb_Hebr->en | nllb-200-distilled-600M | 912 MB | 61.80 | 61.80 | — | — | — | — | **baseline** |
-| Hebrew | en->heb_Hebr | nllb-200-distilled-600M | 912 MB | 50.80 | 50.80 | — | — | — | — | **baseline** |
+| Hebrew | en->heb_Hebr | opus-en-he | 155 MB | 53.28 | 50.80 | +2.48 | 0.0% (0/200) | 26.1 s | 0.465 | **pass** |
 | Hindi | hin_Deva->en | indictrans2-indic-en | 262 MB | 65.68 | 62.50 | +3.18 | 0.0% (0/200) | 33.1 s | 0.767 | **pass** |
 | Hindi | en->hin_Deva | indictrans2-en-indic | 309 MB | 57.86 | 54.20 | +3.66 | 0.0% (0/200) | 36.7 s | 1.321 | **pass** |
 | Hungarian | hun_Latn->en | opus-hu-en | 117 MB | 54.74 | 58.00 | -3.26 | 1.0% (2/200) | 12.4 s | 0.733 | **borderline** |
@@ -101,7 +101,7 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | Spanish | spa_Latn->en | opus-es-en | 119 MB | 54.68 | 57.10 | -2.42 | 0.0% (0/200) | 14.1 s | 0.833 | **borderline** |
 | Spanish | en->spa_Latn | opus-en-es | 119 MB | 52.92 | 52.60 | +0.32 | 0.0% (0/200) | 13.3 s | 0.722 | **pass** |
 | Swahili | swh_Latn->en | nllb-200-distilled-600M | 912 MB | 60.70 | 60.70 | — | — | — | — | **baseline** |
-| Swahili | en->swh_Latn | nllb-200-distilled-600M | 912 MB | 58.00 | 58.00 | — | — | — | — | **baseline** |
+| Swahili | en->swh_Latn | opus-en-sw | 143 MB | 53.66 | 58.00 | -4.34 | 3.0% (6/200) | 16.3 s | 0.458 | **borderline** |
 | Swedish | swe_Latn->en | opus-sv-en | 110 MB | 64.30 | 67.00 | -2.70 | 0.0% (0/200) | 12.6 s | 0.769 | **borderline** |
 | Swedish | en->swe_Latn | opus-en-sv | 110 MB | 63.52 | 62.70 | +0.82 | 1.0% (2/200) | 13.9 s | 0.646 | **pass** |
 | Tagalog | tgl_Latn->en | nllb-200-distilled-600M | 912 MB | 63.70 | 63.70 | — | — | — | — | **baseline** |
@@ -125,7 +125,7 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | Zulu | zul_Latn->en | nllb-200-distilled-600M | 912 MB | 56.80 | 56.80 | — | — | — | — | **baseline** |
 | Zulu | en->zul_Latn | nllb-200-distilled-600M | 912 MB | 51.00 | 51.00 | — | — | — | — | **baseline** |
 
-## List 1 — languages on a small model that are borderline or fail (23)
+## List 1 — languages on a small model that are borderline or fail (25)
 
 A quality problem today: the app routes these directions to a small model that does not clear the bar. Each entry shows the direction, the engine, the verdict, the chrF++ vs the published baseline, and the flag rate.
 
@@ -136,7 +136,7 @@ A quality problem today: the app routes these directions to a small model that d
 `arb_Arab->en` (opus-ar-en): **borderline**, chrF++ 58.63 vs 62.2 (gap -3.57), flags 0.5%  
 `en->arb_Arab` (opus-en-ar): **borderline**, chrF++ 49.56 vs 51.4 (gap -1.84), flags 3.0%
 - **Bulgarian** (bul_Cyrl):  
-`bul_Cyrl->en` (opus-mul-en): **fail**, chrF++ 51.57 vs 63.4 (gap -11.83), flags 1.5%
+`bul_Cyrl->en` (opus-bg-en): **borderline**, chrF++ 60.33 vs 63.4 (gap -3.07), flags 0.5%
 - **Chinese (Simplified)** (zho_Hans):  
 `en->zho_Hans` (opus-en-zh): **borderline**, chrF++ 22.36 vs 19.6 (gap +2.76), flags 5.0%  
 `zho_Hans->en` (opus-zh-en): **borderline**, chrF++ 48.87 vs 52.9 (gap -4.03), flags 4.0%
@@ -148,6 +148,8 @@ A quality problem today: the app routes these directions to a small model that d
 `fin_Latn->en` (opus-fi-en): **borderline**, chrF++ 54.01 vs 56.6 (gap -2.59), flags 0.5%
 - **German** (deu_Latn):  
 `deu_Latn->en` (opus-de-en): **borderline**, chrF++ 62.41 vs 65.3 (gap -2.89), flags 0.0%
+- **Greek** (ell_Grek):  
+`en->ell_Grek` (opus-en-el): **borderline**, chrF++ 48.81 vs 48.5 (gap +0.31), flags 2.5%
 - **Hungarian** (hun_Latn):  
 `hun_Latn->en` (opus-hu-en): **borderline**, chrF++ 54.74 vs 58 (gap -3.26), flags 1.0%
 - **Indonesian** (ind_Latn):  
@@ -169,6 +171,8 @@ A quality problem today: the app routes these directions to a small model that d
 `rus_Cyrl->en` (opus-ru-en): **fail**, chrF++ 53.17 vs 58.6 (gap -5.43), flags 1.0%
 - **Spanish** (spa_Latn):  
 `spa_Latn->en` (opus-es-en): **borderline**, chrF++ 54.68 vs 57.1 (gap -2.42), flags 0.0%
+- **Swahili** (swh_Latn):  
+`en->swh_Latn` (opus-en-sw): **borderline**, chrF++ 53.66 vs 58 (gap -4.34), flags 3.0%
 - **Swedish** (swe_Latn):  
 `swe_Latn->en` (opus-sv-en): **borderline**, chrF++ 64.3 vs 67 (gap -2.7), flags 0.0%
 - **Telugu** (tel_Telu):  
@@ -183,11 +187,11 @@ A quality problem today: the app routes these directions to a small model that d
 - **Vietnamese** (vie_Latn):  
 `vie_Latn->en` (opus-vi-en): **fail**, chrF++ 49.98 vs 58.1 (gap -8.12), flags 0.5%
 
-## List 2 — languages with no small model at all (17)
+## List 2 — languages with no small model at all (14)
 
 Every direction routes to the full model (the honest heavy path, ~912 MB download). These are coverage gaps, not quality failures: the full model is the bar itself.
 
-Amharic (amh_Ethi), Catalan (cat_Latn), Chinese (Traditional) (zho_Hant), Croatian (hrv_Latn), Greek (ell_Grek), Hausa (hau_Latn), Hebrew (heb_Hebr), Malay (zsm_Latn), Norwegian Bokmål (nob_Latn), Pashto (pbt_Arab), Persian (pes_Arab), Serbian (srp_Cyrl), Sinhala (sin_Sinh), Swahili (swh_Latn), Tagalog (tgl_Latn), Yoruba (yor_Latn), Zulu (zul_Latn)
+Amharic (amh_Ethi), Catalan (cat_Latn), Chinese (Traditional) (zho_Hant), Croatian (hrv_Latn), Hausa (hau_Latn), Malay (zsm_Latn), Norwegian Bokmål (nob_Latn), Pashto (pbt_Arab), Persian (pes_Arab), Serbian (srp_Cyrl), Sinhala (sin_Sinh), Tagalog (tgl_Latn), Yoruba (yor_Latn), Zulu (zul_Latn)
 
 ## Full model — P1 local runs (provenance only)
 

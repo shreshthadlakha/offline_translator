@@ -6306,6 +6306,293 @@
         "downloadedBytes": 261714435
       },
       "completedAt": "2026-10-15T10:09:21.693Z"
+    },
+    {
+      "runKey": "eng_Latn-ell_Grek#opus-en-el",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "ell_Grek"
+      },
+      "engine": {
+        "id": "opus-en-el",
+        "kind": "opus",
+        "modelId": "fintutto/opus-mt-en-el",
+        "name": "Opus-MT English to Greek",
+        "expectedBytes": 153628535,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 48.81,
+        "corpusLower": 49.31
+      },
+      "published": {
+        "chrfpp": 48.5,
+        "delta": 0.31
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 4,
+          "endsMidWord": 0,
+          "missingFinalPunct": 3
+        },
+        "flaggedSentences": 5,
+        "flagRate": 0.025,
+        "details": [
+          {
+            "id": 166,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 34.6
+          },
+          {
+            "id": 691,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 17.8
+          },
+          {
+            "id": 799,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 34.7
+          },
+          {
+            "id": 846,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 60
+          },
+          {
+            "id": 848,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 12.1
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.603,
+        "p90SecondsPerSentence": 0.968,
+        "loadMsCold": 26491,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 153628461
+      },
+      "completedAt": "2026-10-15T10:22:16.628Z"
+    },
+    {
+      "runKey": "bul_Cyrl-eng_Latn#opus-bg-en",
+      "pair": {
+        "src": "bul_Cyrl",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "opus-bg-en",
+        "kind": "opus",
+        "modelId": "fintutto/opus-mt-bg-en",
+        "name": "Opus-MT Bulgarian to English",
+        "expectedBytes": 148678447,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 60.33,
+        "corpusLower": 61.32
+      },
+      "published": {
+        "chrfpp": 63.4,
+        "delta": -3.07
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 1,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 461,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 33
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.472,
+        "p90SecondsPerSentence": 0.691,
+        "loadMsCold": 21861,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 148678373
+      },
+      "completedAt": "2026-10-15T10:24:24.829Z"
+    },
+    {
+      "runKey": "eng_Latn-heb_Hebr#opus-en-he",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "heb_Hebr"
+      },
+      "engine": {
+        "id": "opus-en-he",
+        "kind": "opus",
+        "modelId": "fintutto/opus-mt-en-he",
+        "name": "Opus-MT English to Hebrew",
+        "expectedBytes": 154992594,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 53.28,
+        "corpusLower": 53.29
+      },
+      "published": {
+        "chrfpp": 50.8,
+        "delta": 2.48
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 3
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.465,
+        "p90SecondsPerSentence": 0.748,
+        "loadMsCold": 26134,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 154992520
+      },
+      "completedAt": "2026-10-15T10:26:34.516Z"
+    },
+    {
+      "runKey": "eng_Latn-swh_Latn#opus-en-sw",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "swh_Latn"
+      },
+      "engine": {
+        "id": "opus-en-sw",
+        "kind": "opus",
+        "modelId": "fintutto/opus-mt-en-sw",
+        "name": "Opus-MT English to Swahili",
+        "expectedBytes": 143060716,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 53.66,
+        "corpusLower": 54.1
+      },
+      "published": {
+        "chrfpp": 58,
+        "delta": -4.34
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 4,
+          "lenRatio": 2,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 6,
+        "flagRate": 0.03,
+        "details": [
+          {
+            "id": 198,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 52.5
+          },
+          {
+            "id": 253,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 100
+          },
+          {
+            "id": 375,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 51.7
+          },
+          {
+            "id": 637,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 44.4
+          },
+          {
+            "id": 781,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 26
+          },
+          {
+            "id": 799,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 21.3
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.458,
+        "p90SecondsPerSentence": 0.736,
+        "loadMsCold": 16322,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 143060642
+      },
+      "completedAt": "2026-10-15T10:28:31.002Z"
     }
   ]
 }
