@@ -24,6 +24,7 @@ const OUT = join(ROOT, "THIRD_PARTY_NOTICES.md");
 const CHECK = process.argv.includes("--check");
 
 const revisions = JSON.parse(readFileSync(HERE("release/model-revisions.json"), "utf8")).revisions;
+const community = JSON.parse(readFileSync(HERE("release/community-models.json"), "utf8")).models;
 const hubAudit = JSON.parse(readFileSync(HERE("language-audit/hub-audit.json"), "utf8"));
 const hubResearch = JSON.parse(readFileSync(HERE("hub-research.json"), "utf8"));
 const packageJson = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8"));
@@ -54,6 +55,12 @@ const rows = allEngines().map((engine) => {
   if (engine.id === NLLB_ENGINE.id) {
     upstreamModel = hubResearch.fullModel.originalModel;
     upstreamLicenseTag = hubResearch.fullModel.license;
+  } else if (community[engine.modelId]) {
+    // A community conversion (IndicTrans2 int8 exports by hari31416, Opus-MT
+    // conversions by fintutto): the upstream original and both licenses were
+    // verified on the Hub and recorded in scripts/release/community-models.json.
+    upstreamModel = community[engine.modelId].upstream;
+    upstreamLicenseTag = community[engine.modelId].upstreamLicense;
   } else {
     const audit = audited.get(engine.modelId);
     if (!audit) throw new Error(`No Hub audit entry for ${engine.modelId}`);
@@ -120,6 +127,17 @@ L.push("## Translation runtime");
 L.push("");
 L.push(`- **\`@huggingface/transformers\`${transformersLocked ? ` (v${transformersLocked}, resolved by package-lock.json)` : ""}** — the transformers.js library that loads and runs the models in the web worker. Apache-2.0. Bundled into \`public/translator.worker.js\` at build time.`);
 L.push("- **ONNX Runtime Web** — the WebAssembly runtime files (\`ort-wasm-simd-threaded.jsep.wasm\` and its loader) that transformers.js depends on. MIT, © Microsoft. Copied out of the transformers package by `scripts/copy-ort.mjs` and served self hosted from `/ort/`, so the app never requests them from a CDN.");
+L.push("");
+L.push("## Ported code");
+L.push("");
+L.push("The IndicTrans2 preprocessing and postprocessing in `src/lib/indictrans2/processor.ts` is a TypeScript port of reference Python code, with the algorithmic structure and constants preserved:");
+L.push("");
+L.push("- **IndicTransToolkit 1.1.1** (`processor.pyx` — the placeholder, normalization and transliteration pipeline) — AI4Bharat, MIT.");
+L.push("- **indic-nlp-library 0.92** (script normalizers, transliterator, trivial tokenizers) — Anoop Kunchukuttan, MIT.");
+L.push("- **sacremoses 0.2.0** (the Moses punctuation normalizer and tokenizer/detokenizer, English subset actually used) — MIT.");
+L.push("- **urduhack 1.1.1** (Urdu character normalization) — MIT.");
+L.push("");
+L.push("The research copies of these libraries (pinned release tarballs) live under `scripts/indictrans2/` as provenance; the app ships only the port, and no upstream code is bundled verbatim.");
 L.push("");
 L.push("## Self hosted fonts");
 L.push("");

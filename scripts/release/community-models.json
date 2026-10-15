@@ -1,0 +1,37 @@
+{
+  "verifiedAt": "2026-10-15",
+  "source": "Hugging Face Hub API (repository license tags), verified per repository",
+  "note": "Community conversions the app routes to. The upstream model and its license govern the weights; the conversion repository's own license tag is listed too. Verified once and committed so scripts/generate-notices.mjs stays deterministic from committed files only.",
+  "models": {
+    "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8": {
+      "upstream": "ai4bharat/indictrans2-en-indic-dist-200M",
+      "upstreamLicense": "mit",
+      "conversionLicense": "mit"
+    },
+    "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8": {
+      "upstream": "ai4bharat/indictrans2-indic-en-dist-200M",
+      "upstreamLicense": "mit",
+      "conversionLicense": "mit"
+    },
+    "fintutto/opus-mt-en-el": {
+      "upstream": "Helsinki-NLP/opus-mt-en-el",
+      "upstreamLicense": "apache-2.0",
+      "conversionLicense": "apache-2.0"
+    },
+    "fintutto/opus-mt-bg-en": {
+      "upstream": "Helsinki-NLP/opus-mt-bg-en",
+      "upstreamLicense": "apache-2.0",
+      "conversionLicense": "apache-2.0"
+    },
+    "fintutto/opus-mt-en-he": {
+      "upstream": "Helsinki-NLP/opus-mt-en-he",
+      "upstreamLicense": "apache-2.0",
+      "conversionLicense": "apache-2.0"
+    },
+    "fintutto/opus-mt-en-sw": {
+      "upstream": "Helsinki-NLP/opus-mt-en-sw",
+      "upstreamLicense": "apache-2.0",
+      "conversionLicense": "apache-2.0"
+    }
+  }
+}

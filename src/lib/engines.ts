@@ -19,7 +19,7 @@
  * plus tokenizer and config files.
  */
 
-import { directionQuality, type QualityTier } from "./quality";
+import { directionQuality, type QualityTier } from "./quality.ts";
 
 export type EngineKind = "nllb" | "opus" | "indictrans2";
 

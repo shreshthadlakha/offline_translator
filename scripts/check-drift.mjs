@@ -10,6 +10,9 @@
 //    scripts/release/model-revisions.json — the app pins what the notices
 //    publish, and neither can drift from the other.
 // 4. Every engine the app can route to must have a pinned revision.
+// 5. The IndicTrans2 bundles (which download at commits pinned inside
+//    src/lib/indictrans2/bundles.ts, verified by sha256) must agree with the
+//    revision registry: one pin per model, never two.
 import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -57,6 +60,21 @@ if (unpinned.length > 0) {
   failed = true;
 } else {
   console.log(`ok: every routable engine (${allEngines().length}) has a pinned revision`);
+}
+
+// 5: IndicTrans2 bundle commits vs the revision registry.
+const bundles = (await import("../src/lib/indictrans2/bundles.ts")).INDICTRANS2_BUNDLES;
+for (const [key, bundle] of Object.entries(bundles)) {
+  const registry = recorded[bundle.repo];
+  if (!registry) {
+    console.error(`drift: IndicTrans2 bundle ${key} (${bundle.repo}) is not in model-revisions.json`);
+    failed = true;
+  } else if (registry !== bundle.commit) {
+    console.error(`drift: IndicTrans2 bundle ${key} pins ${bundle.commit} but the registry says ${registry}`);
+    failed = true;
+  } else {
+    console.log(`ok: IndicTrans2 bundle ${key} pin matches the registry (${bundle.commit.slice(0, 12)})`);
+  }
 }
 
 if (failed) {
