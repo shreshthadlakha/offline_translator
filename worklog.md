@@ -553,3 +553,18 @@ Work Log:
 Stage Summary:
 - Every language shows an honest tier, approximate and limited outputs carry the notice, and the override works end to end through the existing heavy warning and Settings.
 - Autonomous decisions recorded: "limited" gets its own picker label ("Fast, limited") rather than being folded into "approximate", because the measured gap is 5+ chrF and the prompts treat it as its own tier; the notice stays visible while a pair runs on an approximate/limited model (no dismissal state exists in the spec, and hiding it on a later visit would hide the honest warning); the heavy dialog keeps its existing wording on the override path (the P4 spec explicitly reuses that warning, and P7 forbids interface changes beyond it).
+
+---
+Task ID: 14-B5 (P9 Step B5 — quality safety net)
+Agent: main (Z.ai Code)
+Task: P9 B5 — the P7 safety net: list the live failures, confirm the worst are removed, confirm the notice and button really work, never disguise a cut off sentence.
+
+Work Log:
+- The live failures, from the regenerated quality table against the current routing (P7 task 1): ten directions still run on a small model with a fail verdict — Afrikaans to English (-9.43), Indonesian to English (-6.49), Japanese to English (-6.33), Korean to English (-8.01), Russian to English (-5.43), Thai to English (-8.21), Turkish to English (-6.60), Ukrainian to English (-7.01), English to Ukrainian (-6.59), Vietnamese to English (-8.12). All are the p3d "no better candidate exists" set: every one has a flag rate at or under 1.5% and a gap better than minus 10, so none meets the removal rule; each carries the honest "Fast, limited" label, the notice and the button.
+- The removed set (P7 task 2), already landed in B1 and re-verified now: every route with a gap worse than minus 10 or a flag rate above 10% is off the small models — English to Bulgarian (-18.98, 54% cut off), Croatian both directions, Greek to English, Norwegian both directions (including English to Norwegian, under the "all Norwegian group routes" rule despite -9.33), Serbian both directions, English to Vietnamese (-14.01) — plus Romanian to English (the p3d decision). All ten fall back to the full model through the existing heavy download warning, which the B1 browser test showed firing.
+- The notice and the button (P7 task 3) already existed from B4, and this step checked that they really work on a limited route: a live English to Ukrainian translation (fresh 111 MB model) produced "Сьогодні гарна погода. Я забув парасольку в офісі." with the notice "This fast model is approximate. For important text, use the full model." and the "Use the full model for this language." button under it. Zero page errors.
+- Never disguise a cut off sentence (P7 task 4): the worker skips the final punctuation restoration whenever the loaded engine's tier is "limited" (verified present in the built bundle), the shared function itself also refuses to add a mark behind a comma or colon (unit-tested), and the benchmark's separate missingFinalPunct count keeps dropped marks visible in the data.
+- Details and the picker labels re-checked in B4's sweep; the README language table updates with the notices regeneration in B6.
+
+Stage Summary:
+- The safety net holds with no new code needed: the numbers land exactly on the P7 rule, the worst routes are gone, the honest paths all show their warnings, and the remaining failures are labelled, noticed and escapable per language.
