@@ -229,7 +229,9 @@ function SetupCardInner() {
           {fastPair && desired ? (
             <>
               <h3 className="type-body font-medium">
-                {copy.setup.settingUpPair(pairEnglish, mbWhole(desired.expectedBytes))}
+                {(desired.expectedBytes >= 200 * 1024 * 1024
+                  ? copy.setup.settingUpLargePair(pairEnglish, mbWhole(desired.expectedBytes))
+                  : copy.setup.settingUpPair(pairEnglish, mbWhole(desired.expectedBytes)))}
               </h3>
               <p className="type-small mt-1.5 text-muted-foreground">{copy.setup.line2}</p>
             </>
@@ -260,7 +262,9 @@ function SetupCardInner() {
         ? switching
           ? copy.setup.switching
           : desired?.kind === "opus"
-            ? copy.setup.settingUpPair(`${srcLang?.english ?? "English"} to ${tgtLang?.english ?? "French"}`, mbWhole(desired.expectedBytes))
+            ? desired.expectedBytes >= 200 * 1024 * 1024
+              ? copy.setup.settingUpLargePair(`${srcLang?.english ?? "English"} to ${tgtLang?.english ?? "French"}`, mbWhole(desired.expectedBytes))
+              : copy.setup.settingUpPair(`${srcLang?.english ?? "English"} to ${tgtLang?.english ?? "French"}`, mbWhole(desired.expectedBytes))
             : copy.setup.stageDownloading
         : status === "initializing"
           ? copy.setup.stageInitializing

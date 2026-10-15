@@ -14,9 +14,14 @@
  * v5: engines can be group models that need a language tag, ">>hrv<<", at
  * the start of the source text. The worker adds it from the spec and never
  * shows it anywhere.
+ *
+ * v6: IndicTrans2 engines. A new engine kind with its own bundle downloads
+ * (pinned commits, sha256-verified files, its own cache), so the spec gains
+ * a bundle key; the worker runs it beside the transformers pipelines with
+ * the same stages, progress, Details and cancel semantics.
  */
 
-export const PROTOCOL_VERSION = 5;
+export const PROTOCOL_VERSION = 6;
 
 export type Priority = "manual" | "sentence" | "fragment" | "batch";
 
@@ -28,11 +33,16 @@ export type EngineErrorCode = "memory" | "download" | "translate" | "quota" | "a
  * structural so the worker bundle doesn't pull the whole catalog in. */
 export type EngineSpec = {
   id: string;
-  kind: "nllb" | "opus";
+  kind: "nllb" | "opus" | "indictrans2";
   modelId: string;
   /** For group models: the language tag the worker prepends, e.g. "hrv".
    *  Absent for single pair models and the full model. */
   langTag?: string;
+  /** For IndicTrans2 engines: which of the two bundles to load. */
+  bundle?: "en-indic" | "indic-en";
+  /** For pipeline engines whose ONNX files live outside the default "onnx/"
+   *  directory of the repository. */
+  subfolder?: string;
   /** The route's quality tier, from the measured data in lib/quality.ts.
    *  "limited" routes are the honest fallback: their model is measurably
    *  weaker than the full model, so their output is never given the final

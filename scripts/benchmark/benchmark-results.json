@@ -52,7 +52,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 113111733
       },
-      "completedAt": "2026-10-15T09:53:58.747Z"
+      "completedAt": "2026-10-15T10:08:55.796Z"
     },
     {
       "runKey": "eng_Latn-fra_Latn#nllb-200-distilled-600M",
@@ -131,7 +131,7 @@
         "loadSeconds": 5.568,
         "downloadSeconds": null
       },
-      "completedAt": "2026-10-15T09:53:56.772Z"
+      "completedAt": "2026-10-15T10:08:54.014Z"
     },
     {
       "runKey": "eng_Latn-hin_Deva#nllb-200-distilled-600M",
@@ -219,7 +219,7 @@
         "loadSeconds": 6.04,
         "downloadSeconds": null
       },
-      "completedAt": "2026-10-15T09:53:59.047Z"
+      "completedAt": "2026-10-15T10:08:56.684Z"
     },
     {
       "runKey": "fra_Latn-eng_Latn#nllb-200-distilled-600M",
@@ -282,7 +282,7 @@
         "loadSeconds": 6.063,
         "downloadSeconds": null
       },
-      "completedAt": "2026-10-15T09:54:09.542Z"
+      "completedAt": "2026-10-15T10:09:09.609Z"
     },
     {
       "runKey": "hin_Deva-eng_Latn#nllb-200-distilled-600M",
@@ -328,7 +328,7 @@
         "loadSeconds": 6.196,
         "downloadSeconds": null
       },
-      "completedAt": "2026-10-15T09:54:10.075Z"
+      "completedAt": "2026-10-15T10:09:10.643Z"
     },
     {
       "runKey": "eng_Latn-zho_Hans#nllb-200-distilled-600M",
@@ -672,7 +672,7 @@
         "loadSeconds": 5.684,
         "downloadSeconds": 56.195
       },
-      "completedAt": "2026-10-15T09:54:08.168Z"
+      "completedAt": "2026-10-15T10:09:08.244Z"
     },
     {
       "runKey": "eng_Latn-hrv_Latn#opus-en-mul",
@@ -848,7 +848,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 118280506
       },
-      "completedAt": "2026-10-15T09:54:02.422Z"
+      "completedAt": "2026-10-15T10:08:59.983Z"
     },
     {
       "runKey": "eng_Latn-bul_Cyrl#opus-en-mul",
@@ -1088,7 +1088,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 118280506
       },
-      "completedAt": "2026-10-15T09:53:53.763Z"
+      "completedAt": "2026-10-15T10:08:50.963Z"
     },
     {
       "runKey": "eng_Latn-srp_Cyrl#opus-en-mul",
@@ -1344,7 +1344,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 118280506
       },
-      "completedAt": "2026-10-15T09:54:05.717Z"
+      "completedAt": "2026-10-15T10:09:04.946Z"
     },
     {
       "runKey": "eng_Latn-nob_Latn#opus-en-mul",
@@ -1440,7 +1440,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 118280506
       },
-      "completedAt": "2026-10-15T09:54:04.186Z"
+      "completedAt": "2026-10-15T10:09:02.571Z"
     },
     {
       "runKey": "hrv_Latn-eng_Latn#opus-mul-en",
@@ -1552,7 +1552,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 118351723
       },
-      "completedAt": "2026-10-15T09:54:10.635Z"
+      "completedAt": "2026-10-15T10:09:11.172Z"
     },
     {
       "runKey": "bul_Cyrl-eng_Latn#opus-mul-en",
@@ -1625,7 +1625,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 118351723
       },
-      "completedAt": "2026-10-15T09:53:51.817Z"
+      "completedAt": "2026-10-15T10:08:48.040Z"
     },
     {
       "runKey": "srp_Cyrl-eng_Latn#opus-mul-en",
@@ -1672,7 +1672,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 118351723
       },
-      "completedAt": "2026-10-15T09:54:16.861Z"
+      "completedAt": "2026-10-15T10:09:18.607Z"
     },
     {
       "runKey": "nob_Latn-eng_Latn#opus-mul-en",
@@ -1776,7 +1776,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 118351723
       },
-      "completedAt": "2026-10-15T09:54:13.930Z"
+      "completedAt": "2026-10-15T10:09:14.936Z"
     },
     {
       "runKey": "ell_Grek-eng_Latn#opus-mul-en",
@@ -1848,7 +1848,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 118351723
       },
-      "completedAt": "2026-10-15T09:53:52.898Z"
+      "completedAt": "2026-10-15T10:08:49.106Z"
     },
     {
       "runKey": "eng_Latn-por_Latn#opus-en-romance",
@@ -1895,7 +1895,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 119232541
       },
-      "completedAt": "2026-10-15T09:54:04.478Z"
+      "completedAt": "2026-10-15T10:09:03.767Z"
     },
     {
       "runKey": "por_Latn-eng_Latn#opus-romance-en",
@@ -1959,7 +1959,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 119234852
       },
-      "completedAt": "2026-10-15T09:54:14.472Z"
+      "completedAt": "2026-10-15T10:09:16.224Z"
     },
     {
       "runKey": "ron_Latn-eng_Latn#opus-romance-en",
@@ -2016,7 +2016,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 119234852
       },
-      "completedAt": "2026-10-15T09:54:14.739Z"
+      "completedAt": "2026-10-15T10:09:16.491Z"
     },
     {
       "runKey": "afr_Latn-eng_Latn#opus-af-en",
@@ -2080,7 +2080,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 110916295
       },
-      "completedAt": "2026-10-15T09:53:51.278Z"
+      "completedAt": "2026-10-15T10:08:46.972Z"
     },
     {
       "runKey": "arb_Arab-eng_Latn#opus-ar-en",
@@ -2136,7 +2136,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 117621466
       },
-      "completedAt": "2026-10-15T09:53:51.553Z"
+      "completedAt": "2026-10-15T10:08:47.245Z"
     },
     {
       "runKey": "ces_Latn-eng_Latn#opus-cs-en",
@@ -2192,7 +2192,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 116695526
       },
-      "completedAt": "2026-10-15T09:53:52.079Z"
+      "completedAt": "2026-10-15T10:08:48.303Z"
     },
     {
       "runKey": "dan_Latn-eng_Latn#opus-da-en",
@@ -2239,7 +2239,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 112558989
       },
-      "completedAt": "2026-10-15T09:53:52.347Z"
+      "completedAt": "2026-10-15T10:08:48.568Z"
     },
     {
       "runKey": "deu_Latn-eng_Latn#opus-de-en",
@@ -2286,7 +2286,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 111519745
       },
-      "completedAt": "2026-10-15T09:53:52.624Z"
+      "completedAt": "2026-10-15T10:08:48.833Z"
     },
     {
       "runKey": "eng_Latn-afr_Latn#opus-en-af",
@@ -2358,7 +2358,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 110916295
       },
-      "completedAt": "2026-10-15T09:53:53.174Z"
+      "completedAt": "2026-10-15T10:08:49.381Z"
     },
     {
       "runKey": "eng_Latn-arb_Arab#opus-en-ar",
@@ -2454,7 +2454,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 117602786
       },
-      "completedAt": "2026-10-15T09:53:53.439Z"
+      "completedAt": "2026-10-15T10:08:49.742Z"
     },
     {
       "runKey": "eng_Latn-ces_Latn#opus-en-cs",
@@ -2501,7 +2501,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 116695526
       },
-      "completedAt": "2026-10-15T09:53:54.025Z"
+      "completedAt": "2026-10-15T10:08:51.242Z"
     },
     {
       "runKey": "eng_Latn-dan_Latn#opus-en-da",
@@ -2565,7 +2565,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 112558991
       },
-      "completedAt": "2026-10-15T09:53:54.284Z"
+      "completedAt": "2026-10-15T10:08:51.595Z"
     },
     {
       "runKey": "eng_Latn-deu_Latn#opus-en-de",
@@ -2612,7 +2612,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 111519780
       },
-      "completedAt": "2026-10-15T09:53:56.110Z"
+      "completedAt": "2026-10-15T10:08:53.448Z"
     },
     {
       "runKey": "eng_Latn-fin_Latn#opus-en-fi",
@@ -2676,7 +2676,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 119429988
       },
-      "completedAt": "2026-10-15T09:53:56.386Z"
+      "completedAt": "2026-10-15T10:08:53.724Z"
     },
     {
       "runKey": "eng_Latn-hin_Deva#opus-en-hi",
@@ -3043,7 +3043,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 116699316
       },
-      "completedAt": "2026-10-15T09:54:02.724Z"
+      "completedAt": "2026-10-15T10:09:00.252Z"
     },
     {
       "runKey": "eng_Latn-ind_Latn#opus-en-id",
@@ -3139,7 +3139,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 107915091
       },
-      "completedAt": "2026-10-15T09:54:03.021Z"
+      "completedAt": "2026-10-15T10:09:00.532Z"
     },
     {
       "runKey": "eng_Latn-ita_Latn#opus-en-it",
@@ -3195,7 +3195,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 136474044
       },
-      "completedAt": "2026-10-15T09:54:03.340Z"
+      "completedAt": "2026-10-15T10:09:00.816Z"
     },
     {
       "runKey": "eng_Latn-nld_Latn#opus-en-nl",
@@ -3251,7 +3251,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 121631416
       },
-      "completedAt": "2026-10-15T09:54:03.648Z"
+      "completedAt": "2026-10-15T10:09:02.061Z"
     },
     {
       "runKey": "eng_Latn-ron_Latn#opus-en-ro",
@@ -3298,7 +3298,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 113247006
       },
-      "completedAt": "2026-10-15T09:54:04.785Z"
+      "completedAt": "2026-10-15T10:09:04.061Z"
     },
     {
       "runKey": "eng_Latn-rus_Cyrl#opus-en-ru",
@@ -3362,7 +3362,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 117767359
       },
-      "completedAt": "2026-10-15T09:54:05.096Z"
+      "completedAt": "2026-10-15T10:09:04.373Z"
     },
     {
       "runKey": "eng_Latn-spa_Latn#opus-en-es",
@@ -3409,7 +3409,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 119377271
       },
-      "completedAt": "2026-10-15T09:54:05.410Z"
+      "completedAt": "2026-10-15T10:09:04.665Z"
     },
     {
       "runKey": "eng_Latn-swe_Latn#opus-en-sv",
@@ -3473,7 +3473,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 109758413
       },
-      "completedAt": "2026-10-15T09:54:05.978Z"
+      "completedAt": "2026-10-15T10:09:05.203Z"
     },
     {
       "runKey": "eng_Latn-ukr_Cyrl#opus-en-uk",
@@ -3545,7 +3545,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 116526929
       },
-      "completedAt": "2026-10-15T09:54:06.273Z"
+      "completedAt": "2026-10-15T10:09:06.130Z"
     },
     {
       "runKey": "eng_Latn-vie_Latn#opus-en-vi",
@@ -3681,7 +3681,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 106645206
       },
-      "completedAt": "2026-10-15T09:54:08.039Z"
+      "completedAt": "2026-10-15T10:09:08.119Z"
     },
     {
       "runKey": "eng_Latn-zho_Hans#opus-en-zh",
@@ -3810,7 +3810,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 119495576
       },
-      "completedAt": "2026-10-15T09:54:09.000Z"
+      "completedAt": "2026-10-15T10:09:09.075Z"
     },
     {
       "runKey": "fin_Latn-eng_Latn#opus-fi-en",
@@ -3866,7 +3866,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 113395364
       },
-      "completedAt": "2026-10-15T09:54:09.260Z"
+      "completedAt": "2026-10-15T10:09:09.341Z"
     },
     {
       "runKey": "fra_Latn-eng_Latn#opus-fr-en",
@@ -3913,7 +3913,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 113111733
       },
-      "completedAt": "2026-10-15T09:54:09.820Z"
+      "completedAt": "2026-10-15T10:09:09.873Z"
     },
     {
       "runKey": "hin_Deva-eng_Latn#opus-hi-en",
@@ -4066,7 +4066,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 116699316
       },
-      "completedAt": "2026-10-15T09:54:10.921Z"
+      "completedAt": "2026-10-15T10:09:11.427Z"
     },
     {
       "runKey": "ind_Latn-eng_Latn#opus-id-en",
@@ -4122,7 +4122,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 107915093
       },
-      "completedAt": "2026-10-15T09:54:11.191Z"
+      "completedAt": "2026-10-15T10:09:11.676Z"
     },
     {
       "runKey": "ita_Latn-eng_Latn#opus-it-en",
@@ -4178,7 +4178,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 136865393
       },
-      "completedAt": "2026-10-15T09:54:11.478Z"
+      "completedAt": "2026-10-15T10:09:11.941Z"
     },
     {
       "runKey": "jpn_Jpan-eng_Latn#opus-ja-en",
@@ -4250,7 +4250,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 114701000
       },
-      "completedAt": "2026-10-15T09:54:11.727Z"
+      "completedAt": "2026-10-15T10:09:12.185Z"
     },
     {
       "runKey": "kor_Hang-eng_Latn#opus-ko-en",
@@ -4314,7 +4314,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 119601552
       },
-      "completedAt": "2026-10-15T09:54:13.369Z"
+      "completedAt": "2026-10-15T10:09:13.898Z"
     },
     {
       "runKey": "nld_Latn-eng_Latn#opus-nl-en",
@@ -4370,7 +4370,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 121631418
       },
-      "completedAt": "2026-10-15T09:54:13.646Z"
+      "completedAt": "2026-10-15T10:09:14.670Z"
     },
     {
       "runKey": "pol_Latn-eng_Latn#opus-pl-en",
@@ -4417,7 +4417,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 117618083
       },
-      "completedAt": "2026-10-15T09:54:14.208Z"
+      "completedAt": "2026-10-15T10:09:15.965Z"
     },
     {
       "runKey": "rus_Cyrl-eng_Latn#opus-ru-en",
@@ -4481,7 +4481,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 117767359
       },
-      "completedAt": "2026-10-15T09:54:16.322Z"
+      "completedAt": "2026-10-15T10:09:18.056Z"
     },
     {
       "runKey": "spa_Latn-eng_Latn#opus-es-en",
@@ -4528,7 +4528,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 119377236
       },
-      "completedAt": "2026-10-15T09:54:16.593Z"
+      "completedAt": "2026-10-15T10:09:18.343Z"
     },
     {
       "runKey": "swe_Latn-eng_Latn#opus-sv-en",
@@ -4575,7 +4575,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 109758413
       },
-      "completedAt": "2026-10-15T09:54:17.130Z"
+      "completedAt": "2026-10-15T10:09:18.869Z"
     },
     {
       "runKey": "tha_Thai-eng_Latn#opus-th-en",
@@ -4631,7 +4631,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 117356323
       },
-      "completedAt": "2026-10-15T09:54:18.718Z"
+      "completedAt": "2026-10-15T10:09:20.898Z"
     },
     {
       "runKey": "tur_Latn-eng_Latn#opus-tr-en",
@@ -4696,7 +4696,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 116552937
       },
-      "completedAt": "2026-10-15T09:54:18.994Z"
+      "completedAt": "2026-10-15T10:09:21.157Z"
     },
     {
       "runKey": "ukr_Cyrl-eng_Latn#opus-uk-en",
@@ -4752,7 +4752,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 116526929
       },
-      "completedAt": "2026-10-15T09:54:19.294Z"
+      "completedAt": "2026-10-15T10:09:21.416Z"
     },
     {
       "runKey": "vie_Latn-eng_Latn#opus-vi-en",
@@ -4808,7 +4808,7 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 106706880
       },
-      "completedAt": "2026-10-15T09:54:19.546Z"
+      "completedAt": "2026-10-15T10:09:21.943Z"
     },
     {
       "runKey": "zho_Hans-eng_Latn#opus-zh-en",
@@ -4920,7 +4920,1392 @@
         "loadMsWarmMedian": null,
         "downloadedBytes": 119495849
       },
-      "completedAt": "2026-10-15T09:54:19.831Z"
+      "completedAt": "2026-10-15T10:09:22.200Z"
+    },
+    {
+      "runKey": "asm_Beng-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "asm_Beng",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 54.63,
+        "corpusLower": 55.59
+      },
+      "published": {
+        "chrfpp": 52.7,
+        "delta": 1.93
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 14
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.904,
+        "p90SecondsPerSentence": 1.332,
+        "loadMsCold": 32294,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:08:47.525Z"
+    },
+    {
+      "runKey": "ben_Beng-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "ben_Beng",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 60.71,
+        "corpusLower": 61.83
+      },
+      "published": {
+        "chrfpp": 57.9,
+        "delta": 2.81
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 11
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 305,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 58.7
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.827,
+        "p90SecondsPerSentence": 1.211,
+        "loadMsCold": 33197,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:08:47.778Z"
+    },
+    {
+      "runKey": "eng_Latn-asm_Beng#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "asm_Beng"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 38.84,
+        "corpusLower": 38.84
+      },
+      "published": {
+        "chrfpp": 34.6,
+        "delta": 4.24
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 1,
+          "missingFinalPunct": 16
+        },
+        "flaggedSentences": 2,
+        "flagRate": 0.01,
+        "details": [
+          {
+            "id": 257,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 36
+          },
+          {
+            "id": 511,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 26.5
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.874,
+        "p90SecondsPerSentence": 2.883,
+        "loadMsCold": 36684,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:08:50.133Z"
+    },
+    {
+      "runKey": "eng_Latn-ben_Beng#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "ben_Beng"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 51.26,
+        "corpusLower": 51.26
+      },
+      "published": {
+        "chrfpp": 46.2,
+        "delta": 5.06
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.305,
+        "p90SecondsPerSentence": 1.926,
+        "loadMsCold": 37225,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:08:50.553Z"
+    },
+    {
+      "runKey": "eng_Latn-guj_Gujr#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "guj_Gujr"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 55.37,
+        "corpusLower": 55.37
+      },
+      "published": {
+        "chrfpp": 50.4,
+        "delta": 4.97
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.366,
+        "p90SecondsPerSentence": 2.086,
+        "loadMsCold": 38461,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:08:56.090Z"
+    },
+    {
+      "runKey": "eng_Latn-hin_Deva#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "hin_Deva"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 57.86,
+        "corpusLower": 57.86
+      },
+      "published": {
+        "chrfpp": 54.2,
+        "delta": 3.66
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.321,
+        "p90SecondsPerSentence": 2.007,
+        "loadMsCold": 36688,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:08:58.479Z"
+    },
+    {
+      "runKey": "eng_Latn-kan_Knda#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "kan_Knda"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 53.18,
+        "corpusLower": 53.18
+      },
+      "published": {
+        "chrfpp": 50.2,
+        "delta": 2.98
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.344,
+        "p90SecondsPerSentence": 1.981,
+        "loadMsCold": 36546,
+        "loadMsWarmMedian": 38984,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:09:01.137Z"
+    },
+    {
+      "runKey": "eng_Latn-mal_Mlym#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "mal_Mlym"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 54.5,
+        "corpusLower": 54.5
+      },
+      "published": {
+        "chrfpp": 47.2,
+        "delta": 7.3
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 4,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 4,
+        "flagRate": 0.02,
+        "details": [
+          {
+            "id": 506,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 34.6
+          },
+          {
+            "id": 511,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 56.8
+          },
+          {
+            "id": 876,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 33.7
+          },
+          {
+            "id": 897,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 33.5
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.545,
+        "p90SecondsPerSentence": 2.321,
+        "loadMsCold": 38656,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:09:01.465Z"
+    },
+    {
+      "runKey": "eng_Latn-mar_Deva#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "mar_Deva"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 50.24,
+        "corpusLower": 50.24
+      },
+      "published": {
+        "chrfpp": 44.6,
+        "delta": 5.64
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 884,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 55.9
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.282,
+        "p90SecondsPerSentence": 1.903,
+        "loadMsCold": 37003,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:09:01.773Z"
+    },
+    {
+      "runKey": "eng_Latn-npi_Deva#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "npi_Deva"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 55.34,
+        "corpusLower": 55.34
+      },
+      "published": {
+        "chrfpp": 49,
+        "delta": 6.34
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.209,
+        "p90SecondsPerSentence": 1.831,
+        "loadMsCold": 36584,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:09:02.852Z"
+    },
+    {
+      "runKey": "eng_Latn-ory_Orya#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "ory_Orya"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 48.09,
+        "corpusLower": 48.09
+      },
+      "published": {
+        "chrfpp": 44.9,
+        "delta": 3.19
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 60
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.312,
+        "p90SecondsPerSentence": 1.975,
+        "loadMsCold": 38689,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:09:03.175Z"
+    },
+    {
+      "runKey": "eng_Latn-pan_Guru#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "pan_Guru"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 50.56,
+        "corpusLower": 50.56
+      },
+      "published": {
+        "chrfpp": 46.7,
+        "delta": 3.86
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 4
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.796,
+        "p90SecondsPerSentence": 2.727,
+        "loadMsCold": 34264,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:09:03.487Z"
+    },
+    {
+      "runKey": "eng_Latn-tam_Taml#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "tam_Taml"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 56.11,
+        "corpusLower": 56.11
+      },
+      "published": {
+        "chrfpp": 51.1,
+        "delta": 5.01
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.398,
+        "p90SecondsPerSentence": 2.112,
+        "loadMsCold": 38071,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:09:05.534Z"
+    },
+    {
+      "runKey": "eng_Latn-tel_Telu#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "tel_Telu"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 57.6,
+        "corpusLower": 57.6
+      },
+      "published": {
+        "chrfpp": 51.8,
+        "delta": 5.8
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 1,
+          "missingFinalPunct": 1
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 848,
+            "flags": [
+              "repeatLoop",
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 14.2
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.258,
+        "p90SecondsPerSentence": 1.932,
+        "loadMsCold": 35423,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:09:05.837Z"
+    },
+    {
+      "runKey": "eng_Latn-urd_Arab#indictrans2-en-indic",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "urd_Arab"
+      },
+      "engine": {
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 English to Indian languages",
+        "expectedBytes": 309314905,
+        "langTag": null,
+        "bundle": "en-indic"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 49.85,
+        "corpusLower": 49.85
+      },
+      "published": {
+        "chrfpp": 46.6,
+        "delta": 3.25
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 1.478,
+        "p90SecondsPerSentence": 2.307,
+        "loadMsCold": 35943,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 309338772
+      },
+      "completedAt": "2026-10-15T10:09:06.420Z"
+    },
+    {
+      "runKey": "guj_Gujr-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "guj_Gujr",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 64.7,
+        "corpusLower": 65.77
+      },
+      "published": {
+        "chrfpp": 62.5,
+        "delta": 2.2
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 7
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.827,
+        "p90SecondsPerSentence": 1.224,
+        "loadMsCold": 33264,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:09:10.135Z"
+    },
+    {
+      "runKey": "hin_Deva-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "hin_Deva",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 65.68,
+        "corpusLower": 66.56
+      },
+      "published": {
+        "chrfpp": 62.5,
+        "delta": 3.18
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.767,
+        "p90SecondsPerSentence": 1.176,
+        "loadMsCold": 33069,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:09:10.908Z"
+    },
+    {
+      "runKey": "kan_Knda-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "kan_Knda",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 58.91,
+        "corpusLower": 59.86
+      },
+      "published": {
+        "chrfpp": 57,
+        "delta": 1.91
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 1
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.861,
+        "p90SecondsPerSentence": 1.237,
+        "loadMsCold": 30856,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:09:12.442Z"
+    },
+    {
+      "runKey": "mal_Mlym-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "mal_Mlym",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 61.1,
+        "corpusLower": 62.19
+      },
+      "published": {
+        "chrfpp": 59,
+        "delta": 2.1
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 9
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.852,
+        "p90SecondsPerSentence": 1.274,
+        "loadMsCold": 35874,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:09:14.154Z"
+    },
+    {
+      "runKey": "mar_Deva-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "mar_Deva",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 62.43,
+        "corpusLower": 63.46
+      },
+      "published": {
+        "chrfpp": 58.9,
+        "delta": 3.53
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 11
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 876,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 49.4
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.811,
+        "p90SecondsPerSentence": 1.239,
+        "loadMsCold": 33207,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:09:14.417Z"
+    },
+    {
+      "runKey": "npi_Deva-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "npi_Deva",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 64.81,
+        "corpusLower": 65.78
+      },
+      "published": {
+        "chrfpp": 62.5,
+        "delta": 2.31
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.833,
+        "p90SecondsPerSentence": 1.278,
+        "loadMsCold": 32624,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:09:15.189Z"
+    },
+    {
+      "runKey": "ory_Orya-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "ory_Orya",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 60.72,
+        "corpusLower": 61.71
+      },
+      "published": {
+        "chrfpp": 58.5,
+        "delta": 2.22
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.808,
+        "p90SecondsPerSentence": 1.174,
+        "loadMsCold": 34410,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:09:15.450Z"
+    },
+    {
+      "runKey": "pan_Guru-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "pan_Guru",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 63.31,
+        "corpusLower": 64.1
+      },
+      "published": {
+        "chrfpp": 61.5,
+        "delta": 1.81
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 876,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 63.7
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.87,
+        "p90SecondsPerSentence": 1.328,
+        "loadMsCold": 32755,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:09:15.713Z"
+    },
+    {
+      "runKey": "tam_Taml-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "tam_Taml",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 57.51,
+        "corpusLower": 58.42
+      },
+      "published": {
+        "chrfpp": 55.8,
+        "delta": 1.71
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 6
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.826,
+        "p90SecondsPerSentence": 1.269,
+        "loadMsCold": 32548,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:09:19.126Z"
+    },
+    {
+      "runKey": "tel_Telu-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "tel_Telu",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 62.57,
+        "corpusLower": 63.56
+      },
+      "published": {
+        "chrfpp": 61.2,
+        "delta": 1.37
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 3,
+          "lenRatio": 1,
+          "endsMidWord": 1,
+          "missingFinalPunct": 11
+        },
+        "flaggedSentences": 5,
+        "flagRate": 0.025,
+        "details": [
+          {
+            "id": 45,
+            "flags": [
+              "endsMidWord"
+            ],
+            "error": null,
+            "score": 66.6
+          },
+          {
+            "id": 86,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 74.3
+          },
+          {
+            "id": 125,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 58.5
+          },
+          {
+            "id": 189,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 68.8
+          },
+          {
+            "id": 298,
+            "flags": [
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 34.8
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.83,
+        "p90SecondsPerSentence": 1.281,
+        "loadMsCold": 44545,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:09:19.382Z"
+    },
+    {
+      "runKey": "urd_Arab-eng_Latn#indictrans2-indic-en",
+      "pair": {
+        "src": "urd_Arab",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "name": "IndicTrans2 Indian languages to English",
+        "expectedBytes": 261656622,
+        "langTag": null,
+        "bundle": "indic-en"
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 59.06,
+        "corpusLower": 60.04
+      },
+      "published": {
+        "chrfpp": 57.8,
+        "delta": 1.26
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 1
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.867,
+        "p90SecondsPerSentence": 1.32,
+        "loadMsCold": 33594,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 261714435
+      },
+      "completedAt": "2026-10-15T10:09:21.693Z"
     }
   ]
 }

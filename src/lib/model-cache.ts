@@ -1,23 +1,38 @@
 /**
- * The browser cache where the translation library keeps model files, and the
- * service worker's shell cache.
+ * The browser caches where downloaded models live, and the service worker's
+ * shell cache.
  *
- * Model files are stored by the library in the Cache API under
- * "transformers-cache", keyed by their Hugging Face URLs. Every helper here
- * works per model, so a single saved model can be removed without touching
- * the others.
+ * Pipeline engines (Opus-MT, NLLB) store their files in the Cache API under
+ * "transformers-cache", keyed by their Hugging Face URLs. The IndicTrans2
+ * engine verifies each file against a SHA-256 checksum and keeps them under
+ * its own "pt-indictrans2" cache, keyed by the same URL shape (repo, pinned
+ * commit, file). Every helper here works across both caches, so a single
+ * saved model can be removed without touching the others, and Erase
+ * everything removes them all.
  */
 
-const MODEL_CACHE_NAME = "transformers-cache";
+import { INDICTRANS2_BUNDLES } from "@/lib/indictrans2/bundles";
+
+const MODEL_CACHES = ["transformers-cache", "pt-indictrans2"] as const;
 /** Shell caches carry the build id: pt-shell-<buildId>, one per build
  * (see scripts/sw-template.js). The prefix is what the app owns. */
 export const SHELL_CACHE_PREFIX = "pt-shell-";
 /** @deprecated Old fixed-name shell cache from before per-build names. */
 export const SHELL_CACHE_NAME = "pt-shell-v2";
 
-/** Quantized ONNX files every engine needs to be considered saved. */
+/** Quantized ONNX files a pipeline engine needs to be considered saved. */
 function requiredOnnxFiles(): string[] {
   return ["encoder_model_quantized.onnx", "decoder_model_merged_quantized.onnx"];
+}
+
+/** Every file an engine needs to be considered saved. IndicTrans2 bundles
+ * need all of their files (the sessions load them from the cache); pipeline
+ * engines need the two quantized ONNX files. */
+function requiredFilesFor(modelId: string): string[] {
+  for (const bundle of Object.values(INDICTRANS2_BUNDLES)) {
+    if (bundle.repo === modelId) return bundle.files.map((f) => f.name);
+  }
+  return requiredOnnxFiles();
 }
 
 /** The model id part of a cache entry URL, e.g. "Xenova/opus-mt-en-fr". */
@@ -45,10 +60,12 @@ export async function cachedModelFiles(modelId: string): Promise<Set<string>> {
   const names = new Set<string>();
   try {
     if (typeof caches === "undefined") return names;
-    const cache = await caches.open(MODEL_CACHE_NAME);
-    const requests = await cache.keys();
-    for (const request of requests) {
-      if (modelIdOf(request.url) === modelId) names.add(basenameOf(request.url));
+    for (const cacheName of MODEL_CACHES) {
+      const cache = await caches.open(cacheName);
+      const requests = await cache.keys();
+      for (const request of requests) {
+        if (modelIdOf(request.url) === modelId) names.add(basenameOf(request.url));
+      }
     }
   } catch {
     // Storage may be unavailable. Nothing is saved then.
@@ -56,25 +73,27 @@ export async function cachedModelFiles(modelId: string): Promise<Set<string>> {
   return names;
 }
 
-/** True when the model's quantized ONNX files are in the cache. */
+/** True when the model's required files are in the cache. */
 export async function modelFilesCached(modelId: string): Promise<boolean> {
   const names = await cachedModelFiles(modelId);
-  return requiredOnnxFiles().every((file) => names.has(file));
+  return requiredFilesFor(modelId).every((file) => names.has(file));
 }
 
-/** Bytes stored in the cache for one model, from response content lengths. */
+/** Bytes stored in the caches for one model, from response content lengths. */
 export async function cachedModelBytes(modelId: string): Promise<number> {
   let total = 0;
   try {
     if (typeof caches === "undefined") return 0;
-    const cache = await caches.open(MODEL_CACHE_NAME);
-    const requests = await cache.keys();
-    for (const request of requests) {
-      if (modelIdOf(request.url) !== modelId) continue;
-      const response = await cache.match(request);
-      const header = response?.headers.get("content-length");
-      const size = header == null ? NaN : Number(header);
-      if (Number.isFinite(size)) total += size;
+    for (const cacheName of MODEL_CACHES) {
+      const cache = await caches.open(cacheName);
+      const requests = await cache.keys();
+      for (const request of requests) {
+        if (modelIdOf(request.url) !== modelId) continue;
+        const response = await cache.match(request);
+        const header = response?.headers.get("content-length");
+        const size = header == null ? NaN : Number(header);
+        if (Number.isFinite(size)) total += size;
+      }
     }
   } catch {
     // Unavailable storage reads as zero.
@@ -82,20 +101,22 @@ export async function cachedModelBytes(modelId: string): Promise<number> {
   return total;
 }
 
-/** Every saved model with its size in bytes. */
+/** Every saved model with its size in bytes, across both model caches. */
 export async function savedModels(): Promise<Map<string, number>> {
   const sizes = new Map<string, number>();
   try {
     if (typeof caches === "undefined") return sizes;
-    const cache = await caches.open(MODEL_CACHE_NAME);
-    const requests = await cache.keys();
-    for (const request of requests) {
-      const modelId = modelIdOf(request.url);
-      if (!modelId) continue;
-      const response = await cache.match(request);
-      const header = response?.headers.get("content-length");
-      const size = header == null ? 0 : Number(header);
-      sizes.set(modelId, (sizes.get(modelId) ?? 0) + (Number.isFinite(size) ? size : 0));
+    for (const cacheName of MODEL_CACHES) {
+      const cache = await caches.open(cacheName);
+      const requests = await cache.keys();
+      for (const request of requests) {
+        const modelId = modelIdOf(request.url);
+        if (!modelId) continue;
+        const response = await cache.match(request);
+        const header = response?.headers.get("content-length");
+        const size = header == null ? 0 : Number(header);
+        sizes.set(modelId, (sizes.get(modelId) ?? 0) + (Number.isFinite(size) ? size : 0));
+      }
     }
   } catch {
     // Unavailable storage reads as empty.
@@ -103,25 +124,29 @@ export async function savedModels(): Promise<Map<string, number>> {
   return sizes;
 }
 
-/** Remove one saved model's entries from the cache. */
+/** Remove one saved model's entries from the caches. */
 export async function deleteModelEntries(modelId: string): Promise<void> {
   try {
     if (typeof caches === "undefined") return;
-    const cache = await caches.open(MODEL_CACHE_NAME);
-    const requests = await cache.keys();
-    for (const request of requests) {
-      if (modelIdOf(request.url) === modelId) await cache.delete(request);
+    for (const cacheName of MODEL_CACHES) {
+      const cache = await caches.open(cacheName);
+      const requests = await cache.keys();
+      for (const request of requests) {
+        if (modelIdOf(request.url) === modelId) await cache.delete(request);
+      }
     }
   } catch {
     // Best effort.
   }
 }
 
-/** Remove every saved model (the whole library cache). */
+/** Remove every saved model (both model caches). */
 export async function deleteModelCache(): Promise<void> {
   try {
     if (typeof caches === "undefined") return;
-    await caches.delete(MODEL_CACHE_NAME);
+    for (const cacheName of MODEL_CACHES) {
+      await caches.delete(cacheName);
+    }
   } catch {
     // The cache may already be gone.
   }

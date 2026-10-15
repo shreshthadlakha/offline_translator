@@ -10,7 +10,7 @@ Generated 2026-10-15 from the P1 benchmark: 200 fixed FLORES-200 devtest sentenc
 
 CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs baseline is what counts, never the absolute number.
 
-**Verdicts across the 44 routed small-model directions: 13 pass, 18 borderline, 13 fail.** Plus 66 full-model baseline rows (one per remaining language direction).
+**Verdicts across the 68 routed small-model directions: 38 pass, 19 borderline, 11 fail.** Plus 42 full-model baseline rows (one per remaining language direction).
 
 | Language | Direction | Engine | Model | chrF++ | Baseline | Gap | Flags | Cold load | Median s/sent | Verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -20,10 +20,10 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | Amharic | en->amh_Ethi | nllb-200-distilled-600M | 912 MB | 37.20 | 37.20 | — | — | — | — | **baseline** |
 | Arabic | arb_Arab->en | opus-ar-en | 118 MB | 58.63 | 62.20 | -3.57 | 0.5% (1/200) | 12.1 s | 0.814 | **borderline** |
 | Arabic | en->arb_Arab | opus-en-ar | 118 MB | 49.56 | 51.40 | -1.84 | 3.0% (6/200) | 13.1 s | 0.679 | **borderline** |
-| Assamese | asm_Beng->en | nllb-200-distilled-600M | 912 MB | 52.70 | 52.70 | — | — | — | — | **baseline** |
-| Assamese | en->asm_Beng | nllb-200-distilled-600M | 912 MB | 34.60 | 34.60 | — | — | — | — | **baseline** |
-| Bengali | ben_Beng->en | nllb-200-distilled-600M | 912 MB | 57.90 | 57.90 | — | — | — | — | **baseline** |
-| Bengali | en->ben_Beng | nllb-200-distilled-600M | 912 MB | 46.20 | 46.20 | — | — | — | — | **baseline** |
+| Assamese | asm_Beng->en | indictrans2-indic-en | 262 MB | 54.63 | 52.70 | +1.93 | 0.0% (0/200) | 32.3 s | 0.904 | **pass** |
+| Assamese | en->asm_Beng | indictrans2-en-indic | 309 MB | 38.84 | 34.60 | +4.24 | 1.0% (2/200) | 36.7 s | 1.874 | **pass** |
+| Bengali | ben_Beng->en | indictrans2-indic-en | 262 MB | 60.71 | 57.90 | +2.81 | 0.5% (1/200) | 33.2 s | 0.827 | **pass** |
+| Bengali | en->ben_Beng | indictrans2-en-indic | 309 MB | 51.26 | 46.20 | +5.06 | 0.0% (0/200) | 37.2 s | 1.305 | **pass** |
 | Bulgarian | bul_Cyrl->en | opus-mul-en (group) | 118 MB | 51.57 | 63.40 | -11.83 | 1.5% (3/200) | 13.1 s | 0.857 | **fail** |
 | Bulgarian | en->bul_Cyrl | nllb-200-distilled-600M | 912 MB | 60.40 | 60.40 | — | — | — | — | **baseline** |
 | Catalan | cat_Latn->en | nllb-200-distilled-600M | 912 MB | 66.60 | 66.60 | — | — | — | — | **baseline** |
@@ -48,14 +48,14 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | German | en->deu_Latn | opus-en-de | 112 MB | 58.65 | 59.40 | -0.75 | 0.0% (0/200) | 12.9 s | 0.697 | **pass** |
 | Greek | ell_Grek->en | nllb-200-distilled-600M | 912 MB | 58.40 | 58.40 | — | — | — | — | **baseline** |
 | Greek | en->ell_Grek | nllb-200-distilled-600M | 912 MB | 48.50 | 48.50 | — | — | — | — | **baseline** |
-| Gujarati | guj_Gujr->en | nllb-200-distilled-600M | 912 MB | 62.50 | 62.50 | — | — | — | — | **baseline** |
-| Gujarati | en->guj_Gujr | nllb-200-distilled-600M | 912 MB | 50.40 | 50.40 | — | — | — | — | **baseline** |
+| Gujarati | guj_Gujr->en | indictrans2-indic-en | 262 MB | 64.70 | 62.50 | +2.20 | 0.0% (0/200) | 33.3 s | 0.827 | **pass** |
+| Gujarati | en->guj_Gujr | indictrans2-en-indic | 309 MB | 55.37 | 50.40 | +4.97 | 0.0% (0/200) | 38.5 s | 1.366 | **pass** |
 | Hausa | hau_Latn->en | nllb-200-distilled-600M | 912 MB | 52.60 | 52.60 | — | — | — | — | **baseline** |
 | Hausa | en->hau_Latn | nllb-200-distilled-600M | 912 MB | 49.00 | 49.00 | — | — | — | — | **baseline** |
 | Hebrew | heb_Hebr->en | nllb-200-distilled-600M | 912 MB | 61.80 | 61.80 | — | — | — | — | **baseline** |
 | Hebrew | en->heb_Hebr | nllb-200-distilled-600M | 912 MB | 50.80 | 50.80 | — | — | — | — | **baseline** |
-| Hindi | hin_Deva->en | opus-hi-en | 116 MB | 44.32 | 62.50 | -18.18 | 2.5% (5/200) | 13.3 s | 0.662 | **fail** |
-| Hindi | en->hin_Deva | opus-en-hi | 117 MB | 31.27 | 54.20 | -22.93 | 17.0% (34/200) | 13.3 s | 0.686 | **fail** |
+| Hindi | hin_Deva->en | indictrans2-indic-en | 262 MB | 65.68 | 62.50 | +3.18 | 0.0% (0/200) | 33.1 s | 0.767 | **pass** |
+| Hindi | en->hin_Deva | indictrans2-en-indic | 309 MB | 57.86 | 54.20 | +3.66 | 0.0% (0/200) | 36.7 s | 1.321 | **pass** |
 | Hungarian | hun_Latn->en | opus-hu-en | 117 MB | 54.74 | 58.00 | -3.26 | 1.0% (2/200) | 12.4 s | 0.733 | **borderline** |
 | Hungarian | en->hun_Latn | opus-en-hu | 117 MB | 50.81 | 50.60 | +0.21 | 0.0% (0/200) | 12.9 s | 0.798 | **pass** |
 | Indonesian | ind_Latn->en | opus-id-en | 108 MB | 57.41 | 63.90 | -6.49 | 0.5% (1/200) | 13.3 s | 0.544 | **fail** |
@@ -64,22 +64,22 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | Italian | en->ita_Latn | opus-en-it | 136 MB | 54.73 | 54.60 | +0.13 | 0.5% (1/200) | 15.9 s | 1.109 | **pass** |
 | Japanese | jpn_Jpan->en | opus-ja-en | 115 MB | 43.87 | 50.20 | -6.33 | 1.5% (3/200) | 13.4 s | 0.599 | **fail** |
 | Japanese | en->jpn_Jpan | nllb-200-distilled-600M | 912 MB | 23.60 | 23.60 | — | — | — | — | **baseline** |
-| Kannada | kan_Knda->en | nllb-200-distilled-600M | 912 MB | 57.00 | 57.00 | — | — | — | — | **baseline** |
-| Kannada | en->kan_Knda | nllb-200-distilled-600M | 912 MB | 50.20 | 50.20 | — | — | — | — | **baseline** |
+| Kannada | kan_Knda->en | indictrans2-indic-en | 262 MB | 58.91 | 57.00 | +1.91 | 0.0% (0/200) | 30.9 s | 0.861 | **pass** |
+| Kannada | en->kan_Knda | indictrans2-en-indic | 309 MB | 53.18 | 50.20 | +2.98 | 0.0% (0/200) | 36.5 s | 1.344 | **pass** |
 | Korean | kor_Hang->en | opus-ko-en | 120 MB | 44.49 | 52.50 | -8.01 | 1.0% (2/200) | 12.5 s | 0.734 | **fail** |
 | Korean | en->kor_Hang | nllb-200-distilled-600M | 912 MB | 32.10 | 32.10 | — | — | — | — | **baseline** |
 | Malay | zsm_Latn->en | nllb-200-distilled-600M | 912 MB | 64.30 | 64.30 | — | — | — | — | **baseline** |
 | Malay | en->zsm_Latn | nllb-200-distilled-600M | 912 MB | 63.50 | 63.50 | — | — | — | — | **baseline** |
-| Malayalam | mal_Mlym->en | nllb-200-distilled-600M | 912 MB | 59.00 | 59.00 | — | — | — | — | **baseline** |
-| Malayalam | en->mal_Mlym | nllb-200-distilled-600M | 912 MB | 47.20 | 47.20 | — | — | — | — | **baseline** |
-| Marathi | mar_Deva->en | nllb-200-distilled-600M | 912 MB | 58.90 | 58.90 | — | — | — | — | **baseline** |
-| Marathi | en->mar_Deva | nllb-200-distilled-600M | 912 MB | 44.60 | 44.60 | — | — | — | — | **baseline** |
-| Nepali | npi_Deva->en | nllb-200-distilled-600M | 912 MB | 62.50 | 62.50 | — | — | — | — | **baseline** |
-| Nepali | en->npi_Deva | nllb-200-distilled-600M | 912 MB | 49.00 | 49.00 | — | — | — | — | **baseline** |
+| Malayalam | mal_Mlym->en | indictrans2-indic-en | 262 MB | 61.10 | 59.00 | +2.10 | 0.0% (0/200) | 35.9 s | 0.852 | **pass** |
+| Malayalam | en->mal_Mlym | indictrans2-en-indic | 309 MB | 54.50 | 47.20 | +7.30 | 2.0% (4/200) | 38.7 s | 1.545 | **pass** |
+| Marathi | mar_Deva->en | indictrans2-indic-en | 262 MB | 62.43 | 58.90 | +3.53 | 0.5% (1/200) | 33.2 s | 0.811 | **pass** |
+| Marathi | en->mar_Deva | indictrans2-en-indic | 309 MB | 50.24 | 44.60 | +5.64 | 0.5% (1/200) | 37 s | 1.282 | **pass** |
+| Nepali | npi_Deva->en | indictrans2-indic-en | 262 MB | 64.81 | 62.50 | +2.31 | 0.0% (0/200) | 32.6 s | 0.833 | **pass** |
+| Nepali | en->npi_Deva | indictrans2-en-indic | 309 MB | 55.34 | 49.00 | +6.34 | 0.0% (0/200) | 36.6 s | 1.209 | **pass** |
 | Norwegian Bokmål | nob_Latn->en | nllb-200-distilled-600M | 912 MB | 62.90 | 62.90 | — | — | — | — | **baseline** |
 | Norwegian Bokmål | en->nob_Latn | nllb-200-distilled-600M | 912 MB | 56.80 | 56.80 | — | — | — | — | **baseline** |
-| Odia | ory_Orya->en | nllb-200-distilled-600M | 912 MB | 58.50 | 58.50 | — | — | — | — | **baseline** |
-| Odia | en->ory_Orya | nllb-200-distilled-600M | 912 MB | 44.90 | 44.90 | — | — | — | — | **baseline** |
+| Odia | ory_Orya->en | indictrans2-indic-en | 262 MB | 60.72 | 58.50 | +2.22 | 0.0% (0/200) | 34.4 s | 0.808 | **pass** |
+| Odia | en->ory_Orya | indictrans2-en-indic | 309 MB | 48.09 | 44.90 | +3.19 | 0.0% (0/200) | 38.7 s | 1.312 | **pass** |
 | Pashto | pbt_Arab->en | nllb-200-distilled-600M | 912 MB | 54.50 | 54.50 | — | — | — | — | **baseline** |
 | Pashto | en->pbt_Arab | nllb-200-distilled-600M | 912 MB | 36.90 | 36.90 | — | — | — | — | **baseline** |
 | Persian | pes_Arab->en | nllb-200-distilled-600M | 912 MB | 58.70 | 58.70 | — | — | — | — | **baseline** |
@@ -88,8 +88,8 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | Polish | en->pol_Latn | nllb-200-distilled-600M | 912 MB | 45.30 | 45.30 | — | — | — | — | **baseline** |
 | Portuguese | por_Latn->en | opus-romance-en (group) | 119 MB | 64.25 | 69.00 | -4.75 | 1.0% (2/200) | 13.6 s | 0.661 | **borderline** |
 | Portuguese | en->por_Latn | opus-en-romance (group) | 119 MB | 64.86 | 67.40 | -2.54 | 0.0% (0/200) | 14 s | 0.866 | **borderline** |
-| Punjabi | pan_Guru->en | nllb-200-distilled-600M | 912 MB | 61.50 | 61.50 | — | — | — | — | **baseline** |
-| Punjabi | en->pan_Guru | nllb-200-distilled-600M | 912 MB | 46.70 | 46.70 | — | — | — | — | **baseline** |
+| Punjabi | pan_Guru->en | indictrans2-indic-en | 262 MB | 63.31 | 61.50 | +1.81 | 0.5% (1/200) | 32.8 s | 0.870 | **pass** |
+| Punjabi | en->pan_Guru | indictrans2-en-indic | 309 MB | 50.56 | 46.70 | +3.86 | 0.0% (0/200) | 34.3 s | 1.796 | **pass** |
 | Romanian | ron_Latn->en | nllb-200-distilled-600M | 912 MB | 65.90 | 65.90 | — | — | — | — | **baseline** |
 | Romanian | en->ron_Latn | opus-en-ro | 113 MB | 56.84 | 58.20 | -1.36 | 0.0% (0/200) | 13.2 s | 0.778 | **pass** |
 | Russian | rus_Cyrl->en | opus-ru-en | 118 MB | 53.17 | 58.60 | -5.43 | 1.0% (2/200) | 13.9 s | 0.704 | **fail** |
@@ -106,18 +106,18 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | Swedish | en->swe_Latn | opus-en-sv | 110 MB | 63.52 | 62.70 | +0.82 | 1.0% (2/200) | 13.9 s | 0.646 | **pass** |
 | Tagalog | tgl_Latn->en | nllb-200-distilled-600M | 912 MB | 63.70 | 63.70 | — | — | — | — | **baseline** |
 | Tagalog | en->tgl_Latn | nllb-200-distilled-600M | 912 MB | 56.40 | 56.40 | — | — | — | — | **baseline** |
-| Tamil | tam_Taml->en | nllb-200-distilled-600M | 912 MB | 55.80 | 55.80 | — | — | — | — | **baseline** |
-| Tamil | en->tam_Taml | nllb-200-distilled-600M | 912 MB | 51.10 | 51.10 | — | — | — | — | **baseline** |
-| Telugu | tel_Telu->en | nllb-200-distilled-600M | 912 MB | 61.20 | 61.20 | — | — | — | — | **baseline** |
-| Telugu | en->tel_Telu | nllb-200-distilled-600M | 912 MB | 51.80 | 51.80 | — | — | — | — | **baseline** |
+| Tamil | tam_Taml->en | indictrans2-indic-en | 262 MB | 57.51 | 55.80 | +1.71 | 0.0% (0/200) | 32.5 s | 0.826 | **pass** |
+| Tamil | en->tam_Taml | indictrans2-en-indic | 309 MB | 56.11 | 51.10 | +5.01 | 0.0% (0/200) | 38.1 s | 1.398 | **pass** |
+| Telugu | tel_Telu->en | indictrans2-indic-en | 262 MB | 62.57 | 61.20 | +1.37 | 2.5% (5/200) | 44.5 s | 0.830 | **borderline** |
+| Telugu | en->tel_Telu | indictrans2-en-indic | 309 MB | 57.60 | 51.80 | +5.80 | 0.5% (1/200) | 35.4 s | 1.258 | **pass** |
 | Thai | tha_Thai->en | opus-th-en | 117 MB | 44.49 | 52.70 | -8.21 | 0.5% (1/200) | 13.1 s | 0.752 | **fail** |
 | Thai | en->tha_Thai | nllb-200-distilled-600M | 912 MB | 36.00 | 36.00 | — | — | — | — | **baseline** |
 | Turkish | tur_Latn->en | opus-tr-en | 117 MB | 53.40 | 60.00 | -6.60 | 1.0% (2/200) | 14.7 s | 0.666 | **fail** |
 | Turkish | en->tur_Latn | nllb-200-distilled-600M | 912 MB | 52.90 | 52.90 | — | — | — | — | **baseline** |
 | Ukrainian | ukr_Cyrl->en | opus-uk-en | 117 MB | 54.09 | 61.10 | -7.01 | 0.5% (1/200) | 13.1 s | 0.667 | **fail** |
 | Ukrainian | en->ukr_Cyrl | opus-en-uk | 117 MB | 43.91 | 50.50 | -6.59 | 1.5% (3/200) | 11.5 s | 0.736 | **fail** |
-| Urdu | urd_Arab->en | nllb-200-distilled-600M | 912 MB | 57.80 | 57.80 | — | — | — | — | **baseline** |
-| Urdu | en->urd_Arab | nllb-200-distilled-600M | 912 MB | 46.60 | 46.60 | — | — | — | — | **baseline** |
+| Urdu | urd_Arab->en | indictrans2-indic-en | 262 MB | 59.06 | 57.80 | +1.26 | 0.0% (0/200) | 33.6 s | 0.867 | **pass** |
+| Urdu | en->urd_Arab | indictrans2-en-indic | 309 MB | 49.85 | 46.60 | +3.25 | 0.0% (0/200) | 35.9 s | 1.478 | **pass** |
 | Vietnamese | vie_Latn->en | opus-vi-en | 107 MB | 49.98 | 58.10 | -8.12 | 0.5% (1/200) | 11.7 s | 0.560 | **fail** |
 | Vietnamese | en->vie_Latn | nllb-200-distilled-600M | 912 MB | 56.40 | 56.40 | — | — | — | — | **baseline** |
 | Yoruba | yor_Latn->en | nllb-200-distilled-600M | 912 MB | 39.90 | 39.90 | — | — | — | — | **baseline** |
@@ -148,9 +148,6 @@ A quality problem today: the app routes these directions to a small model that d
 `fin_Latn->en` (opus-fi-en): **borderline**, chrF++ 54.01 vs 56.6 (gap -2.59), flags 0.5%
 - **German** (deu_Latn):  
 `deu_Latn->en` (opus-de-en): **borderline**, chrF++ 62.41 vs 65.3 (gap -2.89), flags 0.0%
-- **Hindi** (hin_Deva):  
-`en->hin_Deva` (opus-en-hi): **fail**, chrF++ 31.27 vs 54.2 (gap -22.93), flags 17.0%  
-`hin_Deva->en` (opus-hi-en): **fail**, chrF++ 44.32 vs 62.5 (gap -18.18), flags 2.5%
 - **Hungarian** (hun_Latn):  
 `hun_Latn->en` (opus-hu-en): **borderline**, chrF++ 54.74 vs 58 (gap -3.26), flags 1.0%
 - **Indonesian** (ind_Latn):  
@@ -174,6 +171,8 @@ A quality problem today: the app routes these directions to a small model that d
 `spa_Latn->en` (opus-es-en): **borderline**, chrF++ 54.68 vs 57.1 (gap -2.42), flags 0.0%
 - **Swedish** (swe_Latn):  
 `swe_Latn->en` (opus-sv-en): **borderline**, chrF++ 64.3 vs 67 (gap -2.7), flags 0.0%
+- **Telugu** (tel_Telu):  
+`tel_Telu->en` (indictrans2-indic-en): **borderline**, chrF++ 62.57 vs 61.2 (gap +1.37), flags 2.5%
 - **Thai** (tha_Thai):  
 `tha_Thai->en` (opus-th-en): **fail**, chrF++ 44.49 vs 52.7 (gap -8.21), flags 0.5%
 - **Turkish** (tur_Latn):  
@@ -184,11 +183,11 @@ A quality problem today: the app routes these directions to a small model that d
 - **Vietnamese** (vie_Latn):  
 `vie_Latn->en` (opus-vi-en): **fail**, chrF++ 49.98 vs 58.1 (gap -8.12), flags 0.5%
 
-## List 2 — languages with no small model at all (29)
+## List 2 — languages with no small model at all (17)
 
 Every direction routes to the full model (the honest heavy path, ~912 MB download). These are coverage gaps, not quality failures: the full model is the bar itself.
 
-Amharic (amh_Ethi), Assamese (asm_Beng), Bengali (ben_Beng), Catalan (cat_Latn), Chinese (Traditional) (zho_Hant), Croatian (hrv_Latn), Greek (ell_Grek), Gujarati (guj_Gujr), Hausa (hau_Latn), Hebrew (heb_Hebr), Kannada (kan_Knda), Malay (zsm_Latn), Malayalam (mal_Mlym), Marathi (mar_Deva), Nepali (npi_Deva), Norwegian Bokmål (nob_Latn), Odia (ory_Orya), Pashto (pbt_Arab), Persian (pes_Arab), Punjabi (pan_Guru), Serbian (srp_Cyrl), Sinhala (sin_Sinh), Swahili (swh_Latn), Tagalog (tgl_Latn), Tamil (tam_Taml), Telugu (tel_Telu), Urdu (urd_Arab), Yoruba (yor_Latn), Zulu (zul_Latn)
+Amharic (amh_Ethi), Catalan (cat_Latn), Chinese (Traditional) (zho_Hant), Croatian (hrv_Latn), Greek (ell_Grek), Hausa (hau_Latn), Hebrew (heb_Hebr), Malay (zsm_Latn), Norwegian Bokmål (nob_Latn), Pashto (pbt_Arab), Persian (pes_Arab), Serbian (srp_Cyrl), Sinhala (sin_Sinh), Swahili (swh_Latn), Tagalog (tgl_Latn), Yoruba (yor_Latn), Zulu (zul_Latn)
 
 ## Full model — P1 local runs (provenance only)
 

@@ -19,7 +19,7 @@
  * plus tokenizer and config files.
  */
 
-export type EngineKind = "nllb" | "opus";
+export type EngineKind = "nllb" | "opus" | "indictrans2";
 
 export type EngineDescriptor = {
   /** Stable key, used in the protocol and the saved model list. */
@@ -103,6 +103,8 @@ export const MODEL_REVISIONS: Record<string, string> = {
 export type PairEngine = EngineDescriptor & {
   /** The ">>tag<<" language code for group models. Absent otherwise. */
   tag?: string;
+  /** For IndicTrans2 engines: which of the two bundles serves this pair. */
+  bundle?: "en-indic" | "indic-en";
   /** Set on quarantined routes: the pair falls back to the full model, and
    *  the entry stays in the table (with its reason) so a later phase can
    *  switch the route back on or replace the engine. */
@@ -279,6 +281,68 @@ const QUARANTINED: Record<string, string> = {
 for (const [pair, reason] of Object.entries(QUARANTINED)) {
   const entry = ENGINE_TABLE[pair];
   if (entry) entry.disabled = { reason };
+}
+
+// --- IndicTrans2 -------------------------------------------------------------------
+//
+// The thirteen Indian languages, both directions with English, run on
+// IndicTrans2 distilled 200M (MIT, AI4Bharat) as int8 ONNX exports by the
+// community member hari31416. Two bundles: English to Indic (~295 MB) and
+// Indic to English (~249 MB). Every file downloads from a pinned commit and
+// is verified against a SHA-256 checksum before it is used or cached
+// (src/lib/indictrans2/bundles.ts); the JavaScript preprocessing port and
+// the custom decoding loop live in src/workers/indictrans2-engine.ts, with
+// the browser proof in scripts/indictrans2/.
+//
+// Quality: 25 of the 26 directions passed the P2 bar on the 200 sentence
+// FLORES-200 sample; Telugu to English was borderline and Assamese to
+// English a narrow pass (both carry the honest approximate label). Pairs
+// between two Indic languages are not covered and keep using the full model.
+
+function indictrans2(
+  id: string,
+  modelId: string,
+  name: string,
+  expectedBytes: number,
+): EngineDescriptor {
+  return {
+    id,
+    kind: "indictrans2",
+    modelId,
+    name,
+    expectedBytes,
+    license: "MIT",
+    licenseUrl: "https://huggingface.co/ai4bharat/IndicTrans2",
+    attribution: "AI4Bharat (IndicTrans2, MIT); int8 ONNX export by hari31416",
+  };
+}
+
+export const INDICTRANS2_EN_INDIC: EngineDescriptor = indictrans2(
+  "indictrans2-en-indic",
+  "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+  "IndicTrans2 English to Indian languages",
+  309314905,
+);
+
+export const INDICTRANS2_INDIC_EN: EngineDescriptor = indictrans2(
+  "indictrans2-indic-en",
+  "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+  "IndicTrans2 Indian languages to English",
+  261656622,
+);
+
+/** The thirteen Indian languages IndicTrans2 serves with English. */
+export const INDIC_LANGUAGES = [
+  "asm_Beng", "ben_Beng", "guj_Gujr", "hin_Deva", "kan_Knda",
+  "mal_Mlym", "mar_Deva", "npi_Deva", "ory_Orya", "pan_Guru",
+  "tam_Taml", "tel_Telu", "urd_Arab",
+] as const;
+
+for (const code of INDIC_LANGUAGES) {
+  // These routes replace the quarantined Hindi Opus-MT pair: the Opus
+  // entries above stay in the table but no pair points at them any more.
+  ENGINE_TABLE[`eng_Latn|${code}`] = { ...INDICTRANS2_EN_INDIC, bundle: "en-indic" };
+  ENGINE_TABLE[`${code}|eng_Latn`] = { ...INDICTRANS2_INDIC_EN, bundle: "indic-en" };
 }
 
 /**

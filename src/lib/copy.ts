@@ -64,6 +64,9 @@ export const copy = {
     stageReady: "Ready",
     // A small model for a specific pair, instead of the full one.
     settingUpPair: (pairEnglish: string, sizeMB: string) => `Setting up ${pairEnglish}. This downloads a small model once, about ${sizeMB} MB.`,
+    // The IndicTrans2 bundles are larger than the small pairs: honest
+    // wording without "small", so nobody is surprised by a 295 MB download.
+    settingUpLargePair: (pairEnglish: string, sizeMB: string) => `Setting up ${pairEnglish}. This downloads a model once, about ${sizeMB} MB.`,
     switching: "Switching to the faster model for this pair.",
     settingUp: "Setting up translation. This happens once.",
     // The drawn check once setup finishes.
@@ -243,7 +246,7 @@ export const copy = {
     questions: [
       {
         q: "Which models does it use?",
-        a: "Popular pairs, like English to French, use small Opus-MT models from Helsinki NLP, released under Apache-2.0 or CC BY 4.0 depending on the pair. A few more languages (Croatian, Serbian, Bulgarian, Norwegian, Portuguese, Romanian and Greek to English) share small multi language Opus-MT models, about 120 MB each. Every other pair uses NLLB-200 from Meta, which is released under a non commercial licence, CC BY-NC 4.0. The exact model for the pair you're using, and its licence, is in Details.",
+        a: "Popular pairs, like English to French, use small Opus-MT models from Helsinki NLP, released under Apache-2.0 or CC BY 4.0 depending on the pair. Portuguese shares one small multi language Opus-MT model, about 115 MB. The Indian languages (Hindi, Bengali, Tamil, Urdu and nine more, both directions with English) use IndicTrans2 from AI4Bharat, MIT licensed, as community int8 exports, about 250 to 300 MB per direction. Every other pair uses NLLB-200 from Meta, which is released under a non commercial licence, CC BY-NC 4.0. The exact model for the pair you're using, and its licence, is in Details.",
       },
       {
         q: "Does it work offline?",

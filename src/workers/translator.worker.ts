@@ -28,6 +28,7 @@ import { BUILD_ID } from "./build-id";
 import { MODEL_REVISIONS } from "../lib/engines";
 import { SPEED_CONFIG } from "../lib/speed-config";
 import { restoreTerminalPunctuation } from "../lib/terminal-punct";
+import { IndicTrans2Engine } from "./indictrans2-engine";
 
 // --- Privacy critical configuration ------------------------------------------
 
@@ -63,6 +64,9 @@ let runningJob: Job | null = null;
 let runningInterrupt: InterruptCriteria | null = null;
 let pumpScheduled = false;
 let translator: TranslationPipeline | null = null;
+/** The IndicTrans2 engine, when the loaded spec is that kind. One engine in
+ * memory at a time: this and `translator` are mutually exclusive. */
+let indicEngine: IndicTrans2Engine | null = null;
 let loadedEngine: EngineSpec | null = null;
 let deviceUsed: EngineDevice | null = null;
 let loading = false;
@@ -300,6 +304,14 @@ async function disposeCurrent(): Promise<void> {
     }
     translator = null;
   }
+  if (indicEngine) {
+    try {
+      await indicEngine.dispose();
+    } catch {
+      // Best effort: the sessions are being replaced regardless.
+    }
+    indicEngine = null;
+  }
   loadedEngine = null;
   deviceUsed = null;
   postStatsSnapshot();
@@ -334,6 +346,9 @@ async function createPipeline(spec: EngineSpec, device: "wasm" | "webgpu"): Prom
   };
   const revision = MODEL_REVISIONS[spec.modelId];
   if (revision) options.revision = revision;
+  // Repos that keep their ONNX files outside the default "onnx/" directory
+  // (the p3 candidates) instead of the library's default location.
+  if (spec.subfolder !== undefined) options.subfolder = spec.subfolder;
   return startTranslationPipeline("translation", spec.modelId, options);
 }
 
@@ -347,9 +362,13 @@ function asCallOptions(options: GenerateOptions) {
 
 /** Translate the warm up sentence. Returns false on empty output. */
 async function warmUp(spec: EngineSpec, src: string, tgt: string): Promise<boolean> {
-  if (!translator) return false;
   const interrupt = new InterruptCriteria();
   const warmupText = applyLangTag(WARMUP_TEXT);
+  if (indicEngine) {
+    const text = await indicEngine.translate(warmupText, src, tgt, () => interrupt.stopped);
+    return text.trim().length > 0;
+  }
+  if (!translator) return false;
   const output = await translator(warmupText, asCallOptions(generateOptions(warmupText, src, tgt, interrupt)));
   const text = Array.isArray(output)
     ? output.map((o) => (typeof o === "string" ? o : o.translation_text)).join("").trim()
@@ -363,7 +382,7 @@ async function load(spec: EngineSpec, src: string, tgt: string, deviceWanted: "w
   // only by the language tag: switching the tag updates the spec and confirms
   // ready without reloading anything. Anything queued for the previous tag is
   // cancelled; the scheduler re-queues what is still needed.
-  if (translator && loadedEngine?.id === spec.id) {
+  if ((translator || indicEngine) && loadedEngine?.id === spec.id) {
     if (loadedEngine.langTag !== spec.langTag) {
       if (runningJob) runningJob.cancelled = true;
       if (runningInterrupt) runningInterrupt.stopped = true;
@@ -380,37 +399,85 @@ async function load(spec: EngineSpec, src: string, tgt: string, deviceWanted: "w
     resetFileProgress();
 
     let usedDevice: EngineDevice = "wasm";
-    if (deviceWanted === "webgpu" && (await supportsWebGPU())) {
-      try {
-        translator = await createPipeline(spec, "webgpu");
-        deviceUsed = "webgpu";
-        usedDevice = "webgpu";
+    if (spec.kind === "indictrans2") {
+      // The IndicTrans2 engine: pinned-commit downloads with sha256
+      // verification, its own cache, the JavaScript preprocessing port and
+      // a custom greedy decoding loop. The same stage/progress messages as
+      // the pipeline engines, so the page treats it identically.
+      if (!spec.bundle) throw new Error("missing bundle in engine spec");
+      const sessionOptions = {
+        enableCpuMemArena: false,
+        graphOptimizationLevel,
+        enableMemPattern: false,
+      };
+      if (deviceWanted === "webgpu" && (await supportsWebGPU())) {
+        try {
+          const engine = new IndicTrans2Engine();
+          await engine.load(spec.bundle, "webgpu", onProgressCallback, sessionOptions);
+          indicEngine = engine;
+          deviceUsed = "webgpu";
+          usedDevice = "webgpu";
+          post({ type: "stage", stage: "testing" });
+          const ok = await warmUp(spec, src, tgt);
+          if (!ok) throw new Error("empty warm up output");
+        } catch {
+          // WebGPU didn't work on this device. The verified files are
+          // already cached, so the wasm retry costs no second download.
+          if (indicEngine) {
+            try {
+              await indicEngine.dispose();
+            } catch {
+              // Ignore. Starting over regardless.
+            }
+          }
+          indicEngine = null;
+          deviceUsed = null;
+          resetFileProgress();
+        }
+      }
+      if (!indicEngine) {
+        const engine = new IndicTrans2Engine();
+        await engine.load(spec.bundle, "wasm", onProgressCallback, sessionOptions);
+        indicEngine = engine;
+        deviceUsed = "wasm";
+        usedDevice = "wasm";
         post({ type: "stage", stage: "testing" });
         const ok = await warmUp(spec, src, tgt);
         if (!ok) throw new Error("empty warm up output");
-      } catch {
-        // WebGPU didn't work on this device. Tear it down and use the more
-        // compatible mode with the same downloaded files.
-        if (translator) {
-          try {
-            await translator.dispose();
-          } catch {
-            // Ignore. Starting over regardless.
-          }
-        }
-        translator = null;
-        deviceUsed = null;
-        resetFileProgress();
       }
-    }
+    } else {
+      if (deviceWanted === "webgpu" && (await supportsWebGPU())) {
+        try {
+          translator = await createPipeline(spec, "webgpu");
+          deviceUsed = "webgpu";
+          usedDevice = "webgpu";
+          post({ type: "stage", stage: "testing" });
+          const ok = await warmUp(spec, src, tgt);
+          if (!ok) throw new Error("empty warm up output");
+        } catch {
+          // WebGPU didn't work on this device. Tear it down and use the more
+          // compatible mode with the same downloaded files.
+          if (translator) {
+            try {
+              await translator.dispose();
+            } catch {
+              // Ignore. Starting over regardless.
+            }
+          }
+          translator = null;
+          deviceUsed = null;
+          resetFileProgress();
+        }
+      }
 
-    if (!translator) {
-      translator = await createPipeline(spec, "wasm");
-      deviceUsed = "wasm";
-      usedDevice = "wasm";
-      post({ type: "stage", stage: "testing" });
-      const ok = await warmUp(spec, src, tgt);
-      if (!ok) throw new Error("empty warm up output");
+      if (!translator) {
+        translator = await createPipeline(spec, "wasm");
+        deviceUsed = "wasm";
+        usedDevice = "wasm";
+        post({ type: "stage", stage: "testing" });
+        const ok = await warmUp(spec, src, tgt);
+        if (!ok) throw new Error("empty warm up output");
+      }
     }
 
     loadedEngine = spec;
@@ -470,7 +537,7 @@ function schedulePump(): void {
 }
 
 async function pump(): Promise<void> {
-  if (runningJob || !translator || loading) return;
+  if (runningJob || (!translator && !indicEngine) || loading) return;
   // Re-check right before starting: a job whose source text no longer
   // exists is never started.
   const job = pickNext();
@@ -481,24 +548,45 @@ async function pump(): Promise<void> {
   const started = performance.now();
   const chars = job.texts.reduce((sum, t) => sum + t.length, 0);
   try {
-    // A batch job carries several sentences in one call; live typing is
-    // always one sentence at a time. Group models carry the language tag on
-    // every sentence.
-    const taggedTexts = job.texts.map(applyLangTag);
-    const perCallOptions =
-      job.texts.length === 1
-        ? generateOptions(taggedTexts[0] ?? "", job.src, job.tgt, interrupt)
-        : generateOptionsForGroup(taggedTexts, job.src, job.tgt, interrupt);
-    const output = await translator(job.texts.length === 1 ? (taggedTexts[0] ?? "") : taggedTexts, asCallOptions(perCallOptions));
-    const texts = (Array.isArray(output) ? output : [output]).map((o, i) => {
-      const raw = typeof o === "string" ? stripLangTagEcho(o).trim() : String((o as { translation_text?: string }).translation_text ?? "").trim();
-      // Final punctuation restoration: if the source sentence ended with a
-      // terminal mark and the translation lost it, put the target language's
-      // mark back. Never on limited routes, where a restored full stop must
-      // not make a cut off sentence look finished (the P7 safety net).
-      if (loadedEngine?.tier === "limited") return raw;
-      return restoreTerminalPunctuation(job.texts[i] ?? "", raw, job.tgt);
-    });
+    // One of the two engines is loaded (the pump guard checked); the empty
+    // default only satisfies the compiler.
+    let texts: string[] = [];
+    if (indicEngine) {
+      // The IndicTrans2 engine translates one sentence per call, with its
+      // own preprocessing (normalisation, transliteration, language tags)
+      // and postprocessing inside the module. The final punctuation
+      // restoration applies on top, exactly like the pipeline engines (and
+      // exactly like the benchmark scores these runs).
+      const out: string[] = [];
+      for (const text of job.texts) {
+        out.push(await indicEngine.translate(text, job.src, job.tgt, () => interrupt.stopped));
+      }
+      texts = out.map((t, i) => {
+        const raw = t.trim();
+        if (loadedEngine?.tier === "limited") return raw;
+        return restoreTerminalPunctuation(job.texts[i] ?? "", raw, job.tgt);
+      });
+    } else if (translator) {
+      // A batch job carries several sentences in one call; live typing is
+      // always one sentence at a time. Group models carry the language tag on
+      // every sentence.
+      const taggedTexts = job.texts.map(applyLangTag);
+      const perCallOptions =
+        job.texts.length === 1
+          ? generateOptions(taggedTexts[0] ?? "", job.src, job.tgt, interrupt)
+          : generateOptionsForGroup(taggedTexts, job.src, job.tgt, interrupt);
+      const output = await translator(job.texts.length === 1 ? (taggedTexts[0] ?? "") : taggedTexts, asCallOptions(perCallOptions));
+      texts = (Array.isArray(output) ? output : [output]).map((o, i) => {
+        const raw = typeof o === "string" ? stripLangTagEcho(o).trim() : String((o as { translation_text?: string }).translation_text ?? "").trim();
+        // Final punctuation restoration: if the source sentence ended with a
+        // terminal mark and the translation lost it, put the target language's
+        // mark back (the danda for Devanagari and Bengali targets here). Never
+        // on limited routes, where a restored full stop must not make a cut
+        // off sentence look finished (the P7 safety net).
+        if (loadedEngine?.tier === "limited") return raw;
+        return restoreTerminalPunctuation(job.texts[i] ?? "", raw, job.tgt);
+      });
+    }
     if (!job.cancelled) {
       post({
         type: "result",

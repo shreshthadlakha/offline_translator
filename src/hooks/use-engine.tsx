@@ -23,6 +23,7 @@ import { BUILD_ID } from "@/workers/build-id";
 import { STORAGE_KEYS, storageGet, storageRemove, storageSet } from "@/lib/storage";
 import { netlog } from "@/lib/netlog";
 import { engineForPair, type PairEngine } from "@/lib/engines";
+import { directionQuality } from "@/lib/quality";
 import { cachedModelFiles, modelFilesCached } from "@/lib/model-cache";
 import { recordTiming } from "@/lib/speed-metrics";
 import { useSettings } from "@/hooks/use-settings";
@@ -111,6 +112,15 @@ function measureBps(samples: { at: number; loaded: number }[]): number {
  * (first start, switch, or restart) with the model not saved on this device.
  * Resolves true to proceed, false to give up without touching anything. */
 export type HeavyGate = (engine: PairEngine, pair: { src: string; tgt: string }) => Promise<boolean>;
+
+/** The worker spec for a pair engine: identity, the group tag, the
+ * IndicTrans2 bundle, and the route's measured quality tier (drives the
+ * honest notice and the punctuation policy on limited routes). */
+function specFor(engine: PairEngine, srcCode: string, tgtCode: string): EngineSpec {
+  const quality = directionQuality(srcCode, tgtCode);
+  const tier = quality?.tier === "best" || quality?.tier === "good" || quality?.tier === "limited" ? quality.tier : undefined;
+  return { id: engine.id, kind: engine.kind, modelId: engine.modelId, langTag: engine.tag, bundle: engine.bundle, tier };
+}
 
 export function useEngine(heavyGate?: HeavyGate) {
   const { settings, loaded: settingsLoaded } = useSettings();
@@ -593,7 +603,7 @@ export function useEngine(heavyGate?: HeavyGate) {
       downloadStartRef.current = null;
       setProgress({ loaded: 0, total: 0, fraction: 0, bps: 0, etaMs: null, elapsedMs: 0 });
 
-      const spec: EngineSpec = { id: engine.id, kind: engine.kind, modelId: engine.modelId, langTag: engine.tag };
+      const spec: EngineSpec = specFor(engine, srcCode, tgtCode);
       activeSpecRef.current = spec;
       setEngineInfo(engine);
       setStatusSafe("checking");
@@ -663,7 +673,7 @@ export function useEngine(heavyGate?: HeavyGate) {
         // requests held from before the pair changed are flushed on ready.
         setSwitching(true);
         switchStartRef.current = performance.now();
-        const spec: EngineSpec = { id: engine.id, kind: engine.kind, modelId: engine.modelId, langTag: engine.tag };
+        const spec: EngineSpec = specFor(engine, srcCode, tgtCode);
         post({ type: "init", engine: spec, src: srcCode, tgt: tgtCode, device: settings.useWebGPU ? "webgpu" : "wasm", graphOptimizationLevel: sessionOptLevel });
         activeSpecRef.current = spec;
         return;

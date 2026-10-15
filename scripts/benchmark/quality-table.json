@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T09:54:25.632Z",
+  "generatedAt": "2026-10-15T10:09:27.466Z",
   "bar": {
     "file": "scripts/benchmark/quality-bar.mjs",
     "constants": {
@@ -241,27 +241,34 @@
       "src": "asm_Beng",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 52.7,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 54.63,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 52.7,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 1.93,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 14
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 32.3,
+      "medianSecondsPerSentence": 0.904,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +1.93 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -272,27 +279,34 @@
       "src": "eng_Latn",
       "tgt": "asm_Beng",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 34.6,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 38.84,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 34.6,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 4.24,
+      "flagRate": 0.01,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 1,
+        "missingFinalPunct": 16
+      },
+      "flaggedSentences": 2,
+      "nSentences": 200,
+      "loadColdSeconds": 36.7,
+      "medianSecondsPerSentence": 1.874,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +4.24 vs published baseline; flags 1.0% <= 2%"
     },
     {
       "language": {
@@ -303,27 +317,34 @@
       "src": "ben_Beng",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 57.9,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 60.71,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 57.9,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 2.81,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 11
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 33.2,
+      "medianSecondsPerSentence": 0.827,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +2.81 vs published baseline; flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -334,27 +355,34 @@
       "src": "eng_Latn",
       "tgt": "ben_Beng",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 46.2,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 51.26,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 46.2,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 5.06,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 37.2,
+      "medianSecondsPerSentence": 1.305,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +5.06 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1214,27 +1242,34 @@
       "src": "guj_Gujr",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 62.5,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 64.7,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 62.5,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 2.2,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 7
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 33.3,
+      "medianSecondsPerSentence": 0.827,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +2.2 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1245,27 +1280,34 @@
       "src": "eng_Latn",
       "tgt": "guj_Gujr",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 50.4,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 55.37,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 50.4,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 4.97,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 38.5,
+      "medianSecondsPerSentence": 1.366,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +4.97 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1400,34 +1442,34 @@
       "src": "hin_Deva",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "opus-hi-en",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-hi-en",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 115710250,
-      "chrfpp": 44.32,
+      "modelSizeBytes": 261656622,
+      "chrfpp": 65.68,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 62.5,
       "baselineSource": "published",
-      "gap": -18.18,
-      "flagRate": 0.025,
+      "gap": 3.18,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
-        "repeatLoop": 3,
-        "lenRatio": 3,
+        "repeatLoop": 0,
+        "lenRatio": 0,
         "endsMidWord": 0,
-        "missingFinalPunct": 6
+        "missingFinalPunct": 0
       },
-      "flaggedSentences": 5,
+      "flaggedSentences": 0,
       "nSentences": 200,
-      "loadColdSeconds": 13.3,
-      "medianSecondsPerSentence": 0.662,
+      "loadColdSeconds": 33.1,
+      "medianSecondsPerSentence": 0.767,
       "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -18.18 (more than 5 of the bar); flags 2.5% > 2% (repeatLoop 3, lenRatio 3, missingFinalPunct 6)"
+      "verdict": "pass",
+      "verdictReason": "chrF++ +3.18 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1438,34 +1480,34 @@
       "src": "eng_Latn",
       "tgt": "hin_Deva",
       "engine": {
-        "id": "opus-en-hi",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-en-hi",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 116657716,
-      "chrfpp": 31.27,
+      "modelSizeBytes": 309314905,
+      "chrfpp": 57.86,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 54.2,
       "baselineSource": "published",
-      "gap": -22.93,
-      "flagRate": 0.17,
+      "gap": 3.66,
+      "flagRate": 0,
       "flagCounts": {
         "empty": 0,
         "wrongScript": 0,
-        "repeatLoop": 7,
-        "lenRatio": 27,
+        "repeatLoop": 0,
+        "lenRatio": 0,
         "endsMidWord": 0,
-        "missingFinalPunct": 3
+        "missingFinalPunct": 0
       },
-      "flaggedSentences": 34,
+      "flaggedSentences": 0,
       "nSentences": 200,
-      "loadColdSeconds": 13.3,
-      "medianSecondsPerSentence": 0.686,
+      "loadColdSeconds": 36.7,
+      "medianSecondsPerSentence": 1.321,
       "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "fail",
-      "verdictReason": "chrF++ -22.93 (more than 5 of the bar); flags 17.0% > 2% (repeatLoop 7, lenRatio 27, missingFinalPunct 3)"
+      "verdict": "pass",
+      "verdictReason": "chrF++ +3.66 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1773,27 +1815,34 @@
       "src": "kan_Knda",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 57,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 58.91,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 57,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 1.91,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 30.9,
+      "medianSecondsPerSentence": 0.861,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +1.91 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1804,27 +1853,34 @@
       "src": "eng_Latn",
       "tgt": "kan_Knda",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 50.2,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 53.18,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 50.2,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 2.98,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 36.5,
+      "medianSecondsPerSentence": 1.344,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +2.98 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1966,27 +2022,34 @@
       "src": "mal_Mlym",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 59,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 61.1,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 59,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 2.1,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 9
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 35.9,
+      "medianSecondsPerSentence": 0.852,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +2.1 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -1997,27 +2060,34 @@
       "src": "eng_Latn",
       "tgt": "mal_Mlym",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 47.2,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 54.5,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 47.2,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 7.3,
+      "flagRate": 0.02,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 4,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 4,
+      "nSentences": 200,
+      "loadColdSeconds": 38.7,
+      "medianSecondsPerSentence": 1.545,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +7.3 vs published baseline; flags 2.0% <= 2%"
     },
     {
       "language": {
@@ -2028,27 +2098,34 @@
       "src": "mar_Deva",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 58.9,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 62.43,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 58.9,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 3.53,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 11
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 33.2,
+      "medianSecondsPerSentence": 0.811,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +3.53 vs published baseline; flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -2059,27 +2136,34 @@
       "src": "eng_Latn",
       "tgt": "mar_Deva",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 44.6,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 50.24,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 44.6,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 5.64,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 37,
+      "medianSecondsPerSentence": 1.282,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +5.64 vs published baseline; flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -2090,27 +2174,34 @@
       "src": "npi_Deva",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 62.5,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 64.81,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 62.5,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 2.31,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 32.6,
+      "medianSecondsPerSentence": 0.833,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +2.31 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -2121,27 +2212,34 @@
       "src": "eng_Latn",
       "tgt": "npi_Deva",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 49,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 55.34,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 49,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 6.34,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 36.6,
+      "medianSecondsPerSentence": 1.209,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +6.34 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -2214,27 +2312,34 @@
       "src": "ory_Orya",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 58.5,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 60.72,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 58.5,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 2.22,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 34.4,
+      "medianSecondsPerSentence": 0.808,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +2.22 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -2245,27 +2350,34 @@
       "src": "eng_Latn",
       "tgt": "ory_Orya",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 44.9,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 48.09,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 44.9,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 3.19,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 60
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 38.7,
+      "medianSecondsPerSentence": 1.312,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +3.19 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -2545,27 +2657,34 @@
       "src": "pan_Guru",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 61.5,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 63.31,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 61.5,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 1.81,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 32.8,
+      "medianSecondsPerSentence": 0.87,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +1.81 vs published baseline; flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -2576,27 +2695,34 @@
       "src": "eng_Latn",
       "tgt": "pan_Guru",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 46.7,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 50.56,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 46.7,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 3.86,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 4
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 34.3,
+      "medianSecondsPerSentence": 1.796,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +3.86 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -3152,27 +3278,34 @@
       "src": "tam_Taml",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 55.8,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 57.51,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 55.8,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 1.71,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 6
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 32.5,
+      "medianSecondsPerSentence": 0.826,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +1.71 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -3183,27 +3316,34 @@
       "src": "eng_Latn",
       "tgt": "tam_Taml",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 51.1,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 56.11,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 51.1,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 5.01,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 38.1,
+      "medianSecondsPerSentence": 1.398,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +5.01 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -3214,27 +3354,34 @@
       "src": "tel_Telu",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 61.2,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 62.57,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 61.2,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 1.37,
+      "flagRate": 0.025,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 3,
+        "lenRatio": 1,
+        "endsMidWord": 1,
+        "missingFinalPunct": 11
+      },
+      "flaggedSentences": 5,
+      "nSentences": 200,
+      "loadColdSeconds": 44.5,
+      "medianSecondsPerSentence": 0.83,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "borderline",
+      "verdictReason": "chrF++ +1.37 vs published baseline; flags 2.5% > 2% (repeatLoop 3, lenRatio 1, endsMidWord 1, missingFinalPunct 11)"
     },
     {
       "language": {
@@ -3245,27 +3392,34 @@
       "src": "eng_Latn",
       "tgt": "tel_Telu",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 51.8,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 57.6,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 51.8,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 5.8,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 1,
+        "missingFinalPunct": 1
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 35.4,
+      "medianSecondsPerSentence": 1.258,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +5.8 vs published baseline; flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -3490,27 +3644,34 @@
       "src": "urd_Arab",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-indic-en",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 57.8,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 261656622,
+      "chrfpp": 59.06,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 57.8,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 1.26,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 1
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 33.6,
+      "medianSecondsPerSentence": 0.867,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +1.26 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -3521,27 +3682,34 @@
       "src": "eng_Latn",
       "tgt": "urd_Arab",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "indictrans2-en-indic",
+        "kind": "indictrans2",
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 46.6,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 309314905,
+      "chrfpp": 49.85,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 46.6,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 3.25,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 35.9,
+      "medianSecondsPerSentence": 1.478,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +3.25 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -3738,12 +3906,12 @@
     }
   ],
   "counts": {
-    "pass": 13,
-    "borderline": 18,
-    "fail": 13,
+    "pass": 38,
+    "borderline": 19,
+    "fail": 11,
     "error": 0,
-    "baseline": 66,
-    "totalSmallDirections": 44
+    "baseline": 42,
+    "totalSmallDirections": 68
   },
   "list1BorderlineOrFailOnSmallModels": [
     {
@@ -3911,34 +4079,6 @@
           "gap": -2.89,
           "flagRate": 0,
           "flagged": 0,
-          "n": 200
-        }
-      ]
-    },
-    {
-      "code": "hin_Deva",
-      "english": "Hindi",
-      "directions": [
-        {
-          "direction": "en->hin_Deva",
-          "engine": "opus-en-hi",
-          "verdict": "fail",
-          "chrfpp": 31.27,
-          "baseline": 54.2,
-          "gap": -22.93,
-          "flagRate": 0.17,
-          "flagged": 34,
-          "n": 200
-        },
-        {
-          "direction": "hin_Deva->en",
-          "engine": "opus-hi-en",
-          "verdict": "fail",
-          "chrfpp": 44.32,
-          "baseline": 62.5,
-          "gap": -18.18,
-          "flagRate": 0.025,
-          "flagged": 5,
           "n": 200
         }
       ]
@@ -4147,6 +4287,23 @@
       ]
     },
     {
+      "code": "tel_Telu",
+      "english": "Telugu",
+      "directions": [
+        {
+          "direction": "tel_Telu->en",
+          "engine": "indictrans2-indic-en",
+          "verdict": "borderline",
+          "chrfpp": 62.57,
+          "baseline": 61.2,
+          "gap": 1.37,
+          "flagRate": 0.025,
+          "flagged": 5,
+          "n": 200
+        }
+      ]
+    },
+    {
       "code": "tha_Thai",
       "english": "Thai",
       "directions": [
@@ -4232,14 +4389,6 @@
       "english": "Amharic"
     },
     {
-      "code": "asm_Beng",
-      "english": "Assamese"
-    },
-    {
-      "code": "ben_Beng",
-      "english": "Bengali"
-    },
-    {
       "code": "cat_Latn",
       "english": "Catalan"
     },
@@ -4256,10 +4405,6 @@
       "english": "Greek"
     },
     {
-      "code": "guj_Gujr",
-      "english": "Gujarati"
-    },
-    {
       "code": "hau_Latn",
       "english": "Hausa"
     },
@@ -4268,32 +4413,12 @@
       "english": "Hebrew"
     },
     {
-      "code": "kan_Knda",
-      "english": "Kannada"
-    },
-    {
       "code": "zsm_Latn",
       "english": "Malay"
     },
     {
-      "code": "mal_Mlym",
-      "english": "Malayalam"
-    },
-    {
-      "code": "mar_Deva",
-      "english": "Marathi"
-    },
-    {
-      "code": "npi_Deva",
-      "english": "Nepali"
-    },
-    {
       "code": "nob_Latn",
       "english": "Norwegian Bokmål"
-    },
-    {
-      "code": "ory_Orya",
-      "english": "Odia"
     },
     {
       "code": "pbt_Arab",
@@ -4302,10 +4427,6 @@
     {
       "code": "pes_Arab",
       "english": "Persian"
-    },
-    {
-      "code": "pan_Guru",
-      "english": "Punjabi"
     },
     {
       "code": "srp_Cyrl",
@@ -4322,18 +4443,6 @@
     {
       "code": "tgl_Latn",
       "english": "Tagalog"
-    },
-    {
-      "code": "tam_Taml",
-      "english": "Tamil"
-    },
-    {
-      "code": "tel_Telu",
-      "english": "Telugu"
-    },
-    {
-      "code": "urd_Arab",
-      "english": "Urdu"
     },
     {
       "code": "yor_Latn",

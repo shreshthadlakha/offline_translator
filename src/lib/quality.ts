@@ -84,30 +84,30 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "asm_Beng",
     "english": "Assamese",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 1.93
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 4.24
       }
     }
   },
   {
     "code": "ben_Beng",
     "english": "Bengali",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 2.81
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 5.06
       }
     }
   },
@@ -294,15 +294,15 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "guj_Gujr",
     "english": "Gujarati",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 2.2
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 4.97
       }
     }
   },
@@ -339,15 +339,15 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "hin_Deva",
     "english": "Hindi",
-    "tier": "limited",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "limited",
-        "gap": -18.18
+        "tier": "best",
+        "gap": 3.18
       },
       "en->": {
-        "tier": "limited",
-        "gap": -22.93
+        "tier": "best",
+        "gap": 3.66
       }
     }
   },
@@ -414,15 +414,15 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "kan_Knda",
     "english": "Kannada",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 1.91
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 2.98
       }
     }
   },
@@ -459,45 +459,45 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "mal_Mlym",
     "english": "Malayalam",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 2.1
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 7.3
       }
     }
   },
   {
     "code": "mar_Deva",
     "english": "Marathi",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 3.53
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 5.64
       }
     }
   },
   {
     "code": "npi_Deva",
     "english": "Nepali",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 2.31
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 6.34
       }
     }
   },
@@ -519,15 +519,15 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "ory_Orya",
     "english": "Odia",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 2.22
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 3.19
       }
     }
   },
@@ -594,15 +594,15 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "pan_Guru",
     "english": "Punjabi",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 1.81
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 3.86
       }
     }
   },
@@ -729,30 +729,30 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "tam_Taml",
     "english": "Tamil",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 1.71
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 5.01
       }
     }
   },
   {
     "code": "tel_Telu",
     "english": "Telugu",
-    "tier": "full",
+    "tier": "good",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "good",
+        "gap": 1.37
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 5.8
       }
     }
   },
@@ -804,15 +804,15 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "urd_Arab",
     "english": "Urdu",
-    "tier": "full",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 1.26
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 3.25
       }
     }
   },
