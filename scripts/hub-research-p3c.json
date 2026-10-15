@@ -1,0 +1,14 @@
+{
+  "task": "p3c: remaining (African) models research",
+  "date": "2025-10-13",
+  "candidates": [
+    {"repo": "fintutto/opus-mt-en-sw", "license": "apache-2.0", "result": "en->sw gap -4.34, 6/200 flags (4 repeatLoop reviewed as normal-Swahili word repetition false positives, 2 lenRatio) => BORDERLINE. SHIPPED (full-model-only before; 137MB vs 900MB for a borderline direction)"},
+    {"repo": "fintutto/opus-mt-yo-en", "result": "yo->en -17.4 with 39 repeatLoop flags and hallucinated output. REJECTED"},
+    {"repo": "fintutto/opus-mt-ha-en", "result": "ha->en -23.49 with 21 repeatLoop. REJECTED"},
+    {"repo": "fintutto/opus-mt-en-ha", "result": "en->ha -19.65 with 20 repeatLoop. REJECTED"},
+    {"repo": "Amharic", "result": "no models anywhere (Helsinki has none, fintutto has en-ti not en-am). Full model"},
+    {"repo": "Zulu", "result": "no models anywhere. Full model"},
+    {"repo": "Swahili->English", "result": "no sw-en conversion exists (only en-sw). Full model"}
+  ],
+  "decisions": { "ship": ["eng->swh via fintutto/opus-mt-en-sw (-4.34 borderline)"], "rejected": ["yor, hau both directions"], "full-model": ["amh both", "zul both", "swh->en"] }
+}

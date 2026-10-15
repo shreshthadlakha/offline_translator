@@ -1,0 +1,19 @@
+{
+  "task": "p3e: Asian failed models research",
+  "date": "2025-10-13",
+  "currentFails": "jpn->en -6.33 (opus-ja-en routed), kor->en -8.01, tha->en -8.21, vie->en -8.12, en->vie -14.01, ind->en -6.49, zho_Hant none, zsm none, sin none, tgl none",
+  "candidates": [
+    {"repo": "Xenova/opus-mt-en-jap", "result": "en->ja -19.05 with heavy hallucination (bible-domain output on news text). REJECTED"},
+    {"repo": "Xenova/opus-mt-jap-en", "result": "ja->en -30.72 with 67% endsMidWord flags (127/200). REJECTED"},
+    {"repo": "noticemkjung/opus-mt-tc-big-en-ko-ONNX", "result": "int8 merged is 670MB (unquantized weights in the 'int8' file — broken conversion). REJECTED"},
+    {"repo": "Torick63/{ko,th,vi,ja}-en-onnx-quantized", "result": "split decoders only (no merged) — incompatible with transformers.js v3 pipeline. REJECTED"},
+    {"repo": "HPLT/translate-*", "result": "CC-BY-4.0 Marian models but PyTorch/.npz only, no ONNX anywhere. Covers zh_hant. REJECTED (no browser-ready conversion exists)"},
+    {"repo": "Helsinki-NLP/opus-mt-tc-big-en-ko", "result": "exists (CC-BY-4.0, 4962 downloads) but no browser conversion; noticemkjung's is broken"},
+    {"repo": "Helsinki-NLP/opus-mt-tl-en + en-tl", "result": "Apache-2.0 originals exist; TigreGotico's ONNX int8 merged is 337MB broken (unquantized). No other conversion. REJECTED"},
+    {"repo": "Helsinki single-pair models", "result": "do not exist for ms/si (Malay, Sinhala); ja/ko/th/vi singles are the already-routed failing Xenova conversions"},
+    {"repo": "Tatoeba challenge groups (gem-gem etc.)", "result": "do not cover any of these languages"}
+  ],
+  "decisions": {
+    "no-change": "Every failing Asian route keeps its current model: the routed Xenova conversions are already the best browser-ready option (their 'bigger' tc-big siblings have no working conversion), and the no-model languages (zho_Hant, zsm, sin, tgl) stay on the full model with the honest heavy ask. p4 labels the quality honestly. The failing directions remain a documented gap, recorded with numbers in quality-table.json."
+  }
+}

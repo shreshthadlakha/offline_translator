@@ -1,0 +1,144 @@
+{
+  "generatedAt": "2026-10-13T10:25:34.826Z",
+  "loadMs": 1532,
+  "results": [
+    {
+      "direction": "eng_Latn-urd_Arab",
+      "engine": "IndicTrans2-distilled-200M-int8 (en-indic, node harness)",
+      "n": 200,
+      "chrfpp": 50.09,
+      "chrfppLower": 50.09,
+      "baselineChrfpp": 46.6,
+      "gap": 3.49,
+      "flagRate": 0,
+      "flagged": 0,
+      "verdict": "pass",
+      "errors": 0,
+      "sentenceMs": null,
+      "worst": [
+        {
+          "chrf": 20.9,
+          "src": "Travellers who had an easy time adjusting to the new culture sometimes have a particularly",
+          "hyp": "جن مسافروں کو نئی ثقافت کے ساتھ ایڈجسٹ ہونے میں آسانی ہوتی ہے انہیں بعض اوقات اپنی مقامی ث",
+          "ref": "وہ سیاح جنہیں نئے تہذیب و تمدن اختیار کرنا وقت کے لحاظ سے آسان رہا ہو کبھی کبھار انہیں اپن"
+        },
+        {
+          "chrf": 21.1,
+          "src": "Others are alleged to have been brought up by animals; some are said to have lived in the ",
+          "hyp": "دوسروں پر الزام ہے کہ ان کی پرورش جانوروں نے کی تھی۔ کہا جاتا ہے کہ کچھ خود ہی جنگل میں رہ",
+          "ref": "دیگر افراد نے مبینہ طور پر جانوروں کے ذریعے پرورش پائی ہے؛ کچھ کے بارے میں بتایا گیا کہ وہ"
+        },
+        {
+          "chrf": 21.1,
+          "src": "Next, some saddles, particularly English saddles, have safety bars that allow a stirrup le",
+          "hyp": "اس کے بعد، کچھ سیڈلوں، خاص طور پر انگریزی سیڈلوں میں حفاظتی سلاخیں ہوتی ہیں جو گرتے ہوئے س",
+          "ref": "اگلا، بعض زینوں بالخصوص انگلش زینوں میں سیفٹی بار لگی ہوتی ہے جسے اگر گرنے والا سوار پیچھے"
+        },
+        {
+          "chrf": 23.6,
+          "src": "In fact, it is not easy to find at all even if one knew it existed. Once inside the cave, ",
+          "hyp": "درحقیقت، اسے تلاش کرنا بالکل بھی آسان نہیں ہے چاہے کوئی جانتا ہو کہ یہ موجود ہے۔ ایک بار غ",
+          "ref": "فی الواقع اس کو پانا آسان نہیں بے باوجودیکہ کسی کو اس کے وجود کا علم ہو، ایک بار اگر غار م"
+        },
+        {
+          "chrf": 24.6,
+          "src": "he cave itself, which survived the times, gives a very vivid image of Muhammad’s spiritual",
+          "hyp": "وہ خود غار، جو اس زمانے میں بچ گیا، محمد کے روحانی جھکاؤ کی ایک بہت ہی واضح تصویر دیتا ہے۔",
+          "ref": "اُنہوں نے خُود کو غار میں مقید کردیا، جس نے ادوار گُزارے، اس سے محمد ﷺ کی رُوحانی محسوسات "
+        }
+      ]
+    },
+    {
+      "direction": "eng_Latn-tam_Taml",
+      "engine": "IndicTrans2-distilled-200M-int8 (en-indic, node harness)",
+      "n": 200,
+      "chrfpp": 56.22,
+      "chrfppLower": 56.22,
+      "baselineChrfpp": 51.1,
+      "gap": 5.12,
+      "flagRate": 0,
+      "flagged": 0,
+      "verdict": "pass",
+      "errors": 0,
+      "sentenceMs": null,
+      "worst": [
+        {
+          "chrf": 25.5,
+          "src": "Visibility may also be restricted by falling or blowing snow or by condensation or ice on ",
+          "hyp": "பனி விழுவது அல்லது வீசுவது அல்லது வாகன ஜன்னல்களில் ஒடுக்கம் அல்லது பனி மூலம் பார்வைக் கட்ட",
+          "ref": "பனிப்பொழிவு மற்றும் பனி வீசுதல் மூலம் தெரிவு நிலை குறையலாம் அல்லது கார் கண்ணாடியின் மீது ஐ"
+        },
+        {
+          "chrf": 28.5,
+          "src": "These couples may choose to make an adoption plan for their baby.",
+          "hyp": "இந்த தம்பதிகள் தங்கள் குழந்தைக்கு தத்தெடுக்கும் திட்டத்தை உருவாக்கலாம்.",
+          "ref": "இந்த ஜோடிகள், அவர்களுக்கான குழந்தையை தத்தெடுக்க திட்டங்களை தேர்வு செய்கிறார்கள்."
+        },
+        {
+          "chrf": 29.6,
+          "src": "The smaller the Rossby number, the less active the star with respect to magnetic reversals",
+          "hyp": "ராஸ்பி எண் சிறியதாக இருந்தால், காந்த தலைகீழாக மாறுவதைப் பொறுத்தவரை நட்சத்திரம் குறைவான செய",
+          "ref": "ரோஸ்பி எண் குறைவாக உள்ள நட்சத்திரம், காந்தப்புற மாற்ற தொடர்புகளுடன் மிகவும் குறைந்த செயல்ப"
+        },
+        {
+          "chrf": 30.7,
+          "src": "The High Middle Ages were preceded by the Early Middle Ages and followed by the Late Middl",
+          "hyp": "உயர்மட்ட இடைக்காலம் ஆரம்ப இடைக்காலத்திற்கு முன்னும், பிற்பகுதியில் இடைக்காலத்தைத் தொடர்ந்த",
+          "ref": "உயர் நடுக் காலத்திற்கு முன்னால் ஆரம்ப நடுக் காலமும் பின்னால் பின் நடுக்காலமும், இவை அனைத்த"
+        },
+        {
+          "chrf": 30.7,
+          "src": "For Australians, the idea of 'flat white' coffee is foreign. A short black is 'espresso', ",
+          "hyp": "ஆஸ்திரேலியர்களைப் பொறுத்தவரை,'தட்டையான வெள்ளை'காபி என்ற யோசனை அந்நியமானது. ஒரு குறுகிய கரு",
+          "ref": "ஆஸ்திரேலியர்களுக்கு, 'ஃப்ளாட் வயிட்' காஃபி எனும் யோசனை புதிதானது. சிறிது குறைவான கருப்பு ந"
+        }
+      ]
+    },
+    {
+      "direction": "eng_Latn-ben_Beng",
+      "engine": "IndicTrans2-distilled-200M-int8 (en-indic, node harness)",
+      "n": 200,
+      "chrfpp": 51.28,
+      "chrfppLower": 51.28,
+      "baselineChrfpp": 46.2,
+      "gap": 5.08,
+      "flagRate": 0,
+      "flagged": 0,
+      "verdict": "pass",
+      "errors": 0,
+      "sentenceMs": null,
+      "worst": [
+        {
+          "chrf": 19.7,
+          "src": "During his trip, Iwasaki ran into trouble on many occasions.",
+          "hyp": "ভ্রমণের সময় ইওয়াসাকি অনেকবার সমস্যায় পড়েন।",
+          "ref": "ইভাশাকি তাঁর ভ্রমণকালে অনেক সময় অনেক সমস্যার মধ্যে পড়েছিলেন।"
+        },
+        {
+          "chrf": 22.6,
+          "src": "It is helpful to also wear a ring (just not one that looks too expensive.",
+          "hyp": "আংটি পরাও সহায়ক (খুব বেশি দামি দেখায় এমন আংটি নয়।",
+          "ref": "এটি আংটি পরতেও সহায়ক হয় (কেবলমাত্র ব্যয়বহুল দেখানোর জন্য নয়।"
+        },
+        {
+          "chrf": 27.8,
+          "src": "He added that \"they should not, however, be asked to take on obligations that go beyond th",
+          "hyp": "তিনি আরও বলেন, \"তবে, তাদের উন্নয়নের পর্যায়, দায়িত্ব এবং সক্ষমতার বাইরে যাওয়া দায়িত্বগ",
+          "ref": "\"তিনি আরো যোগ করেন \"\"যা তাদের উন্নয়নের স্তর, দায়িত্ব,  এবং সক্ষমতার সীমা ছাড়িয়ে যায় সেইসব "
+        },
+        {
+          "chrf": 27.8,
+          "src": "Its long jaws were studded with more than 70 razor-sharp teeth, along with an extra set in",
+          "hyp": "এর লম্বা চোয়ালগুলিতে 70টিরও বেশি রেজার-তীক্ষ্ণ দাঁত এবং এর মুখের ছাদে একটি অতিরিক্ত সেট ছ",
+          "ref": "এর দীর্ঘ চোয়ালগুলি খচিত ছিল সত্তর-এর ( 70 ) থেকে বেশি ক্ষুর তীব্র দাঁত দিয়ে, এরই সঙ্গে ছিল"
+        },
+        {
+          "chrf": 28.4,
+          "src": "As a result, the process of an organization working together to overcome an obstacle can l",
+          "hyp": "ফলস্বরূপ, একটি বাধা কাটিয়ে ওঠার জন্য একটি সংস্থার একসঙ্গে কাজ করার প্রক্রিয়া গ্রাহকের চা",
+          "ref": "ফলস্বরূপ , কোনো প্রতিষ্ঠানের বাঁধা অতিক্রম করতে যখন সেই প্রতিষ্ঠানের সব কর্মচারী একসাথে মি"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1238 @@
+{
+  "scoredAt": "2026-10-12T14:21:53.394Z",
+  "engine": {
+    "name": "IndicTrans2 distilled 200M (AI4Bharat, MIT)",
+    "onnxExport": "hari31416/indictrans2-{en-indic,indic-en}-dist-200M-ONNX-int8 (MIT, dynamic int8)",
+    "models": {
+      "en-indic": {
+        "modelId": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+        "license": "MIT (upstream ai4bharat, MIT)",
+        "weightsMB": 276.9,
+        "bundleMB": 318
+      },
+      "indic-en": {
+        "modelId": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+        "license": "MIT (upstream ai4bharat, MIT)",
+        "weightsMB": 231.9,
+        "bundleMB": 270.3
+      }
+    },
+    "pipeline": "JS port of IndicProcessor (golden-verified 1200/1200 preprocess, 1197/1200 postprocess; 3 diffs = the toolkit set-iteration nondeterminism on one sentence)",
+    "decoding": "greedy, max_new_tokens 256 (the app has no beam search; the model card uses beams 5 — the P1/P2c -1.4 greedy-vs-published calibration applies)"
+  },
+  "directions": [
+    {
+      "direction": "eng_Latn->urd_Arab",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 50.14,
+        "corpusLower": 50.14
+      },
+      "publishedBaselineChrfpp": 46.6,
+      "gap": 3.54,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.625,
+        "p90SecondsPerSentence": 1.006,
+        "loadSeconds": 1.454,
+        "peakRssMB": 791
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:53.701Z"
+    },
+    {
+      "direction": "urd_Arab->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 59.06,
+        "corpusLower": 59.99
+      },
+      "publishedBaselineChrfpp": 57.8,
+      "gap": 1.26,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 1,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": [
+          {
+            "id": 976,
+            "flags": [
+              "endsMidWord"
+            ],
+            "score": 33.7
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.507,
+        "p90SecondsPerSentence": 0.8,
+        "loadSeconds": 1.034,
+        "peakRssMB": 668.4
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:53.924Z"
+    },
+    {
+      "direction": "eng_Latn->tam_Taml",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 56.29,
+        "corpusLower": 56.29
+      },
+      "publishedBaselineChrfpp": 51.1,
+      "gap": 5.19,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.558,
+        "p90SecondsPerSentence": 0.9,
+        "loadSeconds": 1.158,
+        "peakRssMB": 785.2
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:54.203Z"
+    },
+    {
+      "direction": "tam_Taml->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 57.23,
+        "corpusLower": 58.13
+      },
+      "publishedBaselineChrfpp": 55.8,
+      "gap": 1.43,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 6
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 6,
+        "punctuationRestored": 6,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.499,
+        "p90SecondsPerSentence": 0.806,
+        "loadSeconds": 1.03,
+        "peakRssMB": 652.1
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:54.435Z"
+    },
+    {
+      "direction": "eng_Latn->ben_Beng",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 51.3,
+        "corpusLower": 51.3
+      },
+      "publishedBaselineChrfpp": 46.2,
+      "gap": 5.1,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.522,
+        "p90SecondsPerSentence": 0.8,
+        "loadSeconds": 1.167,
+        "peakRssMB": 782.6
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:54.666Z"
+    },
+    {
+      "direction": "ben_Beng->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 58.13,
+        "corpusLower": 59.13
+      },
+      "publishedBaselineChrfpp": 57.9,
+      "gap": 0.23,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 3,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 11
+        },
+        "flaggedSentences": 3,
+        "flagRate": 0.015,
+        "missingFinalPunct": 11,
+        "punctuationRestored": 10,
+        "flaggedDetails": [
+          {
+            "id": 86,
+            "flags": [
+              "repeatLoop",
+              "missingFinalPunct"
+            ],
+            "score": 50.9
+          },
+          {
+            "id": 305,
+            "flags": [
+              "repeatLoop",
+              "missingFinalPunct"
+            ],
+            "score": 71.3
+          },
+          {
+            "id": 538,
+            "flags": [
+              "repeatLoop"
+            ],
+            "score": 45.1
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.542,
+        "p90SecondsPerSentence": 1.085,
+        "loadSeconds": 0.986,
+        "peakRssMB": 673.9
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:54.884Z"
+    },
+    {
+      "direction": "eng_Latn->hin_Deva",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 57.84,
+        "corpusLower": 57.84
+      },
+      "publishedBaselineChrfpp": 54.2,
+      "gap": 3.64,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": [
+          {
+            "id": 370,
+            "flags": [
+              "repeatLoop"
+            ],
+            "score": 45.4
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.595,
+        "p90SecondsPerSentence": 1.003,
+        "loadSeconds": 1.75,
+        "peakRssMB": 727.7
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:55.109Z"
+    },
+    {
+      "direction": "hin_Deva->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 65.63,
+        "corpusLower": 66.53
+      },
+      "publishedBaselineChrfpp": 62.5,
+      "gap": 3.13,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.466,
+        "p90SecondsPerSentence": 0.758,
+        "loadSeconds": 1.322,
+        "peakRssMB": 653.7
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:55.327Z"
+    },
+    {
+      "direction": "eng_Latn->guj_Gujr",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 55.19,
+        "corpusLower": 55.19
+      },
+      "publishedBaselineChrfpp": 50.4,
+      "gap": 4.79,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.546,
+        "p90SecondsPerSentence": 0.946,
+        "loadSeconds": 1.175,
+        "peakRssMB": 770.8
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:55.546Z"
+    },
+    {
+      "direction": "guj_Gujr->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 64.7,
+        "corpusLower": 65.79
+      },
+      "publishedBaselineChrfpp": 62.5,
+      "gap": 2.2,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 7
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 7,
+        "punctuationRestored": 6,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.513,
+        "p90SecondsPerSentence": 0.826,
+        "loadSeconds": 1.096,
+        "peakRssMB": 646.4
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:55.757Z"
+    },
+    {
+      "direction": "eng_Latn->kan_Knda",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 53.27,
+        "corpusLower": 53.27
+      },
+      "publishedBaselineChrfpp": 50.2,
+      "gap": 3.07,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.516,
+        "p90SecondsPerSentence": 0.803,
+        "loadSeconds": 1.159,
+        "peakRssMB": 773.9
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:55.994Z"
+    },
+    {
+      "direction": "kan_Knda->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 58.78,
+        "corpusLower": 59.65
+      },
+      "publishedBaselineChrfpp": 57,
+      "gap": 1.78,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 1
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 1,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.492,
+        "p90SecondsPerSentence": 0.797,
+        "loadSeconds": 0.991,
+        "peakRssMB": 648.3
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:56.203Z"
+    },
+    {
+      "direction": "eng_Latn->mal_Mlym",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 54.66,
+        "corpusLower": 54.66
+      },
+      "publishedBaselineChrfpp": 47.2,
+      "gap": 7.46,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 4,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 4,
+        "flagRate": 0.02,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": [
+          {
+            "id": 506,
+            "flags": [
+              "repeatLoop"
+            ],
+            "score": 34.6
+          },
+          {
+            "id": 511,
+            "flags": [
+              "repeatLoop"
+            ],
+            "score": 53.5
+          },
+          {
+            "id": 876,
+            "flags": [
+              "repeatLoop"
+            ],
+            "score": 33.7
+          },
+          {
+            "id": 897,
+            "flags": [
+              "repeatLoop"
+            ],
+            "score": 33.5
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.693,
+        "p90SecondsPerSentence": 1.125,
+        "loadSeconds": 1.532,
+        "peakRssMB": 795.2
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:56.456Z"
+    },
+    {
+      "direction": "mal_Mlym->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 61.1,
+        "corpusLower": 62.22
+      },
+      "publishedBaselineChrfpp": 59,
+      "gap": 2.1,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 9
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 9,
+        "punctuationRestored": 10,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.493,
+        "p90SecondsPerSentence": 0.781,
+        "loadSeconds": 1.088,
+        "peakRssMB": 661.8
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:56.664Z"
+    },
+    {
+      "direction": "eng_Latn->mar_Deva",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 50.21,
+        "corpusLower": 50.21
+      },
+      "publishedBaselineChrfpp": 44.6,
+      "gap": 5.61,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": [
+          {
+            "id": 884,
+            "flags": [
+              "repeatLoop"
+            ],
+            "score": 53.2
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.567,
+        "p90SecondsPerSentence": 0.887,
+        "loadSeconds": 1.173,
+        "peakRssMB": 779.8
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:56.891Z"
+    },
+    {
+      "direction": "mar_Deva->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 62.5,
+        "corpusLower": 63.52
+      },
+      "publishedBaselineChrfpp": 58.9,
+      "gap": 3.6,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 9
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "missingFinalPunct": 9,
+        "punctuationRestored": 9,
+        "flaggedDetails": [
+          {
+            "id": 876,
+            "flags": [
+              "repeatLoop"
+            ],
+            "score": 49.4
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.485,
+        "p90SecondsPerSentence": 0.819,
+        "loadSeconds": 1.006,
+        "peakRssMB": 659.6
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:57.100Z"
+    },
+    {
+      "direction": "eng_Latn->npi_Deva",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 55.64,
+        "corpusLower": 55.64
+      },
+      "publishedBaselineChrfpp": 49,
+      "gap": 6.64,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.513,
+        "p90SecondsPerSentence": 0.862,
+        "loadSeconds": 1.194,
+        "peakRssMB": 819.5
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:57.315Z"
+    },
+    {
+      "direction": "npi_Deva->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 65.33,
+        "corpusLower": 66.28
+      },
+      "publishedBaselineChrfpp": 62.5,
+      "gap": 2.83,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.488,
+        "p90SecondsPerSentence": 0.764,
+        "loadSeconds": 1.011,
+        "peakRssMB": 654.8
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:57.522Z"
+    },
+    {
+      "direction": "eng_Latn->ory_Orya",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 48.05,
+        "corpusLower": 48.05
+      },
+      "publishedBaselineChrfpp": 44.9,
+      "gap": 3.15,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 62
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 62,
+        "punctuationRestored": 63,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.563,
+        "p90SecondsPerSentence": 0.882,
+        "loadSeconds": 1.285,
+        "peakRssMB": 758.5
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:57.759Z"
+    },
+    {
+      "direction": "ory_Orya->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 61.25,
+        "corpusLower": 62.21
+      },
+      "publishedBaselineChrfpp": 58.5,
+      "gap": 2.75,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.495,
+        "p90SecondsPerSentence": 0.791,
+        "loadSeconds": 1.018,
+        "peakRssMB": 650.5
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:57.966Z"
+    },
+    {
+      "direction": "eng_Latn->pan_Guru",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 50.52,
+        "corpusLower": 50.52
+      },
+      "publishedBaselineChrfpp": 46.7,
+      "gap": 3.82,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.789,
+        "p90SecondsPerSentence": 1.257,
+        "loadSeconds": 1.195,
+        "peakRssMB": 794.1
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:58.208Z"
+    },
+    {
+      "direction": "pan_Guru->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 62.85,
+        "corpusLower": 63.73
+      },
+      "publishedBaselineChrfpp": 61.5,
+      "gap": 1.35,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": [
+          {
+            "id": 876,
+            "flags": [
+              "repeatLoop"
+            ],
+            "score": 63.7
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.514,
+        "p90SecondsPerSentence": 0.833,
+        "loadSeconds": 1.098,
+        "peakRssMB": 660.1
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:58.423Z"
+    },
+    {
+      "direction": "eng_Latn->tel_Telu",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 57.87,
+        "corpusLower": 57.87
+      },
+      "publishedBaselineChrfpp": 51.8,
+      "gap": 6.07,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": []
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.554,
+        "p90SecondsPerSentence": 0.887,
+        "loadSeconds": 1.15,
+        "peakRssMB": 756
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:58.654Z"
+    },
+    {
+      "direction": "tel_Telu->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 62.79,
+        "corpusLower": 63.81
+      },
+      "publishedBaselineChrfpp": 61.2,
+      "gap": 1.59,
+      "verdict": "borderline",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 3,
+          "lenRatio": 1,
+          "endsMidWord": 1,
+          "missingFinalPunct": 9
+        },
+        "flaggedSentences": 5,
+        "flagRate": 0.025,
+        "missingFinalPunct": 9,
+        "punctuationRestored": 10,
+        "flaggedDetails": [
+          {
+            "id": 45,
+            "flags": [
+              "endsMidWord"
+            ],
+            "score": 64.3
+          },
+          {
+            "id": 86,
+            "flags": [
+              "repeatLoop",
+              "missingFinalPunct"
+            ],
+            "score": 68.1
+          },
+          {
+            "id": 125,
+            "flags": [
+              "repeatLoop",
+              "missingFinalPunct"
+            ],
+            "score": 62.5
+          },
+          {
+            "id": 189,
+            "flags": [
+              "repeatLoop",
+              "missingFinalPunct"
+            ],
+            "score": 68.8
+          },
+          {
+            "id": 298,
+            "flags": [
+              "lenRatio"
+            ],
+            "score": 34.8
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.472,
+        "p90SecondsPerSentence": 0.8,
+        "loadSeconds": 0.994,
+        "peakRssMB": 659.1
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:58.861Z"
+    },
+    {
+      "direction": "eng_Latn->asm_Beng",
+      "engine": "indictrans2-en-indic-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 38.69,
+        "corpusLower": 38.69
+      },
+      "publishedBaselineChrfpp": 34.6,
+      "gap": 4.09,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "missingFinalPunct": 0,
+        "punctuationRestored": 0,
+        "flaggedDetails": [
+          {
+            "id": 257,
+            "flags": [
+              "repeatLoop"
+            ],
+            "score": 36
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.78,
+        "p90SecondsPerSentence": 1.307,
+        "loadSeconds": 1.284,
+        "peakRssMB": 813.9
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:59.091Z"
+    },
+    {
+      "direction": "asm_Beng->eng_Latn",
+      "engine": "indictrans2-indic-en-dist-200M",
+      "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+      "nSentences": 200,
+      "sentenceErrors": 0,
+      "chrfpp": {
+        "corpus": 50.74,
+        "corpusLower": 51.72
+      },
+      "publishedBaselineChrfpp": 52.7,
+      "gap": -1.96,
+      "verdict": "pass",
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 2,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 15
+        },
+        "flaggedSentences": 2,
+        "flagRate": 0.01,
+        "missingFinalPunct": 15,
+        "punctuationRestored": 14,
+        "flaggedDetails": [
+          {
+            "id": 459,
+            "flags": [
+              "repeatLoop",
+              "missingFinalPunct"
+            ],
+            "score": 12.6
+          },
+          {
+            "id": 978,
+            "flags": [
+              "repeatLoop"
+            ],
+            "score": 37.4
+          }
+        ]
+      },
+      "speed": {
+        "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+        "medianSecondsPerSentence": 0.747,
+        "p90SecondsPerSentence": 1.27,
+        "loadSeconds": 1.013,
+        "peakRssMB": 736.6
+      },
+      "postprocessGoldenDiff": null,
+      "scoredAt": "2026-10-12T14:21:59.311Z"
+    }
+  ],
+  "m2m100Comparison": {
+    "engine": "m2m100_418M",
+    "note": "scored on en->ur only; ~10.5 s/sentence median and 640 MB q8 bundle made the remaining directions not worth the hours (IndicTrans2: 0.5-0.6 s, 277 MB)",
+    "direction": "eng_Latn->urd_Arab",
+    "mode": "node-harness (onnxruntime-node, greedy, int8 dynamic; same engine as the browser worker path)",
+    "nSentences": 200,
+    "sentenceErrors": 0,
+    "chrfpp": {
+      "corpus": 37.23,
+      "corpusLower": 37.23
+    },
+    "publishedBaselineChrfpp": 46.6,
+    "gap": -9.37,
+    "verdict": "fail",
+    "sanity": {
+      "counts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 3,
+        "lenRatio": 2,
+        "endsMidWord": 0,
+        "missingFinalPunct": 6
+      },
+      "flaggedSentences": 3,
+      "flagRate": 0.015,
+      "missingFinalPunct": 6,
+      "punctuationRestored": 4,
+      "flaggedDetails": [
+        {
+          "id": 40,
+          "flags": [
+            "repeatLoop",
+            "lenRatio",
+            "missingFinalPunct"
+          ],
+          "score": 3.9
+        },
+        {
+          "id": 455,
+          "flags": [
+            "repeatLoop"
+          ],
+          "score": 44.9
+        },
+        {
+          "id": 864,
+          "flags": [
+            "repeatLoop",
+            "lenRatio",
+            "missingFinalPunct"
+          ],
+          "score": 15.7
+        }
+      ]
+    },
+    "speed": {
+      "source": "node-harness (representative of onnxruntime-web worker: same runtime, same session options)",
+      "medianSecondsPerSentence": 10.507,
+      "p90SecondsPerSentence": 16.351,
+      "loadSeconds": 3.488,
+      "peakRssMB": 1900.1
+    },
+    "postprocessGoldenDiff": null,
+    "scoredAt": "2026-10-12T14:21:59.532Z"
+  },
+  "postprocessGoldenDiff": {
+    "summary": "5189/5200 postprocess outputs byte-identical to the compiled Python IndicTransToolkit",
+    "diffs": "11 sentences (ids 737/723 across 11 directions): the toolkit set() iteration order is hash-randomized per Python process, flipping placeholder numbering on sentences with 2+ entity matches; the JS port uses deterministic insertion order. Final restored text is self-consistent either way; corpus chrF impact ~0.02."
+  }
+}

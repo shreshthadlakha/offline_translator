@@ -70,6 +70,10 @@ function SetupCardInner() {
   // screen: reading the model into memory, and the check that follows.
   const [, clockTick] = useState(0);
   const stageStartRef = useRef<number | null>(null);
+  // Whether any model is saved on this device at all: decides which offline
+  // line to show (never set up, or just this pair not set up). Null while
+  // the cache is being read.
+  const [anyModelSaved, setAnyModelSaved] = useState<boolean | null>(null);
   useEffect(() => {
     if (status !== "initializing" && status !== "testing") {
       stageStartRef.current = null;

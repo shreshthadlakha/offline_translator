@@ -1,0 +1,25 @@
+Private Translator
+Copyright (c) 2026 The Private Translator Contributors
+
+This project is dual-licensed. You may use, copy, modify, and distribute it
+under the terms of either the MIT License or the Apache License, Version 2.0,
+at your choice (SPDX expression: MIT OR Apache-2.0). See LICENSE-MIT and
+LICENSE-APACHE in this repository.
+
+This product includes third party components and AI translation models that
+carry their own licenses. The complete list — every model in use with its
+pinned Hugging Face revision, its license, and whether it is
+non-commercial — is in THIRD_PARTY_NOTICES.md. Notable among them:
+
+  - The full NLLB-200 (distilled 600M) model is distributed by Meta AI under
+    CC BY-NC 4.0, which is NON-COMMERCIAL.
+  - Opus-MT models from Helsinki NLP and their Xenova ONNX conversions are
+    Apache-2.0 or CC BY 4.0.
+  - The ONNX Runtime WebAssembly files served from /ort/ and the
+    transformers.js library are MIT / Apache-2.0.
+  - The self-hosted fonts (IBM Plex, Newsreader) are under the SIL Open
+    Font License 1.1.
+
+Model files are never committed to this repository; the app downloads them
+from the Hugging Face Hub once, pinned to the revisions recorded in
+THIRD_PARTY_NOTICES.md.

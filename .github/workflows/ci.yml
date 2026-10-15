@@ -1,0 +1,41 @@
+# Continuous integration for Private Translator. A clean checkout must be
+# able to install, generate its own runtime files, verify that nothing
+# derived has drifted from the code, type check, lint and build — the same
+# steps a person deploying the app would run.
+#
+# Node 24 is required for the drift check, whose scripts import the
+# TypeScript engine table directly (Node's type stripping).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install (generates the worker, service worker and ORT runtime files)
+        run: npm ci
+
+      - name: Drift check (notices, quality table, pinned revisions)
+        run: node scripts/check-drift.mjs
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build

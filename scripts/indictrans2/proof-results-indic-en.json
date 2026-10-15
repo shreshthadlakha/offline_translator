@@ -1,0 +1,144 @@
+{
+  "generatedAt": "2026-10-13T10:30:22.593Z",
+  "loadMs": 1307,
+  "results": [
+    {
+      "direction": "urd_Arab-eng_Latn",
+      "engine": "IndicTrans2-distilled-200M-int8 (indic-en, node harness)",
+      "n": 200,
+      "chrfpp": 59.08,
+      "chrfppLower": 60,
+      "baselineChrfpp": 57.8,
+      "gap": 1.28,
+      "flagRate": 0.005,
+      "flagged": 1,
+      "verdict": "pass",
+      "errors": 0,
+      "sentenceMs": null,
+      "worst": [
+        {
+          "chrf": 25.8,
+          "src": "آگ سے بچاؤ کے عملے نے آخرکار رات 11:35 پر آگ پر قابو پا لیا۔",
+          "hyp": "Firefighters finally brought the fire under control at 11:35 at night.",
+          "ref": "Fire rescue crews eventually doused the fire by 11:35 pm."
+        },
+        {
+          "chrf": 26.4,
+          "src": "اگر آپ کچھ بنیادی تواضع دکھائیں تو پیرس کے باشندوں کی ناگہانی بیرون بہت جلد اڑ جاتا ہے۔",
+          "hyp": "If you show some basic detail, the tragedy of Parisians flies far too soon.",
+          "ref": "Parisians' abrupt exteriors will rapidly evaporate if you display some basic courtesies."
+        },
+        {
+          "chrf": 27,
+          "src": "عام اصطلاح میں سفاری سے مراد افریقہ کے حیرت ناک وحوش بالخصوص سبز میدانوں کے وحوش کو دیکھنے",
+          "hyp": "Safari in general terms refers to a journey to the land to see the amazing beauty of Afric",
+          "ref": "The term safari in popular use refers to overland travel to view the stunning African wild"
+        },
+        {
+          "chrf": 28.7,
+          "src": "آک لینڈ چونکہ دو گودیوں کے کنارے واقع ہے لہذا یہاں متعدد شواطی (بیچز) پائے جاتے ہیں۔ سب سے",
+          "hyp": "Auckland is located on the edge of two ditches and has numerous shawties( batches); the th",
+          "ref": "There are many beaches, due to Auckland's straddling of two harbours. The most popular one"
+        },
+        {
+          "chrf": 28.7,
+          "src": "وہ سیاح جنہیں نئے تہذیب و تمدن اختیار کرنا وقت کے لحاظ سے آسان رہا ہو کبھی کبھار انہیں اپن",
+          "hyp": "Tourists who have had it easy over time to adapt to new civilizations sometimes find it di",
+          "ref": "Travellers who had an easy time adjusting to the new culture sometimes have a particularly"
+        }
+      ]
+    },
+    {
+      "direction": "tam_Taml-eng_Latn",
+      "engine": "IndicTrans2-distilled-200M-int8 (indic-en, node harness)",
+      "n": 200,
+      "chrfpp": 57.15,
+      "chrfppLower": 58.05,
+      "baselineChrfpp": 55.8,
+      "gap": 1.35,
+      "flagRate": 0.03,
+      "flagged": 6,
+      "verdict": "borderline",
+      "errors": 0,
+      "sentenceMs": null,
+      "worst": [
+        {
+          "chrf": 25.6,
+          "src": "பனிப்பொழிவு மற்றும் பனி வீசுதல் மூலம் தெரிவு நிலை குறையலாம் அல்லது கார் கண்ணாடியின் மீது ஐ",
+          "hyp": "The selection may be reduced by snow and ice or by ice or ice freezing on the car glass.",
+          "ref": "Visibility may also be restricted by falling or blowing snow or by condensation or ice on "
+        },
+        {
+          "chrf": 28,
+          "src": "நீங்கள் அடிப்படை மரியாதையை சற்றே வெளிப்படுத்தினால் பாரிஸியர்களின் நடத்தை உடனடியாக மாறும்.",
+          "hyp": "The behaviour of the Parisians will change immediately if you show a little bit of basic r",
+          "ref": "Parisians' abrupt exteriors will rapidly evaporate if you display some basic courtesies."
+        },
+        {
+          "chrf": 28.1,
+          "src": "ஸ்பிரிங்போக்ஸைப் பொறுத்தவரை, அது ஐந்து போட்டிகளில் தோல்வியடைந்தது.",
+          "hyp": "For Springbok, it lost five games.",
+          "ref": "For the Springboks, it ended a five-match losing streak."
+        },
+        {
+          "chrf": 28.1,
+          "src": "மிகவும் விலையுயர்ந்த ஒன்றாக தெரியவில்லை எனினும் இது மோதிரம் அணியவும் உதவியாக இருக்கும்.",
+          "hyp": "It may not seem like a very expensive item, but it can also help with ring wear.",
+          "ref": "It is helpful to also wear a ring (just not one that looks too expensive."
+        },
+        {
+          "chrf": 29.1,
+          "src": "ரோஸ்பி எண் குறைவாக உள்ள நட்சத்திரம், காந்தப்புற மாற்ற தொடர்புகளுடன் மிகவும் குறைந்த செயல்ப",
+          "hyp": "A star with a low Rospi number will have very little activity with magnetic transition int",
+          "ref": "The smaller the Rossby number, the less active the star with respect to magnetic reversals"
+        }
+      ]
+    },
+    {
+      "direction": "ben_Beng-eng_Latn",
+      "engine": "IndicTrans2-distilled-200M-int8 (indic-en, node harness)",
+      "n": 200,
+      "chrfpp": 60.78,
+      "chrfppLower": 61.8,
+      "baselineChrfpp": 57.9,
+      "gap": 2.88,
+      "flagRate": 0.05,
+      "flagged": 10,
+      "verdict": "borderline",
+      "errors": 0,
+      "sentenceMs": null,
+      "worst": [
+        {
+          "chrf": 25.3,
+          "src": "ইভাশাকি তাঁর ভ্রমণকালে অনেক সময় অনেক সমস্যার মধ্যে পড়েছিলেন।",
+          "hyp": "Ivashaki had many problems at times during his travels.",
+          "ref": "During his trip, Iwasaki ran into trouble on many occasions."
+        },
+        {
+          "chrf": 27.6,
+          "src": "প্যারিসিয়ানদের বাহ্যিক হাবভাব মুহূর্তের মধ্য বাতাসে মিলিয়ে যাবে যদি আপনি কিছু সাধারণ সৌজন",
+          "hyp": "The outward gestures of Parisians will take the air by the moment if you show some common ",
+          "ref": "Parisians' abrupt exteriors will rapidly evaporate if you display some basic courtesies."
+        },
+        {
+          "chrf": 28.8,
+          "src": "কেউ ওয়াইল্ড কার্ডও কিনতে পারে, যা দক্ষিণ আফ্রিকার বিশেষ কিছু পার্ক অথবা যে কোনো জাতীয় উদ্য",
+          "hyp": "One can also purchase wild cards, which allow access to certain parks or any national park",
+          "ref": "It may also be beneficial for one to buy a Wild Card, which provides entry to either selec"
+        },
+        {
+          "chrf": 30.3,
+          "src": "লোকজন অনুমান করতে পারে না যে পর্যটকদের ঘরে ফেরার জন্য ধৈর্য এবং সমঝোতা এই দুইয়েরও প্রয়োজন।",
+          "hyp": "People cannot assume that tourists need both patience and compromise to return home.",
+          "ref": "People may not anticipate that patience and understanding are also necessary for traveller"
+        },
+        {
+          "chrf": 30.4,
+          "src": "গবেষণায় দেখা গেছে যে মহিলারা পুরুষদের থেকে দ্বিগুণ সম্ভাবনা এমএসহবার।",
+          "hyp": "Studies have shown that women are twice as likely as men to have MS.",
+          "ref": "Research has found that females are two times more likely to have MS then males."
+        }
+      ]
+    }
+  ]
+}

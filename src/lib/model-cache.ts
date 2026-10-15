@@ -9,6 +9,10 @@
  */
 
 const MODEL_CACHE_NAME = "transformers-cache";
+/** Shell caches carry the build id: pt-shell-<buildId>, one per build
+ * (see scripts/sw-template.js). The prefix is what the app owns. */
+export const SHELL_CACHE_PREFIX = "pt-shell-";
+/** @deprecated Old fixed-name shell cache from before per-build names. */
 export const SHELL_CACHE_NAME = "pt-shell-v2";
 
 /** Quantized ONNX files every engine needs to be considered saved. */
@@ -124,11 +128,15 @@ export async function deleteModelCache(): Promise<void> {
 }
 
 /** Remove the service worker's shell cache, e.g. when files on the device
- * turned out to be out of date with each other. */
+ * turned out to be out of date with each other. The cache name carries the
+ * build id, so every shell cache of this app goes. */
 export async function clearShellCache(): Promise<void> {
   try {
     if (typeof caches === "undefined") return;
-    await caches.delete(SHELL_CACHE_NAME);
+    const names = await caches.keys();
+    await Promise.all(
+      names.filter((name) => name.startsWith(SHELL_CACHE_PREFIX)).map((name) => caches.delete(name)),
+    );
   } catch {
     // Best effort.
   }

@@ -11,7 +11,7 @@ import { LANGUAGES } from "@/lib/languages";
 export const MODEL_SIZE = "900 MB";
 
 /** The app version, shown in Details. */
-export const APP_VERSION = "0.2.1";
+export const APP_VERSION = "1.0.0";
 
 /** The language count comes from the registry. It is never hard coded. */
 export const LANGUAGE_COUNT = LANGUAGES.length;

@@ -1,0 +1,13 @@
+{
+  "task": "p3b: Middle East models research",
+  "date": "2025-10-13",
+  "candidates": [
+    {"repo": "fintutto/opus-mt-en-he", "license": "apache-2.0", "format": "Xenova layout (onnx/ quantized merged + encoder, 148MB)", "result": "en->he +2.49 vs published full-model chrF++, 10/200 cosmetic endsMidWord flags (no truncations reviewed). SHIPPED"},
+    {"repo": "Helsinki-NLP/opus-mt-en-he upstream", "license": "apache-2.0", "note": "the only Hebrew single-pair original; he-en does not exist"},
+    {"repo": "he->en candidates", "result": "NONE: no single-pair model, tc-big-he-en has no browser conversion, HPLT Hebrew is PyTorch-only. Hebrew->English stays on the full model"},
+    {"repo": "Persian (pes) candidates", "result": "NONE: no opus single-pair, no tc-big, HPLT translate-fa-en exists (CC-BY-4.0) but .npz/PyTorch only — no ONNX anywhere. Stays on the full model"},
+    {"repo": "Pashto (pbt) candidates", "result": "NONE anywhere (opus, tc-big, HPLT, Tatoeba). Stays on the full model"},
+    {"repo": "Arabic", "result": "already routed both directions (borderline in P2: -3.57/-1.95 with punctuation-only flags); kept and honestly labeled in p4"}
+  ],
+  "decisions": { "ship": ["eng->heb via fintutto/opus-mt-en-he (+2.49)"], "full-model": ["heb->en", "pes both", "pbt both"] }
+}

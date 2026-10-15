@@ -21,10 +21,11 @@
 // size only). The translation logic below is untouched by this.
 import "./net-report";
 
-import { pipeline, env, StoppingCriteria, type TranslationPipeline } from "@huggingface/transformers";
+import { pipeline, env, StoppingCriteria, type PretrainedModelOptions, type TranslationPipeline } from "@huggingface/transformers";
 import type { EngineDevice, EngineErrorCode, EngineSpec, FileRowStatus, GraphOptimizationLevel, MainToWorker, Priority, WorkerToMain } from "./protocol";
 import { PROTOCOL_VERSION, PRIORITY_RANK } from "./protocol";
 import { BUILD_ID } from "./build-id";
+import { MODEL_REVISIONS } from "../lib/engines";
 import { SPEED_CONFIG } from "../lib/speed-config";
 
 // --- Privacy critical configuration ------------------------------------------
@@ -230,9 +231,23 @@ function maxNewTokensFor(text: string): number {
   return Math.min(cap, Math.max(12, Math.round(factor * tokens + plus)));
 }
 
+/** The per call generate options: greedy decoding (one beam, no sampling),
+ * the token budget, the interrupt criterion, and NLLB's language pair.
+ * Typed concretely so the values line up with the library's generation
+ * options; the criterion and language fields ride along as extras, exactly
+ * as the library's runtime accepts. */
+type GenerateOptions = {
+  max_new_tokens: number;
+  num_beams: number;
+  do_sample: boolean;
+  stopping_criteria: InterruptCriteria;
+  src_lang?: string;
+  tgt_lang?: string;
+};
+
 /** The per call options. Greedy decoding: one beam, no sampling. */
-function generateOptions(text: string, src: string, tgt: string, interrupt: InterruptCriteria) {
-  const options: Record<string, unknown> = {
+function generateOptions(text: string, src: string, tgt: string, interrupt: InterruptCriteria): GenerateOptions {
+  const options: GenerateOptions = {
     max_new_tokens: maxNewTokensFor(text),
     num_beams: SPEED_CONFIG.decoding.numBeams,
     do_sample: SPEED_CONFIG.decoding.doSample,
@@ -249,9 +264,9 @@ function generateOptions(text: string, src: string, tgt: string, interrupt: Inte
 
 /** Options for a batch call. The token budget is per sentence, the longest
  * sentence in the group sets it; generation runs per sequence. */
-function generateOptionsForGroup(texts: string[], src: string, tgt: string, interrupt: InterruptCriteria) {
+function generateOptionsForGroup(texts: string[], src: string, tgt: string, interrupt: InterruptCriteria): GenerateOptions {
   const options = generateOptions(texts[0] ?? "", src, tgt, interrupt);
-  let maxTokens = Number(options.max_new_tokens) ?? 12;
+  let maxTokens = options.max_new_tokens;
   for (const text of texts.slice(1)) {
     maxTokens = Math.max(maxTokens, maxNewTokensFor(text));
   }
@@ -289,8 +304,22 @@ async function disposeCurrent(): Promise<void> {
   postStatsSnapshot();
 }
 
+/** The library's generic pipeline() typing collapses into a union too
+ * complex for the compiler under bundler module resolution — a typings
+ * limitation of transformers.js v3, not a code problem. This one cast pins
+ * the exact overload the worker uses; everything after it stays fully
+ * typed. */
+const startTranslationPipeline = pipeline as unknown as (
+  task: "translation",
+  model: string,
+  options?: PretrainedModelOptions,
+) => Promise<TranslationPipeline>;
+
 async function createPipeline(spec: EngineSpec, device: "wasm" | "webgpu"): Promise<TranslationPipeline> {
-  return pipeline("translation", spec.modelId, {
+  // The pinned revision from the engine table: the app downloads exactly the
+  // commit that was benchmarked and licensed, never "whatever is on main
+  // now". Same model, same files, deterministic across upstream changes.
+  const options: PretrainedModelOptions = {
     dtype: "q8",
     device,
     progress_callback: onProgressCallback,
@@ -301,7 +330,18 @@ async function createPipeline(spec: EngineSpec, device: "wasm" | "webgpu"): Prom
       graphOptimizationLevel,
       enableMemPattern: false,
     },
-  });
+  };
+  const revision = MODEL_REVISIONS[spec.modelId];
+  if (revision) options.revision = revision;
+  return startTranslationPipeline("translation", spec.modelId, options);
+}
+
+/** The library's translation pipeline typing demands a full GenerationConfig
+ * object even though only the fields actually present are read at runtime
+ * (its own documented examples pass partial options). This helper states
+ * that plainly at the two call sites. */
+function asCallOptions(options: GenerateOptions) {
+  return options as unknown as Parameters<TranslationPipeline>[1];
 }
 
 /** Translate the warm up sentence. Returns false on empty output. */
@@ -309,7 +349,7 @@ async function warmUp(spec: EngineSpec, src: string, tgt: string): Promise<boole
   if (!translator) return false;
   const interrupt = new InterruptCriteria();
   const warmupText = applyLangTag(WARMUP_TEXT);
-  const output = await translator(warmupText, generateOptions(warmupText, src, tgt, interrupt));
+  const output = await translator(warmupText, asCallOptions(generateOptions(warmupText, src, tgt, interrupt)));
   const text = Array.isArray(output)
     ? output.map((o) => (typeof o === "string" ? o : o.translation_text)).join("").trim()
     : String(output).trim();
@@ -448,7 +488,7 @@ async function pump(): Promise<void> {
       job.texts.length === 1
         ? generateOptions(taggedTexts[0] ?? "", job.src, job.tgt, interrupt)
         : generateOptionsForGroup(taggedTexts, job.src, job.tgt, interrupt);
-    const output = await translator(job.texts.length === 1 ? (taggedTexts[0] ?? "") : taggedTexts, perCallOptions);
+    const output = await translator(job.texts.length === 1 ? (taggedTexts[0] ?? "") : taggedTexts, asCallOptions(perCallOptions));
     const texts = (Array.isArray(output) ? output : [output]).map((o) =>
       typeof o === "string" ? stripLangTagEcho(o).trim() : String((o as { translation_text?: string }).translation_text ?? "").trim(),
     );

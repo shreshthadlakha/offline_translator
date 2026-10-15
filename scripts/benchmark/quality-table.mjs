@@ -7,8 +7,11 @@
 // browser-worker run in scripts/benchmark/benchmark-results.json; full-model
 // rows carry the published baseline itself and no run.
 //
-// Usage: bun scripts/benchmark/quality-table.mjs
+// Usage: bun scripts/benchmark/quality-table.mjs [--check]
 // Writes: scripts/benchmark/quality-table.md and quality-table.json
+// --check: regenerate in memory and fail if the committed files differ
+// (ignoring the generatedAt stamp), so scripts/check-drift.mjs can tie the
+// table to the engine table and the benchmark results.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -146,7 +149,48 @@ const table = {
   list2NoSmallModelAtAll: list2,
   fullModelLocalRuns,
 };
-writeFileSync(HERE('quality-table.json'), JSON.stringify(table, null, 2) + '\n');
+const CHECK = process.argv.includes('--check');
+
+function writeOrCheck(file, text, { ignoreDateLine = false, jsonIgnoreField = null } = {}) {
+  if (!CHECK) {
+    writeFileSync(file, text);
+    return;
+  }
+  const current = readFileSync(file, 'utf8');
+  let expected = text;
+  let actual = current;
+  if (jsonIgnoreField) {
+    // The machine file carries generatedAt: a stamp, not content. Compare
+    // the parsed documents with the stamp removed from both sides.
+    const strip = (s) => {
+      const o = JSON.parse(s);
+      delete o[jsonIgnoreField];
+      return JSON.stringify(o, null, 2);
+    };
+    expected = strip(text);
+    actual = strip(current);
+  } else if (ignoreDateLine) {
+    // The human file carries "Generated <date>"; the date is a stamp, not
+    // content. Compare with the committed file's own date substituted in.
+    const dateOf = (s) => (s.match(/Generated (\d{4}-\d{2}-\d{2})/) || [])[1];
+    const currentDate = dateOf(current);
+    const freshDate = dateOf(text);
+    if (!currentDate || !freshDate) {
+      console.error(`drift: ${file} has no parseable Generated date`);
+      process.exitCode = 1;
+      return;
+    }
+    expected = text.replace(`Generated ${freshDate}`, `Generated ${currentDate}`);
+  }
+  if (expected !== actual) {
+    console.error(`drift: ${file} does not match a regeneration from engines.ts + benchmark-results.json`);
+    process.exitCode = 1;
+    return;
+  }
+  console.log(`ok: ${file} matches the regeneration`);
+}
+
+writeOrCheck(HERE('quality-table.json'), JSON.stringify(table, null, 2) + '\n', { jsonIgnoreField: 'generatedAt' });
 
 // --- human file ----------------------------------------------------------------------
 const mb = (bytes) => `${(bytes / 1e6).toFixed(0)} MB`;
@@ -205,10 +249,10 @@ lines.push('- **en->ar (opus-en-ar)** and **en->zh (opus-en-zh)** clear the chrF
 lines.push('- **Hindi (both directions)** is the clearest quality failure among the single-pair models: clause dropping, hallucinated content ("escaped marriage in Nepal" became India), repeat loops and mass truncation on news-domain sentences; -22.9 (en->hi) and -18.2 (hi->en) against the baseline.');
 lines.push('- **The two mul group models** fail every direction they serve (gaps -9.3 to -19.0): half the sentences truncate mid-word into Croatian/Bulgarian/Serbian/Norwegian. The language audit kept them on ten conversational sentences against the full model\'s output; the professional human references overturn that. The Romance group model is materially better (en->por -2.5, por->en -4.8, both borderline; ron->en -7.8 fails).');
 lines.push('');
-writeFileSync(HERE('quality-table.md'), lines.join('\n') + '\n');
+writeOrCheck(HERE('quality-table.md'), lines.join('\n') + '\n', { ignoreDateLine: true });
 
 console.log(`rows: ${rows.length} (${smallRows.length} small + ${rows.length - smallRows.length} baseline)`);
 console.log(`verdicts: ${counts.pass} pass, ${counts.borderline} borderline, ${counts.fail} fail${counts.error ? `, ${counts.error} error` : ''}`);
 console.log(`list 1 (small-model borderline/fail): ${list1.length} languages`);
 console.log(`list 2 (no small model at all): ${list2.length} languages`);
-console.log('wrote scripts/benchmark/quality-table.md and quality-table.json');
+console.log(CHECK ? 'checked scripts/benchmark/quality-table.md and quality-table.json (no files written)' : 'wrote scripts/benchmark/quality-table.md and quality-table.json');

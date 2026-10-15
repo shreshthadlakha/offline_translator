@@ -1,0 +1,62 @@
+{
+  "task": "p5a: IndicTrans2 browser-ready model research",
+  "date": "2025-10-13",
+  "candidates": [
+    {
+      "repo": "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
+      "direction": "en->indic (22 scheduled Indic languages + en)",
+      "license": "MIT (preserved from ai4bharat upstream)",
+      "commit": "1eaa43a3fb76f382f1b22c76e56f6ab4926ad68b",
+      "bundleBytes": 309314905,
+      "files": ["encoder_model.onnx(+.data 73.8MB)", "decoder_model.onnx", "decoder_with_past_model.onnx", "decoder_shared.onnx.data 203MB", "tokenizer_src.json 3.9MB (en BPE)", "tokenizer_tgt.json 23.9MB (indic BPE)", "tokenizer_meta.json", "generation_config.json", "config.json", "tokenizer_config.json"],
+      "notes": "INT8 dynamic per-channel quantization. Author reports 85.6% token-exact vs fp32 oracle, chrF 97.3 vs oracle. Built for transformers.js + onnxruntime-web. Fast BPE tokenizer.json files (no SentencePiece wasm)."
+    },
+    {
+      "repo": "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
+      "direction": "indic->en",
+      "license": "MIT",
+      "commit": "a7ecdc0ba73148c6e1d051ca372332471d8aff4f",
+      "bundleBytes": 261656622,
+      "files": "same layout, encoder 120MB + decoder_shared 110MB data",
+      "notes": "The indic->en direction: no other ONNX conversion of this direction exists on the Hub except TigreGotico's fp32-only repos and mobilebytesensei's fork."
+    },
+    {
+      "repo": "naklitechie/indictrans2-en-indic-dist-200M-ONNX-int8",
+      "rejected": "en->indic only (no indic->en sibling), 335MB single files, parity documented 79.7% exact vs PyTorch. Superseded by hari31416 (smaller, both directions)."
+    },
+    {
+      "repo": "fp16 / q4f16 variants (hari31416)",
+      "rejected": "fp16 627MB (larger than int8); q4f16 73.4% exact-match vs fp32 oracle with lower chrF. int8 is the smallest AND most accurate quantization."
+    },
+    {
+      "repo": "ai4bharat originals / Raghavan / prajdabre rotary variants",
+      "rejected": "PyTorch-only (fairseq format, custom modeling code). No ONNX, not browser-runnable."
+    }
+  ],
+  "preprocessing": {
+    "source": "IndicTransToolkit 1.1.1 (MIT) + indic-nlp-library 0.92 (MIT) + sacremoses en subset (LGPL) + urduhack 1.1.1 (MIT)",
+    "ported": "scripts/indictrans2/processor.ts — full port: punc norm, ASCII digits, placeholders, Moses en tokenizer/detokenizer/punct-normalizer, per-script Indic normalizers (Dev/Bengali/Gurmukhi/Gujarati/Odia/Tamil/Telugu/Kannada/Malayalam/Urdu), UnicodeIndicTransliterator (offset-based script mapping + Tamil corrections), trivial tokenize/detokenize. Verified against the reference outputs documented in the naklitechie README (Bengali/Gujarati/Hindi postprocessing examples match exactly).",
+    "format": "model input: '{src_flores} {tgt_flores} {text}' with language tags as dedicated vocab tokens; the decoder emits Devanagari-unified output for related scripts, postprocess transliterates back to the target script"
+  },
+  "inferenceProtocol": {
+    "encoder": "input_ids, attention_mask -> last_hidden_state",
+    "decoderStep0": "decoder_model.onnx: input_ids, encoder_hidden_states, encoder_attention_mask -> logits + present.{i}.[decoder|encoder].[key|value] (18 layers)",
+    "decoderStepN": "decoder_with_past_model.onnx: input_ids, encoder_attention_mask, past_key_values.{i}.* -> logits + present.*",
+    "greedy": "argmax until eos_id=2, decoder_start_token_id=2",
+    "browserReference": "Hari31416/indictrans2-onnx-browser-demo (MIT) — proven working browser implementation with the same sessions, externalData option for the .onnx.data sidecars, and the transformers.js added-token workaround"
+  },
+  "proofResults": {
+    "benchmark": "P1 200-sentence FLORES-200 devtest sample, chrF++ vs professional human references, P2 quality bar (PASS_WITHIN_CHRF=2.0, BORDERLINE=5.0, MAX_FLAG_RATE=0.02)",
+    "directions": {
+      "eng_Latn-urd_Arab": { "chrfpp": 50.09, "baseline": 46.6, "gap": 3.49, "flagRate": 0.0, "verdict": "pass" },
+      "eng_Latn-tam_Taml": { "chrfpp": 56.22, "baseline": 51.1, "gap": 5.12, "flagRate": 0.0, "verdict": "pass" },
+      "eng_Latn-ben_Beng": { "chrfpp": 51.28, "baseline": 46.2, "gap": 5.08, "flagRate": 0.0, "verdict": "pass" },
+      "urd_Arab-eng_Latn": { "chrfpp": 59.08, "baseline": 57.8, "gap": 1.28, "flagRate": 0.005, "verdict": "pass" },
+      "tam_Taml-eng_Latn": { "chrfpp": 57.15, "baseline": 55.8, "gap": 1.35, "flagRate": 0.03, "verdict": "borderline" },
+      "ben_Beng-eng_Latn": { "chrfpp": 60.78, "baseline": 57.9, "gap": 2.88, "flagRate": 0.05, "verdict": "borderline" }
+    },
+    "flagReview": "Every flag on the two borderline directions is endsMidWord only, on sentences that end inside quotations (the model ends without a final period; references end mid-quote too). No wrongScript, no repeatLoop, no lengthRatio, no empty outputs anywhere. All six gaps are POSITIVE: the int8 distilled 200M beats the published full NLLB-200 600M numbers on every tested direction.",
+    "nodeTiming": { "floresMedian": "0.62-0.83 s/sentence", "floresP90": "1.30-1.46 s", "chatLength": "0.16 s", "load": "1.3-1.5 s from disk" }
+  },
+  "decision": "SHIP in p5b: both bundles, MIT license, pinned commits, SHA-256 verified fetching, custom engine path in the worker (transformers.js tokenizers + direct ORT sessions + the processor port). Fallback to the full model with an honest message if the fetch fails."
+}

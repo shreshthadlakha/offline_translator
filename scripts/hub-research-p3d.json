@@ -1,0 +1,30 @@
+{
+  "task": "p3d: European failed models research",
+  "date": "2025-10-13",
+  "baselines": "P2 quality-table fail rows: afr->en -9.43, ell->en -13.7, hrv->en -14.52, en->hrv -13.03, srp->en -13.06, en->srp -16.17, nob->en -17.62, en->nob -9.33, ron->en -7.75, bul->en -11.83, en->bul -18.98, cat: none",
+  "candidates": [
+    {"repo": "fintutto/opus-mt-bg-en", "license": "apache-2.0", "format": "Xenova layout (onnx/encoder+decoder_merged quantized, 142MB)", "result": "bg->en gap -3.07, flags 0.5% => BORDERLINE, ships (beats -11.83)"},
+    {"repo": "fintutto/opus-mt-en-bg", "license": "apache-2.0", "format": "Xenova layout, 142MB", "result": "en->bg gap -6.18, flags 6% => FAIL, rejected"},
+    {"repo": "fintutto/opus-mt-en-el", "license": "apache-2.0", "format": "Xenova layout, 147MB, explicitly transformers.js tagged", "result": "en->el gap +0.31, flags 4% => BORDERLINE/PASS, ships (new route; el->en had none)"},
+    {"repo": "Xenova/opus-mt-gem-gem", "license": "apache-2.0 (Helsinki gem-gem)", "format": "Xenova full, 86MB", "result": "nob->en -5.89 FAIL; en->nob -4.53 borderline-but-worse-storage; afr->en -9.77; en->afr -5.81. All rejected: never beats current or fails bar"},
+    {"repo": "Xenova/opus-mt-gmw-gmw", "license": "apache-2.0", "result": "does not cover Greek (0.86 chrF). Rejected"},
+    {"repo": "TigreGotico/opus-mt-tc-big-{el,sh,cat,zls}-onnx", "license": "cc-by-4.0", "format": "int8 subfolder has split decoders only OR 890MB unquantized merged. Incompatible with transformers.js v3 pipeline path and too large. Rejected"},
+    {"repo": "R4kSo1997/opus-mt-el-en-onnx-int8", "result": "split decoders only (no merged) - incompatible with the v3 pipeline. Rejected"},
+    {"repo": "Yergin/opus-mt-ca-en + en-ca", "result": "fp32 only (330+190MB). Rejected"},
+    {"repo": "WindyTranslate/translate-tc-big-*", "result": "safetensors only, no ONNX. Rejected"},
+    {"repo": "Helsinki originals for hr/sr/no/el-en/ro-en/ca-en", "result": "single-pair models do not exist for these directions (that is why group models were routed); only tc-big variants exist, with no working browser conversion"}
+  ],
+  "decisions": {
+    "ship": [
+      "eng->ell via fintutto/opus-mt-en-el (new fast route for a language that had none in that direction)",
+      "bul->en via fintutto/opus-mt-bg-en (replaces opus-mul-en fail -11.83 with -3.07 borderline)"
+    ],
+    "full-model with honest label": [
+      "ell->en (no browser candidate exists)", "hrv both (none)", "srp both (none)",
+      "nob both (none)", "ron->en (none; en->ron already passes)",
+      "en->bul (fintutto en-bg fails; no alternative)",
+      "cat both (fp32-only conversions rejected)",
+      "afr stays on current routes: af->en fail -9.43 stays but honest-labeled in p4 (no better candidate: gem-gem -9.77)"
+    ]
+  }
+}
