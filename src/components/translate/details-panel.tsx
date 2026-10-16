@@ -47,6 +47,13 @@ const FILE_LABELS: Record<string, string> = {
 
 function fileLabel(name: string): string {
   if (FILE_LABELS[name]) return FILE_LABELS[name] ?? name;
+  // Bergamot: the int8 Marian model, the lexical shortlist, the SentencePiece
+  // vocabularies, and the self hosted wasm runtime files.
+  if (name.includes("intgemm.alphas.bin")) return "Model";
+  if (name.startsWith("lex.")) return "Word shortlist";
+  if (name.endsWith(".spm") || name.startsWith("srcvocab.") || name.startsWith("trgvocab.")) return "Vocabulary";
+  if (name === "bergamot-translator-worker.js") return "Runtime";
+  if (name === "bergamot-translator-worker.wasm") return "Runtime";
   if (name.endsWith(".json")) return "Configuration";
   return name;
 }

@@ -289,28 +289,30 @@ export class BergamotEngine {
     const cache = await caches.open("pt-bergamot");
     const glueUrl = `/bergamot/${BERGAMOT_RUNTIME.glue.name}`;
     const wasmUrl = `/bergamot/${BERGAMOT_RUNTIME.wasm.name}`;
+    // Cached bodies are read exactly once: a Response body cannot be read
+    // twice. A size match against the pin accepts a cached file (the bytes
+    // were verified before they were cached); anything else re-downloads.
+    let glue: string | null = null;
+    let wasm: ArrayBuffer | null = null;
     const cachedGlue = await cache.match(glueUrl);
-    const cachedWasm = await cache.match(wasmUrl);
-    const glueBuffer =
-      cachedGlue && (await cachedGlue.arrayBuffer()).byteLength === BERGAMOT_RUNTIME.glue.bytes
-        ? await cachedGlue.arrayBuffer()
-        : null;
-    const wasmBuffer =
-      cachedWasm && (await cachedWasm.arrayBuffer()).byteLength === BERGAMOT_RUNTIME.wasm.bytes
-        ? await cachedWasm.arrayBuffer()
-        : null;
-
-    let glue = glueBuffer ? new TextDecoder().decode(glueBuffer) : null;
-    let wasm = wasmBuffer;
-    if (!glue) {
-      glue = new TextDecoder().decode(await fetchVerifiedFile(glueUrl, BERGAMOT_RUNTIME.glue, "pt-bergamot", onProgress));
-    } else {
-      onProgress({ status: "done", file: BERGAMOT_RUNTIME.glue.name, loaded: BERGAMOT_RUNTIME.glue.bytes, total: BERGAMOT_RUNTIME.glue.bytes });
+    if (cachedGlue) {
+      const bytes = await cachedGlue.arrayBuffer();
+      if (bytes.byteLength === BERGAMOT_RUNTIME.glue.bytes) glue = new TextDecoder().decode(bytes);
     }
-    if (!wasm) {
-      wasm = await fetchVerifiedFile(wasmUrl, BERGAMOT_RUNTIME.wasm, "pt-bergamot", onProgress);
+    const cachedWasm = await cache.match(wasmUrl);
+    if (cachedWasm) {
+      const bytes = await cachedWasm.arrayBuffer();
+      if (bytes.byteLength === BERGAMOT_RUNTIME.wasm.bytes) wasm = bytes;
+    }
+    if (glue) {
+      onProgress({ status: "done", file: BERGAMOT_RUNTIME.glue.name, loaded: BERGAMOT_RUNTIME.glue.bytes, total: BERGAMOT_RUNTIME.glue.bytes });
     } else {
+      glue = new TextDecoder().decode(await fetchVerifiedFile(glueUrl, BERGAMOT_RUNTIME.glue, "pt-bergamot", onProgress));
+    }
+    if (wasm) {
       onProgress({ status: "done", file: BERGAMOT_RUNTIME.wasm.name, loaded: BERGAMOT_RUNTIME.wasm.bytes, total: BERGAMOT_RUNTIME.wasm.bytes });
+    } else {
+      wasm = await fetchVerifiedFile(wasmUrl, BERGAMOT_RUNTIME.wasm, "pt-bergamot", onProgress);
     }
 
     // Module worker: importScripts does not exist. The glue only uses it for

@@ -4,16 +4,18 @@
  *
  * Pipeline engines (Opus-MT, NLLB) store their files in the Cache API under
  * "transformers-cache", keyed by their Hugging Face URLs. The IndicTrans2
- * engine verifies each file against a SHA-256 checksum and keeps them under
- * its own "pt-indictrans2" cache, keyed by the same URL shape (repo, pinned
- * commit, file). Every helper here works across both caches, so a single
- * saved model can be removed without touching the others, and Erase
- * everything removes them all.
+ * and Bergamot engines verify each file against a SHA-256 checksum and keep
+ * them under their own caches ("pt-indictrans2", "pt-bergamot"), keyed by
+ * the same URL shape (repo, pinned revision, file; Bergamot adds the pair
+ * directory before the file name). Every helper here works across all three
+ * caches, so a single saved model can be removed without touching the
+ * others, and Erase everything removes them all.
  */
 
 import { INDICTRANS2_BUNDLES } from "@/lib/indictrans2/bundles";
+import { BERGAMOT_PAIRS } from "@/lib/bergamot/bundles";
 
-const MODEL_CACHES = ["transformers-cache", "pt-indictrans2"] as const;
+const MODEL_CACHES = ["transformers-cache", "pt-indictrans2", "pt-bergamot"] as const;
 /** Shell caches carry the build id: pt-shell-<buildId>, one per build
  * (see scripts/sw-template.js). The prefix is what the app owns. */
 export const SHELL_CACHE_PREFIX = "pt-shell-";
@@ -26,21 +28,32 @@ function requiredOnnxFiles(): string[] {
 }
 
 /** Every file an engine needs to be considered saved. IndicTrans2 bundles
- * need all of their files (the sessions load them from the cache); pipeline
- * engines need the two quantized ONNX files. */
+ * and Bergamot pairs need all of their files (the engines load them from the
+ * cache); pipeline engines need the two quantized ONNX files. */
 function requiredFilesFor(modelId: string): string[] {
   for (const bundle of Object.values(INDICTRANS2_BUNDLES)) {
     if (bundle.repo === modelId) return bundle.files.map((f) => f.name);
   }
+  for (const pair of Object.values(BERGAMOT_PAIRS)) {
+    if (pair.modelId === modelId) return pair.files.map((f) => f.name);
+  }
   return requiredOnnxFiles();
 }
 
-/** The model id part of a cache entry URL, e.g. "Xenova/opus-mt-en-fr". */
+/** The model id part of a cache entry URL. Pipeline and IndicTrans2 entries
+ * are "/<owner>/<repo>/resolve/<rev>/<file>" -> "<owner>/<repo>"; Bergamot
+ * entries add the pair directory (".../<rev>/<pair>/<file>"), so the pair is
+ * part of the model identity — one mirror repository, many models. */
 function modelIdOf(url: string): string | null {
   try {
     const path = new URL(url).pathname;
     const parts = path.split("/").filter(Boolean);
-    if (parts.length >= 4 && parts[2] === "resolve") return `${parts[0]}/${parts[1]}`;
+    if (parts.length >= 4 && parts[2] === "resolve") {
+      if (parts[1] === "firefox-translations" && parts.length >= 6) {
+        return `${parts[0]}/${parts[1]}/${parts[4]}`;
+      }
+      return `${parts[0]}/${parts[1]}`;
+    }
     return null;
   } catch {
     return null;

@@ -7,12 +7,13 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { allEngines } from "../../src/lib/engines.ts";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = (f) => join(HERE, "..", "..", f);
 
 const qt = JSON.parse(readFileSync(ROOT("scripts/benchmark/quality-table.json"), "utf8"));
-const engines = readFileSync(ROOT("src/lib/engines.ts"), "utf8");
+const engines = new Set(allEngines().map((engine) => engine.modelId));
 
 // Sanity: every small-model row's engine must still exist in the engine
 // table (the table is regenerated after every route change; drift would
@@ -21,7 +22,7 @@ const missing = new Set();
 for (const row of qt.rows) {
   if (row.verdict === "baseline") continue;
   const modelId = row.engine?.modelId;
-  if (modelId && !engines.includes(modelId)) missing.add(`${row.direction}: ${modelId}`);
+  if (modelId && !engines.has(modelId)) missing.add(`${row.direction}: ${modelId}`);
 }
 if (missing.size > 0) {
   console.error("Rows referencing engines not present in engines.ts:");

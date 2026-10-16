@@ -263,7 +263,7 @@ export const copy = {
     questions: [
       {
         q: "Which models does it use?",
-        a: "Popular pairs, like English to French, use small Opus-MT models from Helsinki NLP, released under Apache-2.0 or CC BY 4.0 depending on the pair. Portuguese shares one small multi language Opus-MT model, about 115 MB. The Indian languages (Hindi, Bengali, Tamil, Urdu and nine more, both directions with English) use IndicTrans2 from AI4Bharat, MIT licensed, as community int8 exports, about 250 to 300 MB per direction. Every other pair uses NLLB-200 from Meta, which is released under a non commercial licence, CC BY-NC 4.0. The exact model for the pair you're using, and its licence, is in Details.",
+        a: "Popular pairs, like English to French, use small Opus-MT models from Helsinki NLP, released under Apache-2.0 or CC BY 4.0 depending on the pair. Portuguese shares one small multi language Opus-MT model, about 115 MB. The Indian languages (Hindi, Bengali, Tamil, Urdu and nine more, both directions with English) use IndicTrans2 from AI4Bharat, MIT licensed, as community int8 exports, about 250 to 300 MB per direction. Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese use Mozilla's Firefox Translations models, MPL-2.0, run by the Bergamot WebAssembly engine, about 20 to 50 MB per direction. Every other pair uses NLLB-200 from Meta, which is released under a non commercial licence, CC BY-NC 4.0. The exact model for the pair you're using, and its licence, is in Details.",
       },
       {
         q: "Does it work offline?",

@@ -218,7 +218,7 @@ function SetupCardInner() {
         </>
       );
     }
-    const fastPair = desired?.kind === "opus";
+    const fastPair = desired?.kind === "opus" || desired?.kind === "bergamot";
     const pairEnglish = `${srcLang?.english ?? "English"} to ${tgtLang?.english ?? "French"}`;
     return (
       <>
@@ -261,7 +261,7 @@ function SetupCardInner() {
       : status === "downloading"
         ? switching
           ? copy.setup.switching
-          : desired?.kind === "opus"
+          : desired?.kind === "opus" || desired?.kind === "bergamot"
             ? desired.expectedBytes >= 200 * 1024 * 1024
               ? copy.setup.settingUpLargePair(`${srcLang?.english ?? "English"} to ${tgtLang?.english ?? "French"}`, mbWhole(desired.expectedBytes))
               : copy.setup.settingUpPair(`${srcLang?.english ?? "English"} to ${tgtLang?.english ?? "French"}`, mbWhole(desired.expectedBytes))

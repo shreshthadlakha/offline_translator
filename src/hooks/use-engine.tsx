@@ -726,6 +726,21 @@ export function useEngine(heavyGate?: HeavyGate) {
             setStatusSafe("idle");
             return;
           }
+          // Leaving Bergamot for another engine kind ends the worker: the
+          // wasm runtime's heap never shrinks inside a living worker, and a
+          // stale half gigabyte next to the full model's three is exactly
+          // the memory pressure this app refuses to create silently.
+          // (Entering Bergamot needs no such step: the other engines release
+          // their sessions on dispose.) The desired-engine effect restarts
+          // on its own once the status is idle — through the idle callback,
+          // which also gives the one-tab lock time to process our release.
+          if (active.kind === "bergamot" && engine.kind !== "bergamot") {
+            terminate();
+            setAutoStarted(false);
+            setSwitching(false);
+            setStatusSafe("idle");
+            return;
+          }
           if (statusRef.current === "ready") {
             switchTo(engine);
           } else {

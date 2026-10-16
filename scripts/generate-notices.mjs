@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 // Generates THIRD_PARTY_NOTICES.md from the code's own tables: every model
 // in the engine table (src/lib/engines.ts) with its pinned revision
 // (scripts/release/model-revisions.json), its licenses (verified Hub research
@@ -17,6 +16,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { allEngines, NLLB_ENGINE } from "../src/lib/engines.ts";
+import { BERGAMOT_PAIRS, BERGAMOT_REVISION, BERGAMOT_RUNTIME } from "../src/lib/bergamot/bundles.ts";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const HERE = (f) => join(dirname(fileURLToPath(import.meta.url)), f);
@@ -48,6 +48,25 @@ const mb = (bytes) => `${Math.round(bytes / 1e6)} MB`;
 
 // --- the model rows -------------------------------------------------------------------
 const rows = allEngines().map((engine) => {
+  if (engine.kind === "bergamot") {
+    // Mozilla's Firefox Translations models, fetched from a byte-for-byte
+    // mirror of Mozilla's own registry at a pinned revision, each file
+    // verified against a SHA-256 from the pinned bundle table.
+    const pair = Object.values(BERGAMOT_PAIRS).find((p) => p.modelId === engine.modelId);
+    if (!pair) throw new Error(`Bergamot engine ${engine.modelId} has no pinned bundle`);
+    return {
+      engine,
+      sha: BERGAMOT_REVISION,
+      serves: engine.name.replace(/^Bergamot /, ""),
+      conversionLicense: engine.license,
+      licenseUrl: engine.licenseUrl,
+      upstreamModel: "mozilla/translations",
+      upstreamLicense: "MPL-2.0",
+      nonCommercial: false,
+      bergamot: true,
+      repo: "midudev/firefox-translations",
+    };
+  }
   const sha = revisions[engine.modelId];
   if (!sha) throw new Error(`No pinned revision for ${engine.modelId} — run scripts/release/fetch-model-revisions.mjs`);
 
@@ -88,9 +107,11 @@ const groupRows = rows.filter((r) => r.engine.group);
 const singleRows = rows.filter((r) => !r.engine.group && r.engine.id !== NLLB_ENGINE.id);
 const nllbRow = rows.find((r) => r.engine.id === NLLB_ENGINE.id);
 const nonCommercialRows = rows.filter((r) => r.nonCommercial);
+const bergamotRows = rows.filter((r) => r.bergamot);
 
 // --- the runtime version (from the committed lockfile, so it cannot drift) --------------
 const transformersLocked = packageLock.packages?.["node_modules/@huggingface/transformers"]?.version;
+const bergamotLocked = packageLock.packages?.["node_modules/@mkljczk/bergamot-translator"]?.version;
 
 // --- assemble ------------------------------------------------------------------------
 const L = [];
@@ -106,16 +127,24 @@ L.push("No model file is committed to this repository. The app downloads each mo
 L.push("");
 L.push(`## Translation models (${rows.length})`);
 L.push("");
-L.push("The full model, then the small single-pair models, then the group models. Sizes are the quantized (q8) bundle the app actually downloads.");
+L.push("The full model, then the small single-pair models, then the group models, then the Bergamot models. Sizes are the quantized (q8) bundle the app actually downloads, except the Bergamot rows, whose size is the int8 Marian model plus its shortlist and vocabularies.");
 L.push("");
 L.push("| Model (conversion) | Pinned revision | Serves | Download | License | Upstream model | Upstream license | Non-commercial |");
 L.push("|---|---|---|---|---|---|---|---|");
-for (const r of [nllbRow, ...singleRows, ...groupRows]) {
-  const revisionLink = `[\`${r.sha.slice(0, 12)}\`](https://huggingface.co/${r.engine.modelId}/tree/${r.sha})`;
+for (const r of [nllbRow, ...singleRows.filter((r) => !r.bergamot), ...groupRows, ...bergamotRows]) {
+  const modelLink = r.bergamot
+    ? `[\`${r.repo}\`](https://huggingface.co/${r.repo})`
+    : `[\`${r.engine.modelId}\`](https://huggingface.co/${r.engine.modelId})`;
+  const revisionLink = `[\`${r.sha.slice(0, 12)}\`](https://huggingface.co/${r.bergamot ? r.repo : r.engine.modelId}/tree/${r.sha})`;
+  const upstreamLink = r.bergamot
+    ? `[\`${r.upstreamModel}\`](https://github.com/${r.upstreamModel})`
+    : `[\`${r.upstreamModel}\`](https://huggingface.co/${r.upstreamModel})`;
   L.push(
-    `| [\`${r.engine.modelId}\`](https://huggingface.co/${r.engine.modelId}) | ${revisionLink} | ${r.serves} | ${mb(r.engine.expectedBytes)} | [${r.conversionLicense}](${r.licenseUrl}) | [\`${r.upstreamModel}\`](https://huggingface.co/${r.upstreamModel}) | ${r.upstreamLicense} | ${r.nonCommercial ? "**yes**" : "no"} |`,
+    `| ${modelLink} | ${revisionLink} | ${r.serves} | ${mb(r.engine.expectedBytes)} | [${r.conversionLicense}](${r.licenseUrl}) | ${upstreamLink} | ${r.upstreamLicense} | ${r.nonCommercial ? "**yes**" : "no"} |`,
   );
 }
+L.push("");
+L.push(`**Bergamot models.** The ${bergamotRows.length} Mozilla rows above are Firefox Translations release models (MPL-2.0), each fetched from the \`midudev/firefox-translations\` mirror at the pinned revision, with every file verified against a SHA-256 in \`src/lib/bergamot/bundles.ts\` before it is used or cached. Croatian and Serbian to English share one released Serbo-Croatian (hbs) model, exactly as Firefox routes them. The mirror was verified byte-for-byte against Mozilla's own model registry: all 31 cross-checkable model hashes match.`);
 L.push("");
 if (nonCommercialRows.length) {
   L.push("**Non-commercial models.** " + nonCommercialRows.map((r) => `\`${r.engine.modelId}\` (upstream \`${r.upstreamModel}\`, ${r.upstreamLicense})`).join(", ") + ". The CC BY-NC 4.0 license from Meta AI forbids commercial use of these weights and their conversions. Every other model above is Apache-2.0 or CC BY 4.0.");
@@ -127,6 +156,7 @@ L.push("## Translation runtime");
 L.push("");
 L.push(`- **\`@huggingface/transformers\`${transformersLocked ? ` (v${transformersLocked}, resolved by package-lock.json)` : ""}** — the transformers.js library that loads and runs the models in the web worker. Apache-2.0. Bundled into \`public/translator.worker.js\` at build time.`);
 L.push("- **ONNX Runtime Web** — the WebAssembly runtime files (\`ort-wasm-simd-threaded.jsep.wasm\` and its loader) that transformers.js depends on. MIT, © Microsoft. Copied out of the transformers package by `scripts/copy-ort.mjs` and served self hosted from `/ort/`, so the app never requests them from a CDN.");
+L.push(`- **Bergamot translator**${bergamotLocked ? ` (the wasm build shipped by \`@mkljczk/bergamot-translator\` v${bergamotLocked}, resolved by package-lock.json)` : ""} — Mozilla's Bergamot translator (Marian + intgemm compiled to WebAssembly; upstream \`mozilla/bergamot-translator\`, MPL-2.0), which runs the Firefox Translations models. Copied by \`scripts/copy-bergamot.mjs\` and served self hosted from \`/bergamot/\`, fetched only when a Bergamot route first runs, and verified against the SHA-256 pins in \`src/lib/bergamot/bundles.ts\` (glue \`${BERGAMOT_RUNTIME.glue.sha256.slice(0, 12)}…\`, wasm \`${BERGAMOT_RUNTIME.wasm.sha256.slice(0, 12)}…\`, ${(BERGAMOT_RUNTIME.wasm.bytes / 1e6).toFixed(1)} MB).`);
 L.push("");
 L.push("## Ported code");
 L.push("");

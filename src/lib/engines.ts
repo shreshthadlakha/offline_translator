@@ -20,8 +20,9 @@
  */
 
 import { directionQuality, type QualityTier } from "./quality.ts";
+import { BERGAMOT_PAIRS } from "./bergamot/bundles.ts";
 
-export type EngineKind = "nllb" | "opus" | "indictrans2";
+export type EngineKind = "nllb" | "opus" | "indictrans2" | "bergamot";
 
 export type EngineDescriptor = {
   /** Stable key, used in the protocol and the saved model list. */
@@ -292,11 +293,16 @@ for (const [pair, reason] of Object.entries(QUARANTINED)) {
 // encoder + merged decoder under onnx/), verified on the Hub with the q8
 // bundle sizes below and scored on the 200 sentence FLORES-200 sample in the
 // browser through the real worker. Apache-2.0, licensed on the conversion
-// repositories themselves. These routes replace the quarantined Bulgarian
-// group route and bring Greek, Hebrew and Swahili their first small models.
+// repositories themselves. These routes brought Greek, Hebrew and Swahili
+// their first small models.
 //
 // Measured: en->el +0.31 chrF vs the published full-model score (borderline),
 // bg->en -3.07 (borderline), en->he +2.49 (pass), en->sw -4.34 (borderline).
+//
+// The Bulgarian and English-to-Greek routes below now point at the Bergamot
+// models (P10 measured pass where these measured borderline, at a third of
+// the size); these entries stay for the record, with no pair pointing at
+// them any more, exactly like the Hindi Opus-MT pair before them.
 
 function fintutto(
   id: string,
@@ -316,10 +322,10 @@ function fintutto(
   };
 }
 
-ENGINE_TABLE["eng_Latn|ell_Grek"] = fintutto("opus-en-el", "fintutto/opus-mt-en-el", "Opus-MT English to Greek", 153628535);
-// Replaces the quarantined Bulgarian group route: the pair entry is
-// overwritten, so it is served (and saved, and listed) by this model.
-ENGINE_TABLE["bul_Cyrl|eng_Latn"] = fintutto("opus-bg-en", "fintutto/opus-mt-bg-en", "Opus-MT Bulgarian to English", 148678447);
+const FINTUTTO_OPUS_EN_EL = fintutto("opus-en-el", "fintutto/opus-mt-en-el", "Opus-MT English to Greek", 153628535);
+const FINTUTTO_OPUS_BG_EN = fintutto("opus-bg-en", "fintutto/opus-mt-bg-en", "Opus-MT Bulgarian to English", 148678447);
+ENGINE_TABLE["eng_Latn|ell_Grek"] = FINTUTTO_OPUS_EN_EL;
+ENGINE_TABLE["bul_Cyrl|eng_Latn"] = FINTUTTO_OPUS_BG_EN;
 ENGINE_TABLE["eng_Latn|heb_Hebr"] = fintutto("opus-en-he", "fintutto/opus-mt-en-he", "Opus-MT English to Hebrew", 154992594);
 ENGINE_TABLE["eng_Latn|swh_Latn"] = fintutto("opus-en-sw", "fintutto/opus-mt-en-sw", "Opus-MT English to Swahili", 143060716);
 
@@ -383,6 +389,128 @@ for (const code of INDIC_LANGUAGES) {
   // entries above stay in the table but no pair points at them any more.
   ENGINE_TABLE[`eng_Latn|${code}`] = { ...INDICTRANS2_EN_INDIC, bundle: "en-indic" };
   ENGINE_TABLE[`${code}|eng_Latn`] = { ...INDICTRANS2_INDIC_EN, bundle: "indic-en" };
+}
+
+// --- Bergamot ---------------------------------------------------------------------
+//
+// The languages whose small models failed the quality bar (Croatian,
+// Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian and the rest of
+// the quarantined and limited routes), plus the ones that never had a small
+// model at all (Persian, Catalan, Malay, Traditional Chinese), run on
+// Mozilla's Firefox Translations models: int8-quantized Marian student
+// models with intgemm, executed by the Bergamot WebAssembly runtime. Every
+// direction measured at or within the P2 quality bar of the full model's
+// published score — most of them above it (en->th +10.0, en->sr +7.8,
+// en->zho_Hant +8.0, en->hr +5.6, en->uk +5.2 chrF++) — at 20-52 MB per
+// direction and roughly ten times the speed of the Opus-MT routes.
+//
+// The models are Mozilla's release set (MPL-2.0), downloaded from a
+// byte-for-byte mirror of Mozilla's own registry at a pinned revision with
+// every file verified against a SHA-256 before it is used or cached
+// (src/lib/bergamot/bundles.ts); the runtime is self-hosted from this origin
+// and pinned the same way. Croatian and Serbian to English share Firefox's
+// released Serbo-Croatian (hbs) model, exactly as Firefox routes them.
+//
+// These routes replace the quarantined group-model routes (Croatian, Serbian,
+// Norwegian, Bulgarian, Greek and Romanian to English, English to
+// Vietnamese), the fintutto Bulgarian and English-to-Greek conversions
+// (Bergamot measured pass where they measured borderline), and the limited
+// Opus-MT routes that carried the honest "Fast, limited" label. Tagalog
+// stays on the full model: no fetchable model exists for it.
+
+
+function bergamot(pair: string, name: string): EngineDescriptor {
+  const pinned = BERGAMOT_PAIRS[pair];
+  if (!pinned) throw new Error(`no pinned Bergamot bundle for ${pair}`);
+  return {
+    id: `bergamot-${pair}`,
+    kind: "bergamot",
+    modelId: pinned.modelId,
+    name,
+    expectedBytes: pinned.totalBytes,
+    license: "MPL-2.0",
+    licenseUrl: "https://github.com/mozilla/translations",
+    attribution: "Mozilla (Bergamot project / Firefox Translations models); byte-for-byte mirror by midudev",
+  };
+}
+
+/** The Bergamot engine descriptors, one per pinned pair on the mirror. */
+const BERGAMOT_ENGINES: Record<string, EngineDescriptor> = {
+  "en-hr": bergamot("en-hr", "Bergamot English to Croatian"),
+  "hbs-en": bergamot("hbs-en", "Bergamot Croatian and Serbian to English"),
+  "en-sr": bergamot("en-sr", "Bergamot English to Serbian"),
+  "en-nb": bergamot("en-nb", "Bergamot English to Norwegian Bokmål"),
+  "nb-en": bergamot("nb-en", "Bergamot Norwegian Bokmål to English"),
+  "en-bg": bergamot("en-bg", "Bergamot English to Bulgarian"),
+  "bg-en": bergamot("bg-en", "Bergamot Bulgarian to English"),
+  "en-el": bergamot("en-el", "Bergamot English to Greek"),
+  "el-en": bergamot("el-en", "Bergamot Greek to English"),
+  "ro-en": bergamot("ro-en", "Bergamot Romanian to English"),
+  "en-fa": bergamot("en-fa", "Bergamot English to Persian"),
+  "fa-en": bergamot("fa-en", "Bergamot Persian to English"),
+  "en-ca": bergamot("en-ca", "Bergamot English to Catalan"),
+  "ca-en": bergamot("ca-en", "Bergamot Catalan to English"),
+  "en-ms": bergamot("en-ms", "Bergamot English to Malay"),
+  "ms-en": bergamot("ms-en", "Bergamot Malay to English"),
+  "en-vi": bergamot("en-vi", "Bergamot English to Vietnamese"),
+  "vi-en": bergamot("vi-en", "Bergamot Vietnamese to English"),
+  "en-uk": bergamot("en-uk", "Bergamot English to Ukrainian"),
+  "uk-en": bergamot("uk-en", "Bergamot Ukrainian to English"),
+  "ru-en": bergamot("ru-en", "Bergamot Russian to English"),
+  "en-ja": bergamot("en-ja", "Bergamot English to Japanese"),
+  "ja-en": bergamot("ja-en", "Bergamot Japanese to English"),
+  "en-th": bergamot("en-th", "Bergamot English to Thai"),
+  "th-en": bergamot("th-en", "Bergamot Thai to English"),
+  "en-tr": bergamot("en-tr", "Bergamot English to Turkish"),
+  "tr-en": bergamot("tr-en", "Bergamot Turkish to English"),
+  "af-en": bergamot("af-en", "Bergamot Afrikaans to English"),
+  "id-en": bergamot("id-en", "Bergamot Indonesian to English"),
+  "ko-en": bergamot("ko-en", "Bergamot Korean to English"),
+  "en-zh-Hant": bergamot("en-zh-Hant", "Bergamot English to Traditional Chinese"),
+  "zh-Hant-en": bergamot("zh-Hant-en", "Bergamot Traditional Chinese to English"),
+};
+
+/** The routes that moved to Bergamot: pair key -> Bergamot pair. */
+const BERGAMOT_ROUTES: Record<string, string> = {
+  "eng_Latn|hrv_Latn": "en-hr",
+  "hrv_Latn|eng_Latn": "hbs-en",
+  "eng_Latn|srp_Cyrl": "en-sr",
+  "srp_Cyrl|eng_Latn": "hbs-en",
+  "eng_Latn|nob_Latn": "en-nb",
+  "nob_Latn|eng_Latn": "nb-en",
+  "eng_Latn|bul_Cyrl": "en-bg",
+  "bul_Cyrl|eng_Latn": "bg-en",
+  "eng_Latn|ell_Grek": "en-el",
+  "ell_Grek|eng_Latn": "el-en",
+  "ron_Latn|eng_Latn": "ro-en",
+  "eng_Latn|pes_Arab": "en-fa",
+  "pes_Arab|eng_Latn": "fa-en",
+  "eng_Latn|cat_Latn": "en-ca",
+  "cat_Latn|eng_Latn": "ca-en",
+  "eng_Latn|zsm_Latn": "en-ms",
+  "zsm_Latn|eng_Latn": "ms-en",
+  "eng_Latn|vie_Latn": "en-vi",
+  "vie_Latn|eng_Latn": "vi-en",
+  "eng_Latn|ukr_Cyrl": "en-uk",
+  "ukr_Cyrl|eng_Latn": "uk-en",
+  "rus_Cyrl|eng_Latn": "ru-en",
+  "eng_Latn|jpn_Jpan": "en-ja",
+  "jpn_Jpan|eng_Latn": "ja-en",
+  "eng_Latn|tha_Thai": "en-th",
+  "tha_Thai|eng_Latn": "th-en",
+  "eng_Latn|tur_Latn": "en-tr",
+  "tur_Latn|eng_Latn": "tr-en",
+  "afr_Latn|eng_Latn": "af-en",
+  "ind_Latn|eng_Latn": "id-en",
+  "kor_Hang|eng_Latn": "ko-en",
+  "eng_Latn|zho_Hant": "en-zh-Hant",
+  "zho_Hant|eng_Latn": "zh-Hant-en",
+};
+
+for (const [pairKey, pair] of Object.entries(BERGAMOT_ROUTES)) {
+  // Overwrites the quarantined, fintutto or limited route that was there:
+  // those entries stay above for the record, with no pair pointing at them.
+  ENGINE_TABLE[pairKey] = BERGAMOT_ENGINES[pair]!;
 }
 
 /**

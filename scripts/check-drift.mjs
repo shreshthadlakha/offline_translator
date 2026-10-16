@@ -13,11 +13,17 @@
 // 5. The IndicTrans2 bundles (which download at commits pinned inside
 //    src/lib/indictrans2/bundles.ts, verified by sha256) must agree with the
 //    revision registry: one pin per model, never two.
+// 6. The Bergamot bundles (mirror revision + per-file sha256, pinned inside
+//    src/lib/bergamot/bundles.ts) must agree with the research record
+//    (scripts/bergamot/bergamot-pins.json), and every routable Bergamot
+//    engine must have its pins. Bergamot engines are pinned there, not in
+//    MODEL_REVISIONS (they are not transformers repositories).
 import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { MODEL_REVISIONS, allEngines } from "../src/lib/engines.ts";
+import { BERGAMOT_PAIRS, BERGAMOT_REVISION, BERGAMOT_RUNTIME } from "../src/lib/bergamot/bundles.ts";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..");
@@ -53,13 +59,15 @@ if (codeKeys.join("\n") !== fileKeys.join("\n")) {
   if (!failed) console.log(`ok: MODEL_REVISIONS matches model-revisions.json (${codeKeys.length} models)`);
 }
 
-// 4: every routable engine pinned.
-const unpinned = allEngines().filter((engine) => !inCode[engine.modelId]);
+// 4: every routable engine pinned (Bergamot engines carry their own pins in
+// src/lib/bergamot/bundles.ts, checked separately below).
+const unpinned = allEngines().filter((engine) => engine.kind !== "bergamot" && !inCode[engine.modelId]);
 if (unpinned.length > 0) {
   console.error(`drift: engines without a pinned revision: ${unpinned.map((e) => e.modelId).join(", ")}`);
   failed = true;
 } else {
-  console.log(`ok: every routable engine (${allEngines().length}) has a pinned revision`);
+  const nonBergamot = allEngines().filter((engine) => engine.kind !== "bergamot").length;
+  console.log(`ok: every routable non-Bergamot engine (${nonBergamot}) has a pinned revision`);
 }
 
 // 5: IndicTrans2 bundle commits vs the revision registry.
@@ -75,6 +83,40 @@ for (const [key, bundle] of Object.entries(bundles)) {
   } else {
     console.log(`ok: IndicTrans2 bundle ${key} pin matches the registry (${bundle.commit.slice(0, 12)})`);
   }
+}
+
+// 6: Bergamot pins vs the research record.
+const bergamotResearch = JSON.parse(readFileSync(join(HERE, "bergamot/bergamot-pins.json"), "utf8"));
+if (bergamotResearch.revision !== BERGAMOT_REVISION) {
+  console.error(`drift: Bergamot revision is ${BERGAMOT_REVISION} in bundles.ts but ${bergamotResearch.revision} in the research record`);
+  failed = true;
+}
+const bergamotRouted = allEngines().filter((engine) => engine.kind === "bergamot");
+for (const engine of bergamotRouted) {
+  const pair = Object.values(BERGAMOT_PAIRS).find((p) => p.modelId === engine.modelId);
+  if (!pair) {
+    console.error(`drift: Bergamot engine ${engine.modelId} has no pinned bundle`);
+    failed = true;
+    continue;
+  }
+  const recorded = bergamotResearch.pairs[pairKeyOf(pair)];
+  if (!recorded) {
+    console.error(`drift: Bergamot pair ${pairKeyOf(pair)} is routed but missing from the research record`);
+    failed = true;
+    continue;
+  }
+  const same =
+    pair.files.length === recorded.length &&
+    pair.files.every((f, i) => f.name === recorded[i].name && f.bytes === recorded[i].bytes && f.sha256 === recorded[i].sha256);
+  if (!same) {
+    console.error(`drift: Bergamot pair ${pairKeyOf(pair)} pins differ from the research record`);
+    failed = true;
+  }
+}
+if (!failed) console.log(`ok: ${bergamotRouted.length} Bergamot engines pinned (revision ${BERGAMOT_REVISION.slice(0, 12)}, per-file sha256, runtime ${BERGAMOT_RUNTIME.wasm.sha256.slice(0, 12)})`);
+
+function pairKeyOf(pair) {
+  return Object.keys(BERGAMOT_PAIRS).find((k) => BERGAMOT_PAIRS[k] === pair) ?? "?";
 }
 
 if (failed) {
