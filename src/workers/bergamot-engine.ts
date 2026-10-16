@@ -262,7 +262,7 @@ export class BergamotEngine {
       buffers.set(file.name, bytes);
     }
 
-    const module = this.module!;
+    const runtime = this.module!;
     const modelFile = pinned.files.find((f) => f.name.startsWith("model."));
     const lexFile = pinned.files.find((f) => f.name.startsWith("lex."));
     const vocabFiles = pinned.files.filter((f) => f.name.endsWith(".spm"));
@@ -270,18 +270,18 @@ export class BergamotEngine {
 
     const aligned = (buffer: ArrayBuffer, alignment: number) => {
       const bytes = new Int8Array(buffer);
-      const memory = new module.AlignedMemory(bytes.byteLength, alignment);
+      const memory = new runtime.AlignedMemory(bytes.byteLength, alignment);
       memory.getByteArrayView().set(bytes);
       return memory;
     };
 
     const modelMemory = aligned(buffers.get(modelFile.name)!, ALIGNMENTS.model);
     const shortlistMemory = aligned(buffers.get(lexFile.name)!, ALIGNMENTS.lex);
-    const vocabList = new module.AlignedMemoryList();
+    const vocabList = new runtime.AlignedMemoryList();
     for (const vocab of vocabFiles) {
       vocabList.push_back(aligned(buffers.get(vocab.name)!, ALIGNMENTS.vocab));
     }
-    this.model = new module.TranslationModel(MODEL_CONFIG, modelMemory, shortlistMemory, vocabList, null);
+    this.model = new runtime.TranslationModel(MODEL_CONFIG, modelMemory, shortlistMemory, vocabList, null);
   }
 
   private async ensureRuntime(onProgress: ProgressFn): Promise<void> {
@@ -360,12 +360,12 @@ export class BergamotEngine {
    */
   async translate(texts: string[], isCancelled: () => boolean): Promise<string[]> {
     if (!this.model || !this.service || !this.module) throw new Error("bergamot engine not loaded");
-    const module = this.module;
+    const runtime = this.module;
     const out: string[] = [];
     for (const text of texts) {
       if (isCancelled()) throw new Error("cancelled");
-      const responseOptions = new module.VectorResponseOptions();
-      const input = new module.VectorString();
+      const responseOptions = new runtime.VectorResponseOptions();
+      const input = new runtime.VectorString();
       const trimmed = text.trim();
       if (trimmed.length > 0) input.push_back(trimmed);
       const result = this.service.translate(this.model, input, responseOptions);
