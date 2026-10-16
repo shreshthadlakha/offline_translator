@@ -105,7 +105,7 @@ The whole routed fleet was benchmarked against professional human translations (
 
 Measured from a production build, compressed, as transferred:
 
-- **First visit: ~297 KB** (HTML + JS + CSS, 11 requests). Fonts load per script on demand (~270 KB total).
+- **First visit: ~298 KB** (HTML + JS + CSS, 11 requests). Fonts load per script on demand (~270 KB total).
 - **First translation setup:** ~5.4 MB more (the worker bundle and the self-hosted ONNX Runtime WebAssembly), plus the model itself — 21–52 MB for a Bergamot pair (plus a one-time 5.3 MB Bergamot runtime, fetched only when a Bergamot language is first used), 105–155 MB for a small pair, 262–309 MB for IndicTrans2, 912 MB for the full model. Once, then cached.
 
 ## Privacy, verifiable
