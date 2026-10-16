@@ -91,6 +91,8 @@ const DRIVER = `
 async (engineSpec, srcCode, tgtCode, batch, fresh) => {
   if (fresh) {
     try { await caches.delete('transformers-cache'); } catch (e) {}
+    try { await caches.delete('pt-indictrans2'); } catch (e) {}
+    try { await caches.delete('pt-bergamot'); } catch (e) {}
     try { localStorage.clear(); } catch (e) {}
     // A fresh RUN must not reuse a worker left on the page by an earlier run.
     if (window.__bmCtx) {
@@ -136,7 +138,7 @@ async (engineSpec, srcCode, tgtCode, batch, fresh) => {
     worker.postMessage({ type: 'hello' });
     const helloOk = await new Promise((res) => {
       const t = setTimeout(() => res(false), 8000);
-      const check = () => { if (ctx.hello) { clearTimeout(t); res(ctx.hello.protocolVersion === 6); } else setTimeout(check, 50); };
+      const check = () => { if (ctx.hello) { clearTimeout(t); res(ctx.hello.protocolVersion === 7); } else setTimeout(check, 50); };
       check();
     });
     if (!helloOk) throw new Error('protocol handshake failed (rebuild the worker bundle)');

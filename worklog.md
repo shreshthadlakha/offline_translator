@@ -636,3 +636,22 @@ Work Log:
 Stage Summary:
 - The engine works end to end in the app's worker model: verified downloads, 23 ms runtime init, sub-100 ms model construction, 0.03-0.04 s/sentence warm, correct Croatian in both directions (hbs-en serving hr->en exactly as Firefox routes it). The wasm_gemm import fix is the critical finding for the integration.
 - Autonomous decisions: the engine links the gemm import itself via Module.instantiateWasm instead of adopting the npm package's full wrapper (we keep our own worker, queue and protocol; only the two runtime files come from the package); memory reported honestly as the wasm heap (performance.memory is unavailable in this Chrome, and the wasm heap is where Marian actually lives).
+
+---
+Task ID: 15-bench (P10 Step 3)
+Agent: main (Z.ai Code)
+Task: P10 benchmark — the P1 runner and the P2 quality bar on every candidate direction, through the real app worker.
+
+Work Log:
+- Wired the engine into the real worker first (the runner drives the app's own bundle): src/workers/bergamot-engine.ts (verified fetching with the pt-bergamot cache bucket, runtime init via the eval'd glue + Module.instantiateWasm with the wasm_gemm import, BlockingService, TranslationModel with Firefox's exact config), the worker's load/pump/dispose/warmUp branches (Bergamot pair switches keep the wasm runtime; only the model swaps), and protocol v7 with the fourth engine kind. The worker derives the model pair from the init's src/tgt codes, so the spec shape is unchanged.
+- run.mjs gained --engine bergamot (resolves the candidate from the pinned bundle table; the routing table is untouched for pending candidates, so the app never routes to an unmeasured engine). The browser driver's handshake expectation moved to v7 and fresh runs now clear pt-indictrans2 and pt-bergamot too. FLORES-200 devtest and the published NLLB metrics CSV were re-downloaded (both gitignored, never committed; the registry data dir had been cleaned after the P9 recovery).
+- Fixed two engine bugs the smoke test caught: the fresh-download path never emitted the per-file "done" progress event (the file rows and the initializing stage would never fire), and cache.put failures (private mode) must not fail a verified download.
+- The full campaign: 33 directions x 200 FLORES-200 devtest sentences through the real browser worker, fresh download per direction (bergamot-queue.mjs, resumable, self-packing chunks). Every direction passes or is borderline; not one fails:
+  * Pass (gap >= -2.0 chrF++, flags <= 2%): en->hr +5.60, hr->en (hbs) +0.65, en->sr +7.82, sr->en (hbs) +0.36, en->nb +3.28, nb->en +0.83, en->bg +5.43, bg->en -0.39, en->el +2.05, en->fa +3.79, fa->en -1.26, en->ca +3.45, ca->en -0.76, en->ms +2.09, en->vi +2.80, en->uk +5.15, ru->en -0.90, en->ja +5.31, ja->en +2.29, en->th +10.02, th->en +1.19, en->tr +3.89, af->en -0.31, id->en -1.42, ko->en +0.40, en->zho_Hant +8.04, zho_Hant->en +1.35.
+  * Borderline (-2.0 to -5.0): el->en -2.05, ro->en -2.55, ms->en -2.20, vi->en -2.16, uk->en -2.34, tr->en -2.18.
+  * Speed: median 0.034-0.080 s/sentence (about 10x faster than the Opus-MT q8 routes); cold loads 6.2-11.7 s including the 21-55 MB download; zero errors across all 6,600 sentences.
+- All 33 run states are committed as provenance (scripts/benchmark/runs/*bergamot*.json) and upserted into benchmark-results.json (now 122 runs).
+
+Stage Summary:
+- Every candidate direction qualifies under the P2 bar. Croatian, Serbian, Norwegian, Bulgarian, Persian, Catalan, Malay, Traditional Chinese and English-to-Ukrainian/Greek/Vietnamese/Japanese/Thai/Turkish measure at or ABOVE the published full-model score; the six borderlines are the to-English directions of Greek, Romanian, Malay, Vietnamese, Ukrainian and Turkish.
+- Autonomous decisions recorded: en->ro, en->ru, en->af and en->id stay on their current passing Opus-MT routes (the brief routes Bergamot in place of quarantined/full/limited routes; those four are live good routes, and the language tier is set by the weaker direction, which is now upgraded). Tagalog stays on the full model (no fetchable model exists; to be reported). bg->en and en->el will move off the fintutto conversions in the integration step: Bergamot measures pass (-0.39) where fintutto measured borderline (-3.07), and pass (+2.05) where fintutto measured +0.31 — the fintutto entries stay in the table, unrouted, like the Hindi precedent.

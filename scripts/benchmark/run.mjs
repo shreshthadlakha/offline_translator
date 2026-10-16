@@ -22,6 +22,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import { ENGINE_TABLE, NLLB_ENGINE } from '../../src/lib/engines.ts';
+import { BERGAMOT_PAIRS, bergamotPairFor } from '../../src/lib/bergamot/bundles.ts';
 import { chrfppCorpus, chrfppCorpusLower, chrfppSentence } from './chrfpp.mjs';
 import { sanityFlags, missingFinalPunct } from './sanity.mjs';
 import { restoreTerminalPunctuation } from '../../src/lib/terminal-punct.ts';
@@ -48,7 +49,7 @@ for (let i = 2; i < process.argv.length; i++) {
 }
 const [src, tgt] = positional;
 if (!src || !tgt) {
-  console.error('usage: bun scripts/benchmark/run.mjs <srcCode> <tgtCode> [--engine auto|fast|full] [--budget-seconds N] [--limit N] [--score-only] [--fresh]');
+  console.error('usage: bun scripts/benchmark/run.mjs <srcCode> <tgtCode> [--engine auto|fast|full|bergamot] [--budget-seconds N] [--limit N] [--score-only] [--fresh]');
   console.error("example: bun scripts/benchmark/run.mjs eng_Latn fra_Latn");
   process.exit(2);
 }
@@ -58,6 +59,23 @@ const pairKey = `${src}|${tgt}`;
 let engine;
 if (engineChoice === 'full') {
   engine = NLLB_ENGINE;
+} else if (engineChoice === 'bergamot') {
+  // The Bergamot candidate for this direction, straight from the pinned
+  // bundle table: benchmarks run before any routing decision, so the engine
+  // table is never touched for pending candidates.
+  const pair = bergamotPairFor(src, tgt);
+  if (!pair) {
+    console.error(`no Bergamot pair for ${pairKey}`);
+    process.exit(1);
+  }
+  const pinned = BERGAMOT_PAIRS[pair];
+  engine = {
+    id: `bergamot-${pair}`,
+    kind: 'bergamot',
+    modelId: pinned.modelId,
+    name: `Bergamot ${pair} (Mozilla Firefox Translations)`,
+    expectedBytes: pinned.totalBytes,
+  };
 } else {
   const fast = ENGINE_TABLE[pairKey];
   if (engineChoice === 'fast' && !fast) {

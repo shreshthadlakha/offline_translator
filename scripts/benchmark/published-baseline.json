@@ -4,7 +4,7 @@
   "source": {
     "url": "https://dl.fbaipublicfiles.com/large_objects/nllb/models/nllb_200_dense_distill_600m/metrics.csv",
     "via": "linked from the model card as https://tinyurl.com/nllb200densedst600mmetrics",
-    "fetchedAt": "2026-10-11T07:57:48.006Z",
+    "fetchedAt": "2026-10-16T13:25:45.011Z",
     "rows": 602
   },
   "languages": {

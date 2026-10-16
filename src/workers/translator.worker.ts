@@ -29,6 +29,7 @@ import { MODEL_REVISIONS } from "../lib/engines";
 import { SPEED_CONFIG } from "../lib/speed-config";
 import { restoreTerminalPunctuation } from "../lib/terminal-punct";
 import { IndicTrans2Engine } from "./indictrans2-engine";
+import { BergamotEngine, bergamotPairForCodes } from "./bergamot-engine";
 
 // --- Privacy critical configuration ------------------------------------------
 
@@ -65,8 +66,14 @@ let runningInterrupt: InterruptCriteria | null = null;
 let pumpScheduled = false;
 let translator: TranslationPipeline | null = null;
 /** The IndicTrans2 engine, when the loaded spec is that kind. One engine in
- * memory at a time: this and `translator` are mutually exclusive. */
+ * memory at a time: this, `translator` and `bergamotEngine` are mutually
+ * exclusive. */
 let indicEngine: IndicTrans2Engine | null = null;
+/** The Bergamot engine, when the loaded spec is that kind. Its wasm runtime
+ * stays loaded across Bergamot pair switches; the engine is disposed when
+ * another kind loads, and the app ends the worker when it switches away from
+ * Bergamot, which releases the wasm heap. */
+let bergamotEngine: BergamotEngine | null = null;
 let loadedEngine: EngineSpec | null = null;
 let deviceUsed: EngineDevice | null = null;
 let loading = false;
@@ -312,6 +319,14 @@ async function disposeCurrent(): Promise<void> {
     }
     indicEngine = null;
   }
+  if (bergamotEngine) {
+    try {
+      await bergamotEngine.dispose();
+    } catch {
+      // Best effort: the model is being replaced regardless.
+    }
+    bergamotEngine = null;
+  }
   loadedEngine = null;
   deviceUsed = null;
   postStatsSnapshot();
@@ -364,6 +379,9 @@ function asCallOptions(options: GenerateOptions) {
 async function warmUp(spec: EngineSpec, src: string, tgt: string): Promise<boolean> {
   const interrupt = new InterruptCriteria();
   const warmupText = applyLangTag(WARMUP_TEXT);
+  if (bergamotEngine) {
+    return await bergamotEngine.warmUp();
+  }
   if (indicEngine) {
     const text = await indicEngine.translate(warmupText, src, tgt, () => interrupt.stopped);
     return text.trim().length > 0;
@@ -382,7 +400,7 @@ async function load(spec: EngineSpec, src: string, tgt: string, deviceWanted: "w
   // only by the language tag: switching the tag updates the spec and confirms
   // ready without reloading anything. Anything queued for the previous tag is
   // cancelled; the scheduler re-queues what is still needed.
-  if ((translator || indicEngine) && loadedEngine?.id === spec.id) {
+  if ((translator || indicEngine || bergamotEngine) && loadedEngine?.id === spec.id) {
     if (loadedEngine.langTag !== spec.langTag) {
       if (runningJob) runningJob.cancelled = true;
       if (runningInterrupt) runningInterrupt.stopped = true;
@@ -395,11 +413,30 @@ async function load(spec: EngineSpec, src: string, tgt: string, deviceWanted: "w
   }
   loading = true;
   try {
+    // A Bergamot pair switch keeps the wasm runtime (only the model swaps),
+    // so the engine reference is captured before the general teardown.
+    const existingBergamot = bergamotEngine;
     await disposeCurrent();
     resetFileProgress();
 
     let usedDevice: EngineDevice = "wasm";
-    if (spec.kind === "indictrans2") {
+    if (spec.kind === "bergamot") {
+      // The Bergamot engine: Mozilla's wasm Marian runtime, self-hosted and
+      // sha256-pinned, with the model files from the pinned mirror revision.
+      // CPU WebAssembly only (intgemm), so no WebGPU attempt. The same
+      // stage/progress messages as the other engines, so the page treats it
+      // identically.
+      const pair = bergamotPairForCodes(src, tgt);
+      if (!pair) throw new Error(`no Bergamot pair for ${src}-${tgt}`);
+      const engine = existingBergamot ?? new BergamotEngine();
+      bergamotEngine = engine;
+      await engine.load(pair, onProgressCallback);
+      deviceUsed = "wasm";
+      usedDevice = "wasm";
+      post({ type: "stage", stage: "testing" });
+      const ok = await warmUp(spec, src, tgt);
+      if (!ok) throw new Error("empty warm up output");
+    } else if (spec.kind === "indictrans2") {
       // The IndicTrans2 engine: pinned-commit downloads with sha256
       // verification, its own cache, the JavaScript preprocessing port and
       // a custom greedy decoding loop. The same stage/progress messages as
@@ -537,7 +574,7 @@ function schedulePump(): void {
 }
 
 async function pump(): Promise<void> {
-  if (runningJob || (!translator && !indicEngine) || loading) return;
+  if (runningJob || (!translator && !indicEngine && !bergamotEngine) || loading) return;
   // Re-check right before starting: a job whose source text no longer
   // exists is never started.
   const job = pickNext();
@@ -548,10 +585,23 @@ async function pump(): Promise<void> {
   const started = performance.now();
   const chars = job.texts.reduce((sum, t) => sum + t.length, 0);
   try {
-    // One of the two engines is loaded (the pump guard checked); the empty
+    // One of the three engines is loaded (the pump guard checked); the empty
     // default only satisfies the compiler.
     let texts: string[] = [];
-    if (indicEngine) {
+    if (bergamotEngine) {
+      // The Bergamot engine translates through the blocking service; its
+      // own sentence splitting runs inside the wasm. The final punctuation
+      // restoration applies on top, exactly like the other engines (and
+      // exactly like the benchmark scores these runs) — never on limited
+      // routes, where a restored full stop must not make a cut off sentence
+      // look finished.
+      const raw = await bergamotEngine.translate(job.texts, () => interrupt.stopped);
+      texts = raw.map((t, i) => {
+        const trimmed = t.trim();
+        if (loadedEngine?.tier === "limited") return trimmed;
+        return restoreTerminalPunctuation(job.texts[i] ?? "", trimmed, job.tgt);
+      });
+    } else if (indicEngine) {
       // The IndicTrans2 engine translates one sentence per call, with its
       // own preprocessing (normalisation, transliteration, language tags)
       // and postprocessing inside the module. The final punctuation

@@ -19,9 +19,13 @@
  * (pinned commits, sha256-verified files, its own cache), so the spec gains
  * a bundle key; the worker runs it beside the transformers pipelines with
  * the same stages, progress, Details and cancel semantics.
+ *
+ * v7: Bergamot engines. A fourth engine kind (Mozilla's wasm Marian runtime
+ * and its pinned mirror models); the worker derives the model pair from the
+ * src/tgt codes the init already carries, so the spec gains no new key.
  */
 
-export const PROTOCOL_VERSION = 6;
+export const PROTOCOL_VERSION = 7;
 
 export type Priority = "manual" | "sentence" | "fragment" | "batch";
 
@@ -33,7 +37,7 @@ export type EngineErrorCode = "memory" | "download" | "translate" | "quota" | "a
  * structural so the worker bundle doesn't pull the whole catalog in. */
 export type EngineSpec = {
   id: string;
-  kind: "nllb" | "opus" | "indictrans2";
+  kind: "nllb" | "opus" | "indictrans2" | "bergamot";
   modelId: string;
   /** For group models: the language tag the worker prepends, e.g. "hrv".
    *  Absent for single pair models and the full model. */
