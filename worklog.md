@@ -585,3 +585,18 @@ Work Log:
 Stage Summary:
 - The release state is green end to end: drift, clean build from a fresh checkout, first visit weight, leftovers, and live e2e all verified, with every step of the recovery committed and tagged (p9-plan, p9-restore, p9-b1-quarantine, p9-b2-indictrans2, p9-b3-community, p9-b4-labels, p9-b5-safety-net, p9-b6-leftovers, p9-final).
 - The clean-build loop earned its keep twice: it caught the missing mkdir that would have broken every fresh deployment, and the re-tracked tests/examples that would have shipped sandbox scaffolding.
+
+---
+Task ID: 15-plan (P10 plan)
+Agent: main (Z.ai Code)
+Task: P10 — plan the Bergamot engine (runtime + models) for the languages whose small models failed or never existed, before building anything.
+
+Plan (the P10 brief, in execution order):
+1. Research (p10-research): verify from live sources the bergamot-translator runtime — license, wasm artifact location, whether a browser can fetch it cross-origin, its size — and Mozilla's model registry (which of our 55 languages have English-pair models, file names, byte sizes, per-model licenses). Check at least hr, sr, nb, bg, el, ro, uk, ru, fa, af, tr, vi, ca, ms, tl. Preferred fetch source: a Hugging Face mirror (pinned revision + sha256, exactly the IndicTrans2 pattern); otherwise pinned raw.githubusercontent.com / jsdelivr URLs with CORS verified by a real OPTIONS/GET. If nothing is browser-fetchable, stop and report.
+2. Logic: a fourth engine kind "bergamot" beside opus/indictrans2/nllb. The wasm runtime and each direction's three files (model .bin, lexical shortlist, vocab) download only when a bergamot route first runs, from pinned URLs, sha256-verified before use, cached in a dedicated Cache API bucket; nothing changes for the first visit. One engine in memory at a time; non-English pairs keep the full model.
+3. Files: src/lib/bergamot/bundles.ts (pins + checksums), src/workers/bergamot-engine.ts (runtime glue, load/dispose/translate), engines.ts routes + engine table entries, protocol.ts v7, model-cache.ts (list/remove/erase across the new bucket), copy.ts honest setup copy, Details/Settings rows, notices + README + drift extension, scripts/benchmark bergamot support.
+4. Proof (p10-proof): dev-harness Web Worker, Croatian→English first, then English→Croatian: download size, load time, heap, seconds per sentence, output checks by hand.
+5. Benchmark (p10-bench): the P1 runner and the P2 quality bar (chrF++ vs the published full-model score, flag rates) on every candidate direction, FLORES re-downloaded if needed, never committed. Only pass/borderline directions integrate; the rest stay on their current route.
+6. Integrate (p10-integrate): routes for qualifying directions replace the quarantined/full routes; tier labels, approximate/limited notice rules, per-language full-model choice, offline and removal parity with the other engines; protocol bump; notices/README regenerated; drift green.
+7. Final (p10-final): clean build in a fresh copy (npm ci, drift, lint, typecheck, build), first-visit size re-measured, live e2e for every integrated language + Cancel + reload + offline + engine switching.
+8. Risks: the wasm runtime's fetchability and size (mitigation: research before building, stop per the brief if unfetchable); model quality below the bar (mitigation: only pass/borderline integrate); the runtime's blocking API (worker thread absorbs it); memory next to the other engines (one-at-a-time rule already enforced); jsdelivr/raw URL stability (mitigation: pinned commit URLs + sha256, same as IndicTrans2).
