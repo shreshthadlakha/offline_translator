@@ -257,6 +257,19 @@ function SettingsSheetInner({ open, onOpenChange, onHowItWorks }: Props) {
             </div>
             <p className="type-small mt-1 text-muted-foreground">{strings.settings.webgpuHint}</p>
 
+            <div className="mt-4 flex items-center justify-between gap-3">
+              <Label htmlFor="experimental-languages" className="type-body cursor-pointer font-normal">
+                {strings.settings.experimentalLanguages}
+              </Label>
+              <Switch
+                id="experimental-languages"
+                checked={settings.showExperimentalLanguages}
+                onCheckedChange={(checked) => updateSettings({ showExperimentalLanguages: checked })}
+                aria-label={strings.settings.experimentalLanguages}
+              />
+            </div>
+            <p className="type-small mt-1 text-muted-foreground">{strings.settings.experimentalLanguagesHint}</p>
+
             <h4 className="type-small mt-5 font-medium text-muted-foreground">{strings.settings.savedModels}</h4>
             {savedModelList.length === 0 ? (
               <p className="type-small mt-1.5 text-muted-foreground">{strings.settings.savedModelsEmpty}</p>

@@ -581,6 +581,28 @@ export function hasFullModelOverride(list: string[] | undefined, src: string, tg
 }
 
 /**
+ * True when this pair's engine would be the full model and the experimental
+ * switch hides it. This is exactly the default-list case: the pair has no
+ * fast route at all, fast models are on, no per-pair override asked for the
+ * full model, and "Show experimental languages" is off. Explicit asks are
+ * not the default list and stay offered with the heavy warning: turning
+ * "Use faster models" off globally, or the per-pair "Use the full model for
+ * this language" button.
+ */
+export function fullModelPairHidden(
+  src: string,
+  tgt: string,
+  fastModelsEnabled: boolean,
+  overrides: string[] | undefined,
+  showExperimentalLanguages: boolean,
+): boolean {
+  if (showExperimentalLanguages) return false;
+  if (!fastModelsEnabled) return false;
+  if (hasFullModelOverride(overrides, src, tgt)) return false;
+  return engineForPair(src, tgt, true).kind === "nllb";
+}
+
+/**
  * The pair that would result from picking a language on one side, including
  * the swap that happens when it is already set on the other side.
  */

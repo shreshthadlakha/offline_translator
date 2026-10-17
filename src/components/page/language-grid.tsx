@@ -17,7 +17,7 @@ import { memo, useCallback } from "react";
 import { usePairState } from "@/components/translate/translator-provider";
 import { useSettings } from "@/hooks/use-settings";
 import { SORTED_LANGUAGES } from "@/lib/languages";
-import { hasFullModelOverride, pairCost, resultingPair } from "@/lib/engines";
+import { engineForPair, hasFullModelOverride, pairCost, resultingPair } from "@/lib/engines";
 import { mbWhole } from "@/lib/format";
 import { copy } from "@/lib/copy";
 
@@ -32,7 +32,13 @@ function LanguageGridInner() {
       const pair = resultingPair("target", code, srcCode, tgtCode);
       const fastOn = settings.useFastModels && !hasFullModelOverride(settings.fullModelFor, pair.src, pair.tgt);
       const cost = pairCost(pair.src, pair.tgt, fastOn);
-      if (cost.kind === "large") return copy.translate.costLarge;
+      if (cost.kind === "large") {
+        // No small model for this pair: the honest experimental wording. The
+        // grid still shows every script (that is its purpose); picking one
+        // with the switch off leads to the plain notice, never to a load.
+        if (fastOn && engineForPair(pair.src, pair.tgt, true).kind === "nllb") return copy.translate.costExperimental;
+        return copy.translate.costLarge;
+      }
       const t = copy.translate;
       if (cost.kind === "group") {
         if (cost.tier === "good") return t.costGroupApproximate(mbWhole(cost.expectedBytes));

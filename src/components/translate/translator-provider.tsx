@@ -195,13 +195,15 @@ export function TranslatorProvider({ children }: { children: React.ReactNode }) 
     if (input.trim().length > 0) {
       maybeStartSetup();
       // If the engine isn't up yet, say what happens to what was typed,
-      // instead of a press that looks like it did nothing.
-      if (engine.status !== "ready" && engine.status !== "error") {
+      // instead of a press that looks like it did nothing. Not for a pair
+      // hidden behind the experimental switch: nothing will start until the
+      // switch is on, and the card already says so.
+      if (!engine.experimentalBlocked && engine.status !== "ready" && engine.status !== "error") {
         toast({ description: copy.setup.willRunAfterSetup });
       }
     }
     translateNow();
-  }, [input, engine.status, maybeStartSetup, translateNow]);
+  }, [input, engine.status, engine.experimentalBlocked, maybeStartSetup, translateNow]);
 
   const confirmDataSaver = useCallback(() => {
     setDataSaverAskOpen(false);

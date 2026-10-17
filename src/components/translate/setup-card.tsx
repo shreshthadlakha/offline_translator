@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useTranslatorState } from "@/components/translate/translator-provider";
 import { useOnlineStatus } from "@/hooks/use-online-status";
+import { useSettings } from "@/hooks/use-settings";
 import { clockMs, mbWhole, speed as speedFmt, eta as etaFmt, formatBytes } from "@/lib/format";
 import { clearShellCache, savedModels } from "@/lib/model-cache";
 import { copy } from "@/lib/copy";
@@ -61,9 +62,10 @@ async function reloadStaleFiles(): Promise<void> {
 }
 
 function SetupCardInner() {
-  const { engine, srcLang, tgtLang, dataSaverAskOpen, confirmDataSaver, declineDataSaver, heavyAsk, confirmHeavySetup, declineHeavySetup } = useTranslatorState();
+  const { engine, srcLang, tgtLang, dataSaverAskOpen, confirmDataSaver, declineDataSaver, heavyAsk, confirmHeavySetup, declineHeavySetup, setTargetPickerOpen } = useTranslatorState();
   const online = useOnlineStatus();
-  const { status, error, progress, switching, notes, crashNotice, stallSeconds } = engine;
+  const { update: updateSettings } = useSettings();
+  const { status, error, progress, switching, notes, crashNotice, stallSeconds, experimentalBlocked } = engine;
   const desired = engine.desiredEngine;
 
   // A visible clock for the stages where nothing would otherwise change on
@@ -200,6 +202,34 @@ function SetupCardInner() {
 
   if (status === "idle") {
     const showCrashNotice = crashNotice != null;
+    // The pair needs the full model and the experimental switch is off: the
+    // plain notice, with the switch itself as the action. Nothing that
+    // depends on the full model is offered by default.
+    if (experimentalBlocked) {
+      const exotic = tgtLang?.code === "eng_Latn" ? srcLang : tgtLang;
+      const language = exotic?.english ?? "this language";
+      return (
+        <>
+          <Card role="status">
+            {showCrashNotice ? (
+              <p className="type-small mb-2 text-danger">{copy.setup.crashedLastTime}</p>
+            ) : null}
+            <h3 className="type-body font-medium">{copy.setup.experimentalTitle(language)}</h3>
+            <p className="type-small mt-1.5 text-muted-foreground">{copy.setup.experimentalBody}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Button size="sm" onClick={() => updateSettings({ showExperimentalLanguages: true })}>
+                {copy.setup.experimentalAction}
+              </Button>
+              <Button size="sm" variant="ghost" onClick={() => setTargetPickerOpen(true)}>
+                {copy.setup.heavyChooseAnother}
+              </Button>
+            </div>
+            <p className="type-small mt-2 text-muted-foreground">{copy.settings.experimentalLanguagesHint}</p>
+          </Card>
+          {heavyDialog}
+        </>
+      );
+    }
     if (!online) {
       const offlineLine =
         anyModelSaved == null || anyModelSaved === false

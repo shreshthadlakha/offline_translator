@@ -20,6 +20,11 @@ export type Settings = {
   useFastModels: boolean;
   /** Experimental: try WebGPU instead of WebAssembly. Off by default. */
   useWebGPU: boolean;
+  /** Show the languages whose only model is the full one. Off by default:
+   * the full model needs roughly 3 GB of free memory and did not finish
+   * loading on a 4 GB test machine, so nothing that depends on it is
+   * offered by default. */
+  showExperimentalLanguages: boolean;
   /** Language pairs ("src|tgt" registry codes) the person chose to always
    *  run on the full model, from the approximate notice's button. Stored
    *  separately from useFastModels so the global switch stays untouched. */
@@ -34,6 +39,7 @@ export const DEFAULT_SETTINGS: Settings = {
   lastTgt: "fra_Latn",
   useFastModels: true,
   useWebGPU: false,
+  showExperimentalLanguages: false,
   fullModelFor: [],
 };
 
@@ -51,6 +57,10 @@ function readFromStorage(): Settings {
     lastTgt: typeof stored.lastTgt === "string" ? stored.lastTgt : DEFAULT_SETTINGS.lastTgt,
     useFastModels: typeof stored.useFastModels === "boolean" ? stored.useFastModels : DEFAULT_SETTINGS.useFastModels,
     useWebGPU: typeof stored.useWebGPU === "boolean" ? stored.useWebGPU : DEFAULT_SETTINGS.useWebGPU,
+    showExperimentalLanguages:
+      typeof stored.showExperimentalLanguages === "boolean"
+        ? stored.showExperimentalLanguages
+        : DEFAULT_SETTINGS.showExperimentalLanguages,
     fullModelFor: Array.isArray(stored.fullModelFor)
       ? stored.fullModelFor.filter((k) => typeof k === "string" && k.includes("|")).slice(0, 64)
       : DEFAULT_SETTINGS.fullModelFor,

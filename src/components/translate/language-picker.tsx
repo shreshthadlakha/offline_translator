@@ -20,7 +20,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSettings } from "@/hooks/use-settings";
 import { searchLanguages, type Language } from "@/lib/languages";
-import { hasFullModelOverride, pairCost, resultingPair } from "@/lib/engines";
+import { engineForPair, hasFullModelOverride, pairCost, resultingPair } from "@/lib/engines";
 import { mbWhole } from "@/lib/format";
 import { copy } from "@/lib/copy";
 import { cn } from "@/lib/utils";
@@ -84,9 +84,27 @@ function LanguageRow({
   );
 }
 
-function LanguageList({ value, otherValue, onChoose, side, noteFor }: PickerProps & { onChoose: (code: string) => void; noteFor: (code: string) => string | null }) {
+function LanguageList({ value, otherValue, onChoose, side, noteFor, isExperimental }: PickerProps & {
+  onChoose: (code: string) => void;
+  noteFor: (code: string) => string | null;
+  /** True when choosing this language would create a pair whose only model is
+   * the full one. Such rows are hidden unless the experimental switch is on,
+   * and then grouped at the end with the plain explanation. */
+  isExperimental: (code: string) => boolean;
+}) {
   const [query, setQuery] = useState("");
+  const { settings } = useSettings();
   const results = useMemo(() => searchLanguages(query), [query]);
+  const { normal, experimental } = useMemo(() => {
+    const normal: Language[] = [];
+    const experimental: Language[] = [];
+    for (const language of results) {
+      (isExperimental(language.code) ? experimental : normal).push(language);
+    }
+    return { normal, experimental };
+  }, [results, isExperimental]);
+  // With the switch off, the experimental rows are simply not offered.
+  const shownExperimental = settings.showExperimentalLanguages ? experimental : [];
 
   return (
     <Command shouldFilter={false} className="flex h-full min-h-0 flex-col overflow-hidden bg-surface">
@@ -101,20 +119,45 @@ function LanguageList({ value, otherValue, onChoose, side, noteFor }: PickerProp
         />
       </div>
       <Command.List className="scroll-surface max-h-[min(24rem,60vh)] min-h-0 flex-1 overflow-y-auto overscroll-contain p-1.5">
-        {results.length === 0 ? (
-          <Command.Empty className="type-small py-6 text-center text-muted-foreground">
-            {copy.translate.noLanguageMatches}
-          </Command.Empty>
+        {normal.length === 0 && shownExperimental.length === 0 ? (
+          experimental.length > 0 ? (
+            // The search matched only languages hidden behind the switch.
+            // Say that plainly instead of a bare "no matches".
+            <p className="type-small px-3 py-6 text-center text-muted-foreground" role="status">
+              {copy.translate.experimentalHiddenMatches}
+            </p>
+          ) : (
+            <Command.Empty className="type-small py-6 text-center text-muted-foreground">
+              {copy.translate.noLanguageMatches}
+            </Command.Empty>
+          )
         ) : (
-          results.map((language) => (
-            <LanguageRow
-              key={language.code}
-              language={language}
-              selected={language.code === value?.code}
-              note={noteFor(language.code)}
-              onSelect={onChoose}
-            />
-          ))
+          <>
+            {normal.map((language) => (
+              <LanguageRow
+                key={language.code}
+                language={language}
+                selected={language.code === value?.code}
+                note={noteFor(language.code)}
+                onSelect={onChoose}
+              />
+            ))}
+            {shownExperimental.length > 0 ? (
+              <div className="mt-2 px-3 pb-1 pt-2" role="group" aria-label={copy.translate.experimentalGroup}>
+                <p className="type-small font-medium text-muted-foreground">{copy.translate.experimentalGroup}</p>
+                <p className="type-small mt-0.5 text-muted-foreground">{copy.translate.experimentalGroupNote}</p>
+              </div>
+            ) : null}
+            {shownExperimental.map((language) => (
+              <LanguageRow
+                key={language.code}
+                language={language}
+                selected={language.code === value?.code}
+                note={noteFor(language.code)}
+                onSelect={onChoose}
+              />
+            ))}
+          </>
         )}
       </Command.List>
       <span className="sr-only">{side === "source" ? copy.translate.chooseSource : copy.translate.chooseTarget}</span>
@@ -136,14 +179,35 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
 
   // The quiet cost note for each row: what the pair created by choosing this
   // language would need. Updates when the other side changes.
-  const noteFor = useCallback(
+  const pairFor = useCallback(
     (code: string) => {
       const src = side === "source" ? (value?.code ?? "eng_Latn") : (otherValue?.code ?? "eng_Latn");
       const tgt = side === "target" ? (value?.code ?? "fra_Latn") : (otherValue?.code ?? "fra_Latn");
-      const pair = resultingPair(side, code, src, tgt);
+      return resultingPair(side, code, src, tgt);
+    },
+    [side, value, otherValue],
+  );
+  // True when choosing this language would create a pair whose only model is
+  // the full one (the default routing, independent of any explicit override:
+  // those are choices, not missing small models).
+  const isExperimental = useCallback(
+    (code: string) => {
+      const pair = pairFor(code);
+      return engineForPair(pair.src, pair.tgt, true).kind === "nllb";
+    },
+    [pairFor],
+  );
+  const noteFor = useCallback(
+    (code: string) => {
+      const pair = pairFor(code);
       const fastOn = settings.useFastModels && !hasFullModelOverride(settings.fullModelFor, pair.src, pair.tgt);
       const cost = pairCost(pair.src, pair.tgt, fastOn);
-      if (cost.kind === "large") return copy.translate.costLarge;
+      if (cost.kind === "large") {
+        // A pair with no small model at all, offered through the
+        // experimental group: the plain experimental wording.
+        if (fastOn && isExperimental(code)) return copy.translate.costExperimental;
+        return copy.translate.costLarge;
+      }
       const t = copy.translate;
       if (cost.kind === "group") {
         if (cost.tier === "good") return t.costGroupApproximate(mbWhole(cost.expectedBytes));
@@ -154,7 +218,7 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
       if (cost.tier === "limited") return t.costFastLimited(mbWhole(cost.expectedBytes));
       return t.costFast(mbWhole(cost.expectedBytes));
     },
-    [side, value, otherValue, settings.useFastModels, settings.fullModelFor],
+    [pairFor, settings.useFastModels, settings.fullModelFor, isExperimental],
   );
 
   const isMobile = useIsMobile();
@@ -209,7 +273,7 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
           <DialogTitle className="sr-only">{ariaLabel}</DialogTitle>
           <DialogDescription className="sr-only">{copy.translate.searchLanguages}</DialogDescription>
           <div className="max-h-[75vh] overflow-hidden">
-            <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} noteFor={noteFor} />
+            <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} noteFor={noteFor} isExperimental={isExperimental} />
           </div>
         </DialogContent>
       </Dialog>
@@ -225,7 +289,7 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
         // Opaque surface above everything else. Nothing underneath shows through.
         style={{ background: "var(--surface)" }}
       >
-        <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} noteFor={noteFor} />
+        <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} noteFor={noteFor} isExperimental={isExperimental} />
       </PopoverContent>
     </Popover>
   );

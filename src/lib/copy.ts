@@ -116,6 +116,14 @@ export const copy = {
     heavyBodyLowMemory: (gb: string) => `The full model is about ${MODEL_SIZE} and needs roughly 3 GB of free memory when it starts. This device reports about ${gb} GB of memory, so it may not finish. Closing other tabs helps.`,
     heavyContinue: "Continue",
     heavyChooseAnother: "Choose another language",
+    // The experimental languages notice: the pair needs the full model, which
+    // is hidden by default. Plain wording, the way out, nothing offered that
+    // would not work.
+    experimentalTitle: (language: string) => `${language} needs the full model.`,
+    experimentalBody: `The full model is about ${MODEL_SIZE} and needs a powerful computer: roughly 3 GB of free memory, and a load that can take minutes. It did not finish loading on our 4 GB test machine, so languages like this are hidden by default.`,
+    experimentalBodyShort: `The full model is about ${MODEL_SIZE}, needs roughly 3 GB of free memory, and can take minutes to load. It's hidden by default because it doesn't work on every computer.`,
+    experimentalAction: "Show experimental languages",
+    experimentalAfterEnable: "Experimental languages are on. Pick the language again to set it up.",
   },
 
   translate: {
@@ -165,6 +173,13 @@ export const copy = {
     costGroupApproximate: (mb: string) => `Fast, approximate, about ${mb} MB (one model shared by a few languages)`,
     costGroupLimited: (mb: string) => `Fast, limited, about ${mb} MB (one model shared by a few languages)`,
     costLarge: `Large, about ${MODEL_SIZE}`,
+    // The picker group for languages whose only model is the full one, shown
+    // only when the experimental switch is on.
+    experimentalGroup: "Experimental, needs a powerful computer",
+    experimentalGroupNote: `About ${MODEL_SIZE}, roughly 3 GB of free memory, and minutes to load. It did not finish on our 4 GB test machine.`,
+    costExperimental: `Experimental: about ${MODEL_SIZE}, needs a powerful computer`,
+    // A search that matched only languages hidden behind the switch.
+    experimentalHiddenMatches: "That language has no small model yet, so it's hidden. \"Show experimental languages\" in Settings lists it.",
     // The quiet notice under a translation from an approximate or limited
     // model, with the per language way out.
     approximateNotice: "This fast model is approximate. For important text, use the full model.",
@@ -254,7 +269,8 @@ export const copy = {
     languagesLead: `${LANGUAGE_COUNT} languages. Pick one to translate into it.`,
     expectHeading: "What to expect",
     expectItems: [
-      `The first set up is a large download, about ${MODEL_SIZE} for the full model. Popular pairs, like English to French, use a much smaller one. It happens once.`,
+      `The first set up downloads a model once: about 20 to 130 MB for popular pairs, like English to French, and larger for some language families. It never happens again.`,
+      "A few languages have no small model yet. They are hidden behind \"Show experimental languages\" in Settings, because the full model needs a powerful computer: about 900 MB and roughly 3 GB of free memory.",
       "Older phones and computers can be slow, and some may run out of memory.",
       "Quality is good for everyday text but varies by language. It won't match the biggest cloud services on subtle meaning.",
       "Listening depends on the voices your device already has.",
@@ -263,7 +279,7 @@ export const copy = {
     questions: [
       {
         q: "Which models does it use?",
-        a: "Popular pairs, like English to French, use small Opus-MT models from Helsinki NLP, released under Apache-2.0 or CC BY 4.0 depending on the pair. Portuguese shares one small multi language Opus-MT model, about 115 MB. The Indian languages (Hindi, Bengali, Tamil, Urdu and nine more, both directions with English) use IndicTrans2 from AI4Bharat, MIT licensed, as community int8 exports, about 250 to 300 MB per direction. Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Polish, Hebrew to English, Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese use Mozilla's Firefox Translations models, MPL-2.0, run by the Bergamot WebAssembly engine, about 20 to 50 MB per direction. Every other pair uses NLLB-200 from Meta, which is released under a non commercial licence, CC BY-NC 4.0. The exact model for the pair you're using, and its licence, is in Details.",
+        a: "Popular pairs, like English to French, use small Opus-MT models from Helsinki NLP, released under Apache-2.0 or CC BY 4.0 depending on the pair. Portuguese shares one small multi language Opus-MT model, about 115 MB. The Indian languages (Hindi, Bengali, Tamil, Urdu and nine more, both directions with English) use IndicTrans2 from AI4Bharat, MIT licensed, as community int8 exports, about 250 to 300 MB per direction. Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Polish, Hebrew to English, Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese use Mozilla's Firefox Translations models, MPL-2.0, run by the Bergamot WebAssembly engine, about 20 to 50 MB per direction. The remaining languages, and pairs between two non-English languages, use NLLB-200 from Meta, released under a non commercial licence, CC BY-NC 4.0. Those are the experimental ones, hidden behind \"Show experimental languages\" in Settings, because the full model needs a powerful computer. The exact model for the pair you're using, and its licence, is in Details.",
       },
       {
         q: "Does it work offline?",
@@ -282,8 +298,12 @@ export const copy = {
         a: "Open Settings and choose Erase everything on this device.",
       },
       {
+        q: "Why are some languages hidden?",
+        a: "They have no small model yet, so they depend on the full model, about 900 MB and roughly 3 GB of free memory. On our 4 GB test machine it never finished loading, so they are off by default. \"Show experimental languages\" in Settings lists them again, plainly labelled.",
+      },
+      {
         q: "Why is the first download so big?",
-        a: "The full model holds what it knows about many languages, and it runs on your device instead of a server. That's the trade for keeping your words private.",
+        a: "The biggest models hold what they know about many languages, and they run on your device instead of a server. That's the trade for keeping your words private. Most pairs need much less.",
       },
     ] as { q: string; a: string }[],
   },
@@ -352,6 +372,10 @@ export const copy = {
     // Experimental device setting.
     webgpu: "Try the faster graphics device (experimental)",
     webgpuHint: "Uses your device's graphics processor where the browser allows it, and falls back if it doesn't work.",
+    // The experimental languages switch: off by default, because the full
+    // model did not finish loading on a 4 GB test machine.
+    experimentalLanguages: "Show experimental languages",
+    experimentalLanguagesHint: "Languages whose only model is the full one, about 900 MB and roughly 3 GB of free memory. They are slow and may not load at all on computers with 4 GB or less.",
     onThisDevice: "On this device",
     savedModels: "Saved models",
     savedModelsEmpty: "None yet.",

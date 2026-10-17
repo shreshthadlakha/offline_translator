@@ -22,7 +22,7 @@ import { PROTOCOL_VERSION, type EngineDevice, type EngineErrorCode, type EngineS
 import { BUILD_ID } from "@/workers/build-id";
 import { STORAGE_KEYS, storageGet, storageRemove, storageSet } from "@/lib/storage";
 import { netlog } from "@/lib/netlog";
-import { engineForPair, type PairEngine } from "@/lib/engines";
+import { engineForPair, fullModelPairHidden, type PairEngine } from "@/lib/engines";
 import { directionQuality } from "@/lib/quality";
 import { cachedModelFiles, modelFilesCached } from "@/lib/model-cache";
 import { recordTiming } from "@/lib/speed-metrics";
@@ -203,6 +203,21 @@ export function useEngine(heavyGate?: HeavyGate) {
     [srcCode, tgtCode, settings.useFastModels, settings.fullModelFor],
   );
   desiredRef.current = desired;
+
+  // The experimental gate: this pair's only model is the full one and the
+  // "Show experimental languages" switch is off (the default). Explicit asks
+  // (fast models off, or the per-pair "use the full model" override) are not
+  // the default list and stay offered with the heavy warning.
+  const experimentalHidden = useMemo(
+    () => fullModelPairHidden(srcCode, tgtCode, settings.useFastModels, settings.fullModelFor, settings.showExperimentalLanguages),
+    [srcCode, tgtCode, settings.useFastModels, settings.fullModelFor, settings.showExperimentalLanguages],
+  );
+  const experimentalHiddenRef = useRef(false);
+  experimentalHiddenRef.current = experimentalHidden;
+  /** True while the current pair is hidden behind the experimental switch:
+   * the setup card shows the plain notice instead of an offer, and no load
+   * can start. */
+  const experimentalPairHidden = experimentalHidden;
 
   const post = useCallback((message: Record<string, unknown>) => {
     workerRef.current?.postMessage(message);
@@ -541,6 +556,16 @@ export function useEngine(heavyGate?: HeavyGate) {
    */
   const beginLoad = useCallback(
     async (engine: PairEngine): Promise<boolean> => {
+      // The experimental gate comes before anything else: nothing that needs
+      // the full model is loaded while it is hidden. The setup card already
+      // shows the plain notice for such a pair; this is the defensive backstop
+      // for any start path that races a settings change. An engine already
+      // running for such a pair is left alone — the switch stops new setups,
+      // it does not kill working translations.
+      if (experimentalHiddenRef.current && engine.kind === "nllb") {
+        setStatusSafe("idle");
+        return false;
+      }
       // The honest ask before a heavy full model setup, on every path that
       // can start one: first start, an engine switch, and a restart. Only
       // when the model isn't already saved on this device; a saved model
@@ -910,6 +935,7 @@ export function useEngine(heavyGate?: HeavyGate) {
       lastSwitchMs,
       lastError: lastErrorRef.current,
       sessionOptLevel,
+      experimentalBlocked: experimentalPairHidden,
       start,
       reset,
       stop,
@@ -938,6 +964,7 @@ export function useEngine(heavyGate?: HeavyGate) {
       heap,
       lastSwitchMs,
       sessionOptLevel,
+      experimentalPairHidden,
       start,
       reset,
       stop,
