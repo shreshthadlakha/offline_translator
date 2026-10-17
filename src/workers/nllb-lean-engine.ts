@@ -126,22 +126,36 @@ async function fetchVerifiedFile(file: NllbPinnedFile, onProgress: ProgressFn): 
     return await verifyAndCache(bytes);
   }
 
+  // Stream every chunk directly into its final place in one pre-allocated
+  // buffer. Collecting chunks and assembling them afterwards would hold two
+  // full copies of a 475 MB file at once — the exact memory peak this
+  // engine exists to avoid. The pinned size (or the server's content-length,
+  // same thing here) sizes the destination up front; a stream that
+  // over-delivers grows the buffer, and any size mismatch is rejected by
+  // the verification below.
   const reader = response.body.getReader();
-  const chunks: Uint8Array[] = [];
+  const expected = total > 0 ? total : file.bytes;
+  let all = new Uint8Array(expected);
   let loaded = 0;
   onProgress({ status: "initiate", file: file.name });
   for (;;) {
     const { done, value } = await reader.read();
     if (done) break;
-    chunks.push(value);
-    loaded += value.byteLength;
-    onProgress({ status: "progress", file: file.name, loaded, total: total || file.bytes });
-  }
-  const all = new Uint8Array(loaded);
-  let offset = 0;
-  for (const chunk of chunks) {
-    all.set(chunk, offset);
-    offset += chunk.byteLength;
+    if (value.byteLength > 0) {
+      if (loaded + value.byteLength > all.length) {
+        const grown = new Uint8Array(Math.max(all.length * 2, loaded + value.byteLength));
+        grown.set(all.subarray(0, loaded), 0);
+        all = grown;
+      }
+      all.set(value, loaded);
+      loaded += value.byteLength;
+    }
+    onProgress({
+      status: "progress",
+      file: file.name,
+      loaded,
+      total: total || file.bytes,
+    });
   }
   return await verifyAndCache(all.buffer);
 
@@ -210,6 +224,15 @@ export class NllbLeanEngine {
   ): Promise<void> {
     if (this.loaded) await this.dispose();
     this.loadedBundle = { totalBytes: NLLB_BUNDLE.totalBytes, files: [...NLLB_BUNDLE.files] };
+
+    // Announce every file up front. The worker's stage logic treats "all
+    // announced files done" as the end of the downloading phase; without
+    // this, a file whose turn has not come yet is simply absent from the
+    // map, and the "reading into memory" stage would post while bytes are
+    // still moving (found by the P12 browser timeline).
+    for (const file of NLLB_BUNDLE.files) {
+      onProgress({ status: "initiate", file: file.name });
+    }
 
     const byName = new Map<string, ArrayBuffer>();
     for (const file of NLLB_BUNDLE.files) {
