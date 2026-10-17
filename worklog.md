@@ -746,3 +746,19 @@ Work Log:
 
 Stage Summary:
 - Four directions benchmarked, four passes, four routes: English to Polish, Polish to English (swapped off the borderline Opus route), English to Korean and Hebrew to English all run on Bergamot now. The full-model fleet is down to the seven languages with no model anywhere plus Swahili to English and every non-English pair. All run states committed as provenance.
+
+---
+Task ID: 16-final (P11 Step 3)
+Agent: main (Z.ai Code)
+Task: P11 final check — clean build in a fresh copy, first-visit size re-measured, and the live browser sweep of the release artifact.
+
+Work Log:
+- Clean build in a fresh copy from git archive of the tracked release truth: npm ci ran postinstall, which by itself produced /bergamot/ (both runtime files), /ort/, the worker bundle (1,741,868 B), sw.js and the stamps; drift, lint and typecheck all green in the fresh copy; npm run build produced the standalone output and the standalone server answered 200 on / and served the 5,241,884-byte Bergamot wasm.
+- The standalone server had to be started with the double-fork (setsid --fork) trick from scripts/dev-relaunch.sh — the sandbox reaper kills anything still a descendant of a tool-call shell, so a plain background start died between calls.
+- First visit re-measured off the standalone server: 305,156 B over 11 requests compressed (HTML + JS + CSS) — 652 B above P10, the four new engine descriptors and routes. Deferred until first translation: 5,422,961 B (worker + ORT), unchanged; the Bergamot runtime's 5.3 MB still loads only when a Bergamot language is first used. README numbers unchanged in weight class.
+- Live browser sweep against the standalone release artifact, fresh origin so every model is a true cold download: English->Polish "Dzien dobry. Gdzie jest najblizsza apteka?" in 7.5 s cold; the swap to Polish->English "Good morning. Where is the nearest pharmacy? Thank you so much." in 6.6 s; English->Korean "Joheun achimimnida. Gajang gakkaun yakguneun eodi isseumnikka?" in 9.0 s; Hebrew->English "Good morning. Where is the nearest pharmacy?" in 16.2 s; the Bergamot->Opus boundary crossing showed the honest French setup card (108 MB, no lock error) and translated "Hello. Where's the nearest pharmacy?"; offline with the network off, French "Merci beaucoup. Je veux lire un livre." -> "Thank you very much. I want to read a book." and Hebrew "Zehu yom yafe. Toda al ha-ezra." -> "It's a beautiful day. Thanks for the help." both from the cache; zero page errors across the whole sweep.
+- The dev-app sweep during integration additionally covered: Details panels with the measured quality lines, Settings listing all four new models with a working Remove, reload auto-start of the saved Hebrew model, Cancel as a deliberate stop with a successful retry, Opus->Bergamot re-entry, and the grid tier labels (Korean and Polish now "Fast", Tagalog honestly "Large").
+- Hygiene: working tree identical to p11-integrate before the final commit; no vercel.json, no netlify.toml, no output:'export' (standalone server output only); largest tracked file 428 KB; no model files or datasets committed (FLORES and the metrics CSV live under the gitignored data dir, re-downloaded this phase and never added).
+
+Stage Summary:
+- P11 complete. Four audited directions route to Bergamot (English to Polish +2.97, Polish to English -1.11 swapped off the borderline Opus route, English to Korean +2.74, Hebrew to English +0.76 chrF++ — all passes), the full-model fleet is down to the seven languages with no model anywhere plus Swahili to English plus every non-English pair, and the release state is green end to end: clean fresh-copy build, first visit 305 KB, live verification of every new direction, engine switching both ways, offline, Cancel, removal and reload.
