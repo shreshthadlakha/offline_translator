@@ -23,9 +23,16 @@
  * v7: Bergamot engines. A fourth engine kind (Mozilla's wasm Marian runtime
  * and its pinned mirror models); the worker derives the model pair from the
  * src/tgt codes the init already carries, so the spec gains no new key.
+ *
+ * v8: the nllb kind now loads through the lean engine (pinned bundle files
+ * fetched one at a time with checksums, encoder session built before the
+ * decoder's bytes are requested, each buffer freed as soon as its session
+ * exists, WebAssembly execution only, the library used only for the
+ * tokenizer). The spec gains no new key; the pair travels with every
+ * translate call exactly as before.
  */
 
-export const PROTOCOL_VERSION = 7;
+export const PROTOCOL_VERSION = 8;
 
 export type Priority = "manual" | "sentence" | "fragment" | "batch";
 

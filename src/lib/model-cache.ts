@@ -14,6 +14,7 @@
 
 import { INDICTRANS2_BUNDLES } from "@/lib/indictrans2/bundles";
 import { BERGAMOT_PAIRS } from "@/lib/bergamot/bundles";
+import { NLLB_BUNDLE } from "@/lib/nllb/bundles";
 
 const MODEL_CACHES = ["transformers-cache", "pt-indictrans2", "pt-bergamot"] as const;
 /** Shell caches carry the build id: pt-shell-<buildId>, one per build
@@ -29,13 +30,17 @@ function requiredOnnxFiles(): string[] {
 
 /** Every file an engine needs to be considered saved. IndicTrans2 bundles
  * and Bergamot pairs need all of their files (the engines load them from the
- * cache); pipeline engines need the two quantized ONNX files. */
+ * cache); the lean full-model engine needs its whole pinned bundle; the
+ * remaining pipeline engines need the two quantized ONNX files. */
 function requiredFilesFor(modelId: string): string[] {
   for (const bundle of Object.values(INDICTRANS2_BUNDLES)) {
     if (bundle.repo === modelId) return bundle.files.map((f) => f.name);
   }
   for (const pair of Object.values(BERGAMOT_PAIRS)) {
     if (pair.modelId === modelId) return pair.files.map((f) => f.name);
+  }
+  if (modelId === NLLB_BUNDLE.repo) {
+    return NLLB_BUNDLE.files.map((f) => f.name.split("/").pop()!);
   }
   return requiredOnnxFiles();
 }

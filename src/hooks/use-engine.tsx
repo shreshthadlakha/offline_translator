@@ -81,17 +81,17 @@ export type EngineNotes = {
 };
 
 /** The session optimization level, read once from the URL flag
- * ?ptSessionOpt=disabled|basic|all. The default is "basic". Shown in
- * Details with the session creation time, so the levels can be compared
- * on a real device. */
-function readSessionOptLevel(): GraphOptimizationLevel {
+ * ?ptSessionOpt=disabled|basic|all; null when the person did not set one.
+ * Shown in Details with the session creation time, so the levels can be
+ * compared on a real device. */
+function readSessionOptLevel(): GraphOptimizationLevel | null {
   try {
     const value = new URLSearchParams(window.location.search).get("ptSessionOpt");
     if (value === "disabled" || value === "basic" || value === "all") return value;
   } catch {
     // Not a browser context, or no URL to read.
   }
-  return "basic";
+  return null;
 }
 
 type Listener = (message: WorkerToMain) => void;
@@ -156,7 +156,7 @@ export function useEngine(heavyGate?: HeavyGate) {
   const [heap, setHeap] = useState<{ used: number | null; limit: number | null }>({ used: null, limit: null });
   const [lastSwitchMs, setLastSwitchMs] = useState<number | null>(null);
   /** The session optimization level for this visit, from the URL flag. */
-  const [sessionOptLevel] = useState<GraphOptimizationLevel>(() => readSessionOptLevel());
+  const [sessionOptLevel] = useState<GraphOptimizationLevel | null>(() => readSessionOptLevel());
 
   const workerRef = useRef<Worker | null>(null);
   const listenersRef = useRef(new Set<Listener>());
@@ -610,7 +610,7 @@ export function useEngine(heavyGate?: HeavyGate) {
       activeSpecRef.current = spec;
       setEngineInfo(engine);
       setStatusSafe("checking");
-      post({ type: "init", engine: spec, src: srcCode, tgt: tgtCode, device: settings.useWebGPU ? "webgpu" : "wasm", graphOptimizationLevel: sessionOptLevel });
+      post({ type: "init", engine: spec, src: srcCode, tgt: tgtCode, device: settings.useWebGPU ? "webgpu" : "wasm", ...(sessionOptLevel ? { graphOptimizationLevel: sessionOptLevel } : {}) });
       startHeartbeat();
       return true;
     },
@@ -677,7 +677,7 @@ export function useEngine(heavyGate?: HeavyGate) {
         setSwitching(true);
         switchStartRef.current = performance.now();
         const spec: EngineSpec = specFor(engine, srcCode, tgtCode);
-        post({ type: "init", engine: spec, src: srcCode, tgt: tgtCode, device: settings.useWebGPU ? "webgpu" : "wasm", graphOptimizationLevel: sessionOptLevel });
+        post({ type: "init", engine: spec, src: srcCode, tgt: tgtCode, device: settings.useWebGPU ? "webgpu" : "wasm", ...(sessionOptLevel ? { graphOptimizationLevel: sessionOptLevel } : {}) });
         activeSpecRef.current = spec;
         return;
       }

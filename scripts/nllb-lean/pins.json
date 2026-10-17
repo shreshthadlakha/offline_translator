@@ -1,0 +1,24 @@
+{
+  "repo": "Xenova/nllb-200-distilled-600M",
+  "revision": "261c31d1a5732c67cdd16d80e8d6088507c7ccea",
+  "revisionSource": "MODEL_REVISIONS in src/lib/engines.ts (pinned since P1; scripts/release/model-revisions.json is the recorded registry)",
+  "hashSource": "onnx/encoder_model_quantized.onnx, onnx/decoder_model_merged_quantized.onnx and tokenizer.json are LFS files: sha256 from the Hub tree API at the pinned revision. The four small config files are git blobs: sha256 computed from the downloaded bytes at the same revision (scripts/nllb-lean/cache, gitignored).",
+  "license": "CC BY-NC 4.0 (facebook/nllb-200-distilled-600M)",
+  "files": [
+    { "name": "onnx/encoder_model_quantized.onnx", "bytes": 419120483, "sha256": "5cde664eacba07a62f198857ec6c06e09572b1ebb77c8137f1fa99ac604a3a28" },
+    { "name": "onnx/decoder_model_merged_quantized.onnx", "bytes": 475505771, "sha256": "dd66608c2a4194e78f95548fa0e64f24302303698c5b09fa8e1f9e16ec00676b" },
+    { "name": "tokenizer.json", "bytes": 17331224, "sha256": "8ac789ad7dabea44d41537822d48c516ba358374c51813e2cba78c006e150c94" },
+    { "name": "tokenizer_config.json", "bytes": 544, "sha256": "ddf411c9f790d081e72de76bb8e8b714d74e160e61bc10c9bd8f56022dcd7fd7" },
+    { "name": "config.json", "bytes": 873, "sha256": "52f035acb54ac80e5ef7fe78d6967f8ddf8e8799f078d1a92a2c8168d8ff4a20" },
+    { "name": "generation_config.json", "bytes": 189, "sha256": "1ce846259ae04c572ae1863e358534bbc376ff3d3f100b1494feda6200b51de8" },
+    { "name": "special_tokens_map.json", "bytes": 3548, "sha256": "992bd4ed610d644d6823081937bcc91bb8878dd556cea4ae5327f2480361330e" }
+  ],
+  "totalBytes": 911962632,
+  "sessionIO": {
+    "encoder": { "inputs": ["input_ids", "attention_mask"], "outputs": ["last_hidden_state"] },
+    "decoder_merged": {
+      "inputs": ["encoder_attention_mask", "input_ids", "encoder_hidden_states", "past_key_values.{0..11}.{decoder,encoder}.{key,value}", "use_cache_branch"],
+      "outputs": ["logits", "present.{0..11}.{decoder,encoder}.{key,value}"]
+    }
+  }
+}

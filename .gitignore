@@ -105,3 +105,7 @@ server.log
 
 # P10 proof harness: untracked dev pages for the browser proof runs.
 /public/bergamot-proof*
+
+# P12 lean full-model research: downloaded model files are re-downloadable
+# provenance (pinned in scripts/nllb-lean/pins.json), never committed.
+/scripts/nllb-lean/cache/

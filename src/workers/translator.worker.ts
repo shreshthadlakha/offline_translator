@@ -30,6 +30,7 @@ import { SPEED_CONFIG } from "../lib/speed-config";
 import { restoreTerminalPunctuation } from "../lib/terminal-punct";
 import { IndicTrans2Engine } from "./indictrans2-engine";
 import { BergamotEngine, bergamotPairForCodes } from "./bergamot-engine";
+import { NllbLeanEngine } from "./nllb-lean-engine";
 
 // --- Privacy critical configuration ------------------------------------------
 
@@ -74,13 +75,26 @@ let indicEngine: IndicTrans2Engine | null = null;
  * another kind loads, and the app ends the worker when it switches away from
  * Bergamot, which releases the wasm heap. */
 let bergamotEngine: BergamotEngine | null = null;
+/** The lean full-model engine (NLLB-200), when the loaded spec is that kind.
+ * Loads the same pinned bytes the pipeline used to, one file and one session
+ * at a time, so the memory peak stays near the model's own size instead of
+ * the library's ~2.8 GB. One engine in memory at a time: this, `translator`,
+ * `indicEngine` and `bergamotEngine` are mutually exclusive. */
+let nllbLeanEngine: NllbLeanEngine | null = null;
 let loadedEngine: EngineSpec | null = null;
 let deviceUsed: EngineDevice | null = null;
 let loading = false;
 let seqCounter = 0;
-/** Session optimization level for the next pipeline creation. The main
- * thread reads it from the URL flag; "basic" is the default. */
+/** Session optimization level for the next session creations. The main
+ * thread sends it only when the person chose one with the URL flag;
+ * "basic" is the pipeline and IndicTrans2 default. */
 let graphOptimizationLevel: GraphOptimizationLevel = "basic";
+/** True when the last init carried an explicit URL-chosen level. When it
+ * did not, the lean full-model engine uses "disabled", its measured
+ * optimum: for the 600 MB q8 decoder, "basic" doubles the session's
+ * memory (the optimizer materializes dequantized copies) and triples the
+ * creation time. */
+let graphOptLevelExplicit = false;
 
 /** The warm up sentence. Built in text, never anything the person typed. */
 const WARMUP_TEXT = "Hello.";
@@ -327,6 +341,14 @@ async function disposeCurrent(): Promise<void> {
     }
     bergamotEngine = null;
   }
+  if (nllbLeanEngine) {
+    try {
+      await nllbLeanEngine.dispose();
+    } catch {
+      // Best effort: the sessions are being replaced regardless.
+    }
+    nllbLeanEngine = null;
+  }
   loadedEngine = null;
   deviceUsed = null;
   postStatsSnapshot();
@@ -382,6 +404,10 @@ async function warmUp(spec: EngineSpec, src: string, tgt: string): Promise<boole
   if (bergamotEngine) {
     return await bergamotEngine.warmUp();
   }
+  if (nllbLeanEngine) {
+    const text = await nllbLeanEngine.translate(warmupText, src, tgt, () => interrupt.stopped);
+    return text.trim().length > 0;
+  }
   if (indicEngine) {
     const text = await indicEngine.translate(warmupText, src, tgt, () => interrupt.stopped);
     return text.trim().length > 0;
@@ -400,7 +426,7 @@ async function load(spec: EngineSpec, src: string, tgt: string, deviceWanted: "w
   // only by the language tag: switching the tag updates the spec and confirms
   // ready without reloading anything. Anything queued for the previous tag is
   // cancelled; the scheduler re-queues what is still needed.
-  if ((translator || indicEngine || bergamotEngine) && loadedEngine?.id === spec.id) {
+  if ((translator || indicEngine || bergamotEngine || nllbLeanEngine) && loadedEngine?.id === spec.id) {
     if (loadedEngine.langTag !== spec.langTag) {
       if (runningJob) runningJob.cancelled = true;
       if (runningInterrupt) runningInterrupt.stopped = true;
@@ -431,6 +457,29 @@ async function load(spec: EngineSpec, src: string, tgt: string, deviceWanted: "w
       const engine = existingBergamot ?? new BergamotEngine();
       bergamotEngine = engine;
       await engine.load(pair, onProgressCallback);
+      deviceUsed = "wasm";
+      usedDevice = "wasm";
+      post({ type: "stage", stage: "testing" });
+      const ok = await warmUp(spec, src, tgt);
+      if (!ok) throw new Error("empty warm up output");
+    } else if (spec.kind === "nllb") {
+      // The lean full-model engine: the pinned bundle's files fetched one at
+      // a time with checksums, the encoder session built before the decoder's
+      // bytes are requested, each buffer freed as soon as its session exists,
+      // and the library used only for the tokenizer. WebAssembly execution
+      // only. Graph optimization defaults to "disabled" (measured: the q8
+      // decoder's "basic" session is about twice as large in memory and three
+      // times slower to create); the URL flag still overrides it. The same
+      // stages and progress as the other engines, so the page treats it
+      // identically.
+      const sessionOptions = {
+        enableCpuMemArena: false,
+        graphOptimizationLevel: graphOptLevelExplicit ? graphOptimizationLevel : ("disabled" as const),
+        enableMemPattern: false,
+      };
+      const engine = new NllbLeanEngine();
+      await engine.load(onProgressCallback, sessionOptions);
+      nllbLeanEngine = engine;
       deviceUsed = "wasm";
       usedDevice = "wasm";
       post({ type: "stage", stage: "testing" });
@@ -574,7 +623,7 @@ function schedulePump(): void {
 }
 
 async function pump(): Promise<void> {
-  if (runningJob || (!translator && !indicEngine && !bergamotEngine) || loading) return;
+  if (runningJob || (!translator && !indicEngine && !bergamotEngine && !nllbLeanEngine) || loading) return;
   // Re-check right before starting: a job whose source text no longer
   // exists is never started.
   const job = pickNext();
@@ -610,6 +659,20 @@ async function pump(): Promise<void> {
       const out: string[] = [];
       for (const text of job.texts) {
         out.push(await indicEngine.translate(text, job.src, job.tgt, () => interrupt.stopped));
+      }
+      texts = out.map((t, i) => {
+        const raw = t.trim();
+        if (loadedEngine?.tier === "limited") return raw;
+        return restoreTerminalPunctuation(job.texts[i] ?? "", raw, job.tgt);
+      });
+    } else if (nllbLeanEngine) {
+      // The lean full-model engine translates one sentence per call, like the
+      // IndicTrans2 engine. The language pair travels with every call (the
+      // model is multilingual), and the final punctuation restoration applies
+      // on top, exactly like the pipeline engines.
+      const out: string[] = [];
+      for (const text of job.texts) {
+        out.push(await nllbLeanEngine.translate(text, job.src, job.tgt, () => interrupt.stopped));
       }
       texts = out.map((t, i) => {
         const raw = t.trim();
@@ -689,6 +752,7 @@ self.onmessage = (event: MessageEvent<MainToWorker>) => {
       post({ type: "hello", protocolVersion: PROTOCOL_VERSION, buildId: BUILD_ID });
       break;
     case "init":
+      graphOptLevelExplicit = msg.graphOptimizationLevel !== undefined;
       if (msg.graphOptimizationLevel) graphOptimizationLevel = msg.graphOptimizationLevel;
       void load(msg.engine, msg.src, msg.tgt, msg.device);
       break;

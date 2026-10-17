@@ -18,12 +18,18 @@
 //    (scripts/bergamot/bergamot-pins.json), and every routable Bergamot
 //    engine must have its pins. Bergamot engines are pinned there, not in
 //    MODEL_REVISIONS (they are not transformers repositories).
+// 7. The lean full-model bundle (src/lib/nllb/bundles.ts) must agree with
+//    its research record (scripts/nllb-lean/pins.json), and its commit must
+//    be the same revision MODEL_REVISIONS pins for the repository — one pin
+//    per model, never two, and the bundle must cover every file the engine
+//    fetches.
 import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { MODEL_REVISIONS, allEngines } from "../src/lib/engines.ts";
 import { BERGAMOT_PAIRS, BERGAMOT_REVISION, BERGAMOT_RUNTIME } from "../src/lib/bergamot/bundles.ts";
+import { NLLB_BUNDLE } from "../src/lib/nllb/bundles.ts";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..");
@@ -118,6 +124,29 @@ if (!failed) console.log(`ok: ${bergamotRouted.length} Bergamot engines pinned (
 function pairKeyOf(pair) {
   return Object.keys(BERGAMOT_PAIRS).find((k) => BERGAMOT_PAIRS[k] === pair) ?? "?";
 }
+
+// 7: the lean full-model bundle vs the research record and the revision registry.
+const nllbResearch = JSON.parse(readFileSync(join(HERE, "nllb-lean/pins.json"), "utf8"));
+if (nllbResearch.revision !== NLLB_BUNDLE.commit) {
+  console.error(`drift: NLLB bundle pins commit ${NLLB_BUNDLE.commit} but the research record says ${nllbResearch.revision}`);
+  failed = true;
+}
+if (inCode[NLLB_BUNDLE.repo] !== NLLB_BUNDLE.commit) {
+  console.error(`drift: NLLB bundle commit ${NLLB_BUNDLE.commit} disagrees with MODEL_REVISIONS pin ${inCode[NLLB_BUNDLE.repo] ?? "(missing)"} for ${NLLB_BUNDLE.repo}`);
+  failed = true;
+}
+const nllbSame =
+  nllbResearch.files.length === NLLB_BUNDLE.files.length &&
+  nllbResearch.files.every((f, i) =>
+    f.name === NLLB_BUNDLE.files[i].name &&
+    f.bytes === NLLB_BUNDLE.files[i].bytes &&
+    f.sha256 === NLLB_BUNDLE.files[i].sha256) &&
+  nllbResearch.totalBytes === NLLB_BUNDLE.totalBytes;
+if (!nllbSame) {
+  console.error("drift: NLLB bundle pins differ from the research record (scripts/nllb-lean/pins.json)");
+  failed = true;
+}
+if (!failed) console.log(`ok: NLLB lean bundle pinned (revision ${NLLB_BUNDLE.commit.slice(0, 12)}, ${NLLB_BUNDLE.files.length} files, per-file sha256, ${NLLB_BUNDLE.totalBytes} B total)`);
 
 if (failed) {
   console.error("\nDrift check FAILED. Regenerate what changed (npm run notices / npm run quality:table) or fix the source of truth, then commit them together.");
