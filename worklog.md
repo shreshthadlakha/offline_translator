@@ -702,3 +702,24 @@ Plan (10 lines):
 4. Integrate (p11-integrate): pins through collect-pins -> gen-bundles -> bundles.ts; routes in engines.ts; quality table + notices + README regenerated; drift green; protocol v7 unchanged (no new engine kind, the worker machinery is engine-agnostic). Tiers, Details, Cancel, offline, Settings removal come free from the P10 surface.
 5. Final (p11-final): fresh-copy clean build (npm ci, drift, lint, typecheck, build), first-visit size re-measured, live browser test of each new direction plus engine switching and offline.
 6. Risks: en-ko / en-pl quality below the bar (stay full, stated honestly); the en-ko mirror copy is the base-memory (Android) variant, not the larger desktop base (only what the mirror carries is fetchable — the benchmark decides); Tagalog likely still unfetchable (plain statement); route changes breaking generated files (regenerate everything, drift must stay green).
+
+---
+Task ID: 16-audit (P11 Step 1)
+Agent: main (Z.ai Code)
+Task: P11 audit — list every direction still routed to the full model and check each one against the COMPLETE model list of the mirror at its pinned revision.
+
+Work Log:
+- scripts/bergamot/p11-audit.mjs enumerates every direction through the app's own engineForPair (fast models on): 18 English-pair directions still route to the full model, plus all 2,970 ordered non-English pairs (no mirror model exists for any of them and pivots are forbidden — one plain statement covers them).
+- The exhaustive enumeration caught two directions the task's own list missed: Hebrew to English and Swahili to English (both full-model because only their English-into directions have small models). This is exactly what "not a shortlist" was for.
+- Cross-referenced against the mirror's complete 106-pair list at the pinned revision 6f6acd72…:
+  * en-ko EXISTS on the mirror (49.5 MB, 4 files with srcvocab/trgvocab, base-memory Release Android variant). The P10 research note "en->ko not fetchable anywhere" was wrong; corrected here. English to Korean can close.
+  * en-pl (34.3 MB) and pl-en (35.6 MB) EXIST (base-memory Release). Polish's large direction (English into Polish) can close; pl->en is currently the Opus borderline route (-4.93, good tier) — a swap candidate if Bergamot measures pass (the P10 bg->el swap precedent).
+  * he-en EXISTS (21.6 MB, tiny variant, shared 17.1 MB model with en-he) — the unexpected finding. Hebrew to English can close. en-he also exists on the mirror (20.1 MB, tiny) but English to Hebrew already routes to the fintutto conversion at BEST tier (+2.48): it keeps its route per the P10 autonomous-decision pattern (no churn on passing routes).
+  * Tagalog: models exist only on Mozilla's CORS-blocked GCS registry (en-tl, tl-en); NOT on the mirror; a deep check of 11 other Firefox-Translations/Bergamot repos on the HF hub found zero carrying Tagalog files. Stays on the full model — plainly stated.
+  * Amharic, Hausa, Pashto, Sinhala, Yoruba, Zulu (both directions each) and Swahili to English: no model exists anywhere in Mozilla's registry, let alone a fetchable one. They stay on the full model — plainly stated.
+- Fidelity verified for every new pair: the mirror's model file matches a Mozilla GCS registry variant byte-for-byte (size + sha256; en-ko matches the base-memory Android variant, not the larger desktop base — that is the only variant the mirror carries).
+- CORS spot-checked with a real GET (Origin http://localhost:3000) on the en-pl model: 302 with access-control-allow-origin echoed — browser-fetchable like the existing 33 pairs.
+- Benchmark candidate set (pre-registered decision rules): en-pl, en-ko, he-en integrate iff pass or borderline; pl-en swaps off the Opus borderline route only if Bergamot measures pass.
+
+Stage Summary:
+- 18 full-model English directions audited; three language gaps are closable (Polish en->pl, Korean en->ko, Hebrew he->en) plus one swap candidate (Polish pl->en). Six languages have no model anywhere (am, hau, ps, si, yo, zu) and Tagalog's models are unfetchable by a browser; all stated plainly in scripts/bergamot/p11-audit.json. Non-English pairs stay on the full model by design.

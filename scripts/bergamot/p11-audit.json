@@ -1,0 +1,457 @@
+{
+  "generatedAt": "2026-10-17T08:18:30.110Z",
+  "mirror": {
+    "repo": "midudev/firefox-translations",
+    "revision": "6f6acd72c26975a06a8e61b72d1fbacbd184c23f",
+    "pairCount": 106,
+    "pairs": [
+      "af-en",
+      "ar-en",
+      "bg-en",
+      "bn-en",
+      "ca-en",
+      "cs-en",
+      "da-en",
+      "de-en",
+      "el-en",
+      "en-af",
+      "en-ar",
+      "en-az",
+      "en-bg",
+      "en-bn",
+      "en-bs",
+      "en-ca",
+      "en-cs",
+      "en-da",
+      "en-de",
+      "en-el",
+      "en-es",
+      "en-et",
+      "en-eu",
+      "en-fa",
+      "en-fi",
+      "en-fr",
+      "en-gl",
+      "en-gu",
+      "en-he",
+      "en-hi",
+      "en-hr",
+      "en-hu",
+      "en-id",
+      "en-is",
+      "en-it",
+      "en-ja",
+      "en-kn",
+      "en-ko",
+      "en-lt",
+      "en-lv",
+      "en-ml",
+      "en-mr",
+      "en-ms",
+      "en-nb",
+      "en-nl",
+      "en-no",
+      "en-pl",
+      "en-pt",
+      "en-ro",
+      "en-ru",
+      "en-sk",
+      "en-sl",
+      "en-sr",
+      "en-sv",
+      "en-ta",
+      "en-te",
+      "en-th",
+      "en-tr",
+      "en-uk",
+      "en-ur",
+      "en-vi",
+      "en-zh",
+      "en-zh-Hant",
+      "es-en",
+      "et-en",
+      "eu-en",
+      "fa-en",
+      "fi-en",
+      "fr-en",
+      "gl-en",
+      "gu-en",
+      "hbs-en",
+      "he-en",
+      "hi-en",
+      "hu-en",
+      "id-en",
+      "is-en",
+      "it-en",
+      "ja-en",
+      "kn-en",
+      "ko-en",
+      "lt-en",
+      "lv-en",
+      "ml-en",
+      "mr-en",
+      "ms-en",
+      "nb-en",
+      "nl-en",
+      "no-en",
+      "pl-en",
+      "pt-en",
+      "ro-en",
+      "ru-en",
+      "sk-en",
+      "sl-en",
+      "sq-en",
+      "sv-en",
+      "ta-en",
+      "te-en",
+      "th-en",
+      "tr-en",
+      "uk-en",
+      "ur-en",
+      "vi-en",
+      "zh-Hant-en",
+      "zh-en"
+    ]
+  },
+  "fullModelEnglishDirections": 18,
+  "findings": [
+    {
+      "src": "amh_Ethi",
+      "tgt": "eng_Latn",
+      "english": "Amharic",
+      "side": "->en",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "amh_Ethi",
+      "english": "Amharic",
+      "side": "en->",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "hau_Latn",
+      "english": "Hausa",
+      "side": "en->",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "kor_Hang",
+      "english": "Korean",
+      "side": "en->",
+      "mirrorPairs": [
+        "en-ko",
+        "ko-en"
+      ],
+      "routed": null,
+      "inventories": {
+        "en-ko": {
+          "license": "MPL-2.0 (mirror repo midudev/firefox-translations; upstream Mozilla Firefox Translations models)",
+          "files": [
+            {
+              "name": "lex.50.50.enko.s2t.bin",
+              "bytes": 6449612,
+              "sha256": "96efba97d4bb93ab362e5569bea0f115184d2f68d63b67305ee663c18e32fbeb"
+            },
+            {
+              "name": "model.enko.intgemm.alphas.bin",
+              "bytes": 43849787,
+              "sha256": "ffe5ef2ce3f2e944055e35310bab186f6a70d533a0ee4394adf716a0e383afbb"
+            },
+            {
+              "name": "srcvocab.enko.spm",
+              "bytes": 791280,
+              "sha256": "8d4e3141868efd410eb86c2b60d41aa6bc6b46e4c4b2c0b85e3792493c69d802"
+            },
+            {
+              "name": "trgvocab.enko.spm",
+              "bytes": 815353,
+              "sha256": "2ece21b28dd7022d36127d17423a74dabf544787dfc1cf614f7b565f93a4a1d3"
+            }
+          ],
+          "totalBytes": 51906032,
+          "matchesRegistryVariant": [
+            "base-memory:Release Android"
+          ]
+        },
+        "ko-en": {
+          "license": "MPL-2.0 (mirror repo midudev/firefox-translations; upstream Mozilla Firefox Translations models)",
+          "files": [
+            {
+              "name": "lex.50.50.koen.s2t.bin",
+              "bytes": 8617516,
+              "sha256": "b26291f063ce216a74239275f0485534a38111203e59d42a2a56ba62d6eeb196"
+            },
+            {
+              "name": "model.koen.intgemm.alphas.bin",
+              "bytes": 43977787,
+              "sha256": "7cb30cbc0a86e242084756445268a2346136771c92b884d9b4ebb077f67d5507"
+            },
+            {
+              "name": "vocab.koen.spm",
+              "bytes": 1410063,
+              "sha256": "1c72b740ab793cdc3a8f16913dd6b4e806c77421077dd2d85edeb7be38418598"
+            }
+          ],
+          "totalBytes": 54005366,
+          "matchesRegistryVariant": [
+            "base-memory:Release Android"
+          ]
+        }
+      }
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "pbt_Arab",
+      "english": "Pashto",
+      "side": "en->",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "pol_Latn",
+      "english": "Polish",
+      "side": "en->",
+      "mirrorPairs": [
+        "en-pl",
+        "pl-en"
+      ],
+      "routed": null,
+      "inventories": {
+        "en-pl": {
+          "license": "MPL-2.0 (mirror repo midudev/firefox-translations; upstream Mozilla Firefox Translations models)",
+          "files": [
+            {
+              "name": "lex.50.50.enpl.s2t.bin",
+              "bytes": 3540052,
+              "sha256": "d7d7b364673f633763c9f8f2e8ee9c7a184e92f4086e8b84abe870a2a8dbe5d5"
+            },
+            {
+              "name": "model.enpl.intgemm.alphas.bin",
+              "bytes": 31561787,
+              "sha256": "b0b59716bcc8f46b8dc6ab5c32a2732acaad42a5a6d9ae9b472526a1bb0d71d4"
+            },
+            {
+              "name": "vocab.enpl.spm",
+              "bytes": 821612,
+              "sha256": "2000f182efa8ce5f69bc3f9e574666b5bc2c0af684eedd32f69d15aa9021ea85"
+            }
+          ],
+          "totalBytes": 35923451,
+          "matchesRegistryVariant": [
+            "base-memory:Release"
+          ]
+        },
+        "pl-en": {
+          "license": "MPL-2.0 (mirror repo midudev/firefox-translations; upstream Mozilla Firefox Translations models)",
+          "files": [
+            {
+              "name": "lex.50.50.plen.s2t.bin",
+              "bytes": 4964208,
+              "sha256": "b295dfefa7022a62e105276e8c39fdfd67bffe588f4fd78583edd4e04ee0cb3b"
+            },
+            {
+              "name": "model.plen.intgemm.alphas.bin",
+              "bytes": 31561787,
+              "sha256": "06dbab3baa3bbceab746bc6a3bba807878f38536382c03acddf59d3edf3b5d94"
+            },
+            {
+              "name": "vocab.plen.spm",
+              "bytes": 821612,
+              "sha256": "2000f182efa8ce5f69bc3f9e574666b5bc2c0af684eedd32f69d15aa9021ea85"
+            }
+          ],
+          "totalBytes": 37347607,
+          "matchesRegistryVariant": [
+            "base-memory:Release"
+          ]
+        }
+      }
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "sin_Sinh",
+      "english": "Sinhala",
+      "side": "en->",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "tgl_Latn",
+      "english": "Tagalog",
+      "side": "en->",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": [
+        "en-tl",
+        "tl-en"
+      ]
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "yor_Latn",
+      "english": "Yoruba",
+      "side": "en->",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "eng_Latn",
+      "tgt": "zul_Latn",
+      "english": "Zulu",
+      "side": "en->",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "hau_Latn",
+      "tgt": "eng_Latn",
+      "english": "Hausa",
+      "side": "->en",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "heb_Hebr",
+      "tgt": "eng_Latn",
+      "english": "Hebrew",
+      "side": "->en",
+      "mirrorPairs": [
+        "en-he",
+        "he-en"
+      ],
+      "routed": null,
+      "inventories": {
+        "en-he": {
+          "license": "MPL-2.0 (mirror repo midudev/firefox-translations; upstream Mozilla Firefox Translations models)",
+          "files": [
+            {
+              "name": "lex.50.50.enhe.s2t.bin",
+              "bytes": 3066048,
+              "sha256": "8795f4c5e19b4a196c9ed394c275a28a09e5ddbbf47ae16faa4446bf2b8bc7d9"
+            },
+            {
+              "name": "model.enhe.intgemm.alphas.bin",
+              "bytes": 17141051,
+              "sha256": "e37ac6e6f131704c85deb94a657aa20afbb44db2879f44aec9c33a34f4467587"
+            },
+            {
+              "name": "vocab.enhe.spm",
+              "bytes": 845017,
+              "sha256": "672b334afa84011200fdaee02c2fc7810910c35ae9ea7619be073c851703ce9e"
+            }
+          ],
+          "totalBytes": 21052116,
+          "matchesRegistryVariant": [
+            "tiny:Release"
+          ]
+        },
+        "he-en": {
+          "license": "MPL-2.0 (mirror repo midudev/firefox-translations; upstream Mozilla Firefox Translations models)",
+          "files": [
+            {
+              "name": "lex.50.50.heen.s2t.bin",
+              "bytes": 4636028,
+              "sha256": "427c88732cb93b28d2a947cace79f62aabceb7d6f4438516e85994b14a73b68e"
+            },
+            {
+              "name": "model.heen.intgemm.alphas.bin",
+              "bytes": 17141051,
+              "sha256": "7291cab3ec483b8cf524da96201fe947dca8c550132be21a06badeb946b5c079"
+            },
+            {
+              "name": "vocab.heen.spm",
+              "bytes": 845177,
+              "sha256": "45f5d413b9208c5f24340ab0e20a63604a572784d289baa2d788deea946f79a2"
+            }
+          ],
+          "totalBytes": 22622256,
+          "matchesRegistryVariant": [
+            "tiny:Release"
+          ]
+        }
+      }
+    },
+    {
+      "src": "pbt_Arab",
+      "tgt": "eng_Latn",
+      "english": "Pashto",
+      "side": "->en",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "sin_Sinh",
+      "tgt": "eng_Latn",
+      "english": "Sinhala",
+      "side": "->en",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "swh_Latn",
+      "tgt": "eng_Latn",
+      "english": "Swahili",
+      "side": "->en",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "tgl_Latn",
+      "tgt": "eng_Latn",
+      "english": "Tagalog",
+      "side": "->en",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": [
+        "en-tl",
+        "tl-en"
+      ]
+    },
+    {
+      "src": "yor_Latn",
+      "tgt": "eng_Latn",
+      "english": "Yoruba",
+      "side": "->en",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    },
+    {
+      "src": "zul_Latn",
+      "tgt": "eng_Latn",
+      "english": "Zulu",
+      "side": "->en",
+      "mirrorPairs": [],
+      "routed": null,
+      "registryOnly": []
+    }
+  ],
+  "nonEnglishPairs": {
+    "orderedPairs": 2970,
+    "distinctLanguages": 55,
+    "note": "No non-English pair has a model on the mirror (all mirror pairs are X-en), Mozilla's registry has none, and pivoting through English is forbidden. Every non-English pair keeps the full model."
+  },
+  "tagalogSearch": {
+    "reposSearched": 11,
+    "reposWithTagalog": []
+  }
+}
