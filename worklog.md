@@ -689,3 +689,16 @@ Work Log:
 
 Stage Summary:
 - P10 is complete: the Bergamot engine runs Mozilla's Firefox Translations models for 33 directions, every one measured at or above the P2 quality bar, with pinned and checksum-verified downloads, the full app surface, and a clean release state. The app's language fleet now has no measured failures at all: 25 best-tier, 23 good-tier, 7 full-model languages.
+
+---
+Task ID: 16-plan (P11 plan)
+Agent: main (Z.ai Code)
+Task: P11 — close the remaining full-model gaps. Safety check passed first: p10-final exists, the working tree matches it (zero diff), the Bergamot engine and its 33 routes are present.
+
+Plan (10 lines):
+1. Audit (p11-audit): a script enumerates EVERY direction still routed to the full model (English pairs plus the non-English pairs) and cross-references the mirror's complete 106-pair list at the pinned revision — not a shortlist. Confirmed suspects already visible in the tree: en-pl, pl-en, en-ko (the P10 note "en->ko not fetchable" was wrong; the pinned revision carries it, base-memory variant, 4 files with srcvocab/trgvocab).
+2. For each hit: file sizes + sha256 from the resolve endpoint headers, fidelity vs Mozilla's GCS registry hashes, MPL-2.0 license line, CORS spot-check. Misses stated plainly; non-English pairs have no models anywhere and pivots are forbidden.
+3. Benchmark: P1 runner + P2 bar (chrF++ vs the published full-model score, flag rate) on every new direction — en-pl, pl-en, en-ko — 200 FLORES-200 devtest sentences each, FLORES re-downloaded if needed, never committed. pl→en is currently the Opus borderline route (-4.93): swap only if Bergamot measures pass; en→pl and en→ko replace full-model routes if pass/borderline.
+4. Integrate (p11-integrate): pins through collect-pins -> gen-bundles -> bundles.ts; routes in engines.ts; quality table + notices + README regenerated; drift green; protocol v7 unchanged (no new engine kind, the worker machinery is engine-agnostic). Tiers, Details, Cancel, offline, Settings removal come free from the P10 surface.
+5. Final (p11-final): fresh-copy clean build (npm ci, drift, lint, typecheck, build), first-visit size re-measured, live browser test of each new direction plus engine switching and offline.
+6. Risks: en-ko / en-pl quality below the bar (stay full, stated honestly); the en-ko mirror copy is the base-memory (Android) variant, not the larger desktop base (only what the mirror carries is fetchable — the benchmark decides); Tagalog likely still unfetchable (plain statement); route changes breaking generated files (regenerate everything, drift must stay green).
