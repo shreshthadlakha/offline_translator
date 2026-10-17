@@ -30,7 +30,7 @@ Five kinds of engines, chosen per language pair:
 - **Group models** (Opus-MT many-languages, ~119 MB): one model covers a language family with a language tag per pair (Portuguese today).
 - **IndicTrans2** (distilled 200M, int8 ONNX exports by `hari31416`, ~262–309 MB per direction): the thirteen Indian languages, both directions with English, with a JavaScript port of the reference preprocessing and a custom decoding loop.
 - **Bergamot** (Mozilla's Firefox Translations models, 21–52 MB per direction): int8 Marian student models with intgemm, run by Mozilla's Bergamot WebAssembly runtime (self-hosted, MPL-2.0) in the worker — Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Polish, Hebrew (to English), Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese, both directions with English where Mozilla ships them. Roughly ten times faster than the Opus routes, and mostly *above* the full model's published quality on the measured sample. The models come from a byte-for-byte mirror of Mozilla's registry at a pinned revision, every file verified against a SHA-256.
-- **The full model** (NLLB-200 distilled 600M, 912 MB): covers every pair of the 56-language registry. The honest heavy path — the app asks before that download.
+- **The full model** (NLLB-200 distilled 600M, 912 MB): covers every pair of the 56-language registry. It is loaded by a lean engine written for it (P12): one file and one ONNX session at a time, every download checksum-verified, the tokenizer from transformers.js and the greedy decode loop in the worker — byte-identical outputs to the library pipeline (proven against the Node harness on fixed sentences). Even so, it needs more memory than a 4 GB machine can give a browser tab: on the 4 GB test machine the renderer was killed at ~2.4 GB during setup, at both graph-optimization levels, and never became ready. So the languages and directions that depend on it are **hidden behind "Show experimental languages" in Settings, off by default**, grouped in the picker as "Experimental, needs a powerful computer". Explicit choices ("Use faster models" off, or a pair's "Use the full model" button) still offer it with the honest warning.
 
 Every model is loaded **pinned to a fixed Hugging Face revision** (`MODEL_REVISIONS` in `src/lib/engines.ts`), so upstream repository changes can never silently change what this app downloads. A model is downloaded once, kept in the browser's cache, and the app keeps working offline afterwards. Inference runs in a web worker — WebGPU when available, WebAssembly otherwise — so typing never blocks.
 
@@ -41,12 +41,12 @@ The whole routed fleet was benchmarked against professional human translations (
 - **pass** — within 2 chrF++ points of the full model's published score on that direction (70 of 95 small-model directions, including 31 of the 37 Bergamot directions — many above the published score itself: English to Thai +10.0, to Serbian +7.8, to Traditional Chinese +8.0, to Croatian +5.6, to Polish +3.0, to Ukrainian +5.2 chrF++)
 - **borderline** — within 5 points, or passing with more flagged sentences than the bar allows (25): labelled "Fast, approximate" in the app, with a notice under the translation and a per-language "use the full model" choice
 - **fail** — more than 5 points below (0): every previously failing route now runs on Bergamot instead — the small-model fleet has no measured failures left
-- **full** — no small model exists (7 languages: Amharic, Hausa, Pashto, Sinhala, Tagalog, Yoruba, Zulu — no browser-fetchable model exists for any of them; Tagalog's models sit behind a CORS-blocked bucket, the others were never trained); plus one direction gap, Swahili to English. The pair routes to the full model
+- **full** — no small model exists (7 languages: Amharic, Hausa, Pashto, Sinhala, Tagalog, Yoruba, Zulu — no browser-fetchable model exists for any of them; Tagalog's models sit behind a CORS-blocked bucket, the others were never trained); plus one direction gap, Swahili to English. The pair routes to the full model — which is experimental: hidden behind "Show experimental languages" in Settings (off by default), because it did not finish loading on the 4 GB test machine
 
-`small` = dedicated pair model, `group` = shared family model, `indictrans2` = the IndicTrans2 bundles, `bergamot` = Mozilla's Firefox Translations models on the Bergamot wasm runtime.
+`small` = dedicated pair model, `group` = shared family model, `indictrans2` = the IndicTrans2 bundles, `bergamot` = Mozilla's Firefox Translations models on the Bergamot wasm runtime. Pairs between two non-English languages also route to the full model (nothing pivots through English) and are likewise hidden behind the experimental switch. "Experimental full model" rows are offered only with "Show experimental languages" on in Settings.
 
 | Afrikaans | `afr_Latn` | small (111 MB), borderline | bergamot (36 MB), pass |
-| Amharic | `amh_Ethi` | full model (912 MB) | full model (912 MB) |
+| Amharic | `amh_Ethi` | experimental full model (912 MB) | experimental full model (912 MB) |
 | Arabic | `arb_Arab` | small (118 MB), borderline | small (118 MB), borderline |
 | Assamese | `asm_Beng` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
 | Bengali | `ben_Beng` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
@@ -63,7 +63,7 @@ The whole routed fleet was benchmarked against professional human translations (
 | German | `deu_Latn` | small (112 MB), pass | small (112 MB), borderline |
 | Greek | `ell_Grek` | bergamot (21 MB), pass | bergamot (22 MB), borderline |
 | Gujarati | `guj_Gujr` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
-| Hausa | `hau_Latn` | full model (912 MB) | full model (912 MB) |
+| Hausa | `hau_Latn` | experimental full model (912 MB) | experimental full model (912 MB) |
 | Hebrew | `heb_Hebr` | small (155 MB), pass | bergamot (23 MB), pass |
 | Hindi | `hin_Deva` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
 | Hungarian | `hun_Latn` | small (117 MB), pass | small (117 MB), borderline |
@@ -78,7 +78,7 @@ The whole routed fleet was benchmarked against professional human translations (
 | Nepali | `npi_Deva` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
 | Norwegian Bokmål | `nob_Latn` | bergamot (22 MB), pass | bergamot (22 MB), pass |
 | Odia | `ory_Orya` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
-| Pashto | `pbt_Arab` | full model (912 MB) | full model (912 MB) |
+| Pashto | `pbt_Arab` | experimental full model (912 MB) | experimental full model (912 MB) |
 | Persian | `pes_Arab` | bergamot (22 MB), pass | bergamot (22 MB), pass |
 | Polish | `pol_Latn` | bergamot (36 MB), pass | bergamot (37 MB), pass |
 | Portuguese | `por_Latn` | group (119 MB), borderline | group (119 MB), borderline |
@@ -86,11 +86,11 @@ The whole routed fleet was benchmarked against professional human translations (
 | Romanian | `ron_Latn` | small (113 MB), pass | bergamot (23 MB), borderline |
 | Russian | `rus_Cyrl` | small (118 MB), borderline | bergamot (37 MB), pass |
 | Serbian | `srp_Cyrl` | bergamot (35 MB), pass | bergamot (38 MB), pass |
-| Sinhala | `sin_Sinh` | full model (912 MB) | full model (912 MB) |
+| Sinhala | `sin_Sinh` | experimental full model (912 MB) | experimental full model (912 MB) |
 | Spanish | `spa_Latn` | small (119 MB), pass | small (119 MB), borderline |
-| Swahili | `swh_Latn` | small (143 MB), borderline | full model (912 MB) |
+| Swahili | `swh_Latn` | small (143 MB), borderline | experimental full model (912 MB) |
 | Swedish | `swe_Latn` | small (110 MB), pass | small (110 MB), borderline |
-| Tagalog | `tgl_Latn` | full model (912 MB) | full model (912 MB) |
+| Tagalog | `tgl_Latn` | experimental full model (912 MB) | experimental full model (912 MB) |
 | Tamil | `tam_Taml` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
 | Telugu | `tel_Telu` | indictrans2 (309 MB), pass | indictrans2 (262 MB), borderline |
 | Thai | `tha_Thai` | bergamot (36 MB), pass | bergamot (37 MB), pass |
@@ -98,15 +98,15 @@ The whole routed fleet was benchmarked against professional human translations (
 | Ukrainian | `ukr_Cyrl` | bergamot (36 MB), pass | bergamot (22 MB), borderline |
 | Urdu | `urd_Arab` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
 | Vietnamese | `vie_Latn` | bergamot (37 MB), pass | bergamot (22 MB), borderline |
-| Yoruba | `yor_Latn` | full model (912 MB) | full model (912 MB) |
-| Zulu | `zul_Latn` | full model (912 MB) | full model (912 MB) |
+| Yoruba | `yor_Latn` | experimental full model (912 MB) | experimental full model (912 MB) |
+| Zulu | `zul_Latn` | experimental full model (912 MB) | experimental full model (912 MB) |
 
 ## Size
 
 Measured from a production build, compressed, as transferred:
 
 - **First visit: ~298 KB** (HTML + JS + CSS, 11 requests). Fonts load per script on demand (~270 KB total).
-- **First translation setup:** ~5.4 MB more (the worker bundle and the self-hosted ONNX Runtime WebAssembly), plus the model itself — 21–52 MB for a Bergamot pair (plus a one-time 5.3 MB Bergamot runtime, fetched only when a Bergamot language is first used), 105–155 MB for a small pair, 262–309 MB for IndicTrans2, 912 MB for the full model. Once, then cached.
+- **First translation setup:** ~5.4 MB more (the worker bundle and the self-hosted ONNX Runtime WebAssembly), plus the model itself — 21–52 MB for a Bergamot pair (plus a one-time 5.3 MB Bergamot runtime, fetched only when a Bergamot language is first used), 105–155 MB for a small pair, 262–309 MB for IndicTrans2, 912 MB for the full model (experimental, hidden by default). Once, then cached.
 
 ## Privacy, verifiable
 
