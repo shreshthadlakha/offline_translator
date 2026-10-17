@@ -22,6 +22,10 @@ const PAIRS = [
   "af-en", "id-en", "ru-en", "ko-en", "bg-en",
   // never had a small model: Traditional Chinese
   "en-zh-Hant", "zh-Hant-en",
+  // P11 audit finds: Polish (en->pl full model, pl->en Opus borderline swap
+  // candidate), English to Korean (full model; the P10 "unfetchable" note
+  // was wrong), Hebrew to English (full model, tiny variant)
+  "en-pl", "pl-en", "en-ko", "he-en",
 ];
 
 const files = {};

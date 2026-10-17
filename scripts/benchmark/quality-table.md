@@ -1,6 +1,6 @@
 # Quality table — every engine the app routes, scored against professional human translation
 
-Generated 2026-10-16 from the P1 benchmark: 200 fixed FLORES-200 devtest sentences (seed 42, the same ids for every language and direction), chrF++ scored against the professional human references, run through the real browser worker bundle. The baseline is the full model's own published chrF++ (NLLB-200 distilled 600M, model-card metrics). Nothing typed or translated left the device.
+Generated 2026-10-17 from the P1 benchmark: 200 fixed FLORES-200 devtest sentences (seed 42, the same ids for every language and direction), chrF++ scored against the professional human references, run through the real browser worker bundle. The baseline is the full model's own published chrF++ (NLLB-200 distilled 600M, model-card metrics). Nothing typed or translated left the device.
 
 **The bar** (`scripts/benchmark/quality-bar.mjs`, all constants adjustable): a small model **passes** a direction when its chrF++ is within 2 points of the published baseline (or higher) **and** at most 2% of sentences carry a sanity flag; within 5 points is **borderline**; more than 5 below is **fail**. A chrF-pass gap with a flag breach is borderline, not fail — the flag review showed the high-flag passes (en->ar 15.5%, en->zh 17.5%) are mostly missing final punctuation rather than broken output. Full-model rows are **baseline**: the full model is the bar, so it gets no run and no verdict.
 
@@ -10,7 +10,7 @@ Generated 2026-10-16 from the P1 benchmark: 200 fixed FLORES-200 devtest sentenc
 
 CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs baseline is what counts, never the absolute number.
 
-**Verdicts across the 92 routed small-model directions: 66 pass, 26 borderline, 0 fail.** Plus 18 full-model baseline rows (one per remaining language direction).
+**Verdicts across the 95 routed small-model directions: 70 pass, 25 borderline, 0 fail.** Plus 15 full-model baseline rows (one per remaining language direction).
 
 | Language | Direction | Engine | Model | chrF++ | Baseline | Gap | Flags | Cold load | Median s/sent | Verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -52,7 +52,7 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | Gujarati | en->guj_Gujr | indictrans2-en-indic | 309 MB | 55.37 | 50.40 | +4.97 | 0.0% (0/200) | 38.5 s | 1.366 | **pass** |
 | Hausa | hau_Latn->en | nllb-200-distilled-600M | 912 MB | 52.60 | 52.60 | — | — | — | — | **baseline** |
 | Hausa | en->hau_Latn | nllb-200-distilled-600M | 912 MB | 49.00 | 49.00 | — | — | — | — | **baseline** |
-| Hebrew | heb_Hebr->en | nllb-200-distilled-600M | 912 MB | 61.80 | 61.80 | — | — | — | — | **baseline** |
+| Hebrew | heb_Hebr->en | bergamot-he-en | 23 MB | 62.56 | 61.80 | +0.76 | 0.0% (0/200) | 7.2 s | 0.037 | **pass** |
 | Hebrew | en->heb_Hebr | opus-en-he | 155 MB | 53.28 | 50.80 | +2.48 | 0.0% (0/200) | 26.1 s | 0.465 | **pass** |
 | Hindi | hin_Deva->en | indictrans2-indic-en | 262 MB | 65.68 | 62.50 | +3.18 | 0.0% (0/200) | 33.1 s | 0.767 | **pass** |
 | Hindi | en->hin_Deva | indictrans2-en-indic | 309 MB | 57.86 | 54.20 | +3.66 | 0.0% (0/200) | 36.7 s | 1.321 | **pass** |
@@ -67,7 +67,7 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | Kannada | kan_Knda->en | indictrans2-indic-en | 262 MB | 58.91 | 57.00 | +1.91 | 0.0% (0/200) | 30.9 s | 0.861 | **pass** |
 | Kannada | en->kan_Knda | indictrans2-en-indic | 309 MB | 53.18 | 50.20 | +2.98 | 0.0% (0/200) | 36.5 s | 1.344 | **pass** |
 | Korean | kor_Hang->en | bergamot-ko-en | 54 MB | 52.90 | 52.50 | +0.40 | 0.0% (0/200) | 10.1 s | 0.067 | **pass** |
-| Korean | en->kor_Hang | nllb-200-distilled-600M | 912 MB | 32.10 | 32.10 | — | — | — | — | **baseline** |
+| Korean | en->kor_Hang | bergamot-en-ko | 52 MB | 34.84 | 32.10 | +2.74 | 2.0% (4/200) | 11.2 s | 0.068 | **pass** |
 | Malay | zsm_Latn->en | bergamot-ms-en | 22 MB | 62.10 | 64.30 | -2.20 | 0.5% (1/200) | 7 s | 0.033 | **borderline** |
 | Malay | en->zsm_Latn | bergamot-en-ms | 22 MB | 65.59 | 63.50 | +2.09 | 0.0% (0/200) | 6.6 s | 0.034 | **pass** |
 | Malayalam | mal_Mlym->en | indictrans2-indic-en | 262 MB | 61.10 | 59.00 | +2.10 | 0.0% (0/200) | 35.9 s | 0.852 | **pass** |
@@ -84,8 +84,8 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | Pashto | en->pbt_Arab | nllb-200-distilled-600M | 912 MB | 36.90 | 36.90 | — | — | — | — | **baseline** |
 | Persian | pes_Arab->en | bergamot-fa-en | 22 MB | 57.44 | 58.70 | -1.26 | 0.0% (0/200) | 6.9 s | 0.037 | **pass** |
 | Persian | en->pes_Arab | bergamot-en-fa | 22 MB | 51.19 | 47.40 | +3.79 | 0.5% (1/200) | 6.2 s | 0.038 | **pass** |
-| Polish | pol_Latn->en | opus-pl-en | 118 MB | 49.37 | 54.30 | -4.93 | 0.0% (0/200) | 13.7 s | 0.728 | **borderline** |
-| Polish | en->pol_Latn | nllb-200-distilled-600M | 912 MB | 45.30 | 45.30 | — | — | — | — | **baseline** |
+| Polish | pol_Latn->en | bergamot-pl-en | 37 MB | 53.19 | 54.30 | -1.11 | 0.0% (0/200) | 7.7 s | 0.079 | **pass** |
+| Polish | en->pol_Latn | bergamot-en-pl | 36 MB | 48.27 | 45.30 | +2.97 | 0.5% (1/200) | 10 s | 0.081 | **pass** |
 | Portuguese | por_Latn->en | opus-romance-en (group) | 119 MB | 64.25 | 69.00 | -4.75 | 1.0% (2/200) | 13.6 s | 0.661 | **borderline** |
 | Portuguese | en->por_Latn | opus-en-romance (group) | 119 MB | 64.86 | 67.40 | -2.54 | 0.0% (0/200) | 14 s | 0.866 | **borderline** |
 | Punjabi | pan_Guru->en | indictrans2-indic-en | 262 MB | 63.31 | 61.50 | +1.81 | 0.5% (1/200) | 32.8 s | 0.870 | **pass** |
@@ -125,7 +125,7 @@ CJK directions have naturally low chrF++ (published en->zh is 19.6): the gap vs 
 | Zulu | zul_Latn->en | nllb-200-distilled-600M | 912 MB | 56.80 | 56.80 | — | — | — | — | **baseline** |
 | Zulu | en->zul_Latn | nllb-200-distilled-600M | 912 MB | 51.00 | 51.00 | — | — | — | — | **baseline** |
 
-## List 1 — languages on a small model that are borderline or fail (23)
+## List 1 — languages on a small model that are borderline or fail (22)
 
 A quality problem today: the app routes these directions to a small model that does not clear the bar. Each entry shows the direction, the engine, the verdict, the chrF++ vs the published baseline, and the flag rate.
 
@@ -155,8 +155,6 @@ A quality problem today: the app routes these directions to a small model that d
 `ita_Latn->en` (opus-it-en): **borderline**, chrF++ 56.73 vs 59.3 (gap -2.57), flags 0.5%
 - **Malay** (zsm_Latn):  
 `zsm_Latn->en` (bergamot-ms-en): **borderline**, chrF++ 62.1 vs 64.3 (gap -2.2), flags 0.5%
-- **Polish** (pol_Latn):  
-`pol_Latn->en` (opus-pl-en): **borderline**, chrF++ 49.37 vs 54.3 (gap -4.93), flags 0.0%
 - **Portuguese** (por_Latn):  
 `en->por_Latn` (opus-en-romance): **borderline**, chrF++ 64.86 vs 67.4 (gap -2.54), flags 0.0%  
 `por_Latn->en` (opus-romance-en): **borderline**, chrF++ 64.25 vs 69 (gap -4.75), flags 1.0%

@@ -8259,6 +8259,237 @@
         "downloadedBytes": 57140330
       },
       "completedAt": "2026-10-16T13:38:17.808Z"
+    },
+    {
+      "runKey": "eng_Latn-pol_Latn#bergamot-en-pl",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "pol_Latn"
+      },
+      "engine": {
+        "id": "bergamot-en-pl",
+        "kind": "bergamot",
+        "modelId": "midudev/firefox-translations/en-pl",
+        "name": "Bergamot en-pl (Mozilla Firefox Translations)",
+        "expectedBytes": 35923451,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 48.27,
+        "corpusLower": 48.96
+      },
+      "published": {
+        "chrfpp": 45.3,
+        "delta": 2.97
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 1,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 2
+        },
+        "flaggedSentences": 1,
+        "flagRate": 0.005,
+        "details": [
+          {
+            "id": 838,
+            "flags": [
+              "repeatLoop"
+            ],
+            "error": null,
+            "score": 65.2
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.081,
+        "p90SecondsPerSentence": 0.128,
+        "loadMsCold": 9996,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 41245809
+      },
+      "completedAt": "2026-10-17T08:22:34.232Z"
+    },
+    {
+      "runKey": "pol_Latn-eng_Latn#bergamot-pl-en",
+      "pair": {
+        "src": "pol_Latn",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "bergamot-pl-en",
+        "kind": "bergamot",
+        "modelId": "midudev/firefox-translations/pl-en",
+        "name": "Bergamot pl-en (Mozilla Firefox Translations)",
+        "expectedBytes": 37347607,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 53.19,
+        "corpusLower": 54.2
+      },
+      "published": {
+        "chrfpp": 54.3,
+        "delta": -1.11
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 1
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.079,
+        "p90SecondsPerSentence": 0.117,
+        "loadMsCold": 7657,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 42669965
+      },
+      "completedAt": "2026-10-17T08:23:05.447Z"
+    },
+    {
+      "runKey": "eng_Latn-kor_Hang#bergamot-en-ko",
+      "pair": {
+        "src": "eng_Latn",
+        "tgt": "kor_Hang"
+      },
+      "engine": {
+        "id": "bergamot-en-ko",
+        "kind": "bergamot",
+        "modelId": "midudev/firefox-translations/en-ko",
+        "name": "Bergamot en-ko (Mozilla Firefox Translations)",
+        "expectedBytes": 51906032,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 34.84,
+        "corpusLower": 34.84
+      },
+      "published": {
+        "chrfpp": 32.1,
+        "delta": 2.74
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 4,
+          "repeatLoop": 0,
+          "lenRatio": 1,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 4,
+        "flagRate": 0.02,
+        "details": [
+          {
+            "id": 66,
+            "flags": [
+              "wrongScript"
+            ],
+            "error": null,
+            "score": 8.9
+          },
+          {
+            "id": 268,
+            "flags": [
+              "wrongScript"
+            ],
+            "error": null,
+            "score": 29.8
+          },
+          {
+            "id": 284,
+            "flags": [
+              "wrongScript"
+            ],
+            "error": null,
+            "score": 40.8
+          },
+          {
+            "id": 776,
+            "flags": [
+              "wrongScript",
+              "lenRatio"
+            ],
+            "error": null,
+            "score": 29.8
+          }
+        ]
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.068,
+        "p90SecondsPerSentence": 0.1,
+        "loadMsCold": 11203,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 57228390
+      },
+      "completedAt": "2026-10-17T08:23:37.437Z"
+    },
+    {
+      "runKey": "heb_Hebr-eng_Latn#bergamot-he-en",
+      "pair": {
+        "src": "heb_Hebr",
+        "tgt": "eng_Latn"
+      },
+      "engine": {
+        "id": "bergamot-he-en",
+        "kind": "bergamot",
+        "modelId": "midudev/firefox-translations/he-en",
+        "name": "Bergamot he-en (Mozilla Firefox Translations)",
+        "expectedBytes": 22622256,
+        "langTag": null
+      },
+      "mode": "browser",
+      "nSentences": 200,
+      "chrfpp": {
+        "corpus": 62.56,
+        "corpusLower": 63.42
+      },
+      "published": {
+        "chrfpp": 61.8,
+        "delta": 0.76
+      },
+      "sanity": {
+        "counts": {
+          "empty": 0,
+          "wrongScript": 0,
+          "repeatLoop": 0,
+          "lenRatio": 0,
+          "endsMidWord": 0,
+          "missingFinalPunct": 0
+        },
+        "flaggedSentences": 0,
+        "flagRate": 0,
+        "details": []
+      },
+      "speed": {
+        "source": "browser-worker (the real app worker bundle)",
+        "medianSecondsPerSentence": 0.037,
+        "p90SecondsPerSentence": 0.059,
+        "loadMsCold": 7236,
+        "loadMsWarmMedian": null,
+        "downloadedBytes": 27944614
+      },
+      "completedAt": "2026-10-17T08:24:13.658Z"
     }
   ]
 }

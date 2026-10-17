@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T13:45:18.167Z",
+  "generatedAt": "2026-10-17T08:25:31.553Z",
   "bar": {
     "file": "scripts/benchmark/quality-bar.mjs",
     "constants": {
@@ -1443,27 +1443,34 @@
       "src": "heb_Hebr",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "bergamot-he-en",
+        "kind": "bergamot",
+        "modelId": "midudev/firefox-translations/he-en",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 61.8,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 22622256,
+      "chrfpp": 62.56,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 61.8,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 0.76,
+      "flagRate": 0,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 0,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 0,
+      "nSentences": 200,
+      "loadColdSeconds": 7.2,
+      "medianSecondsPerSentence": 0.037,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +0.76 vs published baseline; flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -2006,27 +2013,34 @@
       "src": "eng_Latn",
       "tgt": "kor_Hang",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "bergamot-en-ko",
+        "kind": "bergamot",
+        "modelId": "midudev/firefox-translations/en-ko",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 32.1,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 51906032,
+      "chrfpp": 34.84,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 32.1,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 2.74,
+      "flagRate": 0.02,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 4,
+        "repeatLoop": 0,
+        "lenRatio": 1,
+        "endsMidWord": 0,
+        "missingFinalPunct": 0
+      },
+      "flaggedSentences": 4,
+      "nSentences": 200,
+      "loadColdSeconds": 11.2,
+      "medianSecondsPerSentence": 0.068,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +2.74 vs published baseline; flags 2.0% <= 2%"
     },
     {
       "language": {
@@ -2631,18 +2645,18 @@
       "src": "pol_Latn",
       "tgt": "eng_Latn",
       "engine": {
-        "id": "opus-pl-en",
-        "kind": "opus",
-        "modelId": "Xenova/opus-mt-pl-en",
+        "id": "bergamot-pl-en",
+        "kind": "bergamot",
+        "modelId": "midudev/firefox-translations/pl-en",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 117618157,
-      "chrfpp": 49.37,
+      "modelSizeBytes": 37347607,
+      "chrfpp": 53.19,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 54.3,
       "baselineSource": "published",
-      "gap": -4.93,
+      "gap": -1.11,
       "flagRate": 0,
       "flagCounts": {
         "empty": 0,
@@ -2654,11 +2668,11 @@
       },
       "flaggedSentences": 0,
       "nSentences": 200,
-      "loadColdSeconds": 13.7,
-      "medianSecondsPerSentence": 0.728,
+      "loadColdSeconds": 7.7,
+      "medianSecondsPerSentence": 0.079,
       "speedSource": "browser-worker (the real app worker bundle)",
-      "verdict": "borderline",
-      "verdictReason": "chrF++ -4.93 (within 5 of the bar); flags 0.0% <= 2%"
+      "verdict": "pass",
+      "verdictReason": "chrF++ -1.11 (within 2 of the bar); flags 0.0% <= 2%"
     },
     {
       "language": {
@@ -2669,27 +2683,34 @@
       "src": "eng_Latn",
       "tgt": "pol_Latn",
       "engine": {
-        "id": "nllb-200-distilled-600M",
-        "kind": "nllb",
-        "modelId": "Xenova/nllb-200-distilled-600M",
+        "id": "bergamot-en-pl",
+        "kind": "bergamot",
+        "modelId": "midudev/firefox-translations/en-pl",
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 911962632,
-      "chrfpp": 45.3,
-      "chrfppSource": "published-baseline (no run; the full model is the bar)",
+      "modelSizeBytes": 35923451,
+      "chrfpp": 48.27,
+      "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 45.3,
       "baselineSource": "published",
-      "gap": null,
-      "flagRate": null,
-      "flagCounts": null,
-      "flaggedSentences": null,
-      "nSentences": null,
-      "loadColdSeconds": null,
-      "medianSecondsPerSentence": null,
-      "speedSource": null,
-      "verdict": "baseline",
-      "verdictReason": "the full model defines the bar; its published chrF++ is the reference number"
+      "gap": 2.97,
+      "flagRate": 0.005,
+      "flagCounts": {
+        "empty": 0,
+        "wrongScript": 0,
+        "repeatLoop": 1,
+        "lenRatio": 0,
+        "endsMidWord": 0,
+        "missingFinalPunct": 2
+      },
+      "flaggedSentences": 1,
+      "nSentences": 200,
+      "loadColdSeconds": 10,
+      "medianSecondsPerSentence": 0.081,
+      "speedSource": "browser-worker (the real app worker bundle)",
+      "verdict": "pass",
+      "verdictReason": "chrF++ +2.97 vs published baseline; flags 0.5% <= 2%"
     },
     {
       "language": {
@@ -4074,12 +4095,12 @@
     }
   ],
   "counts": {
-    "pass": 66,
-    "borderline": 26,
+    "pass": 70,
+    "borderline": 25,
     "fail": 0,
     "error": 0,
-    "baseline": 18,
-    "totalSmallDirections": 92
+    "baseline": 15,
+    "totalSmallDirections": 95
   },
   "list1BorderlineOrFailOnSmallModels": [
     {
@@ -4304,23 +4325,6 @@
           "gap": -2.2,
           "flagRate": 0.005,
           "flagged": 1,
-          "n": 200
-        }
-      ]
-    },
-    {
-      "code": "pol_Latn",
-      "english": "Polish",
-      "directions": [
-        {
-          "direction": "pol_Latn->en",
-          "engine": "opus-pl-en",
-          "verdict": "borderline",
-          "chrfpp": 49.37,
-          "baseline": 54.3,
-          "gap": -4.93,
-          "flagRate": 0,
-          "flagged": 0,
           "n": 200
         }
       ]

@@ -327,8 +327,8 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
     "tier": "best",
     "directions": {
       "->en": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 0.76
       },
       "en->": {
         "tier": "best",
@@ -436,8 +436,8 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
         "gap": 0.4
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 2.74
       }
     }
   },
@@ -564,15 +564,15 @@ export const LANGUAGE_QUALITY: LanguageQuality[] = [
   {
     "code": "pol_Latn",
     "english": "Polish",
-    "tier": "good",
+    "tier": "best",
     "directions": {
       "->en": {
-        "tier": "good",
-        "gap": -4.93
+        "tier": "best",
+        "gap": -1.11
       },
       "en->": {
-        "tier": "full",
-        "gap": null
+        "tier": "best",
+        "gap": 2.97
       }
     }
   },

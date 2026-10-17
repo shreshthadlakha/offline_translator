@@ -48,6 +48,14 @@ const ROUTES = [
   ["kor_Hang", "eng_Latn", "ko-en"],
   ["eng_Latn", "zho_Hant", "en-zh-Hant"],
   ["zho_Hant", "eng_Latn", "zh-Hant-en"],
+  // P11: Polish (English into Polish was full-model; Polish to English is the
+  // Opus borderline route and swaps if Bergamot measures pass), English into
+  // Korean (full-model; the P10 "unfetchable" note was corrected by the P11
+  // audit), Hebrew to English (full-model, tiny variant).
+  ["eng_Latn", "pol_Latn", "en-pl"],
+  ["pol_Latn", "eng_Latn", "pl-en"],
+  ["eng_Latn", "kor_Hang", "en-ko"],
+  ["heb_Hebr", "eng_Latn", "he-en"],
 ];
 
 for (const [, , pair] of ROUTES) {

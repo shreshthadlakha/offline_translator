@@ -723,3 +723,26 @@ Work Log:
 
 Stage Summary:
 - 18 full-model English directions audited; three language gaps are closable (Polish en->pl, Korean en->ko, Hebrew he->en) plus one swap candidate (Polish pl->en). Six languages have no model anywhere (am, hau, ps, si, yo, zu) and Tagalog's models are unfetchable by a browser; all stated plainly in scripts/bergamot/p11-audit.json. Non-English pairs stay on the full model by design.
+
+---
+Task ID: 16-integrate (P11 Step 2)
+Agent: main (Z.ai Code)
+Task: P11 integration — benchmark the audited candidates against the P2 bar and route the qualifiers.
+
+Work Log:
+- Pin pipeline extended before benchmarking (the runner resolves candidates from the bundle table, and the app's routing table stays untouched for pending candidates — the P10 flow): collect-pins.mjs gained en-pl, pl-en, en-ko, he-en; the re-collection re-verified all 33 existing pins byte-identically (only collectedAt moved) plus the 4 new pairs (37 pairs, 115 files); gen-bundles.mjs routes the new directions and regenerated bundles.ts (36 pairs, 37 routes — hbs-en shared).
+- FLORES-200 devtest and the published NLLB metrics CSV re-downloaded (both gitignored; the data dir had been cleaned after P10).
+- The campaign, 200 FLORES-200 devtest sentences per direction through the real app worker, fresh download each:
+  * en->pl: chrF++ 48.27 vs 45.3 published = +2.97, flags 1/200 (0.5%) -> PASS.
+  * pl->en: 53.19 vs 54.3 = -1.11, flags 0/200 -> PASS. The current Opus route measured borderline (-4.93), so per the pre-registered swap rule (the P10 bg->el precedent) Polish to English moves to Bergamot; the Opus descriptor stays in the table unrouted, exactly like the Korean one, and its revision pin stays.
+  * en->ko: 34.84 vs 32.1 = +2.74, flags 4/200 (2.0% — at the cap, pass per the bar's own rule; the 4 wrongScript flags are Latin proper nouns inside otherwise-Hangul sentences, verified by hand: zero outputs lack Hangul) -> PASS. The 4-file srcvocab/trgvocab pair shape works through the existing engine code unchanged.
+  * he->en: 62.56 vs 61.8 = +0.76, flags 0/200, median 0.037 s/sentence -> PASS. The tiny variant clears the bar with room to spare.
+  * Speed: median 0.037-0.081 s/sentence; cold loads 7.2-11.2 s including the 28-52 MB download; zero errors across all 800 sentences.
+- Integration: engines.ts routes the four directions (33 -> 37 routes); the engine descriptors come from the same bergamot() builder; protocol v7 unchanged (no new engine kind — the worker machinery is pair-agnostic).
+- Regenerated from the new routing: the quality table (110 rows: 95 small + 15 baseline; 70 pass / 25 borderline / 0 fail — the fleet still has no measured failures), quality.ts (26 best / 22 good / 0 limited / 7 full: Polish moved good->best, Korean and Hebrew joined it), THIRD_PARTY_NOTICES.md (71 models: +4 Bergamot rows, the unrouted Opus pl-en row dropped — it is never downloaded now), and the README (Bergamot language list with Polish and Hebrew to English, new verdict counts, the three language-table rows, the Swahili direction gap stated). copy.ts's models answer adds Polish and Hebrew to the Bergamot list.
+- Fixed a pre-existing README inaccuracy found while editing: the fintutto conversions are English->Hebrew and English->Swahili, not the reverse as the bullet claimed since P10.
+- drift green (36 Bergamot engines pinned byte-for-byte, 35 routable non-Bergamot engines pinned), lint clean, typecheck clean, worker bundle rebuilt.
+- Live browser verification on the dev app, all through the real UI: English->Polish "Good morning. Where is the nearest pharmacy? The weather is nice today." -> "Dzien dobry. Gdzie jest najblizsza apteka? Pogoda jest dzis ladnie." with the honest 34 MB setup card and Details showing the engine, mirror model, MPL-2.0 and "Fast, 3.0 chrF++ above the full model's published score"; the swap to Polish->English switched pairs on the same wasm runtime and translated back correctly; English->Korean (the 4-file pair) produced correct polite Korean in 9 s cold; Hebrew->English translated in 0.1 s with "0.8 chrF++ above" in Details; the Bergamot->Opus boundary crossing ended the worker and showed the honest French setup card (no lock error) and translated correctly; Opus->Bergamot re-entered cleanly; offline translation from the cache worked with the network off; Settings lists all four new models with working Remove; reload auto-starts the saved Hebrew model; Cancel during a fresh en-pl setup is a deliberate stop with no crash flag and the retry completes; the grid labels moved (Korean "Fast, about 50 MB", Polish "Fast, about 34 MB", Hebrew keeps the fintutto default at 148 MB, Tagalog honestly stays "Large, about 900 MB", Swahili keeps its one-direction note); zero page errors all session.
+
+Stage Summary:
+- Four directions benchmarked, four passes, four routes: English to Polish, Polish to English (swapped off the borderline Opus route), English to Korean and Hebrew to English all run on Bergamot now. The full-model fleet is down to the seven languages with no model anywhere plus Swahili to English and every non-English pair. All run states committed as provenance.

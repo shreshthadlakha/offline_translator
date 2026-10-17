@@ -26,10 +26,10 @@ CI runs all of it on every push: `.github/workflows/ci.yml`.
 
 Five kinds of engines, chosen per language pair:
 
-- **Small single-pair models** (Opus-MT conversions, ~105–155 MB): one small model per popular pair, both directions where a verified conversion exists. Loads in seconds, translates ~0.5 s/sentence on a laptop. Includes community conversions by `fintutto` (Hebrew, Swahili to English).
+- **Small single-pair models** (Opus-MT conversions, ~105–155 MB): one small model per popular pair, both directions where a verified conversion exists. Loads in seconds, translates ~0.5 s/sentence on a laptop. Includes community conversions by `fintutto` (English to Hebrew, English to Swahili).
 - **Group models** (Opus-MT many-languages, ~119 MB): one model covers a language family with a language tag per pair (Portuguese today).
 - **IndicTrans2** (distilled 200M, int8 ONNX exports by `hari31416`, ~262–309 MB per direction): the thirteen Indian languages, both directions with English, with a JavaScript port of the reference preprocessing and a custom decoding loop.
-- **Bergamot** (Mozilla's Firefox Translations models, 21–52 MB per direction): int8 Marian student models with intgemm, run by Mozilla's Bergamot WebAssembly runtime (self-hosted, MPL-2.0) in the worker — Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese, both directions with English where Mozilla ships them. Roughly ten times faster than the Opus routes, and mostly *above* the full model's published quality on the measured sample. The models come from a byte-for-byte mirror of Mozilla's registry at a pinned revision, every file verified against a SHA-256.
+- **Bergamot** (Mozilla's Firefox Translations models, 21–52 MB per direction): int8 Marian student models with intgemm, run by Mozilla's Bergamot WebAssembly runtime (self-hosted, MPL-2.0) in the worker — Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Polish, Hebrew (to English), Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese, both directions with English where Mozilla ships them. Roughly ten times faster than the Opus routes, and mostly *above* the full model's published quality on the measured sample. The models come from a byte-for-byte mirror of Mozilla's registry at a pinned revision, every file verified against a SHA-256.
 - **The full model** (NLLB-200 distilled 600M, 912 MB): covers every pair of the 56-language registry. The honest heavy path — the app asks before that download.
 
 Every model is loaded **pinned to a fixed Hugging Face revision** (`MODEL_REVISIONS` in `src/lib/engines.ts`), so upstream repository changes can never silently change what this app downloads. A model is downloaded once, kept in the browser's cache, and the app keeps working offline afterwards. Inference runs in a web worker — WebGPU when available, WebAssembly otherwise — so typing never blocks.
@@ -38,10 +38,10 @@ Every model is loaded **pinned to a fixed Hugging Face revision** (`MODEL_REVISI
 
 The whole routed fleet was benchmarked against professional human translations (FLORES-200 devtest, chrF++, 200 fixed sentences per direction through the real browser worker). Verdicts below come from that measurement — **including the failures**, because hiding them would defeat the point. Full detail: `scripts/benchmark/quality-table.md` (per-direction scores, gaps, flag rates); methodology and calibration: the P1/P2 sections of `worklog.md`.
 
-- **pass** — within 2 chrF++ points of the full model's published score on that direction (66 of 92 small-model directions, including 27 of the 33 Bergamot directions — many above the published score itself: English to Thai +10.0, to Serbian +7.8, to Traditional Chinese +8.0, to Croatian +5.6, to Ukrainian +5.2 chrF++)
-- **borderline** — within 5 points, or passing with more flagged sentences than the bar allows (26): labelled "Fast, approximate" in the app, with a notice under the translation and a per-language "use the full model" choice
+- **pass** — within 2 chrF++ points of the full model's published score on that direction (70 of 95 small-model directions, including 31 of the 37 Bergamot directions — many above the published score itself: English to Thai +10.0, to Serbian +7.8, to Traditional Chinese +8.0, to Croatian +5.6, to Polish +3.0, to Ukrainian +5.2 chrF++)
+- **borderline** — within 5 points, or passing with more flagged sentences than the bar allows (25): labelled "Fast, approximate" in the app, with a notice under the translation and a per-language "use the full model" choice
 - **fail** — more than 5 points below (0): every previously failing route now runs on Bergamot instead — the small-model fleet has no measured failures left
-- **full** — no small model exists (7 languages: Amharic, Hausa, Pashto, Sinhala, Tagalog, Yoruba, Zulu — no browser-fetchable model exists for them); the pair routes to the full model
+- **full** — no small model exists (7 languages: Amharic, Hausa, Pashto, Sinhala, Tagalog, Yoruba, Zulu — no browser-fetchable model exists for any of them; Tagalog's models sit behind a CORS-blocked bucket, the others were never trained); plus one direction gap, Swahili to English. The pair routes to the full model
 
 `small` = dedicated pair model, `group` = shared family model, `indictrans2` = the IndicTrans2 bundles, `bergamot` = Mozilla's Firefox Translations models on the Bergamot wasm runtime.
 
@@ -64,14 +64,14 @@ The whole routed fleet was benchmarked against professional human translations (
 | Greek | `ell_Grek` | bergamot (21 MB), pass | bergamot (22 MB), borderline |
 | Gujarati | `guj_Gujr` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
 | Hausa | `hau_Latn` | full model (912 MB) | full model (912 MB) |
-| Hebrew | `heb_Hebr` | small (155 MB), pass | full model (912 MB) |
+| Hebrew | `heb_Hebr` | small (155 MB), pass | bergamot (23 MB), pass |
 | Hindi | `hin_Deva` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
 | Hungarian | `hun_Latn` | small (117 MB), pass | small (117 MB), borderline |
 | Indonesian | `ind_Latn` | small (108 MB), borderline | bergamot (22 MB), pass |
 | Italian | `ita_Latn` | small (136 MB), pass | small (137 MB), borderline |
 | Japanese | `jpn_Jpan` | bergamot (50 MB), pass | bergamot (55 MB), pass |
 | Kannada | `kan_Knda` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
-| Korean | `kor_Hang` | full model (912 MB) | bergamot (54 MB), pass |
+| Korean | `kor_Hang` | bergamot (52 MB), pass | bergamot (54 MB), pass |
 | Malay | `zsm_Latn` | bergamot (22 MB), pass | bergamot (22 MB), borderline |
 | Malayalam | `mal_Mlym` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
 | Marathi | `mar_Deva` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
@@ -80,7 +80,7 @@ The whole routed fleet was benchmarked against professional human translations (
 | Odia | `ory_Orya` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
 | Pashto | `pbt_Arab` | full model (912 MB) | full model (912 MB) |
 | Persian | `pes_Arab` | bergamot (22 MB), pass | bergamot (22 MB), pass |
-| Polish | `pol_Latn` | full model (912 MB) | small (118 MB), borderline |
+| Polish | `pol_Latn` | bergamot (36 MB), pass | bergamot (37 MB), pass |
 | Portuguese | `por_Latn` | group (119 MB), borderline | group (119 MB), borderline |
 | Punjabi | `pan_Guru` | indictrans2 (309 MB), pass | indictrans2 (262 MB), pass |
 | Romanian | `ron_Latn` | small (113 MB), pass | bergamot (23 MB), borderline |

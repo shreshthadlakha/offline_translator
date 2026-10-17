@@ -415,8 +415,19 @@ for (const code of INDIC_LANGUAGES) {
 // Norwegian, Bulgarian, Greek and Romanian to English, English to
 // Vietnamese), the fintutto Bulgarian and English-to-Greek conversions
 // (Bergamot measured pass where they measured borderline), and the limited
-// Opus-MT routes that carried the honest "Fast, limited" label. Tagalog
-// stays on the full model: no fetchable model exists for it.
+// Opus-MT routes that carried the honest "Fast, limited" label.
+//
+// P11 closed the remaining gaps the same way, after the audit checked every
+// full-model direction against the mirror's complete pair list: English to
+// Polish, English to Korean and Hebrew to English were full-model routes
+// with fetchable models (en-ko's P10 "unfetchable" note was wrong — the
+// mirror carries the base-memory variant; corrected in the P11 audit), and
+// Polish to English swapped off its borderline Opus-MT route (Bergamot
+// measures pass at -1.11 where Opus measured borderline at -4.93; the Opus
+// entry above stays for the record, unrouted, exactly like the Korean one).
+// Tagalog and the six languages with no model anywhere (Amharic, Hausa,
+// Pashto, Sinhala, Yoruba, Zulu) stay on the full model: no fetchable model
+// exists for any of them, and Swahili to English likewise.
 
 
 function bergamot(pair: string, name: string): EngineDescriptor {
@@ -468,6 +479,10 @@ const BERGAMOT_ENGINES: Record<string, EngineDescriptor> = {
   "ko-en": bergamot("ko-en", "Bergamot Korean to English"),
   "en-zh-Hant": bergamot("en-zh-Hant", "Bergamot English to Traditional Chinese"),
   "zh-Hant-en": bergamot("zh-Hant-en", "Bergamot Traditional Chinese to English"),
+  "en-pl": bergamot("en-pl", "Bergamot English to Polish"),
+  "pl-en": bergamot("pl-en", "Bergamot Polish to English"),
+  "en-ko": bergamot("en-ko", "Bergamot English to Korean"),
+  "he-en": bergamot("he-en", "Bergamot Hebrew to English"),
 };
 
 /** The routes that moved to Bergamot: pair key -> Bergamot pair. */
@@ -505,6 +520,11 @@ const BERGAMOT_ROUTES: Record<string, string> = {
   "kor_Hang|eng_Latn": "ko-en",
   "eng_Latn|zho_Hant": "en-zh-Hant",
   "zho_Hant|eng_Latn": "zh-Hant-en",
+  // P11: the audited gaps.
+  "eng_Latn|pol_Latn": "en-pl",
+  "pol_Latn|eng_Latn": "pl-en",
+  "eng_Latn|kor_Hang": "en-ko",
+  "heb_Hebr|eng_Latn": "he-en",
 };
 
 for (const [pairKey, pair] of Object.entries(BERGAMOT_ROUTES)) {

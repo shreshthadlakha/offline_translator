@@ -132,6 +132,16 @@ export const BERGAMOT_PAIRS: Record<string, BergamotPair> = {
     { name: "trgvocab.enja.spm", bytes: 827144, sha256: "3b3d9f8f3a034d98d0a476f1794fa79c01e4e98a967ceb6777a66ba2d03ec1e1" },
     ],
   },
+  "en-ko": {
+    modelId: "midudev/firefox-translations/en-ko",
+    totalBytes: 51906032,
+    files: [
+    { name: "lex.50.50.enko.s2t.bin", bytes: 6449612, sha256: "96efba97d4bb93ab362e5569bea0f115184d2f68d63b67305ee663c18e32fbeb" },
+    { name: "model.enko.intgemm.alphas.bin", bytes: 43849787, sha256: "ffe5ef2ce3f2e944055e35310bab186f6a70d533a0ee4394adf716a0e383afbb" },
+    { name: "srcvocab.enko.spm", bytes: 791280, sha256: "8d4e3141868efd410eb86c2b60d41aa6bc6b46e4c4b2c0b85e3792493c69d802" },
+    { name: "trgvocab.enko.spm", bytes: 815353, sha256: "2ece21b28dd7022d36127d17423a74dabf544787dfc1cf614f7b565f93a4a1d3" },
+    ],
+  },
   "en-ms": {
     modelId: "midudev/firefox-translations/en-ms",
     totalBytes: 21879919,
@@ -148,6 +158,15 @@ export const BERGAMOT_PAIRS: Record<string, BergamotPair> = {
     { name: "lex.50.50.ennb.s2t.bin", bytes: 4234572, sha256: "0780a1659ef460864ba92da6d58ca6f9056fb8ec8be507c189aeb25ce23e429f" },
     { name: "model.ennb.intgemm.alphas.bin", bytes: 17141051, sha256: "78429eb7f544361061c9d9ec2f0872adf30b76e4c9ef3dbaab1210a0f2aa19b5" },
     { name: "vocab.ennb.spm", bytes: 802190, sha256: "cad75f2c3eccb9545b571ca32f235e6ffaae6d8a77bfa808cf8068948c421f10" },
+    ],
+  },
+  "en-pl": {
+    modelId: "midudev/firefox-translations/en-pl",
+    totalBytes: 35923451,
+    files: [
+    { name: "lex.50.50.enpl.s2t.bin", bytes: 3540052, sha256: "d7d7b364673f633763c9f8f2e8ee9c7a184e92f4086e8b84abe870a2a8dbe5d5" },
+    { name: "model.enpl.intgemm.alphas.bin", bytes: 31561787, sha256: "b0b59716bcc8f46b8dc6ab5c32a2732acaad42a5a6d9ae9b472526a1bb0d71d4" },
+    { name: "vocab.enpl.spm", bytes: 821612, sha256: "2000f182efa8ce5f69bc3f9e574666b5bc2c0af684eedd32f69d15aa9021ea85" },
     ],
   },
   "en-sr": {
@@ -223,6 +242,15 @@ export const BERGAMOT_PAIRS: Record<string, BergamotPair> = {
     { name: "vocab.hbsen.spm", bytes: 817335, sha256: "320561e2cef014a6d626a64822add3a387c91f609f23ea3b7f421d194075c14c" },
     ],
   },
+  "he-en": {
+    modelId: "midudev/firefox-translations/he-en",
+    totalBytes: 22622256,
+    files: [
+    { name: "lex.50.50.heen.s2t.bin", bytes: 4636028, sha256: "427c88732cb93b28d2a947cace79f62aabceb7d6f4438516e85994b14a73b68e" },
+    { name: "model.heen.intgemm.alphas.bin", bytes: 17141051, sha256: "7291cab3ec483b8cf524da96201fe947dca8c550132be21a06badeb946b5c079" },
+    { name: "vocab.heen.spm", bytes: 845177, sha256: "45f5d413b9208c5f24340ab0e20a63604a572784d289baa2d788deea946f79a2" },
+    ],
+  },
   "id-en": {
     modelId: "midudev/firefox-translations/id-en",
     totalBytes: 21964340,
@@ -266,6 +294,15 @@ export const BERGAMOT_PAIRS: Record<string, BergamotPair> = {
     { name: "lex.50.50.nben.s2t.bin", bytes: 4517876, sha256: "cc07976874c905e859918be71d3fe993c9ec8696d986db2418bb1a16ff4ea500" },
     { name: "model.nben.intgemm.alphas.bin", bytes: 17141051, sha256: "00ab7b969156f6c948be59dad4755e47a24eeb31aa39f02f1de7bce43081cc2a" },
     { name: "vocab.nben.spm", bytes: 802367, sha256: "23eb1743070efac5a447f4f72aafda69b1985af272cece85a2f0bb08e6fcdeef" },
+    ],
+  },
+  "pl-en": {
+    modelId: "midudev/firefox-translations/pl-en",
+    totalBytes: 37347607,
+    files: [
+    { name: "lex.50.50.plen.s2t.bin", bytes: 4964208, sha256: "b295dfefa7022a62e105276e8c39fdfd67bffe588f4fd78583edd4e04ee0cb3b" },
+    { name: "model.plen.intgemm.alphas.bin", bytes: 31561787, sha256: "06dbab3baa3bbceab746bc6a3bba807878f38536382c03acddf59d3edf3b5d94" },
+    { name: "vocab.plen.spm", bytes: 821612, sha256: "2000f182efa8ce5f69bc3f9e574666b5bc2c0af684eedd32f69d15aa9021ea85" },
     ],
   },
   "ro-en": {
@@ -372,6 +409,10 @@ const PAIR_ROUTES: Record<string, string> = {
   "kor_Hang|eng_Latn": "ko-en",
   "eng_Latn|zho_Hant": "en-zh-Hant",
   "zho_Hant|eng_Latn": "zh-Hant-en",
+  "eng_Latn|pol_Latn": "en-pl",
+  "pol_Latn|eng_Latn": "pl-en",
+  "eng_Latn|kor_Hang": "en-ko",
+  "heb_Hebr|eng_Latn": "he-en",
 };
 
 /** The Bergamot pair serving an NLLB-200 code pair, or null. */
