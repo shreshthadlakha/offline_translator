@@ -81,11 +81,11 @@ const HistoryItem = memo(function HistoryItem({
       <p
         lang={srcLang?.bcp47}
         dir={srcLang?.dir ?? "ltr"}
-        className={cn("type-small line-clamp-3 text-muted-foreground", hidden && "masked")}
+        className={cn("native-text type-small line-clamp-3 text-muted-foreground", hidden && "masked")}
       >
         {entry.sourceText}
       </p>
-      <p lang={tgtLang?.bcp47} dir={tgtLang?.dir ?? "ltr"} className="type-body mt-1.5 line-clamp-3">
+      <p lang={tgtLang?.bcp47} dir={tgtLang?.dir ?? "ltr"} className="native-text type-body mt-1.5 line-clamp-3">
         {entry.targetText}
       </p>
       <div className="mt-3 flex items-center justify-end gap-1">

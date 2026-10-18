@@ -151,8 +151,12 @@ function onProgressCallback(data: { status: string; file?: string; loaded?: numb
   const prev = fileProgress.get(name) ?? { loaded: 0, total: 0, status: "waiting" as FileRowStatus };
 
   if (data.status === "initiate") {
-    fileProgress.set(name, { ...prev, status: "waiting" });
-    post({ type: "file", file: name, status: "waiting", loaded: prev.loaded, total: prev.total });
+    // A file announced with its size counts toward the aggregate total
+    // from the start, so the overall fraction can't hit 1 early when a
+    // small file finishes before the big ones have announced themselves.
+    const total = Math.max(prev.total, data.total ?? 0);
+    fileProgress.set(name, { ...prev, total, status: "waiting" });
+    post({ type: "file", file: name, status: "waiting", loaded: prev.loaded, total });
   } else if (data.status === "progress" || data.status === "download") {
     // Per file values never go backwards either.
     const loaded = Math.max(prev.loaded, data.loaded ?? prev.loaded);

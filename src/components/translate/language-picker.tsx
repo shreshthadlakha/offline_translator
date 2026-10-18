@@ -73,7 +73,7 @@ function LanguageRow({
       <Check aria-hidden className={cn("size-4 shrink-0 text-accent-green-text", !selected && "invisible")} />
       <span className="min-w-0 flex-1">
         <span className="flex items-baseline gap-2">
-          <span lang={language.bcp47} dir={language.dir} className="min-w-0 truncate">
+          <span lang={language.bcp47} dir={language.dir} className="native-text min-w-0 truncate">
             {language.native}
           </span>
           <span className="type-small shrink-0 text-muted-foreground">{language.english}</span>
@@ -240,7 +240,7 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
       className="group flex min-h-11 items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-start transition-colors outline-none hover:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/60"
     >
       {value ? (
-        <span lang={value.bcp47} dir={value.dir} className="type-body min-w-0 truncate font-medium">
+        <span lang={value.bcp47} dir={value.dir} className="native-text type-body min-w-0 truncate font-medium">
           {value.native}
         </span>
       ) : null}

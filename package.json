@@ -20,6 +20,7 @@
     "notices": "node scripts/generate-notices.mjs",
     "quality:table": "node scripts/benchmark/quality-table.mjs",
     "drift": "node scripts/check-drift.mjs",
+    "audit:rtl": "node scripts/rtl-audit.mjs",
     "db:push": "prisma db push --accept-data-loss",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",

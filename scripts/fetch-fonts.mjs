@@ -23,7 +23,9 @@ const WANTED = [
   ["IBM+Plex+Sans+Devanagari_wght@400.css", "devanagari", "plex-devanagari", "400"],
   ["IBM+Plex+Sans+Devanagari_wght@500.css", "devanagari", "plex-devanagari", "500"],
   ["IBM+Plex+Sans+Hebrew_wght@400.css", "hebrew", "plex-hebrew", "400"],
+  ["IBM+Plex+Sans+Hebrew_wght@500.css", "hebrew", "plex-hebrew", "500"],
   ["IBM+Plex+Sans+Thai_wght@400.css", "thai", "plex-thai", "400"],
+  ["IBM+Plex+Sans+Thai_wght@500.css", "thai", "plex-thai", "500"],
 ];
 
 function parseBlocks(css) {

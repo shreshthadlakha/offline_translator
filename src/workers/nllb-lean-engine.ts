@@ -225,13 +225,16 @@ export class NllbLeanEngine {
     if (this.loaded) await this.dispose();
     this.loadedBundle = { totalBytes: NLLB_BUNDLE.totalBytes, files: [...NLLB_BUNDLE.files] };
 
-    // Announce every file up front. The worker's stage logic treats "all
-    // announced files done" as the end of the downloading phase; without
-    // this, a file whose turn has not come yet is simply absent from the
-    // map, and the "reading into memory" stage would post while bytes are
-    // still moving (found by the P12 browser timeline).
+    // Announce every file up front, with its size. The worker's stage logic
+    // treats "all announced files done" as the end of the downloading phase;
+    // without this, a file whose turn has not come yet is simply absent from
+    // the map, and the "reading into memory" stage would post while bytes are
+    // still moving (found by the P12 browser timeline). The sizes make the
+    // aggregate total known from the first byte, so a small file finishing
+    // early can't make the overall fraction read 1 before the big files have
+    // even started.
     for (const file of NLLB_BUNDLE.files) {
-      onProgress({ status: "initiate", file: file.name });
+      onProgress({ status: "initiate", file: file.name, total: file.bytes });
     }
 
     const byName = new Map<string, ArrayBuffer>();

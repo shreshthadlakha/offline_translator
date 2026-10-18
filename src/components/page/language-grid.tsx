@@ -3,8 +3,9 @@
 /**
  * Every language, in its own script. A grid of the whole registry, each cell
  * showing the native name large and the English name small, in alphabetical
- * order by English name. Every cell carries its own lang and dir, so scripts
- * render correctly, right to left ones included. Under the names sits a quiet
+ * order by English name. The native name carries its own lang and dir, so
+ * scripts render correctly, right to left ones included, while the English
+ * name and the note under it stay left to right. Under the names sits a quiet
  * note about what translating into this language needs on this device: a
  * small model, a small group model, or the large one. It reflects the pair
  * the cell would create with the current source language, so it updates
@@ -74,12 +75,12 @@ function LanguageGridInner() {
             <li key={language.code}>
               <button
                 type="button"
-                lang={language.bcp47}
-                dir={language.dir}
                 onClick={() => onPick(language.code)}
                 className="flex min-h-14 w-full flex-col items-start gap-0.5 rounded-[var(--radius-control)] border border-border px-3.5 py-3 text-start transition-colors outline-none hover:bg-surface hover:shadow-[var(--shadow-card)] focus-visible:ring-[3px] focus-visible:ring-ring/60"
               >
-                <span className="type-body font-medium">{language.native}</span>
+                <span lang={language.bcp47} dir={language.dir} className="native-text type-body font-medium">
+                  {language.native}
+                </span>
                 <span className="type-small text-muted-foreground">{language.english}</span>
                 <span className="type-small text-muted-foreground">{noteFor(language.code)}</span>
               </button>

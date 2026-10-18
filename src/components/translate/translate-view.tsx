@@ -71,7 +71,7 @@ function TranslateViewInner() {
           onOpenChange={setTargetPickerOpen}
           showShortcut
         />
-        <div className="ml-auto min-w-0 max-w-full sm:max-w-[26rem]">
+        <div className="ms-auto min-w-0 max-w-full sm:max-w-[26rem]">
           <StatusBadge className="max-w-full" />
         </div>
       </div>

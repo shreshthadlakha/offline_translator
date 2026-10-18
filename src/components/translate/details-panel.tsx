@@ -75,7 +75,7 @@ function Row({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex items-baseline justify-between gap-3 py-0.5">
       <dt className="type-small shrink-0 text-muted-foreground">{label}</dt>
-      <dd className="type-small min-w-0 text-right tabular-nums">{value}</dd>
+      <dd className="type-small min-w-0 text-end tabular-nums">{value}</dd>
     </div>
   );
 }
@@ -341,7 +341,7 @@ function DetailsPanelInner() {
                       {fileLabel(row.file)}
                       <span className="block truncate text-[0.6875rem] leading-tight text-muted-foreground/80">{row.file}</span>
                     </span>
-                    <span className="type-small shrink-0 text-right text-muted-foreground tabular-nums">
+                    <span className="type-small shrink-0 text-end text-muted-foreground tabular-nums">
                       {fileStatusText(row)}
                       {row.status === "downloading" && row.total > 0 ? (
                         <span className="block">

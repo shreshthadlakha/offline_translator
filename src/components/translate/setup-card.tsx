@@ -13,7 +13,7 @@
  * of date files, each with the right way forward.
  */
 
-import { memo, useEffect, useRef, useState } from "react";
+import { Fragment, memo, useEffect, useRef, useState } from "react";
 import { CloudOff } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -133,8 +133,8 @@ function SetupCardInner() {
     return (
       <>
         <Card role="group" aria-label={copy.setup.dataSaverTitle}>
-          <p className="type-body font-medium">{copy.setup.dataSaverTitle}</p>
-          <p className="type-small mt-1 text-muted-foreground">{copy.setup.dataSaverBody}</p>
+          <p dir="ltr" className="type-body font-medium">{copy.setup.dataSaverTitle}</p>
+          <p dir="ltr" className="type-small mt-1 text-muted-foreground">{copy.setup.dataSaverBody}</p>
           <div className="mt-3 flex gap-2">
             <Button size="sm" onClick={confirmDataSaver}>
               {copy.setup.dataSaverConfirm}
@@ -190,9 +190,9 @@ function SetupCardInner() {
       <>
         <Card role="alert" className="border-danger/40">
           {crashNotice ? (
-            <p className="type-small mb-2 text-danger">{copy.setup.crashedLastTime}</p>
+            <p dir="ltr" className="type-small mb-2 text-danger">{copy.setup.crashedLastTime}</p>
           ) : null}
-          <p className="type-small text-danger">{body}</p>
+          <p dir="ltr" className="type-small text-danger">{body}</p>
           {action ? <div className="mt-3">{action}</div> : null}
         </Card>
         {heavyDialog}
@@ -212,10 +212,10 @@ function SetupCardInner() {
         <>
           <Card role="status">
             {showCrashNotice ? (
-              <p className="type-small mb-2 text-danger">{copy.setup.crashedLastTime}</p>
+              <p dir="ltr" className="type-small mb-2 text-danger">{copy.setup.crashedLastTime}</p>
             ) : null}
-            <h3 className="type-body font-medium">{copy.setup.experimentalTitle(language)}</h3>
-            <p className="type-small mt-1.5 text-muted-foreground">{copy.setup.experimentalBody}</p>
+            <h3 dir="ltr" className="type-body font-medium">{copy.setup.experimentalTitle(language)}</h3>
+            <p dir="ltr" className="type-small mt-1.5 text-muted-foreground">{copy.setup.experimentalBody}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               <Button size="sm" onClick={() => updateSettings({ showExperimentalLanguages: true })}>
                 {copy.setup.experimentalAction}
@@ -224,7 +224,7 @@ function SetupCardInner() {
                 {copy.setup.heavyChooseAnother}
               </Button>
             </div>
-            <p className="type-small mt-2 text-muted-foreground">{copy.settings.experimentalLanguagesHint}</p>
+            <p dir="ltr" className="type-small mt-2 text-muted-foreground">{copy.settings.experimentalLanguagesHint}</p>
           </Card>
           {heavyDialog}
         </>
@@ -240,9 +240,9 @@ function SetupCardInner() {
           <Card role="status">
             <CloudOff aria-hidden className="size-5 text-muted-foreground" />
             {showCrashNotice ? (
-              <p className="type-small mt-2 text-danger">{copy.setup.crashedLastTime}</p>
+              <p dir="ltr" className="type-small mt-2 text-danger">{copy.setup.crashedLastTime}</p>
             ) : null}
-            <p className="type-small mt-2 text-muted-foreground">{offlineLine}</p>
+            <p dir="ltr" className="type-small mt-2 text-muted-foreground">{offlineLine}</p>
           </Card>
           {heavyDialog}
         </>
@@ -254,22 +254,22 @@ function SetupCardInner() {
       <>
         <Card>
           {showCrashNotice ? (
-            <p className="type-small mb-2 text-danger">{copy.setup.crashedLastTime}</p>
+            <p dir="ltr" className="type-small mb-2 text-danger">{copy.setup.crashedLastTime}</p>
           ) : null}
           {fastPair && desired ? (
             <>
-              <h3 className="type-body font-medium">
+              <h3 dir="ltr" className="type-body font-medium">
                 {(desired.expectedBytes >= 200 * 1024 * 1024
                   ? copy.setup.settingUpLargePair(pairEnglish, mbWhole(desired.expectedBytes))
                   : copy.setup.settingUpPair(pairEnglish, mbWhole(desired.expectedBytes)))}
               </h3>
-              <p className="type-small mt-1.5 text-muted-foreground">{copy.setup.line2}</p>
+              <p dir="ltr" className="type-small mt-1.5 text-muted-foreground">{copy.setup.line2}</p>
             </>
           ) : (
             <>
-              <h3 className="type-body font-medium">{copy.setup.title}</h3>
-              <p className="type-small mt-1.5 text-muted-foreground">{copy.setup.line1}</p>
-              <p className="type-small mt-1 text-muted-foreground">{copy.setup.line2}</p>
+              <h3 dir="ltr" className="type-body font-medium">{copy.setup.title}</h3>
+              <p dir="ltr" className="type-small mt-1.5 text-muted-foreground">{copy.setup.line1}</p>
+              <p dir="ltr" className="type-small mt-1 text-muted-foreground">{copy.setup.line2}</p>
             </>
           )}
           <div className="mt-4">
@@ -300,46 +300,52 @@ function SetupCardInner() {
           ? copy.setup.stageInitializing
           : copy.setup.stageTesting;
 
-  const speedText = speedFmt(progress.bps);
-  const etaText = etaFmt(progress.etaMs);
-  const elapsedText = clockMs(progress.elapsedMs);
-  const numbersLine = [speedText, etaText ? `${etaText} left` : "", `${elapsedText} so far`]
-    .filter((part) => part.length > 0)
-    .join(" · ");
+  const numberParts = copy.setup.progressNumbers(
+    speedFmt(progress.bps),
+    etaFmt(progress.etaMs),
+    clockMs(progress.elapsedMs),
+  );
 
   return (
     <>
     <Card role="status" aria-live="polite">
-      <p className="type-small text-muted-foreground">{primaryLine}</p>
+      <p dir="ltr" className="type-small text-muted-foreground">{primaryLine}</p>
 
       {status === "downloading" && progress.total > 0 ? (
         <>
           <Progress value={Math.round(progress.fraction * 100)} className="mt-2.5" aria-label={primaryLine} />
-          <p className="type-small mt-1.5 text-muted-foreground tabular-nums">
-            {copy.setup.progress(mbWhole(progress.loaded), mbWhole(progress.total))}
+          <p dir="ltr" className="type-small mt-1.5 text-muted-foreground tabular-nums">
+            <bdi>{mbWhole(progress.loaded)} MB</bdi> {copy.setup.progressOf} <bdi>{mbWhole(progress.total)} MB</bdi>
           </p>
-          {numbersLine.length > 0 ? (
-            <p className="type-small mt-0.5 text-muted-foreground tabular-nums">{numbersLine}</p>
+          {numberParts.length > 0 ? (
+            <p dir="ltr" className="type-small mt-0.5 text-muted-foreground tabular-nums">
+              {numberParts.map((part, index) => (
+                <Fragment key={index}>
+                  {index > 0 ? ", " : null}
+                  <bdi>{part}</bdi>
+                </Fragment>
+              ))}
+            </p>
           ) : null}
         </>
       ) : null}
 
       {status === "downloading" && progress.total > 0 && progress.fraction >= 1 ? (
-        <p className="type-small mt-1.5 text-muted-foreground">{copy.setup.stageInitializing}</p>
+        <p dir="ltr" className="type-small mt-1.5 text-muted-foreground">{copy.setup.stageInitializing}</p>
       ) : null}
 
       {(status === "initializing" || status === "testing") && stageClock > 0 ? (
         <>
-          <p className="type-small mt-2 text-muted-foreground tabular-nums">
+          <p dir="ltr" className="type-small mt-2 text-muted-foreground tabular-nums">
             {copy.setup.workingFor(clockMs(stageClock))}
           </p>
-          <p className="type-small mt-0.5 text-muted-foreground">{copy.setup.unpackingNote}</p>
+          <p dir="ltr" className="type-small mt-0.5 text-muted-foreground">{copy.setup.unpackingNote}</p>
           {status === "initializing" && stageClock >= 240_000 ? (
-            <p className="type-small mt-1.5 text-danger" role="status">
+            <p dir="ltr" className="type-small mt-1.5 text-danger" role="status">
               {copy.setup.veryLongLoadNote}
             </p>
           ) : status === "initializing" && stageClock >= 90_000 ? (
-            <p className="type-small mt-1.5 text-muted-foreground" role="status">
+            <p dir="ltr" className="type-small mt-1.5 text-muted-foreground" role="status">
               {copy.setup.longLoadNote}
             </p>
           ) : null}
@@ -347,21 +353,21 @@ function SetupCardInner() {
       ) : null}
 
       {stallSeconds != null && status === "downloading" ? (
-        <p className="type-small mt-2 text-danger" role="status">
+        <p dir="ltr" className="type-small mt-2 text-danger" role="status">
           {copy.setup.stalled(stallSeconds)}
         </p>
       ) : null}
 
       {notes.storageDisabled ? (
-        <p className="type-small mt-2 text-muted-foreground">{copy.setup.storageDisabled}</p>
+        <p dir="ltr" className="type-small mt-2 text-muted-foreground">{copy.setup.storageDisabled}</p>
       ) : null}
       {notes.memoryWarning ? (
-        <p className="type-small mt-2 text-muted-foreground">
+        <p dir="ltr" className="type-small mt-2 text-muted-foreground">
           {copy.setup.lowMemory(notes.memoryGB != null ? String(Math.round(notes.memoryGB)) : "4")}
         </p>
       ) : null}
       {notes.webgpuFellBack && status !== "checking" ? (
-        <p className="type-small mt-2 text-muted-foreground">{copy.setup.webgpuFellBack}</p>
+        <p dir="ltr" className="type-small mt-2 text-muted-foreground">{copy.setup.webgpuFellBack}</p>
       ) : null}
 
       <div className="mt-3">

@@ -57,7 +57,7 @@ function ReadyNote() {
           />
         </svg>
       </span>
-      <p className="type-body font-medium">{copy.setup.readyNote}</p>
+      <p dir="ltr" className="type-body font-medium">{copy.setup.readyNote}</p>
     </div>
   );
 }
@@ -129,7 +129,7 @@ function OutputPaneInner() {
     content = <SetupCard />;
   } else if (hasContent) {
     content = output.lines.map((spans, lineIndex) => (
-      <p key={lineIndex} className="min-h-[1.6em]">
+      <p key={lineIndex} className="native-text min-h-[1.6em]">
         {spans.map((span, spanIndex) => {
           if (span.text.length === 0) {
             if (span.state === "pending") {
@@ -160,7 +160,7 @@ function OutputPaneInner() {
   } else if (showReadyNote) {
     content = <ReadyNote />;
   } else {
-    content = <p className="text-muted-foreground">{copy.translate.outputEmpty}</p>;
+    content = <p dir="ltr" className="text-muted-foreground">{copy.translate.outputEmpty}</p>;
   }
 
   // The honest ask for a full model pair can open while a small model is
@@ -178,7 +178,7 @@ function OutputPaneInner() {
   return (
     <section
       aria-label={copy.translate.translation}
-      className="flex min-w-0 flex-col border-t md:border-t-0 md:border-l"
+      className="flex min-w-0 flex-col border-t md:border-t-0 md:border-s"
     >
       <header className="flex items-center justify-between gap-2 px-4 py-2">
         <h2 className="type-small font-medium text-muted-foreground">{copy.translate.translation}</h2>

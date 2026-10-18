@@ -74,7 +74,7 @@ function InputPaneInner() {
           autoCorrect="off"
           autoCapitalize="off"
           className={cn(
-            "type-pane scroll-surface min-h-0 w-full flex-1 resize-none bg-transparent px-4 py-3 outline-none placeholder:text-muted-foreground",
+            "native-text type-pane scroll-surface min-h-0 w-full flex-1 resize-none bg-transparent px-4 py-3 outline-none placeholder:text-muted-foreground",
             "caret-(--accent-green)",
             hidden && "masked",
           )}

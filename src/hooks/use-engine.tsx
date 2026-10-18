@@ -161,6 +161,9 @@ export function useEngine(heavyGate?: HeavyGate) {
   const workerRef = useRef<Worker | null>(null);
   const listenersRef = useRef(new Set<Listener>());
   const fractionRef = useRef(0);
+  /** The aggregate total the current fractionRef maximum belongs to. When the
+   * known total grows (more files announced), the old maximum is stale. */
+  const progressTotalRef = useRef(0);
   const wasReadyBeforeRef = useRef(false);
   const statusRef = useRef<EngineStatus>("idle");
   const activeSpecRef = useRef<EngineSpec | null>(null);
@@ -338,9 +341,16 @@ export function useEngine(heavyGate?: HeavyGate) {
           const now = performance.now();
           lastProgressAtRef.current = now;
           const fraction = message.total > 0 ? Math.min(1, message.loaded / message.total) : 0;
-          // The displayed value never goes backwards, even when the known
-          // total grows as more files start downloading.
-          fractionRef.current = Math.max(fractionRef.current, fraction);
+          // The displayed value never goes backwards while the known total
+          // is unchanged. When the total grows (more files announced), the
+          // old maximum is stale, so the latch resets and the bar tells the
+          // truth again instead of staying stuck at full.
+          if (message.total !== progressTotalRef.current) {
+            progressTotalRef.current = message.total;
+            fractionRef.current = fraction;
+          } else {
+            fractionRef.current = Math.max(fractionRef.current, fraction);
+          }
           const samples = progressSamplesRef.current;
           samples.push({ at: now, loaded: message.loaded });
           while (samples.length > 2 && now - (samples[0]?.at ?? now) > 6000) samples.shift();
@@ -627,6 +637,7 @@ export function useEngine(heavyGate?: HeavyGate) {
       setFileRows([]);
       setStageTimings({});
       fractionRef.current = 0;
+      progressTotalRef.current = 0;
       progressSamplesRef.current = [];
       downloadStartRef.current = null;
       setProgress({ loaded: 0, total: 0, fraction: 0, bps: 0, etaMs: null, elapsedMs: 0 });

@@ -17,14 +17,6 @@ export function mbWhole(bytes: number): string {
   return Math.max(0, Math.round(bytes / (1024 * 1024))).toString();
 }
 
-/** Megabytes with one decimal, for small models where whole numbers are too
- * coarse: "108.4 MB". */
-export function mbPrecise(bytes: number): string {
-  const mb = bytes / (1024 * 1024);
-  if (mb >= 100) return Math.round(mb).toString();
-  return mb.toFixed(1);
-}
-
 /** A clock like 0:45 or 12:03, for timers that run in view. */
 export function clockMs(ms: number): string {
   const total = Math.max(0, Math.floor(ms / 1000));
@@ -44,10 +36,15 @@ export function speed(bytesPerSecond: number): string {
   return `${(bytesPerSecond / (1024 * 1024)).toFixed(1)} MB/s`;
 }
 
-/** Remaining time, plain: "about 40 s" or "about 3 min". */
+/** Remaining time, plain: "about 40 seconds", "about 1 second" or "about 3 minutes". */
 export function eta(ms: number | null): string {
   if (ms == null || !Number.isFinite(ms) || ms <= 0) return "";
   const seconds = Math.round(ms / 1000);
-  if (seconds < 60) return `about ${seconds} s`;
-  return `about ${Math.max(1, Math.round(seconds / 60))} min`;
+  if (seconds < 60) {
+    if (seconds === 1) return "about 1 second";
+    return `about ${seconds} seconds`;
+  }
+  const minutes = Math.max(1, Math.round(seconds / 60));
+  if (minutes === 1) return "about 1 minute";
+  return `about ${minutes} minutes`;
 }

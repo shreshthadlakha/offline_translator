@@ -203,7 +203,7 @@ export function BatchDialog({ open, onOpenChange }: Props) {
               aria-label={strings.batch.pastePlaceholder}
               lang={srcLang?.bcp47}
               dir={srcLang?.dir ?? "ltr"}
-              className="scroll-surface min-h-40"
+              className="native-text scroll-surface min-h-40"
             />
             <div className="flex items-center justify-between gap-2">
               <input
@@ -263,7 +263,7 @@ export function BatchDialog({ open, onOpenChange }: Props) {
             <div
               lang={tgtLang?.bcp47}
               dir={tgtLang?.dir ?? "ltr"}
-              className="scroll-surface type-body max-h-64 overflow-y-auto whitespace-pre-wrap rounded-lg border bg-surface p-3"
+              className="native-text scroll-surface type-body max-h-64 overflow-y-auto whitespace-pre-wrap rounded-lg border bg-surface p-3"
               aria-label={strings.batch.title}
             >
               {resultText.length > 0 ? resultText : "\u00a0"}

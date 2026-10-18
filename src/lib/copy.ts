@@ -7,7 +7,7 @@
 
 import { LANGUAGES } from "@/lib/languages";
 
-/** Size of the one time download for the full model, shown up front. */
+/** Size of the one-time download for the full model, shown up front. */
 export const MODEL_SIZE = "900 MB";
 
 /** The app version, shown in Details. */
@@ -49,8 +49,8 @@ export const copy = {
     offline: "You're offline",
   },
   setup: {
-    title: "One time set up",
-    line1: `The first translation needs the model on this device. It's a one time download of about ${MODEL_SIZE}.`,
+    title: "One-time setup",
+    line1: `The first translation needs the model on this device. It's a one-time download of about ${MODEL_SIZE}.`,
     line2: "After that, translating works with no connection, and nothing you type is ever sent anywhere.",
     start: "Set up now",
     // Always available during setup: stops the work and returns to the offer.
@@ -61,14 +61,12 @@ export const copy = {
     stageDownloading: "Downloading the model",
     stageInitializing: "Reading it into memory",
     stageTesting: "Checking that translation works",
-    stageReady: "Ready",
     // A small model for a specific pair, instead of the full one.
     settingUpPair: (pairEnglish: string, sizeMB: string) => `Setting up ${pairEnglish}. This downloads a small model once, about ${sizeMB} MB.`,
     // The IndicTrans2 bundles are larger than the small pairs: honest
     // wording without "small", so nobody is surprised by a 295 MB download.
     settingUpLargePair: (pairEnglish: string, sizeMB: string) => `Setting up ${pairEnglish}. This downloads a model once, about ${sizeMB} MB.`,
     switching: "Switching to the faster model for this pair.",
-    settingUp: "Setting up translation. This happens once.",
     // The drawn check once setup finishes.
     readyNote: "Ready. Works offline now.",
     // While the model is being read into memory, no bytes move and nothing
@@ -81,7 +79,18 @@ export const copy = {
     veryLongLoadNote: "This device may not be able to run the full model. You can keep waiting or cancel.",
     // Download stall.
     stalled: (seconds: number) => `No data has arrived for ${seconds} seconds. Check your connection. Files already saved are kept.`,
-    progress: (doneMB: string, totalMB: string) => `${doneMB} of ${totalMB} MB`,
+    // The download progress line and the numbers line under it are built
+    // from parts in the setup card, each part isolated, so right-to-left
+    // layouts can't reorder the numbers: "23 MB of 470 MB",
+    // "3.8 MB/s, about 2 minutes left, 0:05 elapsed".
+    progressOf: "of",
+    progressNumbers: (speed: string, eta: string, elapsed: string): string[] => {
+      const parts: string[] = [];
+      if (speed) parts.push(speed);
+      if (eta) parts.push(`${eta} left`);
+      if (elapsed) parts.push(`${elapsed} elapsed`);
+      return parts;
+    },
     dataSaverTitle: "Data saver is on.",
     dataSaverBody: `Downloading the model uses about ${MODEL_SIZE}. Start anyway?`,
     dataSaverConfirm: "Download now",
@@ -102,7 +111,7 @@ export const copy = {
     // Storage quota smaller than the model.
     quotaTooSmall: (canStore: string, needs: string) => `This window can only store ${canStore}, and the model needs about ${needs}. Open the app in a normal window instead.`,
     // Low reported memory. A note, not a block. Full model only.
-    lowMemory: (gb: string) => `This device reports about ${gb} GB of memory. Setup needs roughly 3 GB free at its peak. Closing other tabs first helps.`,
+    lowMemory: (gb: string) => `This device reports about ${gb} GB of memory. Setup needs roughly 3 GB free at its peak. Closing other tabs helps.`,
     // Storage can't be written at all. Translating still works.
     storageDisabled: "Storage is switched off in this window, so the model can't be saved. It will download again next visit.",
     // WebGPU wanted, WebAssembly used.
@@ -121,9 +130,7 @@ export const copy = {
     // would not work.
     experimentalTitle: (language: string) => `${language} needs the full model.`,
     experimentalBody: `The full model is about ${MODEL_SIZE} and needs a powerful computer: roughly 3 GB of free memory, and a load that can take minutes. It did not finish loading on our 4 GB test machine, so languages like this are hidden by default.`,
-    experimentalBodyShort: `The full model is about ${MODEL_SIZE}, needs roughly 3 GB of free memory, and can take minutes to load. It's hidden by default because it doesn't work on every computer.`,
     experimentalAction: "Show experimental languages",
-    experimentalAfterEnable: "Experimental languages are on. Pick the language again to set it up.",
   },
 
   translate: {
@@ -179,7 +186,7 @@ export const copy = {
     experimentalGroupNote: `About ${MODEL_SIZE}, roughly 3 GB of free memory, and minutes to load. It did not finish on our 4 GB test machine.`,
     costExperimental: `Experimental: about ${MODEL_SIZE}, needs a powerful computer`,
     // A search that matched only languages hidden behind the switch.
-    experimentalHiddenMatches: "That language has no small model yet, so it's hidden. \"Show experimental languages\" in Settings lists it.",
+    experimentalHiddenMatches: "That language has no small model yet, so it's hidden. Turn on \"Show experimental languages\" in Settings to see it.",
     // The quiet notice under a translation from an approximate or limited
     // model, with the per language way out.
     approximateNotice: "This fast model is approximate. For important text, use the full model.",
@@ -219,7 +226,7 @@ export const copy = {
     memory: "Reported memory",
     timings: "Stage times",
     timingLine: (label: string, seconds: string) => `${label}: ${seconds} s`,
-    nowLine: (stage: string, clock: string) => `Now: ${stage}, ${clock} so far`,
+    nowLine: (stage: string, clock: string) => `Now: ${stage}, ${clock} elapsed`,
     lastError: "Last error",
     version: "App version",
     recentTranslations: "Recent translations",
@@ -262,14 +269,14 @@ export const copy = {
     checkOther: "Anything else",
     checkOtherEmpty: "Nothing here so far.",
     checkRequests: (count: number) => (count === 1 ? "1 request" : `${count} requests`),
-    checkSizeUnknown: "—",
+    checkSizeUnknown: "Unknown",
     checkDevtools: "Want to check without taking our word for it? Open your browser's developer tools and look at the Network tab.",
     checkOffline: "Turn off your wifi and translate something. It still works.",
     languagesHeading: "Every language, in its own script",
     languagesLead: `${LANGUAGE_COUNT} languages. Pick one to translate into it.`,
     expectHeading: "What to expect",
     expectItems: [
-      `The first set up downloads a model once: about 20 to 130 MB for popular pairs, like English to French, and larger for some language families. It never happens again.`,
+      `The first setup downloads a model once: about 20 to 130 MB for popular pairs, like English to French, and larger for some language families. It never happens again.`,
       "A few languages have no small model yet. They are hidden behind \"Show experimental languages\" in Settings, because the full model needs a powerful computer: about 900 MB and roughly 3 GB of free memory.",
       "Older phones and computers can be slow, and some may run out of memory.",
       "Quality is good for everyday text but varies by language. It won't match the biggest cloud services on subtle meaning.",
@@ -348,7 +355,7 @@ export const copy = {
     translate: "Translate",
     translating: "Translating",
     cancel: "Cancel",
-    progress: (done: number, total: number) => `${done} of ${total} sentences`,
+    progress: (done: number, total: number) => (total === 1 ? `${done} of ${total} sentence` : `${done} of ${total} sentences`),
     done: "Translation ready.",
     cancelled: "Cancelled.",
     copy: "Copy",

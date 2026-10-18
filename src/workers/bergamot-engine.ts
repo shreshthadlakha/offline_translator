@@ -248,14 +248,27 @@ export class BergamotEngine {
    * shaped exactly like the other engines'.
    */
   async load(pair: string, onProgress: ProgressFn): Promise<void> {
-    await this.ensureRuntime(onProgress);
     if (this.hasPair(pair)) return;
-
-    await this.disposeModel();
-    this.pair = pair;
 
     const pinned = BERGAMOT_PAIRS[pair];
     if (!pinned) throw new Error(`unknown Bergamot pair ${pair}`);
+    // Announce every file this load can still touch before any fetch begins:
+    // the pair's files here, and the runtime's own inside ensureRuntime right
+    // after. The pair files must announce ahead of ensureRuntime — when the
+    // runtime files completed first, the announced set was briefly "all done",
+    // which posted the initializing stage before the pair files had even
+    // announced themselves, and the whole pair download then rendered as
+    // "Reading it into memory" with no progress bar. With every file announced
+    // up front, the aggregate total is the whole load from the first byte, a
+    // small file finishing early can't make the overall fraction read 1, and
+    // the initializing stage only fires when every announced file is truly in.
+    for (const file of pinned.files) {
+      onProgress({ status: "initiate", file: file.name, total: file.bytes });
+    }
+    await this.ensureRuntime(onProgress);
+    await this.disposeModel();
+    this.pair = pair;
+
     const buffers = new Map<string, ArrayBuffer>();
     for (const file of pinned.files) {
       const bytes = await fetchVerifiedFile(bergamotFileUrl(pair, file.name), file, "pt-bergamot", onProgress);
@@ -286,6 +299,14 @@ export class BergamotEngine {
 
   private async ensureRuntime(onProgress: ProgressFn): Promise<void> {
     if (this.module && this.service) return;
+    // Announce the runtime files up front with their sizes. Only reached
+    // when the runtime will actually be fetched or confirmed this load (a
+    // pair switch keeps the loaded runtime), so every announced file gets
+    // its "done" event below: the aggregate total covers them from the
+    // first byte, and the downloading stage cannot end before they are in.
+    for (const file of [BERGAMOT_RUNTIME.glue, BERGAMOT_RUNTIME.wasm]) {
+      onProgress({ status: "initiate", file: file.name, total: file.bytes });
+    }
     const cache = await caches.open("pt-bergamot");
     const glueUrl = `/bergamot/${BERGAMOT_RUNTIME.glue.name}`;
     const wasmUrl = `/bergamot/${BERGAMOT_RUNTIME.wasm.name}`;

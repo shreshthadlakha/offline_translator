@@ -230,6 +230,14 @@ export class IndicTrans2Engine {
     const bundle = INDICTRANS2_BUNDLES[bundleKey];
     this.loadedBundle = { key: bundleKey, totalBytes: bundle.totalBytes, files: bundle.files };
 
+    // Announce every file up front with its size: the aggregate total is the
+    // whole bundle from the first byte, so a small file finishing early can't
+    // make the overall fraction read 1, and the map always names every file
+    // that is still coming (the stage logic waits for all of them).
+    for (const file of bundle.files) {
+      onProgress({ status: "initiate", file: file.name, total: file.bytes });
+    }
+
     const byName = new Map<string, ArrayBuffer>();
     for (const file of bundle.files) {
       const bytes = await fetchVerifiedFile(bundleKey, file, onProgress);
