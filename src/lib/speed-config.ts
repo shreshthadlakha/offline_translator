@@ -89,6 +89,16 @@ export const SPEED_CONFIG = {
    * crash from the last visit. */
   crashFlagMaxAgeMs: 10 * 60 * 1000,
 
+  /** The large full model's memory: it holds about 2.5 GB while it runs, so
+   * it is returned by ending the worker after these rules. */
+  largeModel: {
+    /** Unload it after the tab has been hidden this long, whatever the idle
+     * setting says: a hidden tab is not translating. */
+    hiddenUnloadMs: 3 * 60 * 1000,
+    /** How often the unload watcher checks the two rules. */
+    unloadCheckMs: 15_000,
+  },
+
   /** How many translations the Details log keeps. */
   timingLogSize: 10,
 } as const;

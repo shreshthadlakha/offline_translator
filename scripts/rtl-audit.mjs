@@ -18,7 +18,7 @@
 //   States audited, all through the real UI:
 //     1. the default LTR page (English -> French): the baseline;
 //     2. the RTL grid route: Pashto picked from the "Every language, in its
-//        own script" grid -> the experimental notice inside the output pane's
+//        own script" grid -> the large model offer inside the output pane's
 //        dir=rtl container, plus the target picker popover with its RTL rows;
 //     3. a real small-model RTL pair downloading: English -> Persian (Bergamot
 //        en-fa — see the note next to AUDIT_PAIR), through Set up now /
@@ -524,8 +524,8 @@ async function runRenderedAudit() {
     if (!clickedPashto) throw new Error("Pashto cell not found in the language grid");
     await waitFor(
       conn,
-      `!!document.querySelector('#tool div[dir="rtl"]') && !!Array.from(document.querySelectorAll('#tool h3')).find((h) => h.textContent.includes('needs the full model'))`,
-      "experimental notice inside the rtl output pane",
+      `!!document.querySelector('#tool div[dir="rtl"]') && !!Array.from(document.querySelectorAll('#tool h3')).find((h) => h.textContent.includes('uses the large model'))`,
+      "large model offer inside the rtl output pane",
       30_000,
     );
     await sleep(400);
@@ -543,7 +543,7 @@ async function runRenderedAudit() {
       flag("notice-isolation", "no rtl output pane found after picking Pashto");
     } else {
       for (const el of notice) {
-        if (el.dir !== "ltr") flag("notice-isolation", `experimental notice ${el.tag} "${el.text}" has dir="${el.dir}", expected dir="ltr"`);
+        if (el.dir !== "ltr") flag("notice-isolation", `large model offer line ${el.tag} "${el.text}" has dir="${el.dir}", expected dir="ltr"`);
       }
     }
     // The grid cell: the native span carries lang+dir; the English name and
@@ -584,7 +584,7 @@ async function runRenderedAudit() {
       if (grid.englishUnderRtl) flag("grid-structure", "English name inherits rtl from an ancestor");
       if (grid.noteUnderRtl) flag("grid-structure", `cost note "${grid.noteText}" inherits rtl from an ancestor`);
     }
-    recordWalk("RTL grid route: Pashto experimental notice", await $(`(${WALK})('body')`));
+    recordWalk("RTL grid route: Pashto large model offer", await $(`(${WALK})('body')`));
 
     // The target picker popover, with its RTL rows.
     await $(String.raw`

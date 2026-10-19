@@ -6,15 +6,29 @@
  */
 
 import { LANGUAGES } from "@/lib/languages";
+import { engineForPair } from "@/lib/engines";
 
 /** Size of the one-time download for the full model, shown up front. */
 export const MODEL_SIZE = "900 MB";
+
+/** Memory the full model holds while it runs, from the measured peak (the
+ *  test machine's renderer was killed at ~2.4 GB while loading it). */
+export const LARGE_MEMORY = "2.5 GB";
 
 /** The app version, shown in Details. */
 export const APP_VERSION = "1.0.0";
 
 /** The language count comes from the registry. It is never hard coded. */
 export const LANGUAGE_COUNT = LANGUAGES.length;
+
+/** Languages with no small model in either direction with English, computed
+ *  from the engine table. It is never hard coded. */
+export const LARGE_LANGUAGE_COUNT = LANGUAGES.filter(
+  (l) =>
+    l.code !== "eng_Latn" &&
+    engineForPair(l.code, "eng_Latn", true).kind === "nllb" &&
+    engineForPair("eng_Latn", l.code, true).kind === "nllb",
+).length;
 
 export const copy = {
   app: {
@@ -49,10 +63,16 @@ export const copy = {
     offline: "You're offline",
   },
   setup: {
-    title: "One-time setup",
-    line1: `The first translation needs the model on this device. It's a one-time download of about ${MODEL_SIZE}.`,
     line2: "After that, translating works with no connection, and nothing you type is ever sent anywhere.",
     start: "Set up now",
+    // The large model's offer. It never starts on its own: the button or a
+    // Translate press starts it, and the honest ask below comes first while
+    // the model is not saved on this device.
+    largeTitle: (pairEnglish: string) => `${pairEnglish} uses the large model.`,
+    largeBody: `A one-time download of about ${MODEL_SIZE}. While it runs it uses about ${LARGE_MEMORY} of memory, so other programs and tabs may slow down. Closing other tabs helps.`,
+    loadModel: "Load model",
+    // The quiet line after the large model was unloaded to free memory.
+    unloadedNote: "The large model was unloaded to free memory. It loads again when you translate.",
     // Always available during setup: stops the work and returns to the offer.
     cancelSetup: "Cancel",
     // The setup stages, in order. These are the names people see while the
@@ -111,7 +131,7 @@ export const copy = {
     // Storage quota smaller than the model.
     quotaTooSmall: (canStore: string, needs: string) => `This window can only store ${canStore}, and the model needs about ${needs}. Open the app in a normal window instead.`,
     // Low reported memory. A note, not a block. Full model only.
-    lowMemory: (gb: string) => `This device reports about ${gb} GB of memory. Setup needs roughly 3 GB free at its peak. Closing other tabs helps.`,
+    lowMemory: (gb: string) => `This device reports about ${gb} GB of memory. The large model uses about ${LARGE_MEMORY} while it runs, so it may not finish. Closing other tabs helps.`,
     // Storage can't be written at all. Translating still works.
     storageDisabled: "Storage is switched off in this window, so the model can't be saved. It will download again next visit.",
     // WebGPU wanted, WebAssembly used.
@@ -121,16 +141,15 @@ export const copy = {
     // The honest ask before a heavy setup. Shown once per pair while the full
     // model isn't saved on the device.
     heavyTitle: (language: string) => `There's no fast model for ${language} yet.`,
-    heavyBody: `The full model is about ${MODEL_SIZE} and needs roughly 3 GB of free memory when it starts. On many computers it takes several minutes, and on some it won't finish.`,
-    heavyBodyLowMemory: (gb: string) => `The full model is about ${MODEL_SIZE} and needs roughly 3 GB of free memory when it starts. This device reports about ${gb} GB of memory, so it may not finish. Closing other tabs helps.`,
+    heavyBody: `The full model is a one-time download of about ${MODEL_SIZE}, and it uses about ${LARGE_MEMORY} of memory while it runs. Other programs and tabs may slow down while it's loaded; closing them helps. Loading it can take a few minutes.`,
+    heavyBodyLowMemory: (gb: string) => `The full model is a one-time download of about ${MODEL_SIZE}, and it uses about ${LARGE_MEMORY} of memory while it runs. This device reports about ${gb} GB of memory, so it may not finish. Closing other tabs helps.`,
     heavyContinue: "Continue",
     heavyChooseAnother: "Choose another language",
-    // The experimental languages notice: the pair needs the full model, which
-    // is hidden by default. Plain wording, the way out, nothing offered that
-    // would not work.
-    experimentalTitle: (language: string) => `${language} needs the full model.`,
-    experimentalBody: `The full model is about ${MODEL_SIZE} and needs a powerful computer: roughly 3 GB of free memory, and a load that can take minutes. It did not finish loading on our 4 GB test machine, so languages like this are hidden by default.`,
-    experimentalAction: "Show experimental languages",
+    // The hide-switch notice: the pair needs the large model and the optional
+    // switch keeps it out of the lists. Plain wording, the way out.
+    hiddenLargeTitle: (language: string) => `${language} needs the large model.`,
+    hiddenLargeBody: `It's hidden because "Hide languages that need the large model" is on in Settings. The large model is a one-time download of about ${MODEL_SIZE} and uses about ${LARGE_MEMORY} of memory while it runs.`,
+    hiddenLargeAction: "Show these languages",
   },
 
   translate: {
@@ -172,21 +191,17 @@ export const copy = {
     translatedOffline: "Translated with no connection.",
     // Quiet cost notes beside each language, for the pair it would create
     // with the language on the other side. The tier qualifier comes from the
-    // measured quality data, never a guess.
+    // measured quality data, never a guess. The same tags appear in the
+    // picker and in the grid.
     costFast: (mb: string) => `Fast, about ${mb} MB`,
     costFastApproximate: (mb: string) => `Fast, approximate, about ${mb} MB`,
     costFastLimited: (mb: string) => `Fast, limited, about ${mb} MB`,
-    costGroup: (mb: string) => `Fast, about ${mb} MB (one model shared by a few languages)`,
-    costGroupApproximate: (mb: string) => `Fast, approximate, about ${mb} MB (one model shared by a few languages)`,
-    costGroupLimited: (mb: string) => `Fast, limited, about ${mb} MB (one model shared by a few languages)`,
-    costLarge: `Large, about ${MODEL_SIZE}`,
-    // The picker group for languages whose only model is the full one, shown
-    // only when the experimental switch is on.
-    experimentalGroup: "Experimental, needs a powerful computer",
-    experimentalGroupNote: `About ${MODEL_SIZE}, roughly 3 GB of free memory, and minutes to load. It did not finish on our 4 GB test machine.`,
-    costExperimental: `Experimental: about ${MODEL_SIZE}, needs a powerful computer`,
-    // A search that matched only languages hidden behind the switch.
-    experimentalHiddenMatches: "That language has no small model yet, so it's hidden. Turn on \"Show experimental languages\" in Settings to see it.",
+    costGroup: (mb: string) => `Fast, about ${mb} MB, one shared model`,
+    costGroupApproximate: (mb: string) => `Fast, approximate, about ${mb} MB, one shared model`,
+    costGroupLimited: (mb: string) => `Fast, limited, about ${mb} MB, one shared model`,
+    costLarge: `Large, about ${MODEL_SIZE}. Slower, and uses a lot of memory.`,
+    // A search that matched only languages the hide switch keeps out.
+    largeHiddenMatches: "That language has no small model yet, so it's hidden. Turn off \"Hide languages that need the large model\" in Settings to see it.",
     // The quiet notice under a translation from an approximate or limited
     // model, with the per language way out.
     approximateNotice: "This fast model is approximate. For important text, use the full model.",
@@ -239,6 +254,10 @@ export const copy = {
     speedTestResult: (perSentenceSeconds: string, queueSeconds: string) =>
       `About ${perSentenceSeconds} s per sentence on this device. Waiting in the queue took ${queueSeconds} s.`,
     speedTestUnavailable: "The speed test works from English. Pick English on the left to use it.",
+    // Unload the loaded engine by choice, from Details.
+    freeNow: "Free memory now",
+    freeNowHint: "Unloads the model from memory. It loads again when you translate.",
+    freedNote: "Memory freed. It loads again when you translate.",
     copyDetails: "Copy details",
     copied: "Details copied. They don't include anything you typed.",
     copyFailed: "Couldn't copy. Select the text and copy it yourself.",
@@ -277,7 +296,7 @@ export const copy = {
     expectHeading: "What to expect",
     expectItems: [
       `The first setup downloads a model once: about 20 to 130 MB for popular pairs, like English to French, and larger for some language families. It never happens again.`,
-      "A few languages have no small model yet. They are hidden behind \"Show experimental languages\" in Settings, because the full model needs a powerful computer: about 900 MB and roughly 3 GB of free memory.",
+      `${LARGE_LANGUAGE_COUNT} languages have no small model yet, and so do pairs between two non-English languages. They use the large model: a one-time download of about ${MODEL_SIZE}, and about ${LARGE_MEMORY} of memory while it runs. It loads when you translate and is unloaded after a few minutes without one.`,
       "Older phones and computers can be slow, and some may run out of memory.",
       "Quality is good for everyday text but varies by language. It won't match the biggest cloud services on subtle meaning.",
       "Listening depends on the voices your device already has.",
@@ -286,7 +305,7 @@ export const copy = {
     questions: [
       {
         q: "Which models does it use?",
-        a: "Popular pairs, like English to French, use small Opus-MT models from Helsinki NLP, released under Apache-2.0 or CC BY 4.0 depending on the pair. Portuguese shares one small multi language Opus-MT model, about 115 MB. The Indian languages (Hindi, Bengali, Tamil, Urdu and nine more, both directions with English) use IndicTrans2 from AI4Bharat, MIT licensed, as community int8 exports, about 250 to 300 MB per direction. Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Polish, Hebrew to English, Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese use Mozilla's Firefox Translations models, MPL-2.0, run by the Bergamot WebAssembly engine, about 20 to 50 MB per direction. The remaining languages, and pairs between two non-English languages, use NLLB-200 from Meta, released under a non commercial licence, CC BY-NC 4.0. Those are the experimental ones, hidden behind \"Show experimental languages\" in Settings, because the full model needs a powerful computer. The exact model for the pair you're using, and its licence, is in Details.",
+        a: "Popular pairs, like English to French, use small Opus-MT models from Helsinki NLP, released under Apache-2.0 or CC BY 4.0 depending on the pair. Portuguese shares one small multi language Opus-MT model, about 115 MB. The Indian languages (Hindi, Bengali, Tamil, Urdu and nine more, both directions with English) use IndicTrans2 from AI4Bharat, MIT licensed, as community int8 exports, about 250 to 300 MB per direction. Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Polish, Hebrew to English, Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese use Mozilla's Firefox Translations models, MPL-2.0, run by the Bergamot WebAssembly engine, about 20 to 50 MB per direction. The remaining languages, and pairs between two non-English languages, use NLLB-200 from Meta, released under a non commercial licence, CC BY-NC 4.0. Those pairs are labelled Large in the lists. The exact model for the pair you're using, and its licence, is in Details.",
       },
       {
         q: "Does it work offline?",
@@ -305,8 +324,8 @@ export const copy = {
         a: "Open Settings and choose Erase everything on this device.",
       },
       {
-        q: "Why are some languages hidden?",
-        a: "They have no small model yet, so they depend on the full model, about 900 MB and roughly 3 GB of free memory. On our 4 GB test machine it never finished loading, so they are off by default. \"Show experimental languages\" in Settings lists them again, plainly labelled.",
+        q: "What does the Large label mean?",
+        a: `It means the pair has no small model yet, so it uses the large one: a one-time download of about ${MODEL_SIZE}, and about ${LARGE_MEMORY} of memory while it runs. Translating is slower than with a small model, and other programs and tabs may slow down while it's loaded. The large model loads when you press Translate, and after a few minutes without a translation it is unloaded to give the memory back. If you'd rather not see these languages, turn on "Hide languages that need the large model" in Settings.`,
       },
       {
         q: "Why is the first download so big?",
@@ -379,10 +398,16 @@ export const copy = {
     // Experimental device setting.
     webgpu: "Try the faster graphics device (experimental)",
     webgpuHint: "Uses your device's graphics processor where the browser allows it, and falls back if it doesn't work.",
-    // The experimental languages switch: off by default, because the full
-    // model did not finish loading on a 4 GB test machine.
-    experimentalLanguages: "Show experimental languages",
-    experimentalLanguagesHint: "Languages whose only model is the full one, about 900 MB and roughly 3 GB of free memory. They are slow and may not load at all on computers with 4 GB or less.",
+    // The optional hide switch: off by default, because the large-model
+    // languages are offered normally, with their plain Large tag.
+    hideLargeLanguages: "Hide languages that need the large model",
+    hideLargeLanguagesHint: `Languages with no small model yet: a one-time download of about ${MODEL_SIZE} and about ${LARGE_MEMORY} of memory while the model runs. Turning this on keeps them out of the lists.`,
+    // When the large model is unloaded after no translation.
+    idleUnload: "Free memory when idle",
+    idleUnloadHint: "The large model is unloaded after this long without a translation, and loads again when you translate.",
+    idleUnload5: "5 minutes",
+    idleUnload15: "15 minutes",
+    idleUnloadNever: "Never",
     onThisDevice: "On this device",
     savedModels: "Saved models",
     savedModelsEmpty: "None yet.",

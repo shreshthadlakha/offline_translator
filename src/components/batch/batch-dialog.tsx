@@ -72,7 +72,9 @@ export function BatchDialog({ open, onOpenChange }: Props) {
   const start = useCallback(() => {
     const text = batchText.trim();
     if (text.length === 0) return;
-    maybeStartSetup();
+    // The batch Translate press is an explicit start: it may start the large
+    // model too, which typing and pasting never do.
+    maybeStartSetup({ allowLarge: true });
     const segments = segmentText(text, srcLang?.bcp47 ?? "en");
     const all = flatSentences(segments);
     setState({ phase: "running", text, total: all.length, done: 0, failed: 0 });

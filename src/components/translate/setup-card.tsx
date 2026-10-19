@@ -65,7 +65,7 @@ function SetupCardInner() {
   const { engine, srcLang, tgtLang, dataSaverAskOpen, confirmDataSaver, declineDataSaver, heavyAsk, confirmHeavySetup, declineHeavySetup, setTargetPickerOpen } = useTranslatorState();
   const online = useOnlineStatus();
   const { update: updateSettings } = useSettings();
-  const { status, error, progress, switching, notes, crashNotice, stallSeconds, experimentalBlocked } = engine;
+  const { status, error, progress, switching, notes, crashNotice, stallSeconds, largeBlocked, modelPresent, idleUnloaded } = engine;
   const desired = engine.desiredEngine;
 
   // A visible clock for the stages where nothing would otherwise change on
@@ -202,10 +202,10 @@ function SetupCardInner() {
 
   if (status === "idle") {
     const showCrashNotice = crashNotice != null;
-    // The pair needs the full model and the experimental switch is off: the
-    // plain notice, with the switch itself as the action. Nothing that
-    // depends on the full model is offered by default.
-    if (experimentalBlocked) {
+    // The pair needs the large model and "Hide languages that need the large
+    // model" is on: the plain notice, with the switch itself as the action.
+    // Nothing that needs the large model is offered while it is hidden.
+    if (largeBlocked) {
       const exotic = tgtLang?.code === "eng_Latn" ? srcLang : tgtLang;
       const language = exotic?.english ?? "this language";
       return (
@@ -214,23 +214,26 @@ function SetupCardInner() {
             {showCrashNotice ? (
               <p dir="ltr" className="type-small mb-2 text-danger">{copy.setup.crashedLastTime}</p>
             ) : null}
-            <h3 dir="ltr" className="type-body font-medium">{copy.setup.experimentalTitle(language)}</h3>
-            <p dir="ltr" className="type-small mt-1.5 text-muted-foreground">{copy.setup.experimentalBody}</p>
+            <h3 dir="ltr" className="type-body font-medium">{copy.setup.hiddenLargeTitle(language)}</h3>
+            <p dir="ltr" className="type-small mt-1.5 text-muted-foreground">{copy.setup.hiddenLargeBody}</p>
             <div className="mt-3 flex flex-wrap gap-2">
-              <Button size="sm" onClick={() => updateSettings({ showExperimentalLanguages: true })}>
-                {copy.setup.experimentalAction}
+              <Button size="sm" onClick={() => updateSettings({ hideLargeLanguages: false })}>
+                {copy.setup.hiddenLargeAction}
               </Button>
               <Button size="sm" variant="ghost" onClick={() => setTargetPickerOpen(true)}>
                 {copy.setup.heavyChooseAnother}
               </Button>
             </div>
-            <p dir="ltr" className="type-small mt-2 text-muted-foreground">{copy.settings.experimentalLanguagesHint}</p>
+            <p dir="ltr" className="type-small mt-2 text-muted-foreground">{copy.settings.hideLargeLanguagesHint}</p>
           </Card>
           {heavyDialog}
         </>
       );
     }
-    if (!online) {
+    // Offline and the pair's model is not saved on this device: nothing can
+    // start. A saved model can still load from this device with no
+    // connection, so the offers below show for it.
+    if (!online && !modelPresent) {
       const offlineLine =
         anyModelSaved == null || anyModelSaved === false
           ? copy.setup.offlineNotSetup
@@ -248,30 +251,49 @@ function SetupCardInner() {
         </>
       );
     }
-    const fastPair = desired?.kind === "opus" || desired?.kind === "bergamot";
+    const largePair = desired?.kind === "nllb";
     const pairEnglish = `${srcLang?.english ?? "English"} to ${tgtLang?.english ?? "French"}`;
+    if (largePair) {
+      // The large model's own offer. It never starts on its own: this
+      // button or a Translate press starts it, and the honest ask still
+      // comes first when the model is not saved on this device yet.
+      return (
+        <>
+          <Card>
+            {showCrashNotice ? (
+              <p dir="ltr" className="type-small mb-2 text-danger">{copy.setup.crashedLastTime}</p>
+            ) : null}
+            {idleUnloaded ? (
+              <p dir="ltr" className="type-small mb-2 text-muted-foreground">{copy.setup.unloadedNote}</p>
+            ) : null}
+            <h3 dir="ltr" className="type-body font-medium">{copy.setup.largeTitle(pairEnglish)}</h3>
+            <p dir="ltr" className="type-small mt-1.5 text-muted-foreground">{copy.setup.largeBody}</p>
+            <div className="mt-4">
+              <Button size="sm" onClick={() => engine.start()}>
+                {copy.setup.loadModel}
+              </Button>
+            </div>
+          </Card>
+          {heavyDialog}
+        </>
+      );
+    }
     return (
       <>
         <Card>
           {showCrashNotice ? (
             <p dir="ltr" className="type-small mb-2 text-danger">{copy.setup.crashedLastTime}</p>
           ) : null}
-          {fastPair && desired ? (
+          {desired ? (
             <>
               <h3 dir="ltr" className="type-body font-medium">
                 {(desired.expectedBytes >= 200 * 1024 * 1024
                   ? copy.setup.settingUpLargePair(pairEnglish, mbWhole(desired.expectedBytes))
                   : copy.setup.settingUpPair(pairEnglish, mbWhole(desired.expectedBytes)))}
               </h3>
-              <p dir="ltr" className="type-small mt-1.5 text-muted-foreground">{copy.setup.line2}</p>
-            </>
-          ) : (
-            <>
-              <h3 dir="ltr" className="type-body font-medium">{copy.setup.title}</h3>
-              <p dir="ltr" className="type-small mt-1.5 text-muted-foreground">{copy.setup.line1}</p>
               <p dir="ltr" className="type-small mt-1 text-muted-foreground">{copy.setup.line2}</p>
             </>
-          )}
+          ) : null}
           <div className="mt-4">
             <Button size="sm" onClick={() => engine.start()}>
               {copy.setup.start}
@@ -291,7 +313,7 @@ function SetupCardInner() {
       : status === "downloading"
         ? switching
           ? copy.setup.switching
-          : desired?.kind === "opus" || desired?.kind === "bergamot"
+          : desired && desired.kind !== "nllb"
             ? desired.expectedBytes >= 200 * 1024 * 1024
               ? copy.setup.settingUpLargePair(`${srcLang?.english ?? "English"} to ${tgtLang?.english ?? "French"}`, mbWhole(desired.expectedBytes))
               : copy.setup.settingUpPair(`${srcLang?.english ?? "English"} to ${tgtLang?.english ?? "French"}`, mbWhole(desired.expectedBytes))

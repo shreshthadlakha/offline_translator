@@ -18,7 +18,7 @@ import { memo, useCallback } from "react";
 import { usePairState } from "@/components/translate/translator-provider";
 import { useSettings } from "@/hooks/use-settings";
 import { SORTED_LANGUAGES } from "@/lib/languages";
-import { engineForPair, hasFullModelOverride, pairCost, resultingPair } from "@/lib/engines";
+import { hasFullModelOverride, pairCost, resultingPair } from "@/lib/engines";
 import { mbWhole } from "@/lib/format";
 import { copy } from "@/lib/copy";
 
@@ -27,17 +27,15 @@ function LanguageGridInner() {
   const { settings } = useSettings();
 
   // The cost note for each cell, for the pair choosing this language would
-  // create (including the swap when it is already the source).
+  // create (including the swap when it is already the source). The grid is
+  // the whole registry, every script in it: it never hides a language, and
+  // the large ones carry the same plain tag as in the picker.
   const noteFor = useCallback(
     (code: string) => {
       const pair = resultingPair("target", code, srcCode, tgtCode);
       const fastOn = settings.useFastModels && !hasFullModelOverride(settings.fullModelFor, pair.src, pair.tgt);
       const cost = pairCost(pair.src, pair.tgt, fastOn);
       if (cost.kind === "large") {
-        // No small model for this pair: the honest experimental wording. The
-        // grid still shows every script (that is its purpose); picking one
-        // with the switch off leads to the plain notice, never to a load.
-        if (fastOn && engineForPair(pair.src, pair.tgt, true).kind === "nllb") return copy.translate.costExperimental;
         return copy.translate.costLarge;
       }
       const t = copy.translate;
@@ -81,7 +79,9 @@ function LanguageGridInner() {
                 <span lang={language.bcp47} dir={language.dir} className="native-text type-body font-medium">
                   {language.native}
                 </span>
-                <span className="type-small text-muted-foreground">{language.english}</span>
+                {language.native.trim().toLowerCase() === language.english.trim().toLowerCase() ? null : (
+                  <span className="type-small text-muted-foreground">{language.english}</span>
+                )}
                 <span className="type-small text-muted-foreground">{noteFor(language.code)}</span>
               </button>
             </li>

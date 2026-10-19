@@ -258,17 +258,49 @@ function SettingsSheetInner({ open, onOpenChange, onHowItWorks }: Props) {
             <p className="type-small mt-1 text-muted-foreground">{strings.settings.webgpuHint}</p>
 
             <div className="mt-4 flex items-center justify-between gap-3">
-              <Label htmlFor="experimental-languages" className="type-body cursor-pointer font-normal">
-                {strings.settings.experimentalLanguages}
+              <Label htmlFor="hide-large-languages" className="type-body cursor-pointer font-normal">
+                {strings.settings.hideLargeLanguages}
               </Label>
               <Switch
-                id="experimental-languages"
-                checked={settings.showExperimentalLanguages}
-                onCheckedChange={(checked) => updateSettings({ showExperimentalLanguages: checked })}
-                aria-label={strings.settings.experimentalLanguages}
+                id="hide-large-languages"
+                checked={settings.hideLargeLanguages}
+                onCheckedChange={(checked) => updateSettings({ hideLargeLanguages: checked })}
+                aria-label={strings.settings.hideLargeLanguages}
               />
             </div>
-            <p className="type-small mt-1 text-muted-foreground">{strings.settings.experimentalLanguagesHint}</p>
+            <p className="type-small mt-1 text-muted-foreground">{strings.settings.hideLargeLanguagesHint}</p>
+
+            <div className="mt-5" role="group" aria-labelledby="idle-unload-label">
+              <Label id="idle-unload-label" className="type-body font-normal">
+                {strings.settings.idleUnload}
+              </Label>
+              <p className="type-small mt-1 text-muted-foreground">{strings.settings.idleUnloadHint}</p>
+              <RadioGroup
+                value={String(settings.idleUnloadMinutes)}
+                onValueChange={(value) => {
+                  const minutes = Number(value);
+                  if (minutes === 5 || minutes === 15 || minutes === 0) updateSettings({ idleUnloadMinutes: minutes });
+                }}
+                className="mt-2 grid grid-cols-3 gap-2"
+              >
+                {(
+                  [
+                    { value: "5", label: strings.settings.idleUnload5 },
+                    { value: "15", label: strings.settings.idleUnload15 },
+                    { value: "0", label: strings.settings.idleUnloadNever },
+                  ] as const
+                ).map((option) => (
+                  <Label
+                    key={option.value}
+                    htmlFor={`idle-unload-${option.value}`}
+                    className="flex h-11 cursor-pointer items-center justify-center rounded-lg border border-border bg-surface text-center text-sm font-normal shadow-xs outline-none transition-colors data-[state=checked]:border-accent-green-text data-[state=checked]:text-foreground has-[button[data-state=checked]]:border-accent-green-text"
+                  >
+                    <RadioGroupItem id={`idle-unload-${option.value}`} value={option.value} className="sr-only" />
+                    {option.label}
+                  </Label>
+                ))}
+              </RadioGroup>
+            </div>
 
             <h4 className="type-small mt-5 font-medium text-muted-foreground">{strings.settings.savedModels}</h4>
             {savedModelList.length === 0 ? (

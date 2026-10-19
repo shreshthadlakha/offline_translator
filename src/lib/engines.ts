@@ -21,6 +21,7 @@
 
 import { directionQuality, type QualityTier } from "./quality.ts";
 import { BERGAMOT_PAIRS } from "./bergamot/bundles.ts";
+import { languageByCode } from "./languages.ts";
 
 export type EngineKind = "nllb" | "opus" | "indictrans2" | "bergamot";
 
@@ -580,26 +581,69 @@ export function hasFullModelOverride(list: string[] | undefined, src: string, tg
   return list.includes(`${src}|${tgt}`);
 }
 
+/** True when this pair's engine would be the large full model. */
+export function isLargePair(src: string, tgt: string, fastModelsEnabled: boolean): boolean {
+  return engineForPair(src, tgt, fastModelsEnabled).kind === "nllb";
+}
+
 /**
- * True when this pair's engine would be the full model and the experimental
- * switch hides it. This is exactly the default-list case: the pair has no
- * fast route at all, fast models are on, no per-pair override asked for the
- * full model, and "Show experimental languages" is off. Explicit asks are
- * not the default list and stay offered with the heavy warning: turning
- * "Use faster models" off globally, or the per-pair "Use the full model for
- * this language" button.
+ * True when this pair needs the large full model and the optional
+ * "Hide languages that need the large model" switch hides it. The switch is
+ * off by default: the large-model languages are offered normally, with their
+ * plain tag. This is exactly the default-list case: the pair has no fast
+ * route at all, fast models are on, no per-pair override asked for the full
+ * model, and hiding is on. Explicit asks ("Use faster models" off globally,
+ * or the per-pair "Use the full model for this language" button) are choices,
+ * not missing small models, and stay offered with the honest warning.
  */
-export function fullModelPairHidden(
+export function largePairHidden(
   src: string,
   tgt: string,
   fastModelsEnabled: boolean,
   overrides: string[] | undefined,
-  showExperimentalLanguages: boolean,
+  hideLargeLanguages: boolean,
 ): boolean {
-  if (showExperimentalLanguages) return false;
+  if (!hideLargeLanguages) return false;
   if (!fastModelsEnabled) return false;
   if (hasFullModelOverride(overrides, src, tgt)) return false;
-  return engineForPair(src, tgt, true).kind === "nllb";
+  return isLargePair(src, tgt, true);
+}
+
+/**
+ * The pair to open the page on. The last used pair is kept as it was; when it
+ * needs the large model, the page opens on the last pair that used a small
+ * model instead, or on English to French when no such pair exists under the
+ * current settings. The large model is never started by opening the page, so
+ * nothing that needs it is restored either. Codes are validated against the
+ * registry.
+ */
+export function restoredPair(settings: {
+  lastSrc: string;
+  lastTgt: string;
+  lastSmallSrc: string;
+  lastSmallTgt: string;
+  useFastModels: boolean;
+  fullModelFor: string[];
+}): { src: string; tgt: string; changed: boolean } {
+  const fast = (src: string, tgt: string) =>
+    settings.useFastModels && !settings.fullModelFor.includes(`${src}|${tgt}`);
+  const valid = (code: string, fallback: string) =>
+    languageByCode(code)?.code ?? fallback;
+  const last = {
+    src: valid(settings.lastSrc, "eng_Latn"),
+    tgt: valid(settings.lastTgt, "fra_Latn"),
+  };
+  if (!isLargePair(last.src, last.tgt, fast(last.src, last.tgt))) {
+    return { ...last, changed: false };
+  }
+  const small = {
+    src: valid(settings.lastSmallSrc, "eng_Latn"),
+    tgt: valid(settings.lastSmallTgt, "fra_Latn"),
+  };
+  if (!isLargePair(small.src, small.tgt, fast(small.src, small.tgt))) {
+    return { ...small, changed: true };
+  }
+  return { src: "eng_Latn", tgt: "fra_Latn", changed: true };
 }
 
 /**

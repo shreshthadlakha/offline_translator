@@ -12,7 +12,7 @@
  */
 
 import { memo, useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { Copy as CopyIcon, Gauge } from "lucide-react";
+import { Copy as CopyIcon, Gauge, MemoryStick } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslatorState } from "@/components/translate/translator-provider";
 import { directionQuality } from "@/lib/quality";
@@ -406,6 +406,26 @@ function DetailsPanelInner() {
               </>
             )}
           </section>
+
+          {status === "ready" ? (
+            <section className="mt-3" aria-label={copy.details.freeNow}>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    engine.freeNow();
+                    toast({ description: copy.details.freedNote });
+                  }}
+                  className="type-small"
+                >
+                  <MemoryStick aria-hidden className="size-3.5" />
+                  {copy.details.freeNow}
+                </Button>
+              </div>
+              <p className="type-small mt-1.5 text-muted-foreground">{copy.details.freeNowHint}</p>
+            </section>
+          ) : null}
 
           <section className="mt-3" aria-label={copy.details.speedTest}>
             <div className="flex items-center gap-2">

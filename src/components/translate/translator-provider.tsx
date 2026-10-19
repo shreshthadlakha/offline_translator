@@ -14,11 +14,12 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useEngineContext, type Engine } from "@/hooks/use-engine";
 import { useHistory, type HistoryEntry } from "@/hooks/use-history";
-import { useSettings, type Settings } from "@/hooks/use-settings";
+import { sessionPair, useSettings, type Settings } from "@/hooks/use-settings";
 import { useTranslator, type OutputModel } from "@/hooks/use-translator";
 import { useOnlineStatus } from "@/hooks/use-online-status";
 import { languageByCode } from "@/lib/languages";
 import type { Language } from "@/lib/languages";
+import { engineForPair } from "@/lib/engines";
 import { toast } from "@/hooks/use-toast";
 import { copy } from "@/lib/copy";
 
@@ -43,8 +44,10 @@ export type TranslatorState = {
   clearInput: () => void;
   flagCurrent: () => void;
   manualTick: number;
-  // starts setup when needed, honouring the data saver and offline gates
-  maybeStartSetup: () => void;
+  /** Starts setup when needed, honouring the data saver and offline gates.
+   *  The large model is only started from an explicit Translate press or a
+   *  button on the card, never from typing. */
+  maybeStartSetup: (options?: { allowLarge?: boolean }) => void;
   // history
   history: ReturnType<typeof useHistory>;
   // setup gating
@@ -123,9 +126,13 @@ export function TranslatorProvider({ children }: { children: React.ReactNode }) 
   const [targetPickerOpen, setTargetPickerOpen] = useState(false);
 
   // The pair derives from the stored settings, so the first render matches the
-  // server and the stored pair arrives right after hydration.
-  const srcCode = languageByCode(settings.lastSrc)?.code ?? "eng_Latn";
-  const tgtCode = languageByCode(settings.lastTgt)?.code ?? "fra_Latn";
+  // server and the stored pair arrives right after hydration. When the last
+  // used pair needs the large model, the page opens on the last small pair
+  // (or English to French): the large model never starts on page load.
+  // sessionPair decides that once per visit.
+  const session = sessionPair(settings);
+  const srcCode = session.src;
+  const tgtCode = session.tgt;
 
   const translator = useTranslator(srcCode, tgtCode);
   const { input, setInput, output, translateNow, clearInput, manualTick } = translator;
@@ -164,22 +171,32 @@ export function TranslatorProvider({ children }: { children: React.ReactNode }) 
 
   const dataSaverAskedRef = useRef(false);
 
-  const maybeStartSetup = useCallback(() => {
-    if (engine.status !== "idle") return;
-    if (typeof navigator === "undefined") return;
-    if (engine.error) return;
-    if (typeof navigator.onLine === "boolean" && !navigator.onLine) return;
-    // The honest ask for a full model pair is inside the engine's load path
-    // (the heavy gate below), so it fires on every route to that download:
-    // here, an engine switch, and a restart after an error.
-    const connection = (navigator as { connection?: { saveData?: boolean } }).connection;
-    if (connection?.saveData && !dataSaverAskedRef.current) {
-      dataSaverAskedRef.current = true;
-      setDataSaverAskOpen(true);
-      return;
-    }
-    engine.start();
-  }, [engine]);
+  const maybeStartSetup = useCallback(
+    (options?: { allowLarge?: boolean }) => {
+      if (engine.status !== "idle") return;
+      if (typeof navigator === "undefined") return;
+      if (engine.error) return;
+      // Offline only stops a model that isn't saved on this device: a saved
+      // one loads from the cache with no connection.
+      if (typeof navigator.onLine === "boolean" && !navigator.onLine && !engine.modelPresent) return;
+      // The large model loads only when the person presses Translate or a
+      // button on the card. Typing alone never starts it: it holds about
+      // 2.5 GB while it runs, and nobody should lose that much memory to a
+      // keystroke.
+      if (engine.desiredEngine?.kind === "nllb" && options?.allowLarge !== true) return;
+      // The honest ask for a full model pair is inside the engine's load path
+      // (the heavy gate below), so it fires on every route to that download:
+      // here, an engine switch, and a restart after an error.
+      const connection = (navigator as { connection?: { saveData?: boolean } }).connection;
+      if (connection?.saveData && !dataSaverAskedRef.current) {
+        dataSaverAskedRef.current = true;
+        setDataSaverAskOpen(true);
+        return;
+      }
+      engine.start();
+    },
+    [engine],
+  );
 
   const handleSetInput = useCallback(
     (value: string) => {
@@ -193,17 +210,19 @@ export function TranslatorProvider({ children }: { children: React.ReactNode }) 
     // An explicit Translate press may ask about data saver again after a decline.
     dataSaverAskedRef.current = false;
     if (input.trim().length > 0) {
-      maybeStartSetup();
+      // A Translate press is one of the two explicit ways the large model
+      // may start.
+      maybeStartSetup({ allowLarge: true });
       // If the engine isn't up yet, say what happens to what was typed,
       // instead of a press that looks like it did nothing. Not for a pair
-      // hidden behind the experimental switch: nothing will start until the
-      // switch is on, and the card already says so.
-      if (!engine.experimentalBlocked && engine.status !== "ready" && engine.status !== "error") {
+      // hidden behind the switch: nothing will start until the switch is
+      // off, and the card already says so.
+      if (!engine.largeBlocked && engine.status !== "ready" && engine.status !== "error") {
         toast({ description: copy.setup.willRunAfterSetup });
       }
     }
     translateNow();
-  }, [input, engine.status, engine.experimentalBlocked, maybeStartSetup, translateNow]);
+  }, [input, engine.status, engine.largeBlocked, maybeStartSetup, translateNow]);
 
   const confirmDataSaver = useCallback(() => {
     setDataSaverAskOpen(false);
@@ -243,10 +262,17 @@ export function TranslatorProvider({ children }: { children: React.ReactNode }) 
 
   const setPair = useCallback(
     (src: string, tgt: string) => {
-      // The pair lives in the settings store, which persists it.
-      update({ lastSrc: src, lastTgt: tgt });
+      // The pair lives in the settings store, which persists it. A pair that
+      // runs on a small model is also remembered apart, so the next visit can
+      // open on it when the last pair needs the large model.
+      const runsSmall = engineForPair(src, tgt, settings.useFastModels && !settings.fullModelFor.includes(`${src}|${tgt}`)).kind !== "nllb";
+      update(
+        runsSmall
+          ? { lastSrc: src, lastTgt: tgt, lastSmallSrc: src, lastSmallTgt: tgt }
+          : { lastSrc: src, lastTgt: tgt },
+      );
     },
-    [update],
+    [update, settings.useFastModels, settings.fullModelFor],
   );
 
   const pairValue = useMemo<PairState>(

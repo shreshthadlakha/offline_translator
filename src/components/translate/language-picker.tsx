@@ -63,6 +63,9 @@ function LanguageRow({
   note: string | null;
   onSelect: (code: string) => void;
 }) {
+  // When the native name is the same as the English one (Afrikaans, English,
+  // Hausa, Tagalog), showing both is noise: show it once.
+  const sameName = language.native.trim().toLowerCase() === language.english.trim().toLowerCase();
   return (
     <Command.Item
       value={`${language.english} ${language.native}`}
@@ -76,7 +79,9 @@ function LanguageRow({
           <span lang={language.bcp47} dir={language.dir} className="native-text min-w-0 truncate">
             {language.native}
           </span>
-          <span className="type-small shrink-0 text-muted-foreground">{language.english}</span>
+          {sameName ? null : (
+            <span className="type-small shrink-0 text-muted-foreground">{language.english}</span>
+          )}
         </span>
         {note ? <span className="type-small mt-0.5 block text-muted-foreground">{note}</span> : null}
       </span>
@@ -84,27 +89,28 @@ function LanguageRow({
   );
 }
 
-function LanguageList({ value, otherValue, onChoose, side, noteFor, isExperimental }: PickerProps & {
+function LanguageList({ value, otherValue, onChoose, side, noteFor, isHiddenLarge }: PickerProps & {
   onChoose: (code: string) => void;
   noteFor: (code: string) => string | null;
   /** True when choosing this language would create a pair whose only model is
-   * the full one. Such rows are hidden unless the experimental switch is on,
-   * and then grouped at the end with the plain explanation. */
-  isExperimental: (code: string) => boolean;
+   * the large one. Such rows carry the plain Large tag like every other
+   * language, and are only left out when "Hide languages that need the large
+   * model" is on in Settings. */
+  isHiddenLarge: (code: string) => boolean;
 }) {
   const [query, setQuery] = useState("");
   const { settings } = useSettings();
   const results = useMemo(() => searchLanguages(query), [query]);
-  const { normal, experimental } = useMemo(() => {
-    const normal: Language[] = [];
-    const experimental: Language[] = [];
+  const { shown, hiddenLarge } = useMemo(() => {
+    const shown: Language[] = [];
+    const hiddenLarge: Language[] = [];
     for (const language of results) {
-      (isExperimental(language.code) ? experimental : normal).push(language);
+      (isHiddenLarge(language.code) ? hiddenLarge : shown).push(language);
     }
-    return { normal, experimental };
-  }, [results, isExperimental]);
-  // With the switch off, the experimental rows are simply not offered.
-  const shownExperimental = settings.showExperimentalLanguages ? experimental : [];
+    return { shown, hiddenLarge };
+  }, [results, isHiddenLarge]);
+  // With the switch on, the large-model rows are simply not offered.
+  const displayed = settings.hideLargeLanguages ? shown : results;
 
   return (
     <Command shouldFilter={false} className="flex h-full min-h-0 flex-col overflow-hidden bg-surface">
@@ -119,12 +125,12 @@ function LanguageList({ value, otherValue, onChoose, side, noteFor, isExperiment
         />
       </div>
       <Command.List className="scroll-surface max-h-[min(24rem,60vh)] min-h-0 flex-1 overflow-y-auto overscroll-contain p-1.5">
-        {normal.length === 0 && shownExperimental.length === 0 ? (
-          experimental.length > 0 ? (
-            // The search matched only languages hidden behind the switch.
-            // Say that plainly instead of a bare "no matches".
+        {displayed.length === 0 ? (
+          hiddenLarge.length > 0 ? (
+            // The search matched only languages hidden by the switch. Say
+            // that plainly instead of a bare "no matches".
             <p className="type-small px-3 py-6 text-center text-muted-foreground" role="status">
-              {copy.translate.experimentalHiddenMatches}
+              {copy.translate.largeHiddenMatches}
             </p>
           ) : (
             <Command.Empty className="type-small py-6 text-center text-muted-foreground">
@@ -132,32 +138,15 @@ function LanguageList({ value, otherValue, onChoose, side, noteFor, isExperiment
             </Command.Empty>
           )
         ) : (
-          <>
-            {normal.map((language) => (
-              <LanguageRow
-                key={language.code}
-                language={language}
-                selected={language.code === value?.code}
-                note={noteFor(language.code)}
-                onSelect={onChoose}
-              />
-            ))}
-            {shownExperimental.length > 0 ? (
-              <div className="mt-2 px-3 pb-1 pt-2" role="group" aria-label={copy.translate.experimentalGroup}>
-                <p className="type-small font-medium text-muted-foreground">{copy.translate.experimentalGroup}</p>
-                <p className="type-small mt-0.5 text-muted-foreground">{copy.translate.experimentalGroupNote}</p>
-              </div>
-            ) : null}
-            {shownExperimental.map((language) => (
-              <LanguageRow
-                key={language.code}
-                language={language}
-                selected={language.code === value?.code}
-                note={noteFor(language.code)}
-                onSelect={onChoose}
-              />
-            ))}
-          </>
+          displayed.map((language) => (
+            <LanguageRow
+              key={language.code}
+              language={language}
+              selected={language.code === value?.code}
+              note={noteFor(language.code)}
+              onSelect={onChoose}
+            />
+          ))
         )}
       </Command.List>
       <span className="sr-only">{side === "source" ? copy.translate.chooseSource : copy.translate.chooseTarget}</span>
@@ -188,9 +177,9 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
     [side, value, otherValue],
   );
   // True when choosing this language would create a pair whose only model is
-  // the full one (the default routing, independent of any explicit override:
+  // the large one (the default routing, independent of any explicit override:
   // those are choices, not missing small models).
-  const isExperimental = useCallback(
+  const isHiddenLarge = useCallback(
     (code: string) => {
       const pair = pairFor(code);
       return engineForPair(pair.src, pair.tgt, true).kind === "nllb";
@@ -203,9 +192,7 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
       const fastOn = settings.useFastModels && !hasFullModelOverride(settings.fullModelFor, pair.src, pair.tgt);
       const cost = pairCost(pair.src, pair.tgt, fastOn);
       if (cost.kind === "large") {
-        // A pair with no small model at all, offered through the
-        // experimental group: the plain experimental wording.
-        if (fastOn && isExperimental(code)) return copy.translate.costExperimental;
+        // The large model, chosen or the only option: the same plain tag.
         return copy.translate.costLarge;
       }
       const t = copy.translate;
@@ -218,7 +205,7 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
       if (cost.tier === "limited") return t.costFastLimited(mbWhole(cost.expectedBytes));
       return t.costFast(mbWhole(cost.expectedBytes));
     },
-    [pairFor, settings.useFastModels, settings.fullModelFor, isExperimental],
+    [pairFor, settings.useFastModels, settings.fullModelFor],
   );
 
   const isMobile = useIsMobile();
@@ -273,7 +260,7 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
           <DialogTitle className="sr-only">{ariaLabel}</DialogTitle>
           <DialogDescription className="sr-only">{copy.translate.searchLanguages}</DialogDescription>
           <div className="max-h-[75vh] overflow-hidden">
-            <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} noteFor={noteFor} isExperimental={isExperimental} />
+            <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} noteFor={noteFor} isHiddenLarge={isHiddenLarge} />
           </div>
         </DialogContent>
       </Dialog>
@@ -289,7 +276,7 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
         // Opaque surface above everything else. Nothing underneath shows through.
         style={{ background: "var(--surface)" }}
       >
-        <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} noteFor={noteFor} isExperimental={isExperimental} />
+        <LanguageList side={side} value={value} otherValue={otherValue} onChoose={choose} noteFor={noteFor} isHiddenLarge={isHiddenLarge} />
       </PopoverContent>
     </Popover>
   );

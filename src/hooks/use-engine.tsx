@@ -22,13 +22,12 @@ import { PROTOCOL_VERSION, type EngineDevice, type EngineErrorCode, type EngineS
 import { BUILD_ID } from "@/workers/build-id";
 import { STORAGE_KEYS, storageGet, storageRemove, storageSet } from "@/lib/storage";
 import { netlog } from "@/lib/netlog";
-import { engineForPair, fullModelPairHidden, type PairEngine } from "@/lib/engines";
+import { engineForPair, largePairHidden, type PairEngine } from "@/lib/engines";
 import { directionQuality } from "@/lib/quality";
 import { cachedModelFiles, modelFilesCached } from "@/lib/model-cache";
-import { recordTiming } from "@/lib/speed-metrics";
-import { useSettings } from "@/hooks/use-settings";
+import { clearTimings, recordTiming } from "@/lib/speed-metrics";
+import { sessionPair, useSettings } from "@/hooks/use-settings";
 import { SPEED_CONFIG } from "@/lib/speed-config";
-import { languageByCode } from "@/lib/languages";
 
 export type EngineStatus = "idle" | "checking" | "downloading" | "initializing" | "testing" | "ready" | "error";
 
@@ -157,6 +156,23 @@ export function useEngine(heavyGate?: HeavyGate) {
   const [lastSwitchMs, setLastSwitchMs] = useState<number | null>(null);
   /** The session optimization level for this visit, from the URL flag. */
   const [sessionOptLevel] = useState<GraphOptimizationLevel | null>(() => readSessionOptLevel());
+  /** True while the large model sits unloaded after idle, a hidden tab, or
+   *  the Free memory now button: the setup card shows the quiet line. */
+  const [idleUnloaded, setIdleUnloaded] = useState(false);
+
+  /** The last translation activity (a finished result, or setup finishing).
+   *  The large model is unloaded after this long without one. */
+  const lastActivityRef = useRef<number | null>(null);
+  /** When the tab became hidden, null while visible. */
+  const hiddenAtRef = useRef<number | null>(null);
+  /** A deliberate unload (idle, hidden, Free memory now, Cancel, erase) holds
+   *  the automatic restart until the person acts again: typing, Translate, or
+   *  a button on the card. Without it the desired-engine effect would start a
+   *  saved model right back up and the button would free nothing. */
+  const holdAutoStartRef = useRef(false);
+  /** The engine id the desired-engine effect last saw, so choosing a
+   *  different engine lifts the deliberate-unload hold. */
+  const prevEngineIdRef = useRef<string | null>(null);
 
   const workerRef = useRef<Worker | null>(null);
   const listenersRef = useRef(new Set<Listener>());
@@ -199,28 +215,31 @@ export function useEngine(heavyGate?: HeavyGate) {
 
   // The pair and the engine it needs, from the stored settings. The first
   // render matches the server; the stored pair arrives right after hydration.
-  const srcCode = languageByCode(settings.lastSrc)?.code ?? "eng_Latn";
-  const tgtCode = languageByCode(settings.lastTgt)?.code ?? "fra_Latn";
+  // When the last used pair needs the large model, the page opens on the last
+  // small pair (or English to French) instead: the large model never starts
+  // on page load. sessionPair decides that once per visit.
+  const session = sessionPair(settings);
+  const srcCode = session.src;
+  const tgtCode = session.tgt;
   const desired = useMemo(
     () => engineForPair(srcCode, tgtCode, settings.useFastModels && !settings.fullModelFor.includes(`${srcCode}|${tgtCode}`)),
     [srcCode, tgtCode, settings.useFastModels, settings.fullModelFor],
   );
   desiredRef.current = desired;
 
-  // The experimental gate: this pair's only model is the full one and the
-  // "Show experimental languages" switch is off (the default). Explicit asks
-  // (fast models off, or the per-pair "use the full model" override) are not
-  // the default list and stay offered with the heavy warning.
-  const experimentalHidden = useMemo(
-    () => fullModelPairHidden(srcCode, tgtCode, settings.useFastModels, settings.fullModelFor, settings.showExperimentalLanguages),
-    [srcCode, tgtCode, settings.useFastModels, settings.fullModelFor, settings.showExperimentalLanguages],
+  // The optional hide switch: this pair needs the large model and "Hide
+  // languages that need the large model" is on. Explicit asks (fast models
+  // off, or the per-pair "use the full model" override) are choices, not
+  // missing small models, and stay offered with the heavy warning.
+  const largeHidden = useMemo(
+    () => largePairHidden(srcCode, tgtCode, settings.useFastModels, settings.fullModelFor, settings.hideLargeLanguages),
+    [srcCode, tgtCode, settings.useFastModels, settings.fullModelFor, settings.hideLargeLanguages],
   );
-  const experimentalHiddenRef = useRef(false);
-  experimentalHiddenRef.current = experimentalHidden;
-  /** True while the current pair is hidden behind the experimental switch:
-   * the setup card shows the plain notice instead of an offer, and no load
-   * can start. */
-  const experimentalPairHidden = experimentalHidden;
+  const largeHiddenRef = useRef(false);
+  largeHiddenRef.current = largeHidden;
+  /** True while the current pair is hidden behind the switch: the setup card
+   * shows the plain notice instead of an offer, and no load can start. */
+  const largeBlocked = largeHidden;
 
   const post = useCallback((message: Record<string, unknown>) => {
     workerRef.current?.postMessage(message);
@@ -397,6 +416,7 @@ export function useEngine(heavyGate?: HeavyGate) {
           setCrashNotice(null);
           if (!wasReadyBeforeRef.current) storageSet(STORAGE_KEYS.modelReady, "1");
           wasReadyBeforeRef.current = true;
+          lastActivityRef.current = performance.now();
           finishStage("testing");
           if (switchStartRef.current != null) {
             setLastSwitchMs(Math.round(performance.now() - switchStartRef.current));
@@ -421,6 +441,9 @@ export function useEngine(heavyGate?: HeavyGate) {
           break;
         }
         case "result": {
+          // A finished translation is activity: the idle unload counts from
+          // the last one of these.
+          lastActivityRef.current = performance.now();
           // The queue wait, measured on this side: how long the request sat
           // around before the engine translated it. The worker cannot see
           // this itself (its message loop is blocked while it works), so it
@@ -566,13 +589,13 @@ export function useEngine(heavyGate?: HeavyGate) {
    */
   const beginLoad = useCallback(
     async (engine: PairEngine): Promise<boolean> => {
-      // The experimental gate comes before anything else: nothing that needs
-      // the full model is loaded while it is hidden. The setup card already
-      // shows the plain notice for such a pair; this is the defensive backstop
-      // for any start path that races a settings change. An engine already
-      // running for such a pair is left alone — the switch stops new setups,
-      // it does not kill working translations.
-      if (experimentalHiddenRef.current && engine.kind === "nllb") {
+      // The optional hide switch comes before anything else: nothing that
+      // needs the large model is loaded while it is hidden. The setup card
+      // already shows the plain notice for such a pair; this is the defensive
+      // backstop for any start path that races a settings change. An engine
+      // already running for such a pair is left alone — the switch stops new
+      // setups, it does not kill working translations.
+      if (largeHiddenRef.current && engine.kind === "nllb") {
         setStatusSafe("idle");
         return false;
       }
@@ -636,6 +659,7 @@ export function useEngine(heavyGate?: HeavyGate) {
       fileRowOrderRef.current = [];
       setFileRows([]);
       setStageTimings({});
+      setIdleUnloaded(false);
       fractionRef.current = 0;
       progressTotalRef.current = 0;
       progressSamplesRef.current = [];
@@ -643,6 +667,9 @@ export function useEngine(heavyGate?: HeavyGate) {
       setProgress({ loaded: 0, total: 0, fraction: 0, bps: 0, etaMs: null, elapsedMs: 0 });
 
       const spec: EngineSpec = specFor(engine, srcCode, tgtCode);
+      // A different engine is taking over: its measured seconds per sentence
+      // in Details must describe it, not the one before it.
+      if (activeSpecRef.current?.id !== spec.id) clearTimings();
       activeSpecRef.current = spec;
       setEngineInfo(engine);
       setStatusSafe("checking");
@@ -658,6 +685,9 @@ export function useEngine(heavyGate?: HeavyGate) {
       if (workerRef.current) return;
       const engine = desiredRef.current;
       if (!engine) return;
+      // An explicit start (a button, typing, Translate) lifts the deliberate
+      // unload hold. The automatic path keeps it.
+      if (options?.auto !== true) holdAutoStartRef.current = false;
       setError(null);
       setDevice(null);
       setSwitching(false);
@@ -731,13 +761,23 @@ export function useEngine(heavyGate?: HeavyGate) {
     [beginLoad, post, settings.useWebGPU, srcCode, tgtCode, sessionOptLevel],
   );
 
-  // The desired engine, followed. Loading starts early when the model is
-  // already saved here, during idle time. A pair change inside the same
-  // engine never reloads anything. A change to a different engine switches.
+  // The desired engine, followed. Small models load early when saved on this
+  // device, during idle time; the large model never starts on its own, on any
+  // path: not on page load, not on a pair change, not on a restart. It starts
+  // when the person presses Translate or the card's Load model button, and
+  // those are explicit. A pair change inside the same engine never reloads
+  // anything. A change to a different small engine switches.
   useEffect(() => {
     if (!settingsLoaded) return;
     const engine = desiredRef.current;
     if (!engine) return;
+
+    // Choosing a different engine lifts the deliberate-unload hold: a fresh
+    // choice is a fresh start, and small models go back to loading early.
+    if (prevEngineIdRef.current !== engine.id) {
+      prevEngineIdRef.current = engine.id;
+      holdAutoStartRef.current = false;
+    }
 
     let cancelled = false;
     void (async () => {
@@ -758,19 +798,29 @@ export function useEngine(heavyGate?: HeavyGate) {
             // download that can only fail. The old engine can't translate
             // the new pair, so it goes too.
             terminate();
+            setAutoStarted(false);
             setSwitching(false);
             setStatusSafe("idle");
             return;
           }
-          // Leaving Bergamot for another engine kind ends the worker: the
-          // wasm runtime's heap never shrinks inside a living worker, and a
-          // stale half gigabyte next to the full model's three is exactly
-          // the memory pressure this app refuses to create silently.
-          // (Entering Bergamot needs no such step: the other engines release
-          // their sessions on dispose.) The desired-engine effect restarts
-          // on its own once the status is idle — through the idle callback,
-          // which also gives the one-tab lock time to process our release.
-          if (active.kind === "bergamot" && engine.kind !== "bergamot") {
+          // The large model never starts on its own, not even on a pair
+          // change. The engine that is loaded cannot serve the pair, so it
+          // is stopped rather than left holding memory, and the setup card
+          // makes the offer. Pressing Translate or Load model starts it.
+          if (engine.kind === "nllb") {
+            terminate();
+            setAutoStarted(false);
+            setSwitching(false);
+            setStatusSafe("idle");
+            return;
+          }
+          // Leaving the large model for another engine kind ends the worker,
+          // exactly like leaving Bergamot: the wasm heap never shrinks inside
+          // a living worker, and the point of the large model's memory is to
+          // give it back. The desired-engine effect restarts on its own once
+          // the status is idle — through the idle callback, which also gives
+          // the one-tab lock time to process our release.
+          if ((active.kind === "nllb" || active.kind === "bergamot") && engine.kind !== active.kind) {
             terminate();
             setAutoStarted(false);
             setSwitching(false);
@@ -793,6 +843,13 @@ export function useEngine(heavyGate?: HeavyGate) {
       }
 
       if (statusRef.current !== "idle" && statusRef.current !== "error") return;
+      // The large model is never started automatically, even when it is
+      // already saved on this device. It loads when the person presses
+      // Translate or the card's Load model button.
+      if (engine.kind === "nllb") return;
+      // A deliberate unload holds the automatic start: the model files are
+      // still saved, but the memory was given back on purpose.
+      if (holdAutoStartRef.current) return;
       if (!saved) return;
       // Saved already: begin loading during idle time, without delaying
       // first paint. Don't repeat this for the same engine.
@@ -837,6 +894,79 @@ export function useEngine(heavyGate?: HeavyGate) {
     setNotes((prev) => ({ ...prev, webgpuFellBack: settings.useWebGPU && device === "wasm" }));
   }, [status, device, settings.useWebGPU]);
 
+  // --- giving the large model's memory back ---------------------------------------
+  //
+  // The large model holds about 2.5 GB while it runs. The only way to be
+  // sure the memory really leaves is ending the worker: the wasm heap never
+  // shrinks inside a living worker. Three ways back: after this long without
+  // a translation (Settings, five minutes by default), after the tab has
+  // been hidden for three minutes, and the Free memory now button in Details.
+
+  /** Track when the tab is hidden, so the hidden-tab rule can act on it. */
+  useEffect(() => {
+    const onVisibility = () => {
+      hiddenAtRef.current = document.visibilityState === "hidden" ? performance.now() : null;
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibility);
+      hiddenAtRef.current = null;
+    };
+  }, []);
+
+  /** End the engine by choice: idle, hidden tab, or the button. The memory
+   *  is returned by ending the worker. The automatic restart is held until
+   *  the person acts again, and for the large model the card shows the quiet
+   *  unloaded line. */
+  const deliberateUnload = useCallback(() => {
+    const wasLarge = activeSpecRef.current?.kind === "nllb";
+    terminate();
+    setStatusSafe("idle");
+    setDevice(null);
+    setError(null);
+    setEngineInfo(null);
+    setProgress({ loaded: 0, total: 0, fraction: 0, bps: 0, etaMs: null, elapsedMs: 0 });
+    setFileRows([]);
+    setStageTimings({});
+    setSwitching(false);
+    setAutoStarted(false);
+    setStallSeconds(null);
+    setHeap({ used: null, limit: null });
+    holdAutoStartRef.current = true;
+    if (wasLarge) setIdleUnloaded(true);
+  }, [setStatusSafe, terminate]);
+
+  // The unload watcher: while the large model is ready, check both rules.
+  // An interval rather than a deadline timeout, so a translation arriving at
+  // any moment keeps the model alive without re-arming anything, and hidden
+  // tabs still get checked (timer throttling there is far shorter than the
+  // three minute rule).
+  useEffect(() => {
+    if (status !== "ready" || engineInfo?.kind !== "nllb") return;
+    const idleMinutes = settings.idleUnloadMinutes;
+    const check = () => {
+      if (statusRef.current !== "ready" || !workerRef.current) return;
+      const now = performance.now();
+      const hiddenFor = hiddenAtRef.current != null ? now - hiddenAtRef.current : null;
+      if (hiddenFor != null && hiddenFor >= SPEED_CONFIG.largeModel.hiddenUnloadMs) {
+        deliberateUnload();
+        return;
+      }
+      if (idleMinutes > 0) {
+        const last = lastActivityRef.current;
+        if (last != null && now - last >= idleMinutes * 60_000) deliberateUnload();
+      }
+    };
+    const timer = setInterval(check, SPEED_CONFIG.largeModel.unloadCheckMs);
+    return () => clearInterval(timer);
+  }, [status, engineInfo, settings.idleUnloadMinutes, deliberateUnload]);
+
+  /** Free memory now, from Details: unload whatever engine is loaded. */
+  const freeNow = useCallback(() => {
+    if (!workerRef.current) return;
+    deliberateUnload();
+  }, [deliberateUnload]);
+
   const reset = useCallback(() => {
     terminate();
     setStatusSafe("idle");
@@ -851,6 +981,8 @@ export function useEngine(heavyGate?: HeavyGate) {
     setAutoStarted(false);
     setStallSeconds(null);
     setHeap({ used: null, limit: null });
+    holdAutoStartRef.current = true;
+    setIdleUnloaded(false);
     netlog.setEngineReady(false);
   }, [netlog, setStatusSafe, terminate]);
 
@@ -946,10 +1078,12 @@ export function useEngine(heavyGate?: HeavyGate) {
       lastSwitchMs,
       lastError: lastErrorRef.current,
       sessionOptLevel,
-      experimentalBlocked: experimentalPairHidden,
+      largeBlocked,
+      idleUnloaded,
       start,
       reset,
       stop,
+      freeNow,
       setHeavyGate,
       translate,
       cancel,
@@ -975,10 +1109,12 @@ export function useEngine(heavyGate?: HeavyGate) {
       heap,
       lastSwitchMs,
       sessionOptLevel,
-      experimentalPairHidden,
+      largeBlocked,
+      idleUnloaded,
       start,
       reset,
       stop,
+      freeNow,
       setHeavyGate,
       translate,
       cancel,
