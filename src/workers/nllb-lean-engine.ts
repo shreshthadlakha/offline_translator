@@ -171,7 +171,7 @@ async function fetchVerifiedFile(file: NllbPinnedFile, onProgress: ProgressFn): 
       throw new Error(`Checksum mismatch for ${file.name}`);
     }
     try {
-      await cache.put(url, new Response(bytes, { headers: { "content-type": "application/octet-stream" } }));
+      await cache.put(url, new Response(bytes, { headers: { "content-type": "application/octet-stream", "content-length": String(bytes.byteLength) } }));
     } catch {
       // Cache storage may be unavailable (private mode). The bytes are still
       // verified and usable for this session.

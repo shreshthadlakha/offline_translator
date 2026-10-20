@@ -287,8 +287,15 @@ export function useEngine(heavyGate?: HeavyGate) {
     // Requests posted to the old worker can never come back.
     sentAtRef.current.clear();
     busyUntilRef.current = 0;
+    // No caller may be left claiming an engine exists while no worker does
+    // (the H-1 invariant, at the source): every terminate() resets the
+    // status, and every caller that means something else (error, idle offer)
+    // overwrites it right after. Without this, a terminate() with no status
+    // write - a hot-reload cleanup, a future path - wedges the app in a
+    // fake "ready" that only a reload recovers from.
+    setStatusSafe("idle");
     netlog.setEngineReady(false);
-  }, [stopTimers, releaseLock]);
+  }, [setStatusSafe, stopTimers, releaseLock]);
 
   // --- stage bookkeeping ---------------------------------------------------------
 
@@ -942,7 +949,14 @@ export function useEngine(heavyGate?: HeavyGate) {
         return;
       }
 
-      if (statusRef.current !== "idle" && statusRef.current !== "error") return;
+      // Defense in depth for the wedge class: a status that claims an engine
+      // while no worker exists is impossible state (terminate() already
+      // resets it, but nothing here should trust a stale value either).
+      if (statusRef.current !== "idle" && statusRef.current !== "error") {
+        setStatusSafe("idle");
+        setSwitching(false);
+        setAutoStarted(false);
+      }
       // The large model is never started automatically, even when it is
       // already saved on this device. It loads when the person presses
       // Translate or the card's Load model button.

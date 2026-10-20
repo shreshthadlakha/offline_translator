@@ -257,3 +257,14 @@ new finding: a Bergamot setup card's total (e.g. Turkish "27 MB") includes
 the one-time 5.3 MB Bergamot runtime on first use, while the language grid's
 note quotes the model bytes alone ("about 21 MB"). Both numbers are honest
 for what they measure; the card is the truer first-setup cost.
+
+### Findings from the P16 verification itself
+
+The live verification batteries surfaced three issues the scan had not; all
+three were fixed in the same pass.
+
+| ID | Severity | Area | What was wrong | Resolution |
+| --- | --- | --- | --- | --- |
+| P16-1 | medium | Engine lifecycle (`src/hooks/use-engine.tsx`) | A terminate() without a status write (observed via a dev-mode Fast Refresh cleanup) left status "ready" with no worker and no spec: Translate silently no-ops, held requests never run, and only a reload recovers — the same invariant class as H-1 | **Fixed** — terminate() now resets the status itself (every caller that means otherwise overwrites it immediately after), and the desired-engine effect treats "status claims an engine, no worker exists" as recoverable. Verified live: two consecutive Fast Refresh cycles each followed by a working 0.2 s translation, zero errors |
+| P16-2 | low | Settings honesty (`src/workers/indictrans2-engine.ts`, `nllb-lean-engine.ts`) | IndicTrans2/lean-NLLB cache writes carried no content-length header, so the Settings "On this device" size summed to "About 0 MB" for a fully cached 309 MB model | **Fixed** — both cache writes now store content-length (like Bergamot always did); savedModels also falls back to the pinned bundle total for older header-less entries |
+| P16-3 | low | Settings honesty (`src/lib/model-cache.ts`) | A cancelled large-model download left complete metadata files in the cache, producing a phantom "NLLB-200 — About 0 MB" row that implied a saved model | **Fixed** — savedModels lists only models whose required files are all present; partial leftovers stay removable through Erase everything and are completed by any later successful load |

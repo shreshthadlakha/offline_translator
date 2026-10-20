@@ -15,7 +15,7 @@
 import { INDICTRANS2_BUNDLES } from "./indictrans2/bundles.ts";
 import { BERGAMOT_PAIRS, BERGAMOT_REVISION, BERGAMOT_CACHE } from "./bergamot/bundles.ts";
 import { NLLB_BUNDLE } from "./nllb/bundles.ts";
-import { MODEL_REVISIONS } from "./engines.ts";
+import { MODEL_REVISIONS, allEngines } from "./engines.ts";
 
 const MODEL_CACHES = ["transformers-cache", "pt-indictrans2", BERGAMOT_CACHE] as const;
 /** Shell caches carry the build id: pt-shell-<buildId>, one per build
@@ -152,13 +152,31 @@ export async function cachedModelBytes(modelId: string): Promise<number> {
   return total;
 }
 
+/** The pinned total size of a model's whole bundle, when the app knows it:
+ *  used as the displayed size when cache headers are missing (older cache
+ *  entries were written without a content-length). */
+function pinnedTotalBytesFor(modelId: string): number | null {
+  for (const bundle of Object.values(INDICTRANS2_BUNDLES)) {
+    if (bundle.repo === modelId) return bundle.totalBytes;
+  }
+  for (const pair of Object.values(BERGAMOT_PAIRS)) {
+    if (pair.modelId === modelId) return pair.totalBytes;
+  }
+  if (modelId === NLLB_BUNDLE.repo) return NLLB_BUNDLE.totalBytes;
+  const engine = allEngines().find((e) => e.modelId === modelId);
+  return engine?.expectedBytes ?? null;
+}
+
 /** Every saved model with its size in bytes, across both model caches.
  *  Entries at a revision that is no longer pinned do not count: a pin bump
- *  must not double-list or double-count the model (M-5). */
+ *  must not double-list or double-count the model (M-5). A model whose
+ *  required files are not all present (a cancelled download's leftovers)
+ *  is not listed: it is not saved, and a row for it would claim something
+ *  untrue. */
 export async function savedModels(): Promise<Map<string, number>> {
-  const sizes = new Map<string, number>();
+  const found = new Map<string, { bytes: number; names: Set<string> }>();
   try {
-    if (typeof caches === "undefined") return sizes;
+    if (typeof caches === "undefined") return new Map();
     for (const cacheName of MODEL_CACHES) {
       const cache = await caches.open(cacheName);
       const requests = await cache.keys();
@@ -168,11 +186,25 @@ export async function savedModels(): Promise<Map<string, number>> {
         const response = await cache.match(request);
         const header = response?.headers.get("content-length");
         const size = header == null ? 0 : Number(header);
-        sizes.set(modelId, (sizes.get(modelId) ?? 0) + (Number.isFinite(size) ? size : 0));
+        const entry = found.get(modelId) ?? { bytes: 0, names: new Set<string>() };
+        entry.bytes += Number.isFinite(size) ? size : 0;
+        entry.names.add(basenameOf(request.url));
+        found.set(modelId, entry);
       }
     }
   } catch {
     // Unavailable storage reads as empty.
+  }
+  const sizes = new Map<string, number>();
+  for (const [modelId, entry] of found) {
+    // Only complete models are "on this device": a cancelled download's
+    // partial files must not show up as a saved model.
+    const complete = requiredFilesFor(modelId).every((file) => entry.names.has(file));
+    if (!complete) continue;
+    // Older cache entries carry no content-length: the pinned bundle total
+    // is the honest size for a complete model.
+    const pinned = pinnedTotalBytesFor(modelId);
+    sizes.set(modelId, entry.bytes > 0 ? entry.bytes : (pinned ?? entry.bytes));
   }
   return sizes;
 }

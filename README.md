@@ -110,7 +110,7 @@ The whole routed fleet was benchmarked against professional human translations (
 
 Measured from a production build, compressed, as transferred:
 
-- **First visit: ~298 KB** (HTML + JS + CSS, 11 requests). Fonts load per script on demand (~270 KB total).
+- **First visit: ~311 KB** (HTML + JS + CSS, 10 requests). Fonts load per script on demand (~270 KB total).
 - **First translation setup:** ~5.4 MB more (the worker bundle and the self-hosted ONNX Runtime WebAssembly), plus the model itself — 21–55 MB for a Bergamot pair (plus a one-time 5.3 MB Bergamot runtime, fetched only when a Bergamot language is first used), 105–155 MB for a small pair, 262–309 MB for IndicTrans2, 912 MB for the full model. Once, then cached.
 
 ## Privacy, verifiable
@@ -128,10 +128,12 @@ src/components/          translator UI, settings, history, batch, about sections
 src/hooks/               engine state, settings, history, speech
 src/lib/engines.ts       the engine table + pinned model revisions (the source of truth)
 src/workers/             the translation worker (bundled to public/translator.worker.js)
-scripts/build-worker.mjs     generates the worker, service worker and build stamps
+scripts/build-worker.mjs     generates the worker, service worker and the build stamp
 scripts/copy-ort.mjs         self-hosts the ONNX runtime files
 scripts/generate-notices.mjs THIRD_PARTY_NOTICES.md, from the engine table
-scripts/check-drift.mjs      notices + quality table + pins must match the code
+scripts/check-drift.mjs      notices + quality table + pins + generated files must match the code
+scripts/stamp-sources.mjs    the worker source stamp (shared by build + drift)
+tests/                       unit tests (node --test): segmenting, share links, punctuation, quality, languages, pins
 scripts/release/             revision pinning + first-visit measurement
 scripts/benchmark/           the quality benchmark (FLORES-200, chrF++) and its results
 scripts/language-audit/      the Hub audit that verified every model and license
