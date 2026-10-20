@@ -7,7 +7,7 @@
  * storage is full or blocked.
  */
 
-import { useCallback, useSyncExternalStore } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 import { STORAGE_KEYS, storageGetJSON, storageSetJSON } from "@/lib/storage";
 
 export type HistoryEntry = {
@@ -30,7 +30,16 @@ function readFromStorage(): HistoryEntry[] {
   const stored = storageGetJSON<HistoryEntry[]>(STORAGE_KEYS.history);
   if (!Array.isArray(stored)) return [...EMPTY];
   return stored
-    .filter((e) => e && typeof e.id === "string" && typeof e.sourceText === "string")
+    .filter(
+      (e) =>
+        e &&
+        typeof e.id === "string" &&
+        typeof e.sourceText === "string" &&
+        // A corrupt createdAt must not survive the filter: formatting an
+        // invalid date would break the whole sheet render (L-10).
+        typeof e.createdAt === "number" &&
+        Number.isFinite(e.createdAt),
+    )
     .slice(0, CAP);
 }
 
@@ -93,10 +102,10 @@ export function useHistory() {
   const entries = useSyncExternalStore(subscribe, getSnapshot, () => EMPTY);
   const loaded = entries !== EMPTY;
 
-  const actions = useCallback(
-    () => ({ addOrReplace, remove, setFlagged, clear }),
-    [],
-  )();
+  // A stable object (M-16): the old useCallback-then-call pattern built a
+  // new actions object on every render and re-rendered everything that
+  // depends on the history context on every keystroke.
+  const actions = useMemo(() => ({ addOrReplace, remove, setFlagged, clear }), []);
 
   return { entries, loaded, ...actions };
 }

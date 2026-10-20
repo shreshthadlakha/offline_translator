@@ -32,7 +32,9 @@ function downloadTextFile(text: string, filename: string) {
   anchor.href = url;
   anchor.download = filename;
   anchor.click();
-  URL.revokeObjectURL(url);
+  // Older WebKit can abort the blob fetch if the URL is revoked in the
+  // same tick as the click: give the download a moment to start (L-24).
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 function isoDate(): string {
@@ -148,7 +150,7 @@ function OutputPaneInner() {
                 {span.text}
               </span>
               {span.state === "failed" ? (
-                <span className="mt-1 block text-danger" style={{ fontSize: "0.8125rem", lineHeight: 1.45 }}>
+                <span dir="ltr" className="mt-1 block text-danger" style={{ fontSize: "0.8125rem", lineHeight: 1.45 }}>
                   {copy.translate.sentenceFailed}
                 </span>
               ) : null}
@@ -234,7 +236,9 @@ function OutputPaneInner() {
           <p className="type-small text-muted-foreground tabular-nums">
             {output.pendingCount > 0
               ? copy.translate.translatingSentence(Math.min(output.doneCount + 1, output.totalSentences), output.totalSentences)
-              : copy.translate.translatedIn(secondsPrecise(output.lastTranslatedMs ?? 0))}
+              : output.failedCount > 0
+                ? copy.translate.translatedInFailed(secondsPrecise(output.lastTranslatedMs ?? 0), output.failedCount)
+                : copy.translate.translatedIn(secondsPrecise(output.lastTranslatedMs ?? 0))}
           </p>
         </div>
       ) : null}
@@ -243,7 +247,7 @@ function OutputPaneInner() {
         aria-label={copy.translate.outputAriaLabel}
         lang={tgtLang?.bcp47}
         dir={tgtLang?.dir ?? "ltr"}
-        className="type-pane scroll-surface user-select-text flex min-h-[clamp(320px,50vh,520px)] flex-col overflow-y-auto px-4 py-3 whitespace-pre-wrap"
+        className="type-pane scroll-surface user-select-text flex min-h-[clamp(320px,50vh,520px)] flex-col overflow-y-auto px-4 py-3 whitespace-pre-wrap [overflow-wrap:anywhere]"
       >
         {content}
       </div>

@@ -7,7 +7,7 @@
  */
 
 import { memo, useEffect, useState } from "react";
-import { History, Layers, MoreHorizontal, Settings2 } from "lucide-react";
+import { History, Layers, Link2, MoreHorizontal, Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -17,7 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ShareAction } from "@/components/share/share-action";
+import { ShareAction, ShareFallbackDialog, useShareAction } from "@/components/share/share-action";
 import { copy } from "@/lib/copy";
 
 type Props = {
@@ -27,6 +27,10 @@ type Props = {
 };
 
 function AppHeaderInner({ onOpenHistory, onOpenBatch, onOpenSettings }: Props) {
+  // The mobile menu item shares directly (no button inside a button): the
+  // action and its fallback dialog come from the same hook the desktop
+  // button uses.
+  const { onShare, manualUrl, setManualUrl } = useShareAction();
   // A hairline border appears once the page scrolls.
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -78,10 +82,9 @@ function AppHeaderInner({ onOpenHistory, onOpenBatch, onOpenSettings }: Props) {
                 <Layers aria-hidden className="size-4" />
                 {copy.nav.batch}
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <button type="button" className="type-small flex w-full cursor-pointer items-center gap-2 outline-none">
-                  <ShareAction />
-                </button>
+              <DropdownMenuItem onClick={() => void onShare()} className="type-small">
+                <Link2 aria-hidden className="size-4" />
+                {copy.nav.share}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={onOpenSettings} className="type-small">
                 <Settings2 aria-hidden className="size-4" />
@@ -91,6 +94,8 @@ function AppHeaderInner({ onOpenHistory, onOpenBatch, onOpenSettings }: Props) {
           </DropdownMenu>
         </div>
       </div>
+
+      <ShareFallbackDialog manualUrl={manualUrl} onClose={() => setManualUrl(null)} />
     </header>
   );
 }

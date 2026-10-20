@@ -84,6 +84,10 @@ let nllbLeanEngine: NllbLeanEngine | null = null;
 let loadedEngine: EngineSpec | null = null;
 let deviceUsed: EngineDevice | null = null;
 let loading = false;
+/** The latest init that arrived while another load was running (L-2): it
+ * runs when that load finishes, instead of being silently dropped while the
+ * main thread believes the new engine is loading. */
+let pendingLoad: { spec: EngineSpec; src: string; tgt: string; device: "wasm" | "webgpu" } | null = null;
 let seqCounter = 0;
 /** Session optimization level for the next session creations. The main
  * thread sends it only when the person chose one with the URL flag;
@@ -419,13 +423,18 @@ async function warmUp(spec: EngineSpec, src: string, tgt: string): Promise<boole
   if (!translator) return false;
   const output = await translator(warmupText, asCallOptions(generateOptions(warmupText, src, tgt, interrupt)));
   const text = Array.isArray(output)
-    ? output.map((o) => (typeof o === "string" ? o : o.translation_text)).join("").trim()
+    ? output.map((o) => (typeof o === "string" ? o : ((o as { translation_text?: string }).translation_text ?? ""))).join("").trim()
     : String(output).trim();
   return text.length > 0;
 }
 
 async function load(spec: EngineSpec, src: string, tgt: string, deviceWanted: "wasm" | "webgpu"): Promise<void> {
-  if (loading) return;
+  if (loading) {
+    // Another load is running: this init becomes the latest wish (L-2) and
+    // runs as soon as that load finishes.
+    pendingLoad = { spec, src, tgt, device: deviceWanted };
+    return;
+  }
   // Already running this model? Group models serve many pairs that differ
   // only by the language tag: switching the tag updates the spec and confirms
   // ready without reloading anything. Anything queued for the previous tag is
@@ -580,6 +589,13 @@ async function load(spec: EngineSpec, src: string, tgt: string, deviceWanted: "w
     });
   } finally {
     loading = false;
+    // The init that arrived while this load ran goes next (L-2).
+    const next = pendingLoad;
+    pendingLoad = null;
+    if (next) {
+      void load(next.spec, next.src, next.tgt, next.device);
+      return;
+    }
     // Drain anything that arrived during the load (an engine switch can
     // post translates while the main thread still shows "ready").
     schedulePump();

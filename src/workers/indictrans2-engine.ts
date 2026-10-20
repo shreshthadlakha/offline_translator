@@ -98,17 +98,23 @@ async function fetchVerifiedFile(
   const cached = await cache.match(url);
   if (cached) {
     const bytes = await cached.arrayBuffer();
-    if (bytes.byteLength === file.bytes) {
+    // Both checks, not just the size (L-4): a same-size corrupt entry must
+    // never be used. The bytes are already read, so hashing them is free.
+    if (bytes.byteLength === file.bytes && (await sha256Hex(bytes)) === file.sha256) {
       onProgress({ status: "done", file: file.name, loaded: file.bytes, total: file.bytes });
       return bytes;
     }
-    // Wrong size for this pin: the cache entry is stale or corrupt. Drop it.
+    // Wrong size or wrong hash for this pin: the cache entry is stale or
+    // corrupt. Drop it and fetch fresh, verified bytes.
     await cache.delete(url);
   }
 
   const response = await fetch(url);
   if (!response.ok) throw new Error(`HTTP ${response.status} for ${file.name}`);
-  const total = Number(response.headers.get("content-length") ?? file.bytes);
+  // The pinned byte size is the progress total (L-9): the wire
+  // content-length can be a compressed size while the reader yields
+  // decompressed bytes, which would make loaded outrun total.
+  const total = file.bytes;
 
   if (!response.body) {
     const bytes = await response.arrayBuffer();

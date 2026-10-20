@@ -8,7 +8,7 @@
  * state. Ctrl or Cmd K opens the target language picker.
  */
 
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { LanguagePicker } from "@/components/translate/language-picker";
 import { SwapButton } from "@/components/translate/swap-button";

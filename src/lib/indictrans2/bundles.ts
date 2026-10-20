@@ -81,9 +81,3 @@ export const INDICTRANS2_LANGUAGES: string[] = [
   "sat_Olck", "snd_Arab", "snd_Deva", "tam_Taml", "tel_Telu", "urd_Arab",
   "unr_Deva", "awa_Deva", "bho_Deva",
 ];
-
-export function bundleForDirection(src: string, tgt: string): IndicTrans2BundleKey | null {
-  if (src === "eng_Latn" && INDICTRANS2_LANGUAGES.includes(tgt)) return "en-indic";
-  if (tgt === "eng_Latn" && INDICTRANS2_LANGUAGES.includes(src)) return "indic-en";
-  return null;
-}

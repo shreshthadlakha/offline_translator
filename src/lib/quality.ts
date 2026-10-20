@@ -874,7 +874,4 @@ export function directionQuality(src: string, tgt: string): DirectionQuality | n
   return null;
 }
 
-/** The language-level tier shown beside the language name. */
-export function languageQuality(code: string): QualityTier | null {
-  return BY_CODE.get(code)?.tier ?? null;
-}
+

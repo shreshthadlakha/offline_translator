@@ -11,12 +11,15 @@ npm ci        # installs and generates the worker, service worker and ORT runtim
 npm run dev   # http://localhost:3000
 ```
 
-Everything in `public/ort/`, `public/translator.worker.js`, `public/sw.js` and the two build-id stamps is generated — by `postinstall`, `predev` and `prebuild` — never committed. A fresh checkout needs nothing else.
+Everything in `public/ort/`, `public/translator.worker.js`, `public/sw.js` and the build-id stamp is generated — by `postinstall`, `predev` and `prebuild` — never committed. A fresh checkout needs nothing else.
+
+**Dev trap, worth knowing:** `next dev` does not watch the translation worker's sources. After editing anything under `src/workers/` or `src/lib/`, run `npm run build:worker` (or restart `npm run dev`) before reloading, or the page runs the old worker bundle against your new app code. The drift check catches this (`npm run drift` compares the bundle's source stamp), but only when you run it.
 
 ```bash
 npm run lint        # eslint
 npm run typecheck   # tsc --noEmit
-npm run drift       # notices + quality table + revision pins must match the code
+npm test            # unit tests (node --test)
+npm run drift       # notices + quality table + revision pins + generated files must match the code
 npm run build       # production build (standalone)
 ```
 
@@ -29,7 +32,7 @@ Five kinds of engines, chosen per language pair:
 - **Small single-pair models** (Opus-MT conversions, ~105–155 MB): one small model per popular pair, both directions where a verified conversion exists. Loads in seconds, translates ~0.5 s/sentence on a laptop. Includes community conversions by `fintutto` (English to Hebrew, English to Swahili).
 - **Group models** (Opus-MT many-languages, ~119 MB): one model covers a language family with a language tag per pair (Portuguese today).
 - **IndicTrans2** (distilled 200M, int8 ONNX exports by `hari31416`, ~262–309 MB per direction): the thirteen Indian languages, both directions with English, with a JavaScript port of the reference preprocessing and a custom decoding loop.
-- **Bergamot** (Mozilla's Firefox Translations models, 21–52 MB per direction): int8 Marian student models with intgemm, run by Mozilla's Bergamot WebAssembly runtime (self-hosted, MPL-2.0) in the worker — Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Polish, Hebrew (to English), Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese, both directions with English where Mozilla ships them. Roughly ten times faster than the Opus routes, and mostly *above* the full model's published quality on the measured sample. The models come from a byte-for-byte mirror of Mozilla's registry at a pinned revision, every file verified against a SHA-256.
+- **Bergamot** (Mozilla's Firefox Translations models, 21–55 MB per direction): int8 Marian student models with intgemm, run by Mozilla's Bergamot WebAssembly runtime (self-hosted, MPL-2.0) in the worker — Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Polish, Hebrew (to English), Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese, both directions with English where Mozilla ships them. Roughly ten times faster than the Opus routes, and mostly *above* the full model's published quality on the measured sample. The models come from a byte-for-byte mirror of Mozilla's registry at a pinned revision, every file verified against a SHA-256.
 - **The full model** (NLLB-200 distilled 600M, 912 MB): covers every pair of the 56-language registry. It is loaded by a lean engine written for it (P12): one file and one ONNX session at a time, every download checksum-verified, the tokenizer from transformers.js and the greedy decode loop in the worker — byte-identical outputs to the library pipeline (proven against the Node harness on fixed sentences). On a real computer it loads in a couple of minutes and translates a sentence in seconds; it holds about 2.5 GB of memory while it runs (the 4 GB test machine's renderer was killed at ~2.4 GB during setup, so on such machines it may not finish — the setup card says so honestly). Its languages are offered **normally**, with the plain "Large, about 900 MB. Slower, and uses a lot of memory." tag, and the model is treated as the expensive thing it is: it never starts on page load (the page opens on the last small-model pair instead), it loads only from a Translate press or the card's "Load model" button, and it is unloaded — worker ended, memory really returned — after 5 minutes without a translation (Settings: 5/15/Never), after 3 minutes with the tab hidden, or any time from the "Free memory now" button in Details. An optional "Hide languages that need the large model" switch keeps them out of the lists for people who'd rather not see them.
 
 Every model is loaded **pinned to a fixed Hugging Face revision** (`MODEL_REVISIONS` in `src/lib/engines.ts`), so upstream repository changes can never silently change what this app downloads. A model is downloaded once, kept in the browser's cache, and the app keeps working offline afterwards. Inference runs in a web worker — WebGPU when available, WebAssembly otherwise — so typing never blocks.
@@ -45,6 +48,8 @@ The whole routed fleet was benchmarked against professional human translations (
 
 `small` = dedicated pair model, `group` = shared family model, `indictrans2` = the IndicTrans2 bundles, `bergamot` = Mozilla's Firefox Translations models on the Bergamot wasm runtime. Pairs between two non-English languages also route to the full model (nothing pivots through English). Every "full model" row is offered normally with the Large tag, loads only on an explicit Translate or "Load model" press, and unloads when idle.
 
+| Language | Code | English → this language | This language → English |
+| --- | --- | --- | --- |
 | Afrikaans | `afr_Latn` | small (111 MB), borderline | bergamot (36 MB), pass |
 | Amharic | `amh_Ethi` | full model (912 MB), Large | full model (912 MB), Large |
 | Arabic | `arb_Arab` | small (118 MB), borderline | small (118 MB), borderline |
@@ -106,7 +111,7 @@ The whole routed fleet was benchmarked against professional human translations (
 Measured from a production build, compressed, as transferred:
 
 - **First visit: ~298 KB** (HTML + JS + CSS, 11 requests). Fonts load per script on demand (~270 KB total).
-- **First translation setup:** ~5.4 MB more (the worker bundle and the self-hosted ONNX Runtime WebAssembly), plus the model itself — 21–52 MB for a Bergamot pair (plus a one-time 5.3 MB Bergamot runtime, fetched only when a Bergamot language is first used), 105–155 MB for a small pair, 262–309 MB for IndicTrans2, 912 MB for the full model. Once, then cached.
+- **First translation setup:** ~5.4 MB more (the worker bundle and the self-hosted ONNX Runtime WebAssembly), plus the model itself — 21–55 MB for a Bergamot pair (plus a one-time 5.3 MB Bergamot runtime, fetched only when a Bergamot language is first used), 105–155 MB for a small pair, 262–309 MB for IndicTrans2, 912 MB for the full model. Once, then cached.
 
 ## Privacy, verifiable
 

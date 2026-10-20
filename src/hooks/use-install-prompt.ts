@@ -15,8 +15,14 @@ type BeforeInstallPromptEvent = Event & {
 let deferredPrompt: BeforeInstallPromptEvent | null = null;
 const listeners = new Set<() => void>();
 
+let listenersInstalled = false;
+
 export function initInstallPrompt(): void {
   if (typeof window === "undefined") return;
+  // The init can run more than once (development remounts); the listeners
+  // themselves must only ever be registered one time (L-15).
+  if (listenersInstalled) return;
+  listenersInstalled = true;
   window.addEventListener("beforeinstallprompt", (event) => {
     event.preventDefault();
     deferredPrompt = event as BeforeInstallPromptEvent;

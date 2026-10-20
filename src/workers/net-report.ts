@@ -11,6 +11,13 @@
  * This module must be imported first in translator.worker.ts, before the
  * transformers library is evaluated, so every fetch it makes goes through
  * here.
+ *
+ * Lifecycle note (L-33): the worker is terminated by the page, and a page
+ * reload takes a moment to reach it. A model download that is already
+ * streaming when the person navigates away can therefore complete and be
+ * verified-and-cached inside that window — an interrupted-looking setup can
+ * still end up saved. That is harmless (the bytes are verified before they
+ * count), but Cancel tests should know downloads can outrun the navigation.
  */
 
 import type { WorkerToMain } from "./protocol";

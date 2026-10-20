@@ -119,7 +119,10 @@ async function fetchVerifiedFile(file: NllbPinnedFile, onProgress: ProgressFn): 
 
   const response = await fetch(url);
   if (!response.ok) throw new Error(`HTTP ${response.status} for ${file.name}`);
-  const total = Number(response.headers.get("content-length") ?? file.bytes);
+  // The pinned byte size is the progress total (L-9): the wire
+  // content-length can be a compressed size while the reader yields
+  // decompressed bytes, which would make loaded outrun total.
+  const total = file.bytes;
 
   if (!response.body) {
     const bytes = await response.arrayBuffer();

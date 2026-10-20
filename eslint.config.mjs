@@ -1,16 +1,18 @@
 import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 import nextTypescript from "eslint-config-next/typescript";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
   rules: {
     // TypeScript rules
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": "off",
+    // Re-enabled (L-25): the codebase carries no explicit any.
+    "@typescript-eslint/no-explicit-any": "error",
+    // Re-enabled (L-25): the codebase is clean under both rules; leading
+    // underscores mark deliberately unused parameters (base class
+    // signatures, destructuring position).
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { argsIgnorePattern: "^_", varsIgnorePattern: "^_", destructuredArrayIgnorePattern: "^_" },
+    ],
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/prefer-as-const": "off",
@@ -19,6 +21,11 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
     // React rules
     "react-hooks/exhaustive-deps": "off",
     "react-hooks/purity": "off",
+    // The app syncs external world events (storage reads, media queries,
+    // worker notes, overlay open state) into state from effects on purpose:
+    // there is no event-to-state mapping for these sources otherwise. The
+    // new compiler rule flags every such deliberate sync.
+    "react-hooks/set-state-in-effect": "off",
     // The translation cache is an external store read during render, keyed by
     // a version counter. The refs rule misreads this intentional pattern.
     "react-hooks/refs": "off",

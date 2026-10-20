@@ -181,6 +181,18 @@ function DetailsPanelInner() {
     };
   }, []);
 
+  // If the engine stopped being ready while a speed test ran (unloaded by
+  // Free memory now, an error, a switch), the five messages it waits for
+  // can never arrive: reset the test instead of leaving the button stuck
+  // on "Running the speed test..." forever (M-17).
+  useEffect(() => {
+    if (status !== "ready" && speedTest.running) {
+      speedTestUnsubscribeRef.current?.();
+      speedTestUnsubscribeRef.current = null;
+      setSpeedTest({ running: false, result: null, failed: false });
+    }
+  }, [status, speedTest.running]);
+
   const canRunSpeedTest = srcLang?.code === "eng_Latn" && status === "ready" && !speedTest.running;
 
   const runSpeedTest = useCallback(() => {
@@ -339,7 +351,7 @@ function DetailsPanelInner() {
                   <li key={row.file} className="flex items-baseline justify-between gap-3">
                     <span className="type-small min-w-0">
                       {fileLabel(row.file)}
-                      <span className="block truncate text-[0.6875rem] leading-tight text-muted-foreground/80">{row.file}</span>
+                      <span className="block truncate text-[0.6875rem] leading-tight text-muted-foreground">{row.file}</span>
                     </span>
                     <span className="type-small shrink-0 text-end text-muted-foreground tabular-nums">
                       {fileStatusText(row)}

@@ -35,6 +35,7 @@
  */
 
 import {
+  BERGAMOT_CACHE,
   BERGAMOT_PAIRS,
   BERGAMOT_RUNTIME,
   bergamotFileUrl,
@@ -115,17 +116,23 @@ async function fetchVerifiedFile(url: string, file: BergamotPinnedFile, cacheNam
   const cached = await cache.match(url);
   if (cached) {
     const bytes = await cached.arrayBuffer();
-    if (bytes.byteLength === file.bytes) {
+    // Both checks, not just the size (L-4): a same-size corrupt entry must
+    // never be used. The bytes are already read, so hashing them is free.
+    if (bytes.byteLength === file.bytes && (await sha256Hex(bytes)) === file.sha256) {
       onProgress({ status: "done", file: file.name, loaded: file.bytes, total: file.bytes });
       return bytes;
     }
-    // Wrong size for this pin: the cache entry is stale or corrupt. Drop it.
+    // Wrong size or wrong hash for this pin: the cache entry is stale or
+    // corrupt. Drop it and fetch fresh, verified bytes.
     await cache.delete(url);
   }
 
   const response = await fetch(url);
   if (!response.ok) throw new Error(`HTTP ${response.status} for ${file.name}`);
-  const total = Number(response.headers.get("content-length") ?? file.bytes);
+  // The pinned byte size is the progress total (L-9): the wire
+  // content-length can be a compressed size while the reader yields
+  // decompressed bytes, which would make loaded outrun total.
+  const total = file.bytes;
 
   if (!response.body) {
     const bytes = await response.arrayBuffer();
@@ -222,7 +229,7 @@ function gemmImports(info: { env: { memory: WebAssembly.Memory } }): Record<stri
   const fallback: Record<string, (...args: unknown[]) => unknown> = {};
   for (const [key, name] of Object.entries(GEMM_TO_FALLBACK)) {
     fallback[key] = (...args: unknown[]) => {
-      const mod = globalThis.Module as unknown as { asm?: Record<string, (...a: unknown[]) => unknown> };
+      const mod = (globalThis as unknown as { Module?: { asm?: Record<string, (...a: unknown[]) => unknown> } }).Module;
       const fn = mod?.asm?.[name];
       if (typeof fn !== "function") throw new Error(`bergamot gemm fallback ${name} unavailable`);
       return fn(...args);
@@ -271,7 +278,7 @@ export class BergamotEngine {
 
     const buffers = new Map<string, ArrayBuffer>();
     for (const file of pinned.files) {
-      const bytes = await fetchVerifiedFile(bergamotFileUrl(pair, file.name), file, "pt-bergamot", onProgress);
+      const bytes = await fetchVerifiedFile(bergamotFileUrl(pair, file.name), file, BERGAMOT_CACHE, onProgress);
       buffers.set(file.name, bytes);
     }
 
@@ -307,7 +314,7 @@ export class BergamotEngine {
     for (const file of [BERGAMOT_RUNTIME.glue, BERGAMOT_RUNTIME.wasm]) {
       onProgress({ status: "initiate", file: file.name, total: file.bytes });
     }
-    const cache = await caches.open("pt-bergamot");
+    const cache = await caches.open(BERGAMOT_CACHE);
     const glueUrl = `/bergamot/${BERGAMOT_RUNTIME.glue.name}`;
     const wasmUrl = `/bergamot/${BERGAMOT_RUNTIME.wasm.name}`;
     // Cached bodies are read exactly once: a Response body cannot be read
@@ -328,12 +335,12 @@ export class BergamotEngine {
     if (glue) {
       onProgress({ status: "done", file: BERGAMOT_RUNTIME.glue.name, loaded: BERGAMOT_RUNTIME.glue.bytes, total: BERGAMOT_RUNTIME.glue.bytes });
     } else {
-      glue = new TextDecoder().decode(await fetchVerifiedFile(glueUrl, BERGAMOT_RUNTIME.glue, "pt-bergamot", onProgress));
+      glue = new TextDecoder().decode(await fetchVerifiedFile(glueUrl, BERGAMOT_RUNTIME.glue, BERGAMOT_CACHE, onProgress));
     }
     if (wasm) {
       onProgress({ status: "done", file: BERGAMOT_RUNTIME.wasm.name, loaded: BERGAMOT_RUNTIME.wasm.bytes, total: BERGAMOT_RUNTIME.wasm.bytes });
     } else {
-      wasm = await fetchVerifiedFile(wasmUrl, BERGAMOT_RUNTIME.wasm, "pt-bergamot", onProgress);
+      wasm = await fetchVerifiedFile(wasmUrl, BERGAMOT_RUNTIME.wasm, BERGAMOT_CACHE, onProgress);
     }
 
     // Module worker: importScripts does not exist. The glue only uses it for
@@ -341,7 +348,7 @@ export class BergamotEngine {
     // so a throwing stub is the honest way to say "must not happen" while
     // still taking the worker path.
     if (typeof importScripts !== "function") {
-      self.importScripts = () => {
+      (self as unknown as { importScripts?: () => void }).importScripts = () => {
         throw new Error("importScripts must not be called in the bergamot engine");
       };
     }
@@ -362,7 +369,7 @@ export class BergamotEngine {
         });
       return {};
     };
-    globalThis.Module = moduleHolder;
+    (globalThis as unknown as { Module?: typeof moduleHolder }).Module = moduleHolder;
     // Indirect eval: global scope, so the glue's `var Module` merges into the
     // Module just placed on the global object.
     (0, eval)(glue);
@@ -370,7 +377,7 @@ export class BergamotEngine {
       ready,
       new Promise((_, reject) => setTimeout(() => reject(new Error("Bergamot runtime init timeout")), 120_000)),
     ]);
-    const loaded = globalThis.Module as unknown as BergamotModule;
+    const loaded = (globalThis as unknown as { Module?: BergamotModule }).Module;
     if (!loaded?.BlockingService) throw new Error("Bergamot runtime did not expose its API");
     this.module = loaded;
     this.service = new loaded.BlockingService({ cacheSize: 0 });

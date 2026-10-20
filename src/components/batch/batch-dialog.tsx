@@ -13,6 +13,7 @@ import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useTranslatorState } from "@/components/translate/translator-provider";
+import { useRestoreFocus } from "@/hooks/use-restore-focus";
 import { toast } from "@/hooks/use-toast";
 import { translationCache } from "@/lib/cache";
 import { languageByCode } from "@/lib/languages";
@@ -41,8 +42,10 @@ export function BatchDialog({ open, onOpenChange }: Props) {
   const { engine, srcCode, tgtCode, srcLang, tgtLang, maybeStartSetup } = useTranslatorState();
   const [state, setState] = useState<BatchState>(INITIAL);
   const [batchText, setBatchText] = useState("");
-  /** One entry per queued job: the sentences it carries. */
-  const pendingRef = useRef(new Map<string, string[]>());
+  /** One entry per queued job: the sentences it carries, and the pair it
+   *  was queued under (L-3): a mid-run pair change must not write old-pair
+   *  translations into the new pair's cache. */
+  const pendingRef = useRef(new Map<string, { sentences: string[]; src: string; tgt: string }>());
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -55,6 +58,8 @@ export function BatchDialog({ open, onOpenChange }: Props) {
     }
   }, [open, engine]);
 
+  // Segment the batch text once per text (L-17), not three times per run:
+  // this memo feeds the queueing effect, the result assembly and the total.
   const sentences = useMemo(
     () => (state.phase === "input" ? [] : flatSentences(segmentText(state.text, srcLang?.bcp47 ?? "en"))),
     [state.phase, state.text, srcLang?.bcp47],
@@ -63,9 +68,10 @@ export function BatchDialog({ open, onOpenChange }: Props) {
   // Assemble the result from the cache, not from arrival order.
   const resultText = useMemo(() => {
     if (state.phase === "input") return "";
-    const segments = segmentText(state.text, srcLang?.bcp47 ?? "en");
     return joinLines(
-      segments.lines.map((line) => line.map((sentence) => translationCache.get(srcCode, tgtCode, sentence) ?? "")),
+      segmentText(state.text, srcLang?.bcp47 ?? "en").lines.map((line) =>
+        line.map((sentence) => translationCache.get(srcCode, tgtCode, sentence) ?? ""),
+      ),
     );
   }, [state.phase, state.text, srcCode, tgtCode, srcLang?.bcp47, state.done]);
 
@@ -75,8 +81,7 @@ export function BatchDialog({ open, onOpenChange }: Props) {
     // The batch Translate press is an explicit start: it may start the large
     // model too, which typing and pasting never do.
     maybeStartSetup({ allowLarge: true });
-    const segments = segmentText(text, srcLang?.bcp47 ?? "en");
-    const all = flatSentences(segments);
+    const all = flatSentences(segmentText(text, srcLang?.bcp47 ?? "en"));
     setState({ phase: "running", text, total: all.length, done: 0, failed: 0 });
   }, [batchText, maybeStartSetup, srcLang?.bcp47]);
 
@@ -86,11 +91,10 @@ export function BatchDialog({ open, onOpenChange }: Props) {
   // call each when the engine benefits from batching (see lib/speed-config.ts).
   useEffect(() => {
     if (state.phase !== "running" || engine.status !== "ready") return;
-    const segments = segmentText(state.text, srcLang?.bcp47 ?? "en");
-    const all = flatSentences(segments);
+    const all = sentences;
     const pendingSentences = new Set<string>();
     for (const group of pendingRef.current.values()) {
-      for (const sentence of group) pendingSentences.add(sentence);
+      for (const sentence of group.sentences) pendingSentences.add(sentence);
     }
     const toTranslate: string[] = [];
     for (const s of all) {
@@ -101,41 +105,46 @@ export function BatchDialog({ open, onOpenChange }: Props) {
     for (let i = 0; i < toTranslate.length; i += SPEED_CONFIG.batch.groupSize) {
       const group = toTranslate.slice(i, i + SPEED_CONFIG.batch.groupSize);
       const id = `b-${Date.now().toString(36)}-${batchIdCounter++}`;
-      pendingRef.current.set(id, group);
+      // The pair is pinned at queue time (L-3): results land under the pair
+      // the run started with, whatever the pickers say when they arrive.
+      pendingRef.current.set(id, { sentences: group, src: srcCode, tgt: tgtCode });
       engine.translate(id, group, srcCode, tgtCode, "batch");
     }
     const queued = toTranslate.length;
     const alreadyCached = all.length - queued;
-    if (queued === 0) {
+    // L-18: "all cached" also means nothing is still pending, so a copy or
+    // download can never miss in-flight results.
+    if (queued === 0 && pendingRef.current.size === 0) {
       setState((prev) => ({ ...prev, phase: "done", done: all.length }));
     } else if (alreadyCached > 0) {
       setState((prev) => ({ ...prev, done: alreadyCached }));
     }
-  }, [state.phase, state.text, engine.status, engine.readyTick, engine, srcCode, tgtCode, srcLang?.bcp47]);
+  }, [state.phase, sentences, engine.status, engine.readyTick, engine, srcCode, tgtCode]);
 
   // Track results and errors.
   useEffect(() => {
     if (state.phase !== "running") return;
     return engine.subscribe((message) => {
       if (message.type === "result" && message.id && pendingRef.current.has(message.id)) {
-        const group = pendingRef.current.get(message.id) ?? [];
+        const group = pendingRef.current.get(message.id) ?? { sentences: [], src: srcCode, tgt: tgtCode };
         pendingRef.current.delete(message.id);
-        // The results land in the shared cache, and the assembled output is
-        // derived from it, never from arrival order.
-        group.forEach((sentence, index) => {
-          translationCache.set(srcCode, tgtCode, sentence, message.texts[index] ?? "");
+        // The results land in the shared cache under the queued pair (L-3),
+        // and the assembled output is derived from it, never from arrival
+        // order.
+        group.sentences.forEach((sentence, index) => {
+          translationCache.set(group.src, group.tgt, sentence, message.texts[index] ?? "");
         });
         setState((prev) => {
-          const done = prev.done + group.length;
+          const done = prev.done + group.sentences.length;
           const finished = done >= prev.total && pendingRef.current.size === 0;
           return { ...prev, done, phase: finished ? "done" : "running" };
         });
       } else if (message.type === "error" && message.id && pendingRef.current.has(message.id)) {
-        const group = pendingRef.current.get(message.id) ?? [];
+        const group = pendingRef.current.get(message.id) ?? { sentences: [], src: srcCode, tgt: tgtCode };
         pendingRef.current.delete(message.id);
         setState((prev) => {
-          const done = prev.done + group.length;
-          const failed = prev.failed + group.length;
+          const done = prev.done + group.sentences.length;
+          const failed = prev.failed + group.sentences.length;
           const finished = done >= prev.total && pendingRef.current.size === 0;
           return { ...prev, done, failed, phase: finished ? "done" : "running" };
         });
@@ -170,7 +179,9 @@ export function BatchDialog({ open, onOpenChange }: Props) {
     anchor.href = url;
     anchor.download = `translation-${base}-${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}.txt`;
     anchor.click();
-    URL.revokeObjectURL(url);
+    // Older WebKit can abort the blob fetch if the URL is revoked in the
+    // same tick as the click (L-24).
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }, [resultText, srcCode]);
 
   const onPickFile = useCallback(async (file: File | undefined) => {
@@ -186,9 +197,13 @@ export function BatchDialog({ open, onOpenChange }: Props) {
   const running = state.phase === "running";
   const hasResult = (state.phase === "done" || state.phase === "cancelled") && resultText.trim().length > 0;
 
+  // Opened from controlled state (no DialogTrigger): focus must return to
+  // the button that opened the dialog, not fall to <body> (M-13).
+  const restoreFocus = useRestoreFocus(open);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-xl">
+      <DialogContent className="sm:max-w-xl" onCloseAutoFocus={restoreFocus.onCloseAutoFocus}>
         <DialogHeader>
           <DialogTitle className="type-heading">{strings.batch.title}</DialogTitle>
           <DialogDescription className="type-small text-muted-foreground">

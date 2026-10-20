@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useTranslatorState } from "@/components/translate/translator-provider";
 import { useOnlineStatus } from "@/hooks/use-online-status";
+import { useRestoreFocus } from "@/hooks/use-restore-focus";
 import { useSettings } from "@/hooks/use-settings";
 import { clockMs, mbWhole, speed as speedFmt, eta as etaFmt, formatBytes } from "@/lib/format";
 import { clearShellCache, savedModels } from "@/lib/model-cache";
@@ -105,9 +106,10 @@ function SetupCardInner() {
   // runs before any load state exists), during an active setup (a switch or
   // restart), over an error, and over a ready engine (a switch away from a
   // small model, before anything changes).
+  const heavyAskFocus = useRestoreFocus(heavyAsk.open);
   const heavyDialog = (
     <AlertDialog open={heavyAsk.open}>
-      <AlertDialogContent>
+      <AlertDialogContent onCloseAutoFocus={heavyAskFocus.onCloseAutoFocus}>
         <AlertDialogHeader>
           <AlertDialogTitle>{copy.setup.heavyTitle(heavyAsk.language)}</AlertDialogTitle>
           <AlertDialogDescription>
@@ -157,6 +159,14 @@ function SetupCardInner() {
         body = copy.setup.quotaTooSmall(
           error.quota != null ? formatBytes(error.quota) : "",
           error.needed != null ? formatBytes(error.needed) : "",
+        );
+        // A way forward, like every other error card (H-1): the worker was
+        // ended when the quota check failed, so a retry after space is freed
+        // (or the window reopened normally) actually starts again.
+        action = (
+          <Button size="sm" variant="outline" onClick={() => engine.start()}>
+            {copy.setup.retry}
+          </Button>
         );
         break;
       case "another-tab":
@@ -264,7 +274,7 @@ function SetupCardInner() {
               <p dir="ltr" className="type-small mb-2 text-danger">{copy.setup.crashedLastTime}</p>
             ) : null}
             {idleUnloaded ? (
-              <p dir="ltr" className="type-small mb-2 text-muted-foreground">{copy.setup.unloadedNote}</p>
+              <p dir="ltr" role="status" className="type-small mb-2 text-muted-foreground">{copy.setup.unloadedNote}</p>
             ) : null}
             <h3 dir="ltr" className="type-body font-medium">{copy.setup.largeTitle(pairEnglish)}</h3>
             <p dir="ltr" className="type-small mt-1.5 text-muted-foreground">{copy.setup.largeBody}</p>
@@ -382,6 +392,9 @@ function SetupCardInner() {
 
       {notes.storageDisabled ? (
         <p dir="ltr" className="type-small mt-2 text-muted-foreground">{copy.setup.storageDisabled}</p>
+      ) : null}
+      {notes.singleTabLockUnavailable ? (
+        <p dir="ltr" className="type-small mt-2 text-muted-foreground">{copy.setup.singleTabLockUnavailable}</p>
       ) : null}
       {notes.memoryWarning ? (
         <p dir="ltr" className="type-small mt-2 text-muted-foreground">

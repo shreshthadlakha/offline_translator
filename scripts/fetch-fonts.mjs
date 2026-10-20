@@ -1,23 +1,20 @@
 #!/usr/bin/env node
-// Extracts latin/latin-ext/script-subset @font-face blocks from Google Fonts CSS
-// already downloaded to /tmp and downloads the woff2 files into public/fonts.
-// Everything ends up self hosted. Run once during setup; the app never talks to
-// Google Fonts at runtime.
-import { mkdir, readFile, writeFile, readdir, rm } from "node:fs/promises";
+// Extracts script-subset @font-face blocks from Google Fonts CSS already
+// downloaded to /tmp and downloads the woff2 files into public/fonts.
+// Everything ends up self hosted. Run once during setup; the app never talks
+// to Google Fonts at runtime.
+//
+// Only the four script companion families belong here (declared by hand in
+// src/app/globals.css with unicode-range). The Latin faces live in
+// src/fonts/ and load through next/font/local in layout.tsx, so this script
+// must not write them, and it writes no fonts.css: nothing imports one.
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 
 const OUT_DIR = "public/fonts";
 const TMP = "/tmp";
 
 // [css file, subset to keep, output family name, weight]
 const WANTED = [
-  ["Newsreader_opsz_wght@6..72_500.css", "latin", "newsreader", "500"],
-  ["Newsreader_opsz_wght@6..72_600.css", "latin", "newsreader", "600"],
-  ["IBM+Plex+Sans_wght@400.css", "latin", "plex-sans", "400"],
-  ["IBM+Plex+Sans_wght@400.css", "latin-ext", "plex-sans", "400"],
-  ["IBM+Plex+Sans_wght@500.css", "latin", "plex-sans", "500"],
-  ["IBM+Plex+Sans_wght@500.css", "latin-ext", "plex-sans", "500"],
-  ["IBM+Plex+Sans_wght@600.css", "latin", "plex-sans", "600"],
-  ["IBM+Plex+Sans_wght@600.css", "latin-ext", "plex-sans", "600"],
   ["IBM+Plex+Sans+Arabic_wght@400.css", "arabic", "plex-arabic", "400"],
   ["IBM+Plex+Sans+Arabic_wght@500.css", "arabic", "plex-arabic", "500"],
   ["IBM+Plex+Sans+Devanagari_wght@400.css", "devanagari", "plex-devanagari", "400"],
@@ -47,7 +44,6 @@ function parseBlocks(css) {
 await rm(OUT_DIR, { recursive: true, force: true });
 await mkdir(OUT_DIR, { recursive: true });
 
-const cssOut = [];
 const seen = new Set();
 for (const [cssFile, subset, family, weight] of WANTED) {
   const css = await readFile(`${TMP}/${cssFile}`, "utf8");
@@ -70,15 +66,9 @@ for (const [cssFile, subset, family, weight] of WANTED) {
     console.error(`DOWNLOAD FAILED ${url}: ${res.status}`);
     continue;
   }
-  const buf = Buffer.from(await res.arrayBuffer());
-  await writeFile(`${OUT_DIR}/${filename}`, buf);
-  const range = block["unicode-range"];
-  cssOut.push(
-    `@font-face {\n  font-family: "${family}";\n  font-style: normal;\n  font-weight: ${weight};\n  font-display: swap;\n  src: url("/fonts/${filename}") format("woff2");\n${range ? `  unicode-range: ${range};\n` : ""}}`,
-  );
-  console.log(`${filename} ${(buf.length / 1024).toFixed(0)}KB`);
+  const buffer = Buffer.from(await res.arrayBuffer());
+  await writeFile(`${OUT_DIR}/${filename}`, buffer);
+  console.log(`${filename} ${(buffer.length / 1024).toFixed(0)}KB`);
 }
-await writeFile(`${OUT_DIR}/fonts.css`, cssOut.join("\n\n") + "\n");
-console.log("wrote public/fonts/fonts.css");
 const files = await readdir(OUT_DIR);
 console.log(`${files.length} files in ${OUT_DIR}`);

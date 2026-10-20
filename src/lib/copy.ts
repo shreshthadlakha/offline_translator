@@ -5,8 +5,29 @@
  * and status messages that say what is actually true.
  */
 
-import { LANGUAGES } from "@/lib/languages";
-import { engineForPair } from "@/lib/engines";
+import { LANGUAGES } from "./languages.ts";
+import { allEngines, engineForPair } from "./engines.ts";
+
+const decimalMb = (bytes: number) => Math.round(bytes / 1e6);
+const rangeMb = (bytes: number[]) =>
+  `${decimalMb(Math.min(...bytes))} to ${decimalMb(Math.max(...bytes))} MB`;
+
+/** Size ranges computed from the engine table (M-18), so the copy can never
+ *  under-report what a download actually costs. */
+const fastBytes = allEngines()
+  .filter((e) => e.kind === "opus" || e.kind === "bergamot")
+  .map((e) => e.expectedBytes);
+const indicBytes = allEngines().filter((e) => e.kind === "indictrans2").map((e) => e.expectedBytes);
+const bergamotBytes = allEngines().filter((e) => e.kind === "bergamot").map((e) => e.expectedBytes);
+const groupEngine = allEngines().find((e) => e.group);
+/** e.g. "21 to 155 MB" */
+const FAST_SIZE_RANGE = rangeMb(fastBytes);
+/** e.g. "262 to 309 MB" */
+const INDIC_SIZE_RANGE = rangeMb(indicBytes);
+/** e.g. "21 to 55 MB" */
+const BERGAMOT_SIZE_RANGE = rangeMb(bergamotBytes);
+/** The shared group model's size, e.g. "119 MB". */
+const GROUP_SIZE = groupEngine ? `${decimalMb(groupEngine.expectedBytes)} MB` : "119 MB";
 
 /** Size of the one-time download for the full model, shown up front. */
 export const MODEL_SIZE = "900 MB";
@@ -134,6 +155,9 @@ export const copy = {
     lowMemory: (gb: string) => `This device reports about ${gb} GB of memory. The large model uses about ${LARGE_MEMORY} while it runs, so it may not finish. Closing other tabs helps.`,
     // Storage can't be written at all. Translating still works.
     storageDisabled: "Storage is switched off in this window, so the model can't be saved. It will download again next visit.",
+    // The Web Locks API is missing (Safari < 16.4): single-tab mode can't
+    // be enforced. A quiet note, not a block.
+    singleTabLockUnavailable: "This browser can't enforce the one-tab-at-a-time rule, so keep to one tab while translating.",
     // WebGPU wanted, WebAssembly used.
     webgpuFellBack: "Switched to the more compatible mode because the faster one didn't work on this device.",
     // Translate pressed while the engine isn't ready.
@@ -209,6 +233,12 @@ export const copy = {
     // Progress while translating, and the quiet timing line afterwards.
     translatingSentence: (index: number, total: number) => `Translating sentence ${index} of ${total}`,
     translatedIn: (seconds: string) => `Translated in ${seconds} s`,
+    // The completion line when some sentences failed (M-19): screen readers
+    // hear about the failures, not just the success.
+    translatedInFailed: (seconds: string, count: number) =>
+      count === 1
+        ? `Translated in ${seconds} s. 1 sentence couldn't be translated.`
+        : `Translated in ${seconds} s. ${count} sentences couldn't be translated.`,
   },
 
   details: {
@@ -295,7 +325,7 @@ export const copy = {
     languagesLead: `${LANGUAGE_COUNT} languages. Pick one to translate into it.`,
     expectHeading: "What to expect",
     expectItems: [
-      `The first setup downloads a model once: about 20 to 130 MB for popular pairs, like English to French, and larger for some language families. It never happens again.`,
+      `The first setup downloads a model once: about ${FAST_SIZE_RANGE} for popular pairs, like English to French, and larger for some language families. It never happens again.`,
       `${LARGE_LANGUAGE_COUNT} languages have no small model yet, and so do pairs between two non-English languages. They use the large model: a one-time download of about ${MODEL_SIZE}, and about ${LARGE_MEMORY} of memory while it runs. It loads when you translate and is unloaded after a few minutes without one.`,
       "Older phones and computers can be slow, and some may run out of memory.",
       "Quality is good for everyday text but varies by language. It won't match the biggest cloud services on subtle meaning.",
@@ -305,7 +335,7 @@ export const copy = {
     questions: [
       {
         q: "Which models does it use?",
-        a: "Popular pairs, like English to French, use small Opus-MT models from Helsinki NLP, released under Apache-2.0 or CC BY 4.0 depending on the pair. Portuguese shares one small multi language Opus-MT model, about 115 MB. The Indian languages (Hindi, Bengali, Tamil, Urdu and nine more, both directions with English) use IndicTrans2 from AI4Bharat, MIT licensed, as community int8 exports, about 250 to 300 MB per direction. Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Polish, Hebrew to English, Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese use Mozilla's Firefox Translations models, MPL-2.0, run by the Bergamot WebAssembly engine, about 20 to 50 MB per direction. The remaining languages, and pairs between two non-English languages, use NLLB-200 from Meta, released under a non commercial licence, CC BY-NC 4.0. Those pairs are labelled Large in the lists. The exact model for the pair you're using, and its licence, is in Details.",
+        a: `Popular pairs, like English to French, use small Opus-MT models from Helsinki NLP, released under Apache-2.0 or CC BY 4.0 depending on the pair. Portuguese shares one small multi language Opus-MT model, about ${GROUP_SIZE}. The Indian languages (Hindi, Bengali, Tamil, Urdu and nine more, both directions with English) use IndicTrans2 from AI4Bharat, MIT licensed, as community int8 exports, about ${INDIC_SIZE_RANGE} per direction. Croatian, Serbian, Norwegian, Bulgarian, Greek, Romanian, Ukrainian, Russian, Persian, Catalan, Malay, Vietnamese, Japanese, Korean, Polish, Hebrew to English, Thai, Turkish, Afrikaans, Indonesian and Traditional Chinese use Mozilla's Firefox Translations models, MPL-2.0, run by the Bergamot WebAssembly engine, about ${BERGAMOT_SIZE_RANGE} per direction. The remaining languages, and pairs between two non-English languages, use NLLB-200 from Meta, released under a non commercial licence, CC BY-NC 4.0. Those pairs are labelled Large in the lists. The exact model for the pair you're using, and its licence, is in Details.`,
       },
       {
         q: "Does it work offline?",
@@ -344,6 +374,9 @@ export const copy = {
     restoreAria: "Put this translation back in the translator",
     copyAria: "Copy this translation",
     deleteAria: "Delete this entry",
+    // The two-step delete (L-23): the armed state of the trash button.
+    deleteConfirm: "Sure?",
+    deleteConfirmAria: "Delete this translation for good",
     flagAria: "Mark this translation as wrong",
     flaggedBadge: "Flagged",
     clear: "Clear history",
@@ -438,5 +471,3 @@ export const copy = {
     offline: "You're offline",
   },
 } as const;
-
-export type Copy = typeof copy;

@@ -171,7 +171,7 @@ L.push("The research copies of these libraries (pinned release tarballs) live un
 L.push("");
 L.push("## Self hosted fonts");
 L.push("");
-L.push("All fonts are subset woff2 files in `public/fonts/`, fetched once by `scripts/fetch-fonts.mjs` and served from this origin. The app never talks to Google Fonts at runtime.");
+L.push("All fonts are subset woff2 files served from this origin. The Latin faces live in `src/fonts/` and load through `next/font/local`; the four script subsets (Arabic, Devanagari, Hebrew, Thai) live in `public/fonts/`, fetched once by `scripts/fetch-fonts.mjs`. The app never talks to Google Fonts at runtime.");
 L.push("");
 L.push("- **IBM Plex Sans**, with Arabic, Devanagari, Hebrew and Thai subsets — © IBM Corp., SIL Open Font License 1.1.");
 L.push("- **Newsreader** (display type for headlines) — © Production Type, SIL Open Font License 1.1, via Google Fonts.");

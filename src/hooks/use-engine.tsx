@@ -24,7 +24,7 @@ import { STORAGE_KEYS, storageGet, storageRemove, storageSet } from "@/lib/stora
 import { netlog } from "@/lib/netlog";
 import { engineForPair, largePairHidden, type PairEngine } from "@/lib/engines";
 import { directionQuality } from "@/lib/quality";
-import { cachedModelFiles, modelFilesCached } from "@/lib/model-cache";
+import { cachedModelFiles, modelFilesCached, pruneStaleModelEntries } from "@/lib/model-cache";
 import { clearTimings, recordTiming } from "@/lib/speed-metrics";
 import { sessionPair, useSettings } from "@/hooks/use-settings";
 import { SPEED_CONFIG } from "@/lib/speed-config";
@@ -77,6 +77,9 @@ export type EngineNotes = {
   storageDisabled: boolean;
   /** WebGPU was wanted and the engine fell back to WebAssembly. */
   webgpuFellBack: boolean;
+  /** The Web Locks API is missing (Safari < 16.4): single-tab mode cannot
+   * be enforced in this browser. A quiet note, not a block. */
+  singleTabLockUnavailable: boolean;
 };
 
 /** The session optimization level, read once from the URL flag
@@ -148,7 +151,7 @@ export function useEngine(heavyGate?: HeavyGate) {
   const [switching, setSwitching] = useState(false);
   const [fileRows, setFileRows] = useState<FileRow[]>([]);
   const [stageTimings, setStageTimings] = useState<StageTimings>({});
-  const [notes, setNotes] = useState<EngineNotes>({ memoryWarning: false, memoryGB: null, storageDisabled: false, webgpuFellBack: false });
+  const [notes, setNotes] = useState<EngineNotes>({ memoryWarning: false, memoryGB: null, storageDisabled: false, webgpuFellBack: false, singleTabLockUnavailable: false });
   const [crashNotice, setCrashNotice] = useState<string | null>(null);
   /** Seconds since data last arrived, while downloading. */
   const [stallSeconds, setStallSeconds] = useState<number | null>(null);
@@ -173,6 +176,15 @@ export function useEngine(heavyGate?: HeavyGate) {
   /** The engine id the desired-engine effect last saw, so choosing a
    *  different engine lifts the deliberate-unload hold. */
   const prevEngineIdRef = useRef<string | null>(null);
+  /** When the crash flag was last refreshed by progress (L-11). */
+  const lastCrashFlagWriteRef = useRef(0);
+  /** Last known saved-state per model, so switching back to a pair never
+   * flashes the offer card for a model already on the device (M-20). */
+  const modelPresentMemoRef = useRef(new Map<string, boolean>());
+  /** Latest callbacks for the desired-engine effect, which must not re-run
+   * when callback identities change (L-34). */
+  const startRef = useRef<(options?: { auto?: boolean }) => void>(() => {});
+  const switchToRef = useRef<(engine: PairEngine) => Promise<void>>(() => Promise.resolve());
 
   const workerRef = useRef<Worker | null>(null);
   const listenersRef = useRef(new Set<Listener>());
@@ -331,6 +343,9 @@ export function useEngine(heavyGate?: HeavyGate) {
 
   const handleWorkerMessage = useCallback(
     (message: WorkerToMain) => {
+      // A message already in flight when the worker was terminated: there
+      // is no worker to serve further state, so late delivery is dropped.
+      if (!workerRef.current) return;
       // Any message at all proves the worker is alive: pongs, but also
       // results, progress and stats, which arrive between translations when
       // the event loop is briefly free.
@@ -359,6 +374,13 @@ export function useEngine(heavyGate?: HeavyGate) {
         case "progress": {
           const now = performance.now();
           lastProgressAtRef.current = now;
+          // While bytes keep arriving the setup is alive (L-11): refresh the
+          // crash flag, throttled, so a long legitimate download is not
+          // read as a stale crash later.
+          if (now - lastCrashFlagWriteRef.current > 30_000) {
+            lastCrashFlagWriteRef.current = now;
+            storageSet(STORAGE_KEYS.setupCrash, String(Date.now()));
+          }
           const fraction = message.total > 0 ? Math.min(1, message.loaded / message.total) : 0;
           // The displayed value never goes backwards while the known total
           // is unchanged. When the total grows (more files announced), the
@@ -410,6 +432,19 @@ export function useEngine(heavyGate?: HeavyGate) {
           break;
         }
         case "ready": {
+          // The engine the worker reports ready must be the one the main
+          // thread asked for (defense in depth: the desired state is
+          // trusted, never the worker's word alone).
+          if (message.engineId !== activeSpecRef.current?.id) {
+            terminate();
+            setSwitching(false);
+            setStatusSafe("error");
+            const mismatch = { code: "stale-code" as EngineErrorCode, message: "worker ready for a different engine" };
+            setError(mismatch);
+            lastErrorRef.current = mismatch;
+            netlog.setEngineReady(false);
+            break;
+          }
           // Setup finished. Clear the crash flag and remember that setup has
           // been completed once, for the compact hero on return visits.
           storageRemove(STORAGE_KEYS.setupCrash);
@@ -427,6 +462,9 @@ export function useEngine(heavyGate?: HeavyGate) {
           setEngineInfo(desiredRef.current);
           setError(null);
           setStatusSafe("ready");
+          // Quietly drop any cache entries left at a revision that is no
+          // longer pinned (M-5): a pin bump must not orphan old files.
+          void pruneStaleModelEntries();
           setReadyTick((t) => t + 1);
           netlog.setEngineReady(true);
           // Requests that arrived while setup ran are sent now, in order.
@@ -436,6 +474,14 @@ export function useEngine(heavyGate?: HeavyGate) {
           heldQueueRef.current = [];
           for (const { id: heldId, message: heldMessage } of held) {
             sentAtRef.current.set(heldId, performance.now());
+            // Held requests only start translating now, so the busy grace
+            // starts now (M-4): the first flushed sentence's inference
+            // blocks the worker's message loop, and without the grace the
+            // heartbeat would declare the healthy engine dead. The netlog
+            // interval also starts now, so the request is flagged as
+            // in-flight for the honesty panel.
+            busyUntilRef.current = Math.max(busyUntilRef.current, performance.now() + SPEED_CONFIG.heartbeat.busyGraceMs);
+            netlog.markTranslateSent(heldId);
             post(heldMessage);
           }
           break;
@@ -486,7 +532,11 @@ export function useEngine(heavyGate?: HeavyGate) {
           break;
         }
         case "stats": {
-          setHeap({ used: message.used, limit: message.limit });
+          // The same numbers must not re-render the whole translator tree
+          // every heartbeat (M-16): returning the previous state object
+          // lets React bail out.
+          setHeap((prev) =>
+            prev.used === message.used && prev.limit === message.limit ? prev : { used: message.used, limit: message.limit });
           if (message.device) setDevice(message.device);
           break;
         }
@@ -544,7 +594,11 @@ export function useEngine(heavyGate?: HeavyGate) {
       // it. Silence only counts against the worker once the busy window
       // from the last posted translate has passed.
       const busy = performance.now() < busyUntilRef.current;
-      const limit = busy || statusRef.current !== "ready" ? 90_000 : SPEED_CONFIG.heartbeat.timeoutMs;
+      // Session creation (the initializing stage) can block the worker's
+      // message loop for a long stretch on slow hardware (L-9): the cap is
+      // wider there so a slow-but-healthy setup is not declared dead.
+      const loadingLimit = statusRef.current === "initializing" ? 180_000 : 90_000;
+      const limit = busy || statusRef.current !== "ready" ? loadingLimit : SPEED_CONFIG.heartbeat.timeoutMs;
       if (silent > limit) {
         terminate();
         setSwitching(false);
@@ -564,7 +618,7 @@ export function useEngine(heavyGate?: HeavyGate) {
     if (typeof navigator === "undefined" || !("locks" in navigator) || !navigator.locks?.request) return true;
     try {
       return await new Promise<boolean>((resolve) => {
-        void navigator.locks!.request(LOCK_NAME, { ifAvailable: true }, (lock) => {
+        const request = navigator.locks!.request(LOCK_NAME, { ifAvailable: true }, (lock) => {
           if (!lock) {
             resolve(false);
             return undefined;
@@ -575,6 +629,10 @@ export function useEngine(heavyGate?: HeavyGate) {
           resolve(true);
           return held;
         });
+        // A rejection of the lock request itself (an implementation quirk)
+        // must neither become an unhandled rejection nor leave the caller
+        // waiting forever: it counts as "not locked".
+        void Promise.resolve(request).catch(() => resolve(false));
       });
     } catch {
       // Locks misbehaving shouldn't block translation.
@@ -596,6 +654,11 @@ export function useEngine(heavyGate?: HeavyGate) {
       // already running for such a pair is left alone — the switch stops new
       // setups, it does not kill working translations.
       if (largeHiddenRef.current && engine.kind === "nllb") {
+        // Nothing may load while the hide switch is on for this pair. The
+        // worker start() already created for this load must not be left
+        // holding the tab lock with no engine in it (H-1): end it, so a
+        // later start can actually run.
+        if (workerRef.current) terminate();
         setStatusSafe("idle");
         return false;
       }
@@ -617,7 +680,13 @@ export function useEngine(heavyGate?: HeavyGate) {
           } catch {
             allowed = false;
           }
-          if (!allowed) return false;
+          if (!allowed) {
+            // The ask was declined. The worker start() created for this load
+            // is ended here as well as by the decline handler (H-1): nothing
+            // may be left holding the tab lock with no engine in it.
+            if (workerRef.current) terminate();
+            return false;
+          }
         }
       }
 
@@ -634,6 +703,11 @@ export function useEngine(heavyGate?: HeavyGate) {
             quota: estimate.quota,
             needed: engine.expectedBytes,
           };
+          // The worker start() created can never serve this pair in this
+          // window (H-1): end it, so the error state is recoverable — a
+          // Translate press or the card's retry starts fresh instead of
+          // silently no-op-ing until reload.
+          if (workerRef.current) terminate();
           setError(err);
           lastErrorRef.current = err;
           setStatusSafe("error");
@@ -677,7 +751,7 @@ export function useEngine(heavyGate?: HeavyGate) {
       startHeartbeat();
       return true;
     },
-    [post, setStatusSafe, srcCode, tgtCode, startHeartbeat, settings.useWebGPU, sessionOptLevel],
+    [post, setStatusSafe, srcCode, tgtCode, startHeartbeat, settings.useWebGPU, sessionOptLevel, terminate],
   );
 
   const start = useCallback(
@@ -719,7 +793,12 @@ export function useEngine(heavyGate?: HeavyGate) {
           }
         }, 5000);
         worker.postMessage({ type: "hello" });
-        await beginLoad(engine);
+        const ok = await beginLoad(engine);
+        // The safety net for every beginLoad early return (H-1): a precheck
+        // that fails after the worker exists must never leave a spec-less
+        // zombie behind — every later start() would silently no-op and the
+        // app would be bricked until reload.
+        if (!ok && workerRef.current && activeSpecRef.current == null) terminate();
         // The pair may have changed while the prechecks ran. The desired
         // engine effect re-runs on every status change and will catch it,
         // because activeSpecRef is set before the first status update.
@@ -761,6 +840,20 @@ export function useEngine(heavyGate?: HeavyGate) {
     [beginLoad, post, settings.useWebGPU, srcCode, tgtCode, sessionOptLevel],
   );
 
+  // Latest-ref wiring for the desired-engine effect (L-34): it must not
+  // re-run when these callback identities change, and it must never call a
+  // stale one.
+  startRef.current = start;
+  switchToRef.current = switchTo;
+
+  // A missing single-tab lock API (Safari < 16.4) is a quiet note, not a
+  // silent fallthrough (M-6): the one-tab-at-a-time rule cannot be enforced
+  // in this browser, and the Details note says so plainly.
+  useEffect(() => {
+    const missing = typeof navigator === "undefined" || !("locks" in navigator) || !navigator.locks?.request;
+    setNotes((prev) => (prev.singleTabLockUnavailable === missing ? prev : { ...prev, singleTabLockUnavailable: missing }));
+  }, []);
+
   // The desired engine, followed. Small models load early when saved on this
   // device, during idle time; the large model never starts on its own, on any
   // path: not on page load, not on a pair change, not on a restart. It starts
@@ -780,9 +873,16 @@ export function useEngine(heavyGate?: HeavyGate) {
     }
 
     let cancelled = false;
+    // Restore the last known saved-state for this engine immediately
+    // (M-20): switching back to a pair mid-load must never flash the offer
+    // card for a model that is already on the device. The async check below
+    // refreshes it.
+    const memoized = modelPresentMemoRef.current.get(engine.modelId);
+    if (memoized !== undefined) setModelPresent(memoized);
     void (async () => {
       const saved = await modelFilesCached(engine.modelId);
       if (cancelled) return;
+      modelPresentMemoRef.current.set(engine.modelId, saved);
       setModelPresent(saved);
 
       if (workerRef.current) {
@@ -828,7 +928,7 @@ export function useEngine(heavyGate?: HeavyGate) {
             return;
           }
           if (statusRef.current === "ready") {
-            switchTo(engine);
+            switchToRef.current(engine);
           } else {
             // A different engine was wanted mid load. Starting clean is
             // quicker than waiting out a load nobody needs.
@@ -836,7 +936,7 @@ export function useEngine(heavyGate?: HeavyGate) {
             setAutoStarted(false);
             setSwitching(false);
             setStatusSafe("idle");
-            start({ auto: true });
+            startRef.current({ auto: true });
           }
         }
         return;
@@ -856,7 +956,7 @@ export function useEngine(heavyGate?: HeavyGate) {
       setAutoStarted(true);
       const begin = () => {
         if (cancelled || workerRef.current) return;
-        start({ auto: true });
+        startRef.current({ auto: true });
       };
       if (typeof requestIdleCallback === "function") {
         const handle = requestIdleCallback(begin, { timeout: 2000 });
@@ -888,11 +988,29 @@ export function useEngine(heavyGate?: HeavyGate) {
     }
   }, []);
 
-  // The WebGPU note: wanted, and the engine came back on WebAssembly.
+  // The WebGPU note: wanted, and the engine came back on WebAssembly. Only
+  // engines that actually attempt WebGPU can fall back from it (L-8):
+  // Bergamot is WebAssembly only, so the note never shows for it.
   useEffect(() => {
     if (status !== "ready" || !device) return;
+    if (engineInfo?.kind === "bergamot") {
+      setNotes((prev) => (prev.webgpuFellBack ? { ...prev, webgpuFellBack: false } : prev));
+      return;
+    }
     setNotes((prev) => ({ ...prev, webgpuFellBack: settings.useWebGPU && device === "wasm" }));
-  }, [status, device, settings.useWebGPU]);
+  }, [status, device, settings.useWebGPU, engineInfo]);
+
+  // A deliberate leave (close or reload) is not a crash (L-11): the crash
+  // flag must not accuse the next visit of running out of memory. A real
+  // crash never fires pagehide, so the honest recovery card still shows
+  // for genuine failures.
+  useEffect(() => {
+    const onPageHide = () => {
+      storageRemove(STORAGE_KEYS.setupCrash);
+    };
+    window.addEventListener("pagehide", onPageHide);
+    return () => window.removeEventListener("pagehide", onPageHide);
+  }, []);
 
   // --- giving the large model's memory back ---------------------------------------
   //

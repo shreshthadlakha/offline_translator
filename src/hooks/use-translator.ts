@@ -242,7 +242,7 @@ export function useTranslator(srcCode: string, tgtCode: string) {
     let doneCount = 0;
     let hasAnyOutput = false;
 
-    segments.lines.forEach((line, lineIndex) => {
+    segments.lines.forEach((line) => {
       const spans: OutputSpan[] = [];
       let previousText = "";
       line.forEach((sentence) => {

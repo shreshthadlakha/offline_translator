@@ -29,11 +29,13 @@ const PRECACHE = [
   "/fonts/plex-thai-500-thai.woff2",
   "/ort/ort-wasm-simd-threaded.jsep.mjs",
   "/ort/ort-wasm-simd-threaded.jsep.wasm",
+  "/bergamot/bergamot-translator-worker.js",
+  "/bergamot/bergamot-translator-worker.wasm",
   "/translator.worker.js",
 ];
 
 // Assets that never change for a given install: served cache first.
-const CACHE_FIRST = ["/ort/", "/fonts/", "/icons/", "/icon.svg", "/manifest.webmanifest"];
+const CACHE_FIRST = ["/ort/", "/bergamot/", "/fonts/", "/icons/", "/icon.svg", "/manifest.webmanifest"];
 // Everything else of the app's own origin is network first, cache fallback.
 
 self.addEventListener("install", (event) => {
@@ -50,11 +52,20 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
-      const keys = await caches.keys();
+      const keys = (await caches.keys()).filter((key) => key.startsWith("pt-shell-"));
       // Only this app's own shell caches. The model caches hold the one time
       // 900 MB download and must survive app updates.
+      //
+      // The previous generation's shell cache is kept (M-8): a tab that is
+      // still open on the old build keeps fetching its own hashed /_next/*
+      // files from it after this update takes over. It is cleaned up by the
+      // next update instead — at most two shell generations ever exist, a few
+      // hundred KB each. Build ids are timestamps, so "previous" is the
+      // largest other one.
+      const others = keys.filter((key) => key !== SHELL_CACHE).sort();
+      const keep = others.length > 0 ? others[others.length - 1] : null;
       await Promise.all(
-        keys.filter((key) => key.startsWith("pt-shell-") && key !== SHELL_CACHE).map((key) => caches.delete(key)),
+        others.filter((key) => key !== keep).map((key) => caches.delete(key)),
       );
       await self.clients.claim();
     })(),

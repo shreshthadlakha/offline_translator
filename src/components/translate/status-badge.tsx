@@ -54,13 +54,19 @@ function StatusBadgeInner({ className }: { className?: string }) {
     );
   }
 
-  if (!content) return null;
-
+  // The live region stays mounted even with nothing to say (M-19): a
+  // container that unmounts cannot announce the transition into its next
+  // state, only changes within one. Empty content collapses the pill
+  // visually while keeping the element alive for assistive tech.
   return (
     <div
       aria-live="polite"
       className={cn(
         "type-small inline-flex max-w-full items-center gap-2 rounded-full border bg-surface px-3 py-1.5 text-muted-foreground shadow-[var(--shadow-card)]",
+        // Never display:none: an element taken out of the accessibility
+        // tree cannot announce anything. An empty inline-flex is simply
+        // zero sized.
+        !content && "border-transparent bg-transparent px-0 py-0 shadow-none",
         className,
       )}
     >

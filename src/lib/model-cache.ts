@@ -12,16 +12,15 @@
  * others, and Erase everything removes them all.
  */
 
-import { INDICTRANS2_BUNDLES } from "@/lib/indictrans2/bundles";
-import { BERGAMOT_PAIRS } from "@/lib/bergamot/bundles";
-import { NLLB_BUNDLE } from "@/lib/nllb/bundles";
+import { INDICTRANS2_BUNDLES } from "./indictrans2/bundles.ts";
+import { BERGAMOT_PAIRS, BERGAMOT_REVISION, BERGAMOT_CACHE } from "./bergamot/bundles.ts";
+import { NLLB_BUNDLE } from "./nllb/bundles.ts";
+import { MODEL_REVISIONS } from "./engines.ts";
 
-const MODEL_CACHES = ["transformers-cache", "pt-indictrans2", "pt-bergamot"] as const;
+const MODEL_CACHES = ["transformers-cache", "pt-indictrans2", BERGAMOT_CACHE] as const;
 /** Shell caches carry the build id: pt-shell-<buildId>, one per build
  * (see scripts/sw-template.js). The prefix is what the app owns. */
 export const SHELL_CACHE_PREFIX = "pt-shell-";
-/** @deprecated Old fixed-name shell cache from before per-build names. */
-export const SHELL_CACHE_NAME = "pt-shell-v2";
 
 /** Quantized ONNX files a pipeline engine needs to be considered saved. */
 function requiredOnnxFiles(): string[] {
@@ -50,19 +49,49 @@ function requiredFilesFor(modelId: string): string[] {
  * entries add the pair directory (".../<rev>/<pair>/<file>"), so the pair is
  * part of the model identity — one mirror repository, many models. */
 function modelIdOf(url: string): string | null {
+  return modelEntryIdentity(url).modelId;
+}
+
+/** The identity of a cache entry URL: which model it belongs to, and at
+ * which revision. Exported for tests (M-5). */
+export function modelEntryIdentity(url: string): { modelId: string | null; revision: string | null } {
   try {
     const path = new URL(url).pathname;
     const parts = path.split("/").filter(Boolean);
     if (parts.length >= 4 && parts[2] === "resolve") {
+      const revision = parts[3] ?? null;
       if (parts[1] === "firefox-translations" && parts.length >= 6) {
-        return `${parts[0]}/${parts[1]}/${parts[4]}`;
+        return { modelId: `${parts[0]}/${parts[1]}/${parts[4]}`, revision };
       }
-      return `${parts[0]}/${parts[1]}`;
+      return { modelId: `${parts[0]}/${parts[1]}`, revision };
     }
-    return null;
+    return { modelId: null, revision: null };
   } catch {
-    return null;
+    return { modelId: null, revision: null };
   }
+}
+
+/** The pinned revisions a model's cache entries are valid at (M-5): a pin
+ * bump must not read as "already saved" while the engine re-downloads
+ * everything. Exported for tests. */
+export function pinnedRevisionsFor(modelId: string): Set<string> {
+  const revisions = new Set<string>();
+  const fromTable = MODEL_REVISIONS[modelId];
+  if (fromTable) revisions.add(fromTable);
+  if (modelId === NLLB_BUNDLE.repo) revisions.add(NLLB_BUNDLE.commit);
+  if (modelId.startsWith("midudev/firefox-translations/")) revisions.add(BERGAMOT_REVISION);
+  return revisions;
+}
+
+/** True when a cache entry counts as its model: the revision in its URL is
+ * one of the model's pinned revisions (unknown models and unpinned shapes
+ * pass through untouched). */
+function entryIsPinned(url: string, modelId: string | null): boolean {
+  if (modelId == null) return true;
+  const pinned = pinnedRevisionsFor(modelId);
+  if (pinned.size === 0) return true;
+  const { revision } = modelEntryIdentity(url);
+  return revision != null && pinned.has(revision);
 }
 
 function basenameOf(url: string): string {
@@ -73,7 +102,8 @@ function basenameOf(url: string): string {
   }
 }
 
-/** File names already saved in the cache for one model. Empty when none. */
+/** File names already saved in the cache for one model, at its pinned
+ * revision. Empty when none. */
 export async function cachedModelFiles(modelId: string): Promise<Set<string>> {
   const names = new Set<string>();
   try {
@@ -82,7 +112,8 @@ export async function cachedModelFiles(modelId: string): Promise<Set<string>> {
       const cache = await caches.open(cacheName);
       const requests = await cache.keys();
       for (const request of requests) {
-        if (modelIdOf(request.url) === modelId) names.add(basenameOf(request.url));
+        const id = modelIdOf(request.url);
+        if (id === modelId && entryIsPinned(request.url, id)) names.add(basenameOf(request.url));
       }
     }
   } catch {
@@ -97,7 +128,8 @@ export async function modelFilesCached(modelId: string): Promise<boolean> {
   return requiredFilesFor(modelId).every((file) => names.has(file));
 }
 
-/** Bytes stored in the caches for one model, from response content lengths. */
+/** Bytes stored in the caches for one model at its pinned revision, from
+ *  response content lengths. */
 export async function cachedModelBytes(modelId: string): Promise<number> {
   let total = 0;
   try {
@@ -106,7 +138,8 @@ export async function cachedModelBytes(modelId: string): Promise<number> {
       const cache = await caches.open(cacheName);
       const requests = await cache.keys();
       for (const request of requests) {
-        if (modelIdOf(request.url) !== modelId) continue;
+        const id = modelIdOf(request.url);
+        if (id !== modelId || !entryIsPinned(request.url, id)) continue;
         const response = await cache.match(request);
         const header = response?.headers.get("content-length");
         const size = header == null ? NaN : Number(header);
@@ -119,7 +152,9 @@ export async function cachedModelBytes(modelId: string): Promise<number> {
   return total;
 }
 
-/** Every saved model with its size in bytes, across both model caches. */
+/** Every saved model with its size in bytes, across both model caches.
+ *  Entries at a revision that is no longer pinned do not count: a pin bump
+ *  must not double-list or double-count the model (M-5). */
 export async function savedModels(): Promise<Map<string, number>> {
   const sizes = new Map<string, number>();
   try {
@@ -129,7 +164,7 @@ export async function savedModels(): Promise<Map<string, number>> {
       const requests = await cache.keys();
       for (const request of requests) {
         const modelId = modelIdOf(request.url);
-        if (!modelId) continue;
+        if (!modelId || !entryIsPinned(request.url, modelId)) continue;
         const response = await cache.match(request);
         const header = response?.headers.get("content-length");
         const size = header == null ? 0 : Number(header);
@@ -140,6 +175,27 @@ export async function savedModels(): Promise<Map<string, number>> {
     // Unavailable storage reads as empty.
   }
   return sizes;
+}
+
+/** Remove cache entries whose revision is no longer pinned (M-5): after a
+ *  pin bump the old revision's files are orphans on the disk. Runs quietly
+ *  after a successful load; best effort. */
+export async function pruneStaleModelEntries(): Promise<void> {
+  try {
+    if (typeof caches === "undefined") return;
+    for (const cacheName of MODEL_CACHES) {
+      const cache = await caches.open(cacheName);
+      const requests = await cache.keys();
+      for (const request of requests) {
+        const id = modelIdOf(request.url);
+        if (id == null) continue;
+        if (pinnedRevisionsFor(id).size === 0) continue; // not one of ours
+        if (!entryIsPinned(request.url, id)) await cache.delete(request);
+      }
+    }
+  } catch {
+    // Best effort.
+  }
 }
 
 /** Remove one saved model's entries from the caches. */

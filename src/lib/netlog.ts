@@ -139,6 +139,9 @@ function stripQuery(url: string): string {
 // --- translating intervals ----------------------------------------------------
 
 const MAX_INTERVALS = 500;
+/** Entry lists are capped too: a very long visit must not grow them
+ *  without bound (L-14). */
+const MAX_ENTRIES = 500;
 
 /** Intervals during which the engine was actively translating. */
 const intervals = new Map<string, { start: number; end: number | null }>();
@@ -170,6 +173,9 @@ function bump(group: NetGroupName, entry: NetEntry, whileTranslating: boolean): 
   current.count += 1;
   current.bytes += entry.size;
   current.entries.push(entry);
+  // The count and the bytes stay exact; only the displayed list is capped
+  // (the oldest entries fall off, like the intervals map above).
+  if (current.entries.length > MAX_ENTRIES) current.entries.splice(0, current.entries.length - MAX_ENTRIES);
   snapshot = {
     ...groups,
     translations: snapshot.translations,
@@ -243,33 +249,51 @@ export function startNetLogObserver(): () => void {
   };
 
   const observers: PerformanceObserver[] = [];
-  const watch = (init: () => void): void => {
+  // Each observer reports whether its typed form was accepted; the legacy
+  // entryTypes form is only registered when a typed one is missing, and it
+  // then records only the entry types the typed observers could not cover
+  // (M-2: registering both unconditionally double-counts every resource on
+  // Chrome, Firefox and Safari).
+  const tryObserve = (init: () => void): boolean => {
     try {
       init();
+      return true;
     } catch {
       // That entry type isn't supported here. The rest still work.
+      return false;
     }
   };
 
   // Resource entries: everything the page asked for except the document.
   // Navigation entries: the document itself. Both buffered, so requests made
   // before the observer existed are included.
-  watch(() => {
+  const resourceTypedOk = tryObserve(() => {
     const observer = new PerformanceObserver((list) => record(list.getEntries()));
     observer.observe({ type: "resource", buffered: true });
     observers.push(observer);
   });
-  watch(() => {
+  const navigationTypedOk = tryObserve(() => {
     const observer = new PerformanceObserver((list) => record(list.getEntries()));
     observer.observe({ type: "navigation", buffered: true });
     observers.push(observer);
   });
-  watch(() => {
-    // Older browsers without the typed form.
-    const observer = new PerformanceObserver((list) => record(list.getEntries()));
-    observer.observe({ entryTypes: ["resource", "navigation"] });
-    observers.push(observer);
-  });
+  if (!resourceTypedOk || !navigationTypedOk) {
+    // Older browsers without the typed form: record only what the typed
+    // observers are not already covering.
+    tryObserve(() => {
+      const observer = new PerformanceObserver((list) =>
+        record(
+          list.getEntries().filter(
+            (entry) =>
+              (entry.entryType === "resource" && !resourceTypedOk) ||
+              (entry.entryType === "navigation" && !navigationTypedOk),
+          ),
+        ),
+      );
+      observer.observe({ entryTypes: ["resource", "navigation"] });
+      observers.push(observer);
+    });
+  }
 
   return () => {
     for (const observer of observers) observer.disconnect();

@@ -7,7 +7,7 @@
  * the source text shown here.
  */
 
-import { memo, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { Copy, Flag, RotateCcw, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
@@ -22,6 +22,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useTranslatorState } from "@/components/translate/translator-provider";
+import { useRestoreFocus } from "@/hooks/use-restore-focus";
 import { toast } from "@/hooks/use-toast";
 import { languageByCode } from "@/lib/languages";
 import { copy as strings } from "@/lib/copy";
@@ -65,6 +66,14 @@ const HistoryItem = memo(function HistoryItem({
 }) {
   const srcLang = languageByCode(entry.src);
   const tgtLang = languageByCode(entry.tgt);
+  // Two-step delete (L-23): one tap arms the button, a second tap within a
+  // few seconds removes the entry. No permanent loss on a stray touch.
+  const [deleteArmed, setDeleteArmed] = useState(false);
+  useEffect(() => {
+    if (!deleteArmed) return;
+    const timer = setTimeout(() => setDeleteArmed(false), 4000);
+    return () => clearTimeout(timer);
+  }, [deleteArmed]);
   return (
     <article className="surface-card p-4">
       <div className="mb-2 flex items-center justify-between gap-2">
@@ -123,12 +132,19 @@ const HistoryItem = memo(function HistoryItem({
         <Button
           variant="ghost"
           size="icon"
-          aria-label={strings.history.deleteAria}
-          title={strings.history.deleteAria}
-          onClick={() => onDelete(entry.id)}
-          className="text-muted-foreground"
+          aria-label={deleteArmed ? strings.history.deleteConfirmAria : strings.history.deleteAria}
+          title={deleteArmed ? strings.history.deleteConfirmAria : strings.history.deleteAria}
+          aria-pressed={deleteArmed}
+          onClick={() => {
+            if (deleteArmed) onDelete(entry.id);
+            else setDeleteArmed(true);
+          }}
+          className={deleteArmed ? "text-danger" : "text-muted-foreground"}
         >
           <Trash2 aria-hidden className="size-4" />
+          {deleteArmed ? (
+            <span className="type-small ms-1">{strings.history.deleteConfirm}</span>
+          ) : null}
         </Button>
       </div>
     </article>
@@ -176,9 +192,13 @@ function HistorySheetInner({ open, onOpenChange }: Props) {
 
   const emptyMessage = flaggedOnly ? strings.history.emptyFlagged : strings.history.empty;
 
+  // Opened from controlled state (no SheetTrigger): focus must return to
+  // the button that opened the sheet, not fall to <body> (M-13).
+  const restoreFocus = useRestoreFocus(open);
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="flex w-full flex-col gap-0 p-0 sm:max-w-md">
+      <SheetContent side="right" className="flex w-full flex-col gap-0 p-0 sm:max-w-md" onCloseAutoFocus={restoreFocus.onCloseAutoFocus}>
         <SheetHeader className="border-b px-4 py-3">
           <SheetTitle className="type-heading">{strings.history.title}</SheetTitle>
           <SheetDescription className="sr-only">{strings.history.title}</SheetDescription>

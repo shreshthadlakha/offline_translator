@@ -633,6 +633,14 @@ export function restoredPair(settings: {
     src: valid(settings.lastSrc, "eng_Latn"),
     tgt: valid(settings.lastTgt, "fra_Latn"),
   };
+  // Fast models off is a deliberate choice: every pair runs on the full
+  // model, and the no-auto-start rule already protects page load (nothing
+  // large starts until a Translate press), so the saved pair is kept
+  // exactly as it was. The old code routed it through the large-pair
+  // fallback and discarded it on every reload (M-1).
+  if (!settings.useFastModels) {
+    return { ...last, changed: false };
+  }
   if (!isLargePair(last.src, last.tgt, fast(last.src, last.tgt))) {
     return { ...last, changed: false };
   }
@@ -667,8 +675,4 @@ export function allEngines(): EngineDescriptor[] {
     if (!seen.has(pair.id)) seen.set(pair.id, pair);
   }
   return [NLLB_ENGINE, ...seen.values()];
-}
-
-export function engineById(id: string): EngineDescriptor | undefined {
-  return allEngines().find((engine) => engine.id === id);
 }

@@ -28,11 +28,15 @@ function InputPaneInner() {
     }
   };
 
-  // When hide input is on, the blur must not swallow the first click into the
-  // textarea. Focus stays usable because the blur is a filter, not a pointer
-  // event block.
+  // When hide input is toggled on, the blur must not swallow the first
+  // click into the textarea. Focus stays usable because the blur is a
+  // filter, not a pointer event block. Only a real toggle focuses (L-22): a
+  // stored hideInput: true must not yank focus after page load.
+  const prevHiddenRef = useRef(hidden);
   useEffect(() => {
-    if (hidden) textareaRef.current?.focus({ preventScroll: true });
+    const toggled = prevHiddenRef.current !== hidden;
+    prevHiddenRef.current = hidden;
+    if (toggled && hidden) textareaRef.current?.focus({ preventScroll: true });
   }, [hidden]);
 
   // Example chips: only for English, and only while the box is empty.

@@ -9,7 +9,7 @@
  * clauses translate on their own.
  */
 
-import { SPEED_CONFIG } from "@/lib/speed-config";
+import { SPEED_CONFIG } from "./speed-config.ts";
 
 export type SegmentedText = {
   /** Each line of the input, split into sentences. Empty lines are []. */
@@ -47,10 +47,55 @@ function endsWithTerminator(text: string): boolean {
   return TERMINATORS.includes(trimmed[trimmed.length - 1] ?? "");
 }
 
-function splitByRegex(line: string): string[] {
-  // Match a run of non terminators followed by one or more terminators.
-  const parts = line.split(/(?<=[.!?…।॥۔؟。！？])\s*/);
-  return parts.map((p) => p.trim()).filter((p) => p.length > 0);
+/** Common abbreviations that end in a period but do not end a sentence.
+ * Kept deliberately small: only the ones that appear in everyday typing. */
+const ABBREVIATIONS = ["mr", "mrs", "ms", "dr", "prof", "sr", "jr", "st", "no", "vs", "etc", "eg", "ie", "p", "fig"];
+
+function isAbbreviation(before: string): boolean {
+  // The word immediately before the period, letters only.
+  const match = /[A-Za-z]+$/.exec(before);
+  if (!match) return false;
+  return ABBREVIATIONS.includes(match[0].toLowerCase());
+}
+
+/** True when the character after a terminator plausibly starts a new
+ * sentence: whitespace or a quote, then an uppercase letter, a digit-free
+ * start that is not a lowercase continuation. CJK terminators split
+ * unconditionally (those scripts use no spaces between sentences). */
+function startsNewSentence(next: string): boolean {
+  if (next.length === 0) return true;
+  const first = next[0] ?? "";
+  if (/[0-9,.]/.test(first)) return false; // "3.14", "example.com."
+  if (/[a-z]/.test(first)) return false; // "Mr. smith" style continuations
+  return true;
+}
+
+/** The fallback splitter for browsers without Intl.Segmenter: split after a
+ * terminator only when the terminator ends a run (end of line) or is
+ * followed by a plausible sentence start, so decimals, abbreviations and
+ * URLs are not cut mid token. Exported for tests. */
+export function splitByRegex(line: string): string[] {
+  const parts: string[] = [];
+  let start = 0;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i] ?? "";
+    if (!TERMINATORS.includes(ch)) continue;
+    // Only the ASCII terminators participate in the look-ahead rules; the
+    // script-specific ones (। ۔ ؟ 。 ！ ？ ॥) behave the same as before.
+    const rest = line.slice(i + 1);
+    if (ch === "." && isAbbreviation(line.slice(0, i))) continue;
+    if (rest.length > 0 && !startsNewSentence(rest)) continue;
+    // Consume a run of terminators (e.g. "!!!", "?!").
+    let end = i + 1;
+    while (end < line.length && TERMINATORS.includes(line[end] ?? "")) end++;
+    const part = line.slice(start, end).trim();
+    if (part.length > 0) parts.push(part);
+    start = end;
+    i = end - 1;
+  }
+  const tail = line.slice(start).trim();
+  if (tail.length > 0) parts.push(tail);
+  return parts;
 }
 
 function splitLongSentence(sentence: string, limit = SPEED_CONFIG.sentenceSplitLimit): string[] {

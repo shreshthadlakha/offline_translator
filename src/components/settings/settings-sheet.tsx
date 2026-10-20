@@ -32,6 +32,7 @@ import { useSettings } from "@/hooks/use-settings";
 import { deleteModelCache, deleteModelEntries, savedModels } from "@/lib/model-cache";
 import { languageByCode } from "@/lib/languages";
 import { useInstallPrompt } from "@/hooks/use-install-prompt";
+import { useRestoreFocus } from "@/hooks/use-restore-focus";
 import { STORAGE_KEYS, storageRemove } from "@/lib/storage";
 import { formatBytes, mbWhole } from "@/lib/format";
 import { allEngines } from "@/lib/engines";
@@ -141,9 +142,13 @@ function SettingsSheetInner({ open, onOpenChange, onHowItWorks }: Props) {
   const storageFraction =
     storage && storage.quota > 0 ? Math.min(100, (storage.usage / storage.quota) * 100) : null;
 
+  // Opened from controlled state (no SheetTrigger): focus must return to
+  // the button that opened the sheet, not fall to <body> (M-13).
+  const restoreFocus = useRestoreFocus(open);
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="flex w-full flex-col gap-0 p-0 sm:max-w-md">
+      <SheetContent side="right" className="flex w-full flex-col gap-0 p-0 sm:max-w-md" onCloseAutoFocus={restoreFocus.onCloseAutoFocus}>
         <SheetHeader className="border-b px-4 py-3">
           <SheetTitle className="type-heading">{strings.settings.title}</SheetTitle>
           <SheetDescription className="sr-only">{strings.settings.title}</SheetDescription>

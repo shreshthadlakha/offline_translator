@@ -10,7 +10,7 @@
  * itself, never the translation.
  */
 
-import { SPEED_CONFIG } from "@/lib/speed-config";
+import { SPEED_CONFIG } from "./speed-config.ts";
 
 export type TranslationTiming = {
   /** Wall clock time the result arrived. */

@@ -16,7 +16,7 @@ import { memo, useCallback, useMemo, useState, useSyncExternalStore } from "reac
 import { Check, ChevronDown, Search } from "lucide-react";
 import { Command } from "cmdk";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSettings } from "@/hooks/use-settings";
 import { searchLanguages, type Language } from "@/lib/languages";
@@ -89,7 +89,7 @@ function LanguageRow({
   );
 }
 
-function LanguageList({ value, otherValue, onChoose, side, noteFor, isHiddenLarge }: PickerProps & {
+function LanguageList({ value, onChoose, side, noteFor, isHiddenLarge }: PickerProps & {
   onChoose: (code: string) => void;
   noteFor: (code: string) => string | null;
   /** True when choosing this language would create a pair whose only model is
@@ -251,8 +251,10 @@ function LanguagePickerInner({ side, value, otherValue, onChoose, open, onOpenCh
   if (isMobile) {
     return (
       <Dialog open={isOpen} onOpenChange={setOpen}>
-        {/* The sheet variant of the picker */}
-        {trigger}
+        {/* The sheet variant of the picker. The trigger is wired as a real
+            dialog trigger, so closing it returns focus to the picker button
+            instead of dropping it to <body> (M-13). */}
+        <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent
           showCloseButton={false}
           className="top-auto bottom-0 left-0 right-0 h-auto max-h-[80vh] translate-x-0 translate-y-0 gap-0 overflow-hidden rounded-b-none rounded-t-xl border-t p-0 sm:max-w-none"

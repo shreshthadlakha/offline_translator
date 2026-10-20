@@ -1,20 +1,22 @@
 /**
- * Byte formatting shared by the request log and the On this device block.
- * Uses the same 1024 based MB the setup progress uses, so the numbers agree.
+ * Byte formatting shared by the request log, the setup progress and the On
+ * this device block. Decimal units (1 MB = 1,000,000 bytes), the same
+ * convention the pinned model sizes, the README and the license notices
+ * use, so one number can never mean two sizes (M-18).
  */
 
 export function formatBytes(bytes: number): string {
   if (!Number.isFinite(bytes) || bytes <= 0) return "0 B";
-  if (bytes < 1024) return `${Math.round(bytes)} B`;
-  if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
-  const mb = bytes / (1024 * 1024);
+  if (bytes < 1000) return `${Math.round(bytes)} B`;
+  if (bytes < 1000 * 1000) return `${Math.max(1, Math.round(bytes / 1000))} KB`;
+  const mb = bytes / 1e6;
   if (mb < 10) return `${mb.toFixed(1)} MB`;
   return `${Math.round(mb)} MB`;
 }
 
 /** Whole megabytes, the way sizes are shown elsewhere in the app. */
 export function mbWhole(bytes: number): string {
-  return Math.max(0, Math.round(bytes / (1024 * 1024))).toString();
+  return Math.max(0, Math.round(bytes / 1e6)).toString();
 }
 
 /** A clock like 0:45 or 12:03, for timers that run in view. */
@@ -33,7 +35,7 @@ export function secondsPrecise(ms: number): string {
 /** Transfer speed: "1.2 MB/s". */
 export function speed(bytesPerSecond: number): string {
   if (!Number.isFinite(bytesPerSecond) || bytesPerSecond <= 0) return "";
-  return `${(bytesPerSecond / (1024 * 1024)).toFixed(1)} MB/s`;
+  return `${(bytesPerSecond / 1e6).toFixed(1)} MB/s`;
 }
 
 /** Remaining time, plain: "about 40 seconds", "about 1 second" or "about 3 minutes". */
