@@ -1,0 +1,135 @@
+src/workers/translator.worker.ts:623:  setTimeout(() => {
+scripts/browser-tests/tmp/cdp-domains.mjs:13:          const timer = setTimeout(() => { pending.delete(mid); rej(new Error(`TIMEOUT ${method}`)); }, timeoutMs);
+scripts/browser-tests/tmp/cdp-domains.mjs:25:        clearTimeout(timer);
+src/workers/bergamot-engine.ts:371:      new Promise((_, reject) => setTimeout(() => reject(new Error("Bergamot runtime init timeout")), 120_000)),
+scripts/browser-tests/tmp/cdp-probe.mjs:14:          const timer = setTimeout(() => { pending.delete(mid); rej(new Error(`timeout: ${method}`)); }, 8000);
+scripts/browser-tests/tmp/cdp-probe.mjs:27:        clearTimeout(timer);
+scripts/browser-tests/tmp/cdp-unfreeze.mjs:13:          const timer = setTimeout(() => { pending.delete(mid); rej(new Error(`timeout: ${method}`)); }, timeoutMs);
+scripts/browser-tests/tmp/cdp-unfreeze.mjs:25:        clearTimeout(timer);
+scripts/browser-tests/tmp/cdp-state.mjs:13:          const timer = setTimeout(() => { pending.delete(mid); rej(new Error(`TIMEOUT ${method}`)); }, timeoutMs);
+scripts/browser-tests/tmp/cdp-state.mjs:25:        clearTimeout(timer);
+scripts/browser-tests/tmp/cdp-reload-t1.mjs:13:          const timer = setTimeout(() => { pending.delete(mid); rej(new Error(`TIMEOUT ${method}`)); }, timeoutMs);
+scripts/browser-tests/tmp/cdp-reload-t1.mjs:25:        clearTimeout(timer);
+scripts/browser-tests/results-b1.md:52:- To catch the transient line, installed a 100 ms in-page capture (`setInterval`) on the section text, then typed two more sentences at epoch 1791631635: ` My sister arrives tomorrow morning and she wants to visit the old cathedral. After that we will walk along the harbour and take many photographs of the boats.`
+scripts/browser-tests/shim-v3.js:12:    postMessage(msg) { setTimeout(() => this.handle(msg), 5); }
+scripts/browser-tests/shim-v3.js:29:        this.loadTimer = setInterval(() => {
+scripts/browser-tests/shim-v3.js:36:            clearInterval(this.loadTimer);
+scripts/browser-tests/shim-v3.js:38:            setTimeout(() => {
+scripts/browser-tests/shim-v3.js:40:              setTimeout(() => {
+scripts/browser-tests/shim-v3.js:88:      job.timer = setTimeout(finish, d);
+scripts/browser-tests/shim-v3.js:89:      job.abort = () => { clearTimeout(job.timer); finish(); };
+scripts/browser-tests/shim-v3.js:92:    addEventListener() {}
+scripts/browser-tests/shim-v3.js:93:    removeEventListener() {}
+src/hooks/use-history.ts:48:  window.addEventListener("storage", onStorage);
+src/hooks/use-history.ts:51:    window.removeEventListener("storage", onStorage);
+scripts/browser-tests/baseline-type-debug.js:41:    setTimeout(typeNext, delay);
+scripts/browser-tests/baseline-type-debug.js:45:  const timer = setInterval(() => {
+scripts/browser-tests/baseline-type-debug.js:52:      clearInterval(timer);
+scripts/browser-tests/baseline-type-debug.js:55:  setTimeout(() => { if (!window.__test.done) { window.__test.timeout = true; log("timeout"); clearInterval(timer); } }, 45000);
+src/hooks/use-translator.ts:72:  const fragmentTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+src/hooks/use-translator.ts:113:      clearTimeout(fragmentTimerRef.current);
+src/hooks/use-translator.ts:202:      fragmentTimerRef.current = setTimeout(() => {
+src/hooks/use-translator.ts:351:      if (fragmentTimerRef.current !== null) clearTimeout(fragmentTimerRef.current);
+scripts/browser-tests/baseline-type.js:21:    setTimeout(typeNext, delay);
+scripts/browser-tests/baseline-type.js:24:  const timer = setInterval(() => {
+scripts/browser-tests/baseline-type.js:30:      clearInterval(timer);
+scripts/browser-tests/baseline-type.js:33:  setTimeout(() => { if (!window.__test.done) { window.__test.timeout = true; clearInterval(timer); } }, 90000);
+src/hooks/use-settings.ts:130:  window.addEventListener("storage", onStorage);
+src/hooks/use-settings.ts:133:    window.removeEventListener("storage", onStorage);
+src/hooks/use-install-prompt.ts:20:  window.addEventListener("beforeinstallprompt", (event) => {
+src/hooks/use-install-prompt.ts:26:  window.addEventListener("appinstalled", () => {
+scripts/browser-tests/shim.js:6:    postMessage(msg) { setTimeout(() => this.handle(msg), 5); }
+scripts/browser-tests/shim.js:44:      job.timer = setTimeout(finish, d);
+scripts/browser-tests/shim.js:45:      job.abort = () => { clearTimeout(job.timer); finish(); };
+scripts/browser-tests/shim.js:48:    addEventListener() {}
+scripts/browser-tests/shim.js:49:    removeEventListener() {}
+src/hooks/use-engine.tsx:193:  const heartbeatTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+src/hooks/use-engine.tsx:194:  const stallTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+src/hooks/use-engine.tsx:195:  const helloTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+src/hooks/use-engine.tsx:255:      clearInterval(heartbeatTimerRef.current);
+src/hooks/use-engine.tsx:259:      clearInterval(stallTimerRef.current);
+src/hooks/use-engine.tsx:263:      clearTimeout(helloTimeoutRef.current);
+src/hooks/use-engine.tsx:302:          stallTimerRef.current = setInterval(() => {
+src/hooks/use-engine.tsx:318:          clearInterval(stallTimerRef.current);
+src/hooks/use-engine.tsx:341:            clearTimeout(helloTimeoutRef.current);
+src/hooks/use-engine.tsx:535:    heartbeatTimerRef.current = setInterval(() => {
+src/hooks/use-engine.tsx:712:        helloTimeoutRef.current = setTimeout(() => {
+src/hooks/use-engine.tsx:865:        setTimeout(begin, 300);
+src/hooks/use-engine.tsx:910:    document.addEventListener("visibilitychange", onVisibility);
+src/hooks/use-engine.tsx:912:      document.removeEventListener("visibilitychange", onVisibility);
+src/hooks/use-engine.tsx:960:    const timer = setInterval(check, SPEED_CONFIG.largeModel.unloadCheckMs);
+src/hooks/use-engine.tsx:961:    return () => clearInterval(timer);
+src/hooks/use-online-status.ts:16:    window.addEventListener("online", update);
+src/hooks/use-online-status.ts:17:    window.addEventListener("offline", update);
+src/hooks/use-online-status.ts:19:      window.removeEventListener("online", update);
+src/hooks/use-online-status.ts:20:      window.removeEventListener("offline", update);
+src/hooks/use-mobile.ts:13:    mql.addEventListener("change", onChange)
+src/hooks/use-mobile.ts:15:    return () => mql.removeEventListener("change", onChange)
+src/hooks/use-speech.ts:41:    synth.addEventListener("voiceschanged", refresh);
+src/hooks/use-speech.ts:43:      synth.removeEventListener("voiceschanged", refresh);
+src/hooks/use-speech.ts:115:    window.addEventListener("pagehide", pageHide);
+src/hooks/use-speech.ts:117:      window.removeEventListener("pagehide", pageHide);
+src/hooks/use-toast.ts:59:const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
+src/hooks/use-toast.ts:66:  const timeout = setTimeout(() => {
+src/components/translate/translator-provider.tsx:345:    const timer = setTimeout(() => saveEntry(), SETTLE_MS);
+src/components/translate/translator-provider.tsx:346:    return () => clearTimeout(timer);
+src/components/translate/translator-provider.tsx:382:    window.setTimeout(() => {
+src/components/translate/output-pane.tsx:30:  const url = URL.createObjectURL(blob);
+src/components/translate/output-pane.tsx:35:  URL.revokeObjectURL(url);
+src/components/translate/output-pane.tsx:87:    const timer = setTimeout(() => setHiddenAfterTick(tick), 3200);
+src/components/translate/output-pane.tsx:88:    return () => clearTimeout(timer);
+src/components/translate/translate-view.tsx:47:    window.addEventListener("keydown", onKeyDown);
+src/components/translate/translate-view.tsx:48:    return () => window.removeEventListener("keydown", onKeyDown);
+src/components/translate/details-panel.tsx:129:    const timer = setInterval(() => nowTick((t) => t + 1), 1000);
+src/components/translate/details-panel.tsx:130:    return () => clearInterval(timer);
+src/components/translate/setup-card.tsx:85:    const timer = setInterval(() => clockTick((t) => t + 1), 1000);
+src/components/translate/setup-card.tsx:86:    return () => clearInterval(timer);
+scripts/rtl-audit.mjs:248:          const timer = setTimeout(() => { pending.delete(mid); rej(new Error(`TIMEOUT ${method}`)); }, callTimeoutMs);
+scripts/rtl-audit.mjs:260:        clearTimeout(timer);
+scripts/rtl-audit.mjs:269:const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+scripts/rtl-audit.mjs:784:      setTimeout(tick, 200);
+scripts/engine-measure.mjs:38:const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+scripts/language-audit/browser-run.mjs:37:          const timer = setTimeout(() => { pending.delete(mid); rej(new Error(`TIMEOUT ${method}`)); }, callTimeoutMs);
+scripts/language-audit/browser-run.mjs:49:        clearTimeout(timer);
+scripts/language-audit/browser-run.mjs:101:      if (o) { clearTimeout(timers.get(m.id)); outcomes.delete(m.id); o.resolve({ texts: m.texts, ms: m.ms, engineId: m.engineId }); }
+scripts/language-audit/browser-run.mjs:104:      if (o) { clearTimeout(timers.get(m.id)); outcomes.delete(m.id); o.resolve({ texts: null, error: m.code + ': ' + m.message }); }
+scripts/language-audit/browser-run.mjs:111:    const hello = await Promise.race([helloP, new Promise((_, rej) => setTimeout(() => rej(new Error('hello timeout')), 8000))]);
+scripts/language-audit/browser-run.mjs:121:        ready = await Promise.race([pReady, new Promise((_, rej) => setTimeout(() => rej(new Error('ready timeout after 300s')), 300000))]);
+scripts/language-audit/browser-run.mjs:133:        timers.set(id, setTimeout(() => { if (outcomes.has(id)) { outcomes.delete(id); outcomes.get(id); } }, 240000));
+scripts/language-audit/graph-opt-experiment.mjs:27:          const timer = setTimeout(() => { pending.delete(mid); rej(new Error(`TIMEOUT ${method}`)); }, callTimeoutMs);
+scripts/language-audit/graph-opt-experiment.mjs:39:        clearTimeout(timer);
+src/lib/netlog.ts:258:    const observer = new PerformanceObserver((list) => record(list.getEntries()));
+src/lib/netlog.ts:263:    const observer = new PerformanceObserver((list) => record(list.getEntries()));
+src/lib/netlog.ts:269:    const observer = new PerformanceObserver((list) => record(list.getEntries()));
+src/components/app-header.tsx:35:    window.addEventListener("scroll", onScroll, { passive: true });
+src/components/app-header.tsx:36:    return () => window.removeEventListener("scroll", onScroll);
+src/components/batch/batch-dialog.tsx:165:    const url = URL.createObjectURL(blob);
+src/components/batch/batch-dialog.tsx:173:    URL.revokeObjectURL(url);
+scripts/benchmark/browser-driver.mjs:58:          const timer = setTimeout(() => { pending.delete(mid); rej(new Error(`TIMEOUT ${method}`)); }, callTimeoutMs);
+scripts/benchmark/browser-driver.mjs:70:        clearTimeout(timer);
+scripts/benchmark/browser-driver.mjs:125:        if (o) { clearTimeout(ctx.timers.get(m.id)); ctx.outcomes.delete(m.id); o({ texts: m.texts, ms: m.ms }); }
+scripts/benchmark/browser-driver.mjs:129:          if (o) { clearTimeout(ctx.timers.get(m.id)); ctx.outcomes.delete(m.id); o({ texts: null, error: m.code + ': ' + m.message }); }
+scripts/benchmark/browser-driver.mjs:140:      const t = setTimeout(() => res(false), 8000);
+scripts/benchmark/browser-driver.mjs:141:      const check = () => { if (ctx.hello) { clearTimeout(t); res(ctx.hello.protocolVersion === 7); } else setTimeout(check, 50); };
+scripts/benchmark/browser-driver.mjs:148:      const t = setTimeout(() => { ctx.crashed = ctx.crashed || new Error('ready timeout after 300s'); settleReady(); }, 300000);
+scripts/benchmark/browser-driver.mjs:150:      const check = () => { if (ctx.ready || ctx.crashed) { clearTimeout(t); ctx.ready ? res() : rej(ctx.crashed); } else setTimeout(check, 100); };
+scripts/benchmark/browser-driver.mjs:163:      ctx.timers.set(item.id, setTimeout(() => {
+scripts/sw-template.js:39:self.addEventListener("install", (event) => {
+scripts/sw-template.js:50:self.addEventListener("activate", (event) => {
+scripts/sw-template.js:64:self.addEventListener("fetch", (event) => {
+scripts/scan/targeted-grep.sh:37:rg -n --no-heading -e 'setInterval|setTimeout|clearInterval|clearTimeout' -e 'addEventListener|removeEventListener' -e 'createObjectURL|revokeObjectURL' -e 'new PerformanceObserver' $OWNED > "$OUT/targeted-cleanup.txt" || true
+scripts/scan/logs/targeted-leftovers.txt:133:scripts/scan/logs/targeted-cleanup.txt:90:scripts/nllb-lean/fidelity-entry.ts:102:const watch = setInterval(() => console.log(`  tick ${mem()}`), 500);
+scripts/scan/logs/targeted-leftovers.txt:134:scripts/scan/logs/targeted-cleanup.txt:133:scripts/scan/logs/targeted-leftovers.txt:216:scripts/nllb-lean/fidelity-entry.ts:102:const watch = setInterval(() => console.log(`  tick ${mem()}`), 500);
+scripts/scan/logs/targeted-leftovers.txt:228:scripts/nllb-lean/fidelity-entry.ts:102:const watch = setInterval(() => console.log(`  tick ${mem()}`), 500);
+scripts/bergamot/collect-pins.mjs:55:      await new Promise((r) => setTimeout(r, 1500));
+scripts/bergamot/proof-worker.mjs:188:    new Promise((_, reject) => setTimeout(() => reject(new Error("runtime init timeout")), 120_000)),
+scripts/bergamot/p11-audit.mjs:86:    await new Promise((r) => setTimeout(r, 1500));
+scripts/nllb-lean/fidelity-entry.ts:102:const watch = setInterval(() => console.log(`  tick ${mem()}`), 500);
+scripts/nllb-lean/fidelity-entry.ts:127:  await new Promise((r) => setTimeout(r, 250));
+scripts/nllb-lean/fidelity-entry.ts:143:    await new Promise((r) => setTimeout(r, 100));
+scripts/nllb-lean/fidelity-entry.ts:163:clearInterval(watch);
+scripts/nllb-lean/browser-measure.mjs:41:          const timer = setTimeout(() => { pending.delete(mid); rej(new Error(`TIMEOUT ${method}`)); }, callTimeoutMs);
+scripts/nllb-lean/browser-measure.mjs:53:        clearTimeout(timer);
+scripts/nllb-lean/browser-measure.mjs:112:    const ready = await Promise.race([readyP, new Promise((_, rej) => setTimeout(() => rej(new Error('READY TIMEOUT after 420s')), 420000))]);
+scripts/nllb-lean/browser-measure.mjs:118:      const r = await Promise.race([o, new Promise((resolve) => setTimeout(() => resolve({ timeout: true }), 300000))]);
+scripts/nllb-lean/browser-measure.mjs:166:    await new Promise((r) => setTimeout(r, 4000));

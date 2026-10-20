@@ -1,0 +1,45 @@
+
+/home/z/my-project/src/components/app-header.tsx
+  73:15  warning  Visible, non-interactive elements with click handlers must have at least one keyboard listener                                                                                                     jsx-a11y/click-events-have-key-events
+  73:15  warning  Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element  jsx-a11y/no-static-element-interactions
+  77:15  warning  Visible, non-interactive elements with click handlers must have at least one keyboard listener                                                                                                     jsx-a11y/click-events-have-key-events
+  77:15  warning  Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element  jsx-a11y/no-static-element-interactions
+  86:15  warning  Visible, non-interactive elements with click handlers must have at least one keyboard listener                                                                                                     jsx-a11y/click-events-have-key-events
+  86:15  warning  Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element  jsx-a11y/no-static-element-interactions
+
+/home/z/my-project/src/components/batch/batch-dialog.tsx
+   70:6   error    React Hook useMemo has an unnecessary dependency: 'state.done'. Either exclude it or remove the dependency array  react-hooks/exhaustive-deps
+  211:15  warning  A control must be associated with a text label                                                                    jsx-a11y/control-has-associated-label
+
+/home/z/my-project/src/components/settings/settings-sheet.tsx
+  155:13  warning  Form label must have ALL of the following types of associated control: nesting, id  jsx-a11y/label-has-for
+  170:17  warning  Form label must have ALL of the following types of associated control: nesting, id  jsx-a11y/label-has-for
+  188:15  warning  Form label must have ALL of the following types of associated control: nesting, id  jsx-a11y/label-has-for
+  235:15  warning  Form label must have ALL of the following types of associated control: nesting, id  jsx-a11y/label-has-for
+  248:15  warning  Form label must have ALL of the following types of associated control: nesting, id  jsx-a11y/label-has-for
+  261:15  warning  Form label must have ALL of the following types of associated control: nesting, id  jsx-a11y/label-has-for
+  274:15  warning  Form label must have ALL of the following types of associated control: nesting, id  jsx-a11y/label-has-for
+  293:19  warning  Form label must have ALL of the following types of associated control: nesting, id  jsx-a11y/label-has-for
+
+/home/z/my-project/src/components/translate/input-pane.tsx
+  46:11  warning  Form label must have ALL of the following types of associated control: nesting, id  jsx-a11y/label-has-for
+
+/home/z/my-project/src/components/translate/translator-provider.tsx
+  359:6  error  React Hook useEffect has missing dependencies: 'input', 'output.hasAnyOutput', 'output.plainText', and 'saveEntry'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+/home/z/my-project/src/components/translator-app.tsx
+  50:6  error  React Hook useEffect has missing dependencies: 'setInput' and 'setPair'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+/home/z/my-project/src/hooks/use-engine.tsx
+   500:5  error  React Hook useCallback has an unnecessary dependency: 'netlog'. Either exclude it or remove the dependency array. Outer scope values like 'netlog' aren't valid dependencies because mutating them doesn't re-render the component  react-hooks/exhaustive-deps
+   525:5  error  React Hook useCallback has an unnecessary dependency: 'netlog'. Either exclude it or remove the dependency array. Outer scope values like 'netlog' aren't valid dependencies because mutating them doesn't re-render the component  react-hooks/exhaustive-deps
+   558:6  error  React Hook useCallback has an unnecessary dependency: 'netlog'. Either exclude it or remove the dependency array. Outer scope values like 'netlog' aren't valid dependencies because mutating them doesn't re-render the component  react-hooks/exhaustive-deps
+   874:6  error  React Hook useEffect has missing dependencies: 'setStatusSafe', 'start', 'switchTo', and 'terminate'. Either include them or remove the dependency array                                                                            react-hooks/exhaustive-deps
+   987:6  error  React Hook useCallback has an unnecessary dependency: 'netlog'. Either exclude it or remove the dependency array. Outer scope values like 'netlog' aren't valid dependencies because mutating them doesn't re-render the component  react-hooks/exhaustive-deps
+  1032:5  error  React Hook useCallback has an unnecessary dependency: 'netlog'. Either exclude it or remove the dependency array. Outer scope values like 'netlog' aren't valid dependencies because mutating them doesn't re-render the component  react-hooks/exhaustive-deps
+
+/home/z/my-project/src/hooks/use-translator.ts
+  297:6  error  React Hook useMemo has an unnecessary dependency: 'cacheVersion'. Either exclude it or remove the dependency array  react-hooks/exhaustive-deps
+
+✖ 26 problems (10 errors, 16 warnings)
+

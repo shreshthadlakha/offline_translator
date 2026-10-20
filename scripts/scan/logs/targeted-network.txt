@@ -1,0 +1,201 @@
+scripts/browser-tests/tmp/cdp-domains.mjs:6:    const ws = new WebSocket(wsUrl);
+scripts/browser-tests/tmp/cdp-domains.mjs:35:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
+scripts/browser-tests/tmp/cdp-probe.mjs:6:    const ws = new WebSocket(wsUrl);
+scripts/browser-tests/tmp/cdp-probe.mjs:39:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
+scripts/browser-tests/tmp/cdp-unfreeze.mjs:6:    const ws = new WebSocket(wsUrl);
+scripts/browser-tests/tmp/cdp-unfreeze.mjs:35:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
+scripts/browser-tests/tmp/cdp-state.mjs:6:    const ws = new WebSocket(wsUrl);
+scripts/browser-tests/tmp/cdp-state.mjs:56:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
+scripts/browser-tests/tmp/cdp-reload-t1.mjs:6:    const ws = new WebSocket(wsUrl);
+scripts/browser-tests/tmp/cdp-reload-t1.mjs:35:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
+src/workers/bergamot-engine.ts:126:  const response = await fetch(url);
+scripts/browser-tests/results-b4a.md:28:Raw-CDP diagnosis (bypassing agent-browser, direct WebSocket to each page target,
+src/workers/nllb-lean-engine.ts:120:  const response = await fetch(url);
+src/workers/indictrans2-engine.ts:109:  const response = await fetch(url);
+scripts/indictrans2/download.ts:58:  const res = await fetch(url);
+scripts/bergamot/mozilla-demo-worker-reference.js:33:    resp = await fetch(modelRegistryUrl);
+scripts/bergamot/mozilla-demo-worker-reference.js:106:  const response = await fetch(url);
+scripts/bergamot/collect-pins.mjs:35:const listing = await (await fetch(`https://huggingface.co/api/models/${REPO}?blobs=true`)).json();
+scripts/bergamot/collect-pins.mjs:49:        const res = await fetch(url, { method: "HEAD", redirect: "manual" });
+scripts/bergamot/proof-worker.mjs:104:  const response = await fetch(file.url);
+scripts/bergamot/p11-audit.mjs:42:const tree = await (await fetch(treeUrl)).json();
+scripts/bergamot/p11-audit.mjs:77:      const res = await fetch(url, { method: "HEAD", redirect: "manual" });
+scripts/bergamot/p11-audit.mjs:164:const probe = await fetch(probeUrl, { method: "GET", headers: { Range: "bytes=0-0", Origin: "http://localhost:3000" }, redirect: "manual" });
+scripts/bergamot/p11-audit.mjs:172:    fetch(`https://huggingface.co/api/models?search=${encodeURIComponent(q)}&limit=100`).then((r) => r.json()),
+scripts/bergamot/p11-audit.mjs:181:    const info = await (await fetch(`https://huggingface.co/api/models/${repoId}`)).json();
+scripts/nllb-lean/browser-measure.mjs:34:    const ws = new WebSocket(wsUrl);
+scripts/nllb-lean/browser-measure.mjs:63:  const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+scripts/fetch-fonts.mjs:68:  const res = await fetch(url);
+scripts/rtl-audit.mjs:15://   UI in a real headless Chromium over raw CDP — the same WebSocket approach
+scripts/rtl-audit.mjs:200:// Part 2 — rendered audit (own throwaway Chromium, CDP over WebSocket)
+scripts/rtl-audit.mjs:238:/** Raw CDP over WebSocket — the same helper browser-measure.mjs uses. */
+scripts/rtl-audit.mjs:241:    const ws = new WebSocket(wsUrl);
+scripts/rtl-audit.mjs:459:    const version = await (await fetch(`http://127.0.0.1:${port}/json/version`)).json();
+scripts/rtl-audit.mjs:462:    const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+scripts/rtl-audit.mjs:792:    const res = await fetch(APP, { signal: AbortSignal.timeout(4000) });
+scripts/language-audit/browser-run.mjs:30:    const ws = new WebSocket(wsUrl);
+scripts/language-audit/browser-run.mjs:59:  const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+scripts/language-audit/graph-opt-experiment.mjs:20:    const ws = new WebSocket(wsUrl);
+scripts/language-audit/graph-opt-experiment.mjs:87:const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+scripts/benchmark/browser-driver.mjs:51:    const ws = new WebSocket(wsUrl);
+scripts/benchmark/browser-driver.mjs:80:  const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+scripts/sw-template.js:83:          const response = await fetch(request);
+scripts/sw-template.js:100:        const response = await fetch(request);
+scripts/release/fetch-model-revisions.mjs:27:  const response = await fetch(url, { headers: { "User-Agent": "private-translator-release-check" } });
+src/lib/indictrans2/bundles.ts:71:  return `https://huggingface.co/${b.repo}/resolve/${b.commit}/${file}`;
+src/lib/nllb/bundles.ts:43:  return `https://huggingface.co/${NLLB_BUNDLE.repo}/resolve/${NLLB_BUNDLE.commit}/${name}`;
+src/lib/engines.ts:126:  licenseUrl: "https://huggingface.co/facebook/nllb-200-distilled-600M",
+src/lib/engines.ts:150:  "eng_Latn|fra_Latn": opus("opus-en-fr", "Xenova/opus-mt-en-fr", "Opus-MT English to French", 113111807, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-fr"),
+src/lib/engines.ts:151:  "fra_Latn|eng_Latn": opus("opus-fr-en", "Xenova/opus-mt-fr-en", "Opus-MT French to English", 113111807, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-fr-en"),
+src/lib/engines.ts:152:  "eng_Latn|spa_Latn": opus("opus-en-es", "Xenova/opus-mt-en-es", "Opus-MT English to Spanish", 119377345, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-es"),
+src/lib/engines.ts:153:  "spa_Latn|eng_Latn": opus("opus-es-en", "Xenova/opus-mt-es-en", "Opus-MT Spanish to English", 119377310, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-es-en"),
+src/lib/engines.ts:154:  "eng_Latn|deu_Latn": opus("opus-en-de", "Xenova/opus-mt-en-de", "Opus-MT English to German", 111519854, "CC BY 4.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-de"),
+src/lib/engines.ts:155:  "deu_Latn|eng_Latn": opus("opus-de-en", "Xenova/opus-mt-de-en", "Opus-MT German to English", 111519819, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-de-en"),
+src/lib/engines.ts:156:  "eng_Latn|ita_Latn": opus("opus-en-it", "Xenova/opus-mt-en-it", "Opus-MT English to Italian", 136474118, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-it"),
+src/lib/engines.ts:157:  "ita_Latn|eng_Latn": opus("opus-it-en", "Xenova/opus-mt-it-en", "Opus-MT Italian to English", 136865467, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-it-en"),
+src/lib/engines.ts:158:  "eng_Latn|nld_Latn": opus("opus-en-nl", "Xenova/opus-mt-en-nl", "Opus-MT English to Dutch", 121631490, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-nl"),
+src/lib/engines.ts:159:  "nld_Latn|eng_Latn": opus("opus-nl-en", "Xenova/opus-mt-nl-en", "Opus-MT Dutch to English", 121631492, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-nl-en"),
+src/lib/engines.ts:161:  "eng_Latn|rus_Cyrl": opus("opus-en-ru", "Xenova/opus-mt-en-ru", "Opus-MT English to Russian", 117767433, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-ru"),
+src/lib/engines.ts:162:  "rus_Cyrl|eng_Latn": opus("opus-ru-en", "Xenova/opus-mt-ru-en", "Opus-MT Russian to English", 117767433, "CC BY 4.0", "https://huggingface.co/Helsinki-NLP/opus-mt-ru-en"),
+src/lib/engines.ts:163:  "eng_Latn|zho_Hans": opus("opus-en-zh", "Xenova/opus-mt-en-zh", "Opus-MT English to Chinese", 119495650, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-zh"),
+src/lib/engines.ts:164:  "zho_Hans|eng_Latn": opus("opus-zh-en", "Xenova/opus-mt-zh-en", "Opus-MT Chinese to English", 119495923, "CC BY 4.0", "https://huggingface.co/Helsinki-NLP/opus-mt-zh-en"),
+src/lib/engines.ts:165:  "eng_Latn|arb_Arab": opus("opus-en-ar", "Xenova/opus-mt-en-ar", "Opus-MT English to Arabic", 117602860, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-ar"),
+src/lib/engines.ts:166:  "arb_Arab|eng_Latn": opus("opus-ar-en", "Xenova/opus-mt-ar-en", "Opus-MT Arabic to English", 117621540, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-ar-en"),
+src/lib/engines.ts:167:  "eng_Latn|hin_Deva": opus("opus-en-hi", "Xenova/opus-mt-en-hi", "Opus-MT English to Hindi", 116657716, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-hi"),
+src/lib/engines.ts:168:  "hin_Deva|eng_Latn": opus("opus-hi-en", "Xenova/opus-mt-hi-en", "Opus-MT Hindi to English", 115710250, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-hi-en"),
+src/lib/engines.ts:170:  "jpn_Jpan|eng_Latn": opus("opus-ja-en", "Xenova/opus-mt-ja-en", "Opus-MT Japanese to English", 114701074, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-ja-en"),
+src/lib/engines.ts:171:  "tur_Latn|eng_Latn": opus("opus-tr-en", "Xenova/opus-mt-tr-en", "Opus-MT Turkish to English", 116553011, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-tr-en"),
+src/lib/engines.ts:175:  "eng_Latn|afr_Latn": opus("opus-en-af", "Xenova/opus-mt-en-af", "Opus-MT English to Afrikaans", 110916369, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-af"),
+src/lib/engines.ts:176:  "afr_Latn|eng_Latn": opus("opus-af-en", "Xenova/opus-mt-af-en", "Opus-MT Afrikaans to English", 110916369, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-af-en"),
+src/lib/engines.ts:177:  "eng_Latn|ces_Latn": opus("opus-en-cs", "Xenova/opus-mt-en-cs", "Opus-MT English to Czech", 116695600, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-cs"),
+src/lib/engines.ts:178:  "ces_Latn|eng_Latn": opus("opus-cs-en", "Xenova/opus-mt-cs-en", "Opus-MT Czech to English", 116695600, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-cs-en"),
+src/lib/engines.ts:179:  "eng_Latn|dan_Latn": opus("opus-en-da", "Xenova/opus-mt-en-da", "Opus-MT English to Danish", 112559065, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-da"),
+src/lib/engines.ts:180:  "dan_Latn|eng_Latn": opus("opus-da-en", "Xenova/opus-mt-da-en", "Opus-MT Danish to English", 112559063, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-da-en"),
+src/lib/engines.ts:181:  "eng_Latn|fin_Latn": opus("opus-en-fi", "Xenova/opus-mt-en-fi", "Opus-MT English to Finnish", 119430062, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-fi"),
+src/lib/engines.ts:182:  "fin_Latn|eng_Latn": opus("opus-fi-en", "Xenova/opus-mt-fi-en", "Opus-MT Finnish to English", 113395438, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-fi-en"),
+src/lib/engines.ts:183:  "eng_Latn|hun_Latn": opus("opus-en-hu", "Xenova/opus-mt-en-hu", "Opus-MT English to Hungarian", 116699390, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-hu"),
+src/lib/engines.ts:184:  "hun_Latn|eng_Latn": opus("opus-hu-en", "Xenova/opus-mt-hu-en", "Opus-MT Hungarian to English", 116699390, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-hu-en"),
+src/lib/engines.ts:185:  "eng_Latn|ind_Latn": opus("opus-en-id", "Xenova/opus-mt-en-id", "Opus-MT English to Indonesian", 107915165, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-id"),
+src/lib/engines.ts:186:  "ind_Latn|eng_Latn": opus("opus-id-en", "Xenova/opus-mt-id-en", "Opus-MT Indonesian to English", 107915167, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-id-en"),
+src/lib/engines.ts:187:  "eng_Latn|ron_Latn": opus("opus-en-ro", "Xenova/opus-mt-en-ro", "Opus-MT English to Romanian", 113247080, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-ro"),
+src/lib/engines.ts:188:  "eng_Latn|swe_Latn": opus("opus-en-sv", "Xenova/opus-mt-en-sv", "Opus-MT English to Swedish", 109758487, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-sv"),
+src/lib/engines.ts:189:  "swe_Latn|eng_Latn": opus("opus-sv-en", "Xenova/opus-mt-sv-en", "Opus-MT Swedish to English", 109758487, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-sv-en"),
+src/lib/engines.ts:190:  "eng_Latn|ukr_Cyrl": opus("opus-en-uk", "Xenova/opus-mt-en-uk", "Opus-MT English to Ukrainian", 116527003, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-uk"),
+src/lib/engines.ts:191:  "ukr_Cyrl|eng_Latn": opus("opus-uk-en", "Xenova/opus-mt-uk-en", "Opus-MT Ukrainian to English", 116527003, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-uk-en"),
+src/lib/engines.ts:192:  "eng_Latn|vie_Latn": opus("opus-en-vi", "Xenova/opus-mt-en-vi", "Opus-MT English to Vietnamese", 106645280, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-vi"),
+src/lib/engines.ts:193:  "vie_Latn|eng_Latn": opus("opus-vi-en", "Xenova/opus-mt-vi-en", "Opus-MT Vietnamese to English", 106706954, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-vi-en"),
+src/lib/engines.ts:194:  "kor_Hang|eng_Latn": opus("opus-ko-en", "Xenova/opus-mt-ko-en", "Opus-MT Korean to English", 119601626, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-ko-en"),
+src/lib/engines.ts:195:  "pol_Latn|eng_Latn": opus("opus-pl-en", "Xenova/opus-mt-pl-en", "Opus-MT Polish to English", 117618157, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-pl-en"),
+src/lib/engines.ts:196:  "tha_Thai|eng_Latn": opus("opus-th-en", "Xenova/opus-mt-th-en", "Opus-MT Thai to English", 117356397, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-th-en"),
+src/lib/engines.ts:216:const EN_MUL = opus("opus-en-mul", "Xenova/opus-mt-en-mul", "Opus-MT English to Croatian, Serbian, Bulgarian and Norwegian", 118280580, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-mul");
+src/lib/engines.ts:218:const MUL_EN = opus("opus-mul-en", "Xenova/opus-mt-mul-en", "Opus-MT Croatian, Serbian, Bulgarian, Norwegian and Greek to English", 118351797, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-mul-en");
+src/lib/engines.ts:220:const EN_ROMANCE = opus("opus-en-romance", "Xenova/opus-mt-en-ROMANCE", "Opus-MT English to Portuguese", 119232615, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-en-ROMANCE");
+src/lib/engines.ts:222:const ROMANCE_EN = opus("opus-romance-en", "Xenova/opus-mt-ROMANCE-en", "Opus-MT Portuguese and Romanian to English", 119234926, "Apache-2.0", "https://huggingface.co/Helsinki-NLP/opus-mt-ROMANCE-en");
+src/lib/engines.ts:321:    licenseUrl: `https://huggingface.co/${modelId}`,
+src/lib/engines.ts:362:    licenseUrl: "https://huggingface.co/ai4bharat/IndicTrans2",
+src/lib/engines.ts:444:    licenseUrl: "https://github.com/mozilla/translations",
+scripts/browser-tests/tmp/cdp-domains.mjs:35:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
+scripts/browser-tests/tmp/cdp-domains.mjs:36:  const pages = list.filter((t) => t.type === "page" && t.url.startsWith("http://localhost:3000"));
+scripts/browser-tests/tmp/cdp-probe.mjs:39:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
+scripts/browser-tests/tmp/cdp-probe.mjs:40:  const pages = list.filter((t) => t.type === "page" && t.url.startsWith("http://localhost:3000"));
+src/lib/bergamot/bundles.ts:425:  return `https://huggingface.co/${BERGAMOT_MIRROR}/resolve/${BERGAMOT_REVISION}/${pair}/${name}`;
+scripts/browser-tests/tmp/cdp-unfreeze.mjs:35:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
+scripts/browser-tests/tmp/cdp-unfreeze.mjs:36:  const pages = list.filter((t) => t.type === "page" && t.url.startsWith("http://localhost:3000"));
+scripts/browser-tests/tmp/cdp-state.mjs:56:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
+scripts/browser-tests/tmp/cdp-reload-t1.mjs:35:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
+scripts/browser-tests/tmp/cdp-reload-t1.mjs:36:  const pages = list.filter((t) => t.type === "page" && t.url.startsWith("http://localhost:3000"));
+scripts/browser-tests/results-b2.md:3:App: http://localhost:3000
+scripts/browser-tests/results-b2.md:8:- `agent-browser open http://localhost:3000`: page title "Your words belong to you" loaded OK.
+scripts/browser-tests/results-b1.md:3:App: http://localhost:3000 | Started: Sat Oct 10 11:24:46 UTC 2026
+scripts/browser-tests/results-b1.md:6:- `agent-browser open http://localhost:3000` → ✓ (page title shown: "Your words belong to you")
+scripts/browser-tests/results-b3.md:1:# B3 — Browser: engine switch and batch (Private Translator @ http://localhost:3000)
+scripts/browser-tests/results-b3.md:9:| `agent-browser open http://localhost:3000` | ✅ "Your words belong to you" — http://localhost:3000/ |
+scripts/browser-tests/results-b4a.md:1:# B4a — Browser: two tabs and crash (Private Translator @ http://localhost:3000)
+scripts/browser-tests/results-b4a.md:7:Start state (given): two tabs open on http://localhost:3000 — t1 (engine tab, holds the
+scripts/browser-tests/results-b4a.md:17:| `agent-browser tab` | ✅ lists `[t1]`, `→ [t2]` both "Your words belong to you" @ http://localhost:3000/ |
+scripts/browser-tests/results-b4a.md:65:`agent-browser reload` on t2 → ✅ returned `http://localhost:3000/` (reload is browser-process
+scripts/indictrans2/translate-hari.py:10:    https://github.com/Hari31416/indictrans2-onnx-export/blob/main/src/translate.py
+scripts/indictrans2/README-github-export.md:3:Standalone tooling to export [IndicTrans2](https://huggingface.co/collections/ai4bharat/indictrans2-664ccb91d23bbae0d681c3ca) seq2seq models to browser-ready ONNX bundles (encoder + decoder + decoder_with_past).
+scripts/indictrans2/README-github-export.md:7:These exports support **[local-voice-chat](https://github.com/Hari31416/local-voice-chat)** — a local, in-browser voice chat project with live translation for Indian languages. The voice app stays lightweight (TypeScript/Vite); this repo holds the heavy Python export pipeline and publishes weights to Hugging Face. Code lives here, ONNX artifacts live in `scratch/` (gitignored) and on HF.
+scripts/indictrans2/README-github-export.md:27:>- **Hugging Face Space**: [indictrans2-onnx-browser-demo](https://huggingface.co/spaces/hari31416/indictrans2-onnx-browser-demo)
+scripts/indictrans2/README-github-export.md:28:>- **GitHub Pages**: [indictrans2-onnx-browser-demo](https://hari31416.github.io/indictrans2-onnx-browser-demo/)
+scripts/indictrans2/README-github-export.md:30:>The code is available in [indictrans2-onnx-browser-demo](https://github.com/Hari31416/indictrans2-onnx-browser-demo). The application loads ONNX models on-demand and runs execution client-side via WebGPU or WebAssembly.
+scripts/indictrans2/README-github-export.md:35:make browser-lab   # http://127.0.0.1:8010 — pick your scratch/ bundle folder
+scripts/indictrans2/README-github-export.md:43:- [uv](https://docs.astral.sh/uv/) (recommended) or pip
+scripts/indictrans2/README-github-export.md:75:Reference I/O layout: [naklitechie/indictrans2-en-indic-dist-200M-ONNX](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M-ONNX)
+scripts/indictrans2/README-github-export.md:133:For the full size analysis, comparison against the [naklitechie reference bundle](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M-ONNX), and future optimization ideas, see [ONNX_SIZE_OPTIMIZATION.md](./ONNX_SIZE_OPTIMIZATION.md).
+scripts/indictrans2/README-github-export.md:169:After upload, set bundle paths in [local-voice-chat `translation-models.ts`](https://github.com/Hari31416/local-voice-chat/blob/main/src/lib/translation-models.ts).
+scripts/indictrans2/README-github-export.md:268:Then open your browser and navigate to [http://localhost:8000/onnx-components.html](http://localhost:8000/onnx-components.html).
+scripts/indictrans2/README-github-export.md:276:- Go to your GitHub repository settings at `https://github.com/Hari31416/indictrans2-onnx-export/settings/pages`.
+scripts/indictrans2/README-github-export.md:279:Once enabled, the deployment workflow will run, and the documentation will be live at `https://hari31416.github.io/indictrans2-onnx-export/`.
+scripts/indictrans2/README-hari-indic-en.md:44:> - **FP32 (Full Precision / Base)**: [`hari31416/indictrans2-indic-en-dist-200M-ONNX`](https://huggingface.co/hari31416/indictrans2-indic-en-dist-200M-ONNX)
+scripts/indictrans2/README-hari-indic-en.md:45:> - **FP16 (Half Precision)**: [`hari31416/indictrans2-indic-en-dist-200M-ONNX-fp16`](https://huggingface.co/hari31416/indictrans2-indic-en-dist-200M-ONNX-fp16)
+scripts/indictrans2/README-hari-indic-en.md:46:> - **INT8 (Dynamic Quantization)**: [`hari31416/indictrans2-indic-en-dist-200M-ONNX-int8`](https://huggingface.co/hari31416/indictrans2-indic-en-dist-200M-ONNX-int8) *(Current)*
+scripts/indictrans2/README-hari-indic-en.md:47:> - **Q4F16 (4-bit Block Quantization)**: [`hari31416/indictrans2-indic-en-dist-200M-ONNX-q4f16`](https://huggingface.co/hari31416/indictrans2-indic-en-dist-200M-ONNX-q4f16)
+scripts/indictrans2/README-hari-indic-en.md:49:ONNX-exported and quantized version of [`ai4bharat/indictrans2-indic-en-dist-200M`](https://huggingface.co/ai4bharat/indictrans2-indic-en-dist-200M)
+scripts/indictrans2/README-hari-indic-en.md:54:- **Source Pipeline & Details**: For pipeline details, benchmarks, and usage instructions, see the [indictrans2-onnx-export GitHub repository](https://github.com/Hari31416/indictrans2-onnx-export).
+scripts/indictrans2/README-hari-indic-en.md:56:Built for use with [Transformers.js](https://github.com/huggingface/transformers.js)
+scripts/indictrans2/README-hari-indic-en.md:57:and [onnxruntime-web](https://onnxruntime.ai/docs/get-started/with-javascript.html)
+scripts/indictrans2/README-hari-indic-en.md:142:#   https://github.com/Hari31416/indictrans2-onnx-export/blob/main/src/translate.py
+scripts/indictrans2/download.ts:91:      const url = `https://huggingface.co/${bundle.repo}/resolve/${bundle.commit}/${file}`;
+scripts/indictrans2/README-naklitechie.md:33:> - the fp32 ONNX sibling [`naklitechie/indictrans2-en-indic-dist-200M-ONNX`](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M-ONNX) (bit-exact vs PyTorch), or
+scripts/indictrans2/README-naklitechie.md:34:> - the original PyTorch model [`naklitechie/indictrans2-en-indic-dist-200M`](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M).
+scripts/indictrans2/README-naklitechie.md:39:INT8 dynamic quantization of [`naklitechie/indictrans2-en-indic-dist-200M-ONNX`](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M-ONNX)
+scripts/indictrans2/README-naklitechie.md:40:(itself an ONNX export of [`naklitechie/indictrans2-en-indic-dist-200M`](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M))
+scripts/indictrans2/README-naklitechie.md:47:| [PyTorch original (`naklitechie/indictrans2-en-indic-dist-200M`)](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M) | ~750 MB (safetensors) | — |
+scripts/indictrans2/README-naklitechie.md:48:| [fp32 ONNX (`naklitechie/indictrans2-en-indic-dist-200M-ONNX`)](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M-ONNX) | 1.3 GB | 100% |
+scripts/indictrans2/README-naklitechie.md:58:[`naklitechie/indictrans2-en-indic-dist-200M`](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M), run with
+scripts/indictrans2/README-naklitechie.md:68:The intermediate fp32 ONNX bundle ([`naklitechie/indictrans2-en-indic-dist-200M-ONNX`](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M-ONNX))
+scripts/indictrans2/README-naklitechie.md:194:MIT, preserved from upstream [ai4bharat/indictrans2-en-indic-dist-200M](https://huggingface.co/ai4bharat/indictrans2-en-indic-dist-200M).
+scripts/indictrans2/gen-bundle-table.ts:78:  return \`https://huggingface.co/\${b.repo}/resolve/\${b.commit}/\${file}\`;
+scripts/benchmark/published-baseline.json:5:    "url": "https://dl.fbaipublicfiles.com/large_objects/nllb/models/nllb_200_dense_distill_600m/metrics.csv",
+scripts/benchmark/published-baseline.json:6:    "via": "linked from the model card as https://tinyurl.com/nllb200densedst600mmetrics",
+scripts/hub-research.json:1385:      "url": "https://huggingface.co/api/models?author=Xenova&search=opus-mt&limit=1000",
+scripts/hub-research.json:1390:      "url": "https://huggingface.co/api/models?author=onnx-community&search=opus-mt&limit=200",
+scripts/release/fetch-model-revisions.mjs:26:  const url = `https://huggingface.co/api/models/${engine.modelId}`;
+scripts/release/measure-first-visit.mjs:7:// Usage: node scripts/release/measure-first-visit.mjs [http://127.0.0.1:3131]
+scripts/release/measure-first-visit.mjs:11:const BASE = process.argv[2] ?? "http://127.0.0.1:3131";
+scripts/bergamot/gcs-registry.json:3:  "baseUrl": "https://storage.googleapis.com/moz-fx-translations-data--303e-prod-translations-data",
+scripts/bergamot/gen-bundles.mjs:151:  return \`https://huggingface.co/\${BERGAMOT_MIRROR}/resolve/\${BERGAMOT_REVISION}/\${pair}/\${name}\`;
+scripts/bergamot/mozilla-demo-worker-reference.js:8:const githubRaw = "https://raw.githubusercontent.com/mozilla/firefox-translations-models/refs/heads/main"
+scripts/bergamot/mozilla-demo-worker-reference.js:10:const proxy = "https://corsproxy.io/?"
+scripts/bergamot/mozilla-demo-worker-reference.js:12:const githubLfs = "https://github.com/mozilla/firefox-translations-models/raw/refs/heads/main"
+scripts/bergamot/mozilla-demo-worker-reference.js:166:    For available configuration options, please check: https://marian-nmt.github.io/docs/cmd/marian-decoder/
+scripts/bergamot/collect-pins.mjs:35:const listing = await (await fetch(`https://huggingface.co/api/models/${REPO}?blobs=true`)).json();
+scripts/bergamot/collect-pins.mjs:45:    const url = `https://huggingface.co/${REPO}/resolve/${REVISION}/${name}`;
+scripts/bergamot/proof-worker.mjs:25:  "https://huggingface.co/midudev/firefox-translations/resolve/6f6acd72c26975a06a8e61b72d1fbacbd184c23f";
+scripts/bergamot/p11-audit.mjs:41:const treeUrl = `https://huggingface.co/api/models/${BERGAMOT_MIRROR}/tree/${BERGAMOT_REVISION}?recursive=true`;
+scripts/bergamot/p11-audit.mjs:74:  const url = `https://huggingface.co/${BERGAMOT_MIRROR}/resolve/${BERGAMOT_REVISION}/${pair}/${name}`;
+scripts/bergamot/p11-audit.mjs:163:const probeUrl = `https://huggingface.co/${BERGAMOT_MIRROR}/resolve/${BERGAMOT_REVISION}/en-pl/model.enpl.intgemm.alphas.bin`;
+scripts/bergamot/p11-audit.mjs:164:const probe = await fetch(probeUrl, { method: "GET", headers: { Range: "bytes=0-0", Origin: "http://localhost:3000" }, redirect: "manual" });
+scripts/bergamot/p11-audit.mjs:166:console.log(`CORS spot-check (GET en-pl model, Origin http://localhost:3000): status ${probe.status}, access-control-allow-origin: ${corsHeader}`);
+scripts/bergamot/p11-audit.mjs:172:    fetch(`https://huggingface.co/api/models?search=${encodeURIComponent(q)}&limit=100`).then((r) => r.json()),
+scripts/bergamot/p11-audit.mjs:181:    const info = await (await fetch(`https://huggingface.co/api/models/${repoId}`)).json();
+scripts/nllb-lean/browser-measure.mjs:8:// Requires: agent-browser open http://localhost:3000/robots.txt
+scripts/nllb-lean/browser-measure.mjs:63:  const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+scripts/nllb-lean/browser-measure.mjs:65:  if (!page) page = list.find((t) => t.type === "page" && t.url.startsWith("http://localhost:3000"));
+scripts/nllb-lean/browser-measure.mjs:66:  if (!page) throw new Error("no page target; run: agent-browser open http://localhost:3000/robots.txt");
+scripts/rtl-audit.mjs:14://   Part 2 (needs the dev server on http://localhost:3000): drives the real
+scripts/rtl-audit.mjs:44:const APP = "http://localhost:3000";
+scripts/rtl-audit.mjs:459:    const version = await (await fetch(`http://127.0.0.1:${port}/json/version`)).json();
+scripts/rtl-audit.mjs:462:    const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+scripts/generate-notices.mjs:136:    ? `[\`${r.repo}\`](https://huggingface.co/${r.repo})`
+scripts/generate-notices.mjs:137:    : `[\`${r.engine.modelId}\`](https://huggingface.co/${r.engine.modelId})`;
+scripts/generate-notices.mjs:138:  const revisionLink = `[\`${r.sha.slice(0, 12)}\`](https://huggingface.co/${r.bergamot ? r.repo : r.engine.modelId}/tree/${r.sha})`;
+scripts/generate-notices.mjs:140:    ? `[\`${r.upstreamModel}\`](https://github.com/${r.upstreamModel})`
+scripts/generate-notices.mjs:141:    : `[\`${r.upstreamModel}\`](https://huggingface.co/${r.upstreamModel})`;
+scripts/language-audit/browser-run.mjs:59:  const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+scripts/language-audit/browser-run.mjs:62:  if (!page) page = list.find((t) => t.type === 'page' && t.url.startsWith('http://localhost:3000'));
+scripts/language-audit/browser-run.mjs:63:  if (!page) throw new Error('no page target; run: agent-browser open http://localhost:3000/robots.txt');
+scripts/language-audit/graph-opt-experiment.mjs:87:const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+scripts/language-audit/graph-opt-experiment.mjs:88:let page = list.find((t) => t.type === 'page' && t.url.includes('robots.txt')) ?? list.find((t) => t.type === 'page' && t.url.startsWith('http://localhost:3000'));
+scripts/language-audit/graph-opt-experiment.mjs:89:if (!page) throw new Error('open http://localhost:3000/robots.txt first');
+scripts/language-audit/chunk-run.sh:18:curl -s -o /dev/null -w "[chunk] dev server back: %{http_code}\n" http://localhost:3000 >> gen-refs.log
+scripts/benchmark/chunk.sh:43:if curl -s -o /dev/null --max-time 5 http://127.0.0.1:3000/robots.txt; then
+scripts/benchmark/published-baseline.mjs:4:// (https://huggingface.co/facebook/nllb-200-distilled-600M ->
+scripts/benchmark/published-baseline.mjs:42:    url: 'https://dl.fbaipublicfiles.com/large_objects/nllb/models/nllb_200_dense_distill_600m/metrics.csv',
+scripts/benchmark/published-baseline.mjs:43:    via: 'linked from the model card as https://tinyurl.com/nllb200densedst600mmetrics',
+scripts/benchmark/browser-driver.mjs:46:  throw new Error('no DevToolsActivePort found; start agent-browser and open http://localhost:3000/robots.txt');
+scripts/benchmark/browser-driver.mjs:80:  const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+scripts/benchmark/browser-driver.mjs:82:  if (!page) page = list.find((t) => t.type === 'page' && t.url.startsWith('http://localhost:3000'));
+scripts/benchmark/browser-driver.mjs:83:  if (!page) throw new Error('no page target; run: agent-browser open http://localhost:3000/robots.txt');

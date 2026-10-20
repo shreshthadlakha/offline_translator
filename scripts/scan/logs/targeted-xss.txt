@@ -1,0 +1,2 @@
+src/app/layout.tsx:74:        <script dangerouslySetInnerHTML={{ __html: prePaintScript }} />
+src/components/ui/chart.tsx:83:      dangerouslySetInnerHTML={{

@@ -1,0 +1,186 @@
+scripts/browser-tests/tmp/cdp-domains.mjs:22:      const msg = JSON.parse(m.data);
+scripts/browser-tests/tmp/cdp-probe.mjs:24:      const msg = JSON.parse(m.data);
+scripts/browser-tests/tmp/cdp-unfreeze.mjs:22:      const msg = JSON.parse(m.data);
+src/workers/bergamot-engine.ts:114:  const cache = await caches.open(cacheName);
+src/workers/bergamot-engine.ts:310:    const cache = await caches.open("pt-bergamot");
+scripts/browser-tests/tmp/cdp-state.mjs:22:      const msg = JSON.parse(m.data);
+scripts/browser-tests/tmp/cdp-state.mjs:47:    crashFlag: localStorage.getItem("pt.setup.crash"),
+scripts/browser-tests/tmp/cdp-state.mjs:48:    modelReady: localStorage.getItem("pt.model.ready"),
+scripts/browser-tests/tmp/cdp-state.mjs:62:    console.log(JSON.stringify(JSON.parse(v.result.value), null, 2));
+scripts/browser-tests/tmp/cdp-reload-t1.mjs:22:      const msg = JSON.parse(m.data);
+scripts/browser-tests/results-b1.md:10:- `eval 'localStorage.clear(); "cleared"'` → `"cleared"`
+scripts/browser-tests/results-b1.md:101:- Real-model setup for English→French worked end-to-end on first use after clearing localStorage.
+src/workers/nllb-lean-engine.ts:108:  const cache = await caches.open(FILE_CACHE);
+src/workers/nllb-lean-engine.ts:248:    const tokenizerJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer.json")!));
+src/workers/nllb-lean-engine.ts:249:    const tokenizerConfig = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_config.json")!));
+src/workers/nllb-lean-engine.ts:250:    const genConfig = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+src/workers/nllb-lean-engine.ts:251:    const config = JSON.parse(new TextDecoder().decode(byName.get("config.json")!));
+src/workers/indictrans2-engine.ts:97:  const cache = await caches.open(FILE_CACHE);
+src/workers/indictrans2-engine.ts:166:    const cache = await caches.open(FILE_CACHE);
+src/workers/indictrans2-engine.ts:247:    const meta = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_meta.json")!));
+src/workers/indictrans2-engine.ts:248:    const gen = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+src/workers/indictrans2-engine.ts:249:    const srcTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_src.json")!));
+src/workers/indictrans2-engine.ts:250:    const tgtTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_tgt.json")!));
+scripts/indictrans2/gen-bundle-table.ts:10:const manifest = JSON.parse(
+scripts/indictrans2/engine.ts:56:    this.meta = JSON.parse(readFileSync(path.join(dir, "tokenizer_meta.json"), "utf8"));
+scripts/indictrans2/engine.ts:57:    const gen = JSON.parse(readFileSync(path.join(dir, "generation_config.json"), "utf8"));
+src/hooks/use-settings.ts:4: * Settings, persisted in localStorage under pt.settings.v1, read through an
+scripts/indictrans2/proof.ts:43:const sampleIds: number[] = JSON.parse(readFileSync(path.join(BENCH, "sample.json"), "utf8")).ids;
+scripts/indictrans2/proof.ts:44:const baselines = JSON.parse(
+scripts/indictrans2/proof.ts:64:    ? JSON.parse(readFileSync(statePath, "utf8"))
+scripts/indictrans2/proof.ts:141:const previous = existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf8")) : {};
+scripts/benchmark/token-fit.mjs:33:const sample = JSON.parse(readFileSync(HERE('sample.json'), 'utf8'));
+scripts/benchmark/node-indictrans.mjs:36:const state = JSON.parse(readFileSync(statePath, 'utf8'));
+scripts/benchmark/node-indictrans.mjs:39:const meta = JSON.parse(readFileSync(join(modelDir, 'tokenizer_meta.json'), 'utf8'));
+scripts/benchmark/node-indictrans.mjs:50:const tgtTokJson = JSON.parse(readFileSync(join(modelDir, 'tokenizer_tgt.json'), 'utf8'));
+scripts/benchmark/node-indictrans.mjs:90:const sample = JSON.parse(readFileSync(HERE('sample.json'), 'utf8'));
+scripts/benchmark/report.mjs:16:const { results } = JSON.parse(readFileSync(resultsPath, 'utf8'));
+scripts/benchmark/report.mjs:17:const baseline = JSON.parse(readFileSync(HERE('published-baseline.json'), 'utf8'));
+scripts/benchmark/gen-quality.mjs:15:const qt = JSON.parse(readFileSync(ROOT("scripts/benchmark/quality-table.json"), "utf8"));
+scripts/benchmark/node-m2m100.mjs:19:const state = JSON.parse(readFileSync(statePath, 'utf8'));
+scripts/benchmark/node-m2m100.mjs:45:const sample = JSON.parse(readFileSync(HERE('sample.json'), 'utf8'));
+scripts/benchmark/run.mjs:93:const sample = JSON.parse(readFileSync(HERE('sample.json'), 'utf8'));
+scripts/benchmark/run.mjs:99:  state = JSON.parse(readFileSync(statePath, 'utf8'));
+scripts/benchmark/run.mjs:210:    ? JSON.parse(readFileSync(p, 'utf8'))
+scripts/benchmark/run.mjs:232:  state = JSON.parse(readFileSync(statePath, 'utf8'));
+scripts/benchmark/p3a-score.mjs:44:  const state = JSON.parse(readFileSync(statePath, 'utf8'));
+scripts/benchmark/p2c-queue.mjs:34:  return new Set(JSON.parse(readFileSync(resultsPath, 'utf8')).results.map((r) => r.runKey));
+scripts/benchmark/rescore-all.mjs:13:  const state = JSON.parse(readFileSync(`${dir}/${f}`, 'utf8'));
+scripts/sw-template.js:42:      const cache = await caches.open(SHELL_CACHE);
+scripts/sw-template.js:53:      const keys = await caches.keys();
+scripts/sw-template.js:57:        keys.filter((key) => key.startsWith("pt-shell-") && key !== SHELL_CACHE).map((key) => caches.delete(key)),
+scripts/sw-template.js:79:        const cache = await caches.open(SHELL_CACHE);
+scripts/sw-template.js:98:      const cache = await caches.open(SHELL_CACHE);
+scripts/benchmark/quality-table.mjs:27:const { results } = JSON.parse(readFileSync(HERE('benchmark-results.json'), 'utf8'));
+scripts/benchmark/quality-table.mjs:29:const baseline = JSON.parse(readFileSync(HERE('published-baseline.json'), 'utf8'));
+scripts/benchmark/quality-table.mjs:166:      const o = JSON.parse(s);
+scripts/benchmark/p2-queue.mjs:24:const results = JSON.parse(readFileSync(join(__dirname, 'benchmark-results.json'), 'utf8'));
+scripts/benchmark/p3a-processor-golden.test.mjs:12:const golden = JSON.parse(readFileSync(HERE('p3a-golden-pre.json'), 'utf8'));
+scripts/benchmark/p3a-processor-golden.test.mjs:13:const sample = JSON.parse(readFileSync(HERE('sample.json'), 'utf8'));
+scripts/scan/targeted-grep.sh:41:rg -n --no-heading -e 'localStorage|sessionStorage' -e 'JSON\.parse' -e 'caches\.(open|match|delete|keys)' $OWNED > "$OUT/targeted-storage.txt" || true
+scripts/benchmark/indic-queue.mjs:20:    const st = JSON.parse(readFileSync(statePath, 'utf8'));
+scripts/benchmark/indic-processor.mjs:33:const D = JSON.parse(readFileSync(join(__dirname, 'models', 'p3a-processor-data.json'), 'utf8'));
+scripts/benchmark/node-nllb.mjs:26:const state = JSON.parse(readFileSync(statePath, 'utf8'));
+scripts/benchmark/node-nllb.mjs:51:const sample = JSON.parse(readFileSync(HERE('sample.json'), 'utf8'));
+scripts/benchmark/p3a-tok-fidelity.mjs:17:const sample = JSON.parse(readFileSync(HERE('sample.json'), 'utf8'));
+scripts/benchmark/bergamot-queue.mjs:61:    const st = JSON.parse(readFileSync(join(stateDir, f), 'utf8'));
+scripts/scan/logs/targeted-leftovers.txt:21:scripts/browser-tests/tmp/cdp-state.mjs:62:    console.log(JSON.stringify(JSON.parse(v.result.value), null, 2));
+scripts/scan/logs/targeted-leftovers.txt:167:scripts/scan/logs/targeted-storage.txt:14:scripts/browser-tests/tmp/cdp-state.mjs:62:    console.log(JSON.stringify(JSON.parse(v.result.value), null, 2));
+scripts/scan/logs/targeted-leftovers.txt:168:scripts/scan/logs/targeted-storage.txt:134:scripts/scan/logs/targeted-leftovers.txt:21:scripts/browser-tests/tmp/cdp-state.mjs:62:    console.log(JSON.stringify(JSON.parse(v.result.value), null, 2));
+scripts/scan/logs/targeted-leftovers.txt:169:scripts/scan/logs/targeted-storage.txt:135:scripts/scan/logs/targeted-leftovers.txt:237:scripts/nllb-lean/browser-measure.mjs:163:  console.log("\nRenderer appears dead — recovering the timeline from localStorage...");
+scripts/scan/logs/targeted-leftovers.txt:170:scripts/scan/logs/targeted-storage.txt:136:scripts/scan/logs/targeted-leftovers.txt:240:scripts/nllb-lean/browser-measure.mjs:178:      console.log("No localStorage timeline recovered (profile may have been reset).");
+scripts/scan/logs/targeted-leftovers.txt:171:scripts/scan/logs/targeted-storage.txt:159:scripts/nllb-lean/browser-measure.mjs:163:  console.log("\nRenderer appears dead — recovering the timeline from localStorage...");
+scripts/scan/logs/targeted-leftovers.txt:172:scripts/scan/logs/targeted-storage.txt:162:scripts/nllb-lean/browser-measure.mjs:178:      console.log("No localStorage timeline recovered (profile may have been reset).");
+scripts/scan/logs/targeted-leftovers.txt:249:scripts/nllb-lean/browser-measure.mjs:163:  console.log("\nRenderer appears dead — recovering the timeline from localStorage...");
+scripts/scan/logs/targeted-leftovers.txt:252:scripts/nllb-lean/browser-measure.mjs:178:      console.log("No localStorage timeline recovered (profile may have been reset).");
+scripts/scan/logs/targeted-types.txt:30:src/workers/nllb-lean-engine.ts:248:    const tokenizerJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer.json")!));
+scripts/scan/logs/targeted-types.txt:31:src/workers/nllb-lean-engine.ts:249:    const tokenizerConfig = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_config.json")!));
+scripts/scan/logs/targeted-types.txt:32:src/workers/nllb-lean-engine.ts:250:    const genConfig = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+scripts/scan/logs/targeted-types.txt:33:src/workers/nllb-lean-engine.ts:251:    const config = JSON.parse(new TextDecoder().decode(byName.get("config.json")!));
+scripts/scan/logs/targeted-types.txt:37:src/workers/indictrans2-engine.ts:247:    const meta = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_meta.json")!));
+scripts/scan/logs/targeted-types.txt:38:src/workers/indictrans2-engine.ts:248:    const gen = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+scripts/scan/logs/targeted-types.txt:39:src/workers/indictrans2-engine.ts:249:    const srcTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_src.json")!));
+scripts/scan/logs/targeted-types.txt:40:src/workers/indictrans2-engine.ts:250:    const tgtTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_tgt.json")!));
+scripts/scan/logs/targeted-types.txt:52:scripts/scan/logs/targeted-storage.txt:7:src/workers/nllb-lean-engine.ts:248:    const tokenizerJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer.json")!));
+scripts/scan/logs/targeted-types.txt:53:scripts/scan/logs/targeted-storage.txt:8:src/workers/nllb-lean-engine.ts:249:    const tokenizerConfig = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_config.json")!));
+scripts/scan/logs/targeted-types.txt:54:scripts/scan/logs/targeted-storage.txt:9:src/workers/nllb-lean-engine.ts:250:    const genConfig = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+scripts/scan/logs/targeted-types.txt:55:scripts/scan/logs/targeted-storage.txt:10:src/workers/nllb-lean-engine.ts:251:    const config = JSON.parse(new TextDecoder().decode(byName.get("config.json")!));
+scripts/scan/logs/targeted-types.txt:56:scripts/scan/logs/targeted-storage.txt:18:src/workers/indictrans2-engine.ts:247:    const meta = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_meta.json")!));
+scripts/scan/logs/targeted-types.txt:57:scripts/scan/logs/targeted-storage.txt:19:src/workers/indictrans2-engine.ts:248:    const gen = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+scripts/scan/logs/targeted-types.txt:58:scripts/scan/logs/targeted-storage.txt:20:src/workers/indictrans2-engine.ts:249:    const srcTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_src.json")!));
+scripts/scan/logs/targeted-types.txt:59:scripts/scan/logs/targeted-storage.txt:21:src/workers/indictrans2-engine.ts:250:    const tgtTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_tgt.json")!));
+scripts/scan/logs/targeted-types.txt:60:scripts/scan/logs/targeted-storage.txt:137:scripts/scan/logs/targeted-types.txt:30:src/workers/nllb-lean-engine.ts:248:    const tokenizerJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer.json")!));
+scripts/scan/logs/targeted-types.txt:61:scripts/scan/logs/targeted-storage.txt:138:scripts/scan/logs/targeted-types.txt:31:src/workers/nllb-lean-engine.ts:249:    const tokenizerConfig = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_config.json")!));
+scripts/scan/logs/targeted-types.txt:62:scripts/scan/logs/targeted-storage.txt:139:scripts/scan/logs/targeted-types.txt:32:src/workers/nllb-lean-engine.ts:250:    const genConfig = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+scripts/scan/logs/targeted-types.txt:63:scripts/scan/logs/targeted-storage.txt:140:scripts/scan/logs/targeted-types.txt:33:src/workers/nllb-lean-engine.ts:251:    const config = JSON.parse(new TextDecoder().decode(byName.get("config.json")!));
+scripts/scan/logs/targeted-types.txt:64:scripts/scan/logs/targeted-storage.txt:141:scripts/scan/logs/targeted-types.txt:38:src/workers/indictrans2-engine.ts:247:    const meta = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_meta.json")!));
+scripts/scan/logs/targeted-types.txt:65:scripts/scan/logs/targeted-storage.txt:142:scripts/scan/logs/targeted-types.txt:39:src/workers/indictrans2-engine.ts:248:    const gen = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+scripts/scan/logs/targeted-types.txt:66:scripts/scan/logs/targeted-storage.txt:143:scripts/scan/logs/targeted-types.txt:40:src/workers/indictrans2-engine.ts:249:    const srcTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_src.json")!));
+scripts/scan/logs/targeted-types.txt:67:scripts/scan/logs/targeted-storage.txt:144:scripts/scan/logs/targeted-types.txt:41:src/workers/indictrans2-engine.ts:250:    const tgtTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_tgt.json")!));
+scripts/scan/static-tools.sh:41:    const j = JSON.parse(require("fs").readFileSync("'"$LOGS"'/" + f, "utf8"));
+scripts/bergamot/gen-bundles.mjs:12:const pins = JSON.parse(readFileSync(join(HERE, "bergamot-pins.json"), "utf8"));
+scripts/bergamot/proof-worker.mjs:93:  const cache = await caches.open(CACHE);
+scripts/bergamot/p11-audit.mjs:71:const registry = JSON.parse(await Bun.file(join(HERE, "gcs-registry.json")).text());
+scripts/nllb-lean/fidelity-entry.ts:53:// engine, whose fetchVerifiedFile calls caches.open at load time). The
+scripts/nllb-lean/fidelity-entry.ts:136:  const run = JSON.parse(readFileSync(join(ROOT, dir.run), "utf8"));
+scripts/nllb-lean/browser-measure.mjs:4:// event is appended to localStorage before the next one, so the log can be
+scripts/nllb-lean/browser-measure.mjs:50:      const msg = JSON.parse(m.data);
+scripts/nllb-lean/browser-measure.mjs:70:// The in-page driver. Every worker message appends to localStorage BEFORE any
+scripts/nllb-lean/browser-measure.mjs:76:  localStorage.setItem(KEY, JSON.stringify({ startedAt: new Date().toISOString(), level, spec, log: [] }));
+scripts/nllb-lean/browser-measure.mjs:80:    try { localStorage.setItem(KEY, JSON.stringify({ startedAt: new Date().toISOString(), level, spec, log })); } catch (e) {}
+scripts/nllb-lean/browser-measure.mjs:83:  try { await caches.delete('transformers-cache'); append({ ev: 'cache-cleared' }); } catch (e) { append({ ev: 'cache-clear-failed', error: String(e) }); }
+scripts/nllb-lean/browser-measure.mjs:128:  localStorage.setItem('pt-measure-done', JSON.stringify(done));
+scripts/nllb-lean/browser-measure.mjs:162:  // The renderer died mid-run: read the localStorage log from the (reloaded) page.
+scripts/nllb-lean/browser-measure.mjs:163:  console.log("\nRenderer appears dead — recovering the timeline from localStorage...");
+scripts/nllb-lean/browser-measure.mjs:168:      expression: `localStorage.getItem('pt-measure-log')`,
+scripts/nllb-lean/browser-measure.mjs:171:    const timeline = read.result?.value ? JSON.parse(read.result.value) : null;
+scripts/nllb-lean/browser-measure.mjs:178:      console.log("No localStorage timeline recovered (profile may have been reset).");
+scripts/nllb-lean/browser-measure.mjs:188:    expression: `localStorage.getItem('pt-measure-log')`,
+scripts/nllb-lean/browser-measure.mjs:192:    const timeline = JSON.parse(read.result.value);
+scripts/check-drift.mjs:49:const recorded = JSON.parse(readFileSync(join(HERE, "release/model-revisions.json"), "utf8")).revisions;
+scripts/check-drift.mjs:95:const bergamotResearch = JSON.parse(readFileSync(join(HERE, "bergamot/bergamot-pins.json"), "utf8"));
+scripts/check-drift.mjs:129:const nllbResearch = JSON.parse(readFileSync(join(HERE, "nllb-lean/pins.json"), "utf8"));
+scripts/quality-gate/generate-nllb-references.mjs:19:const models = JSON.parse(readFileSync(HERE('models.json'), 'utf8'));
+scripts/quality-gate/generate-nllb-references.mjs:20:const testSets = JSON.parse(readFileSync(HERE('test-sets.json'), 'utf8'));
+scripts/quality-gate/generate-nllb-references.mjs:47:  ? JSON.parse(readFileSync(HERE('nllb-references.json'), 'utf8'))
+scripts/quality-gate/drive.mjs:16:const models = JSON.parse(readFileSync(HERE('models.json'), 'utf8'));
+scripts/quality-gate/drive.mjs:26:  ? JSON.parse(readFileSync(runsPath, 'utf8'))
+scripts/quality-gate/drive.mjs:42:    return JSON.parse(jsonLine);
+scripts/quality-gate/gate.mjs:11:const models = JSON.parse(readFileSync(HERE('models.json'), 'utf8'));
+scripts/quality-gate/gate.mjs:12:const testSets = JSON.parse(readFileSync(HERE('test-sets.json'), 'utf8'));
+scripts/quality-gate/gate.mjs:13:const runs = JSON.parse(readFileSync(HERE('runs.json'), 'utf8'));
+scripts/quality-gate/gate.mjs:14:const refs = JSON.parse(readFileSync(HERE('nllb-references.json'), 'utf8'));
+scripts/quality-gate/run-model.mjs:20:const models = JSON.parse(readFileSync(HERE('models.json'), 'utf8'));
+scripts/quality-gate/run-model.mjs:21:const testSets = JSON.parse(readFileSync(HERE('test-sets.json'), 'utf8'));
+scripts/rtl-audit.mjs:257:      const msg = JSON.parse(m.data);
+scripts/generate-notices.mjs:26:const revisions = JSON.parse(readFileSync(HERE("release/model-revisions.json"), "utf8")).revisions;
+scripts/generate-notices.mjs:27:const community = JSON.parse(readFileSync(HERE("release/community-models.json"), "utf8")).models;
+scripts/generate-notices.mjs:28:const hubAudit = JSON.parse(readFileSync(HERE("language-audit/hub-audit.json"), "utf8"));
+scripts/generate-notices.mjs:29:const hubResearch = JSON.parse(readFileSync(HERE("hub-research.json"), "utf8"));
+scripts/generate-notices.mjs:30:const packageJson = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8"));
+scripts/generate-notices.mjs:31:const packageLock = JSON.parse(readFileSync(join(ROOT, "package-lock.json"), "utf8"));
+scripts/language-audit/browser-run.mjs:14:const plan = JSON.parse(readFileSync(planPath, 'utf8'));
+scripts/language-audit/browser-run.mjs:46:      const msg = JSON.parse(m.data);
+scripts/language-audit/browser-run.mjs:77:    try { await caches.delete('transformers-cache'); } catch (e) {}
+scripts/language-audit/browser-run.mjs:78:    try { localStorage.clear(); } catch (e) {}
+scripts/language-audit/browser-run.mjs:154:  ? JSON.parse(readFileSync(outPath, 'utf8'))
+scripts/language-audit/audit-table.mjs:41:  const gate = JSON.parse(readFileSync("scripts/language-audit/gate-results.json", "utf8"));
+scripts/language-audit/gen-refs.mjs:17:const ENGLISH_SET = JSON.parse(readFileSync(HERE('../quality-gate/test-sets.json'), 'utf8')).en;
+scripts/language-audit/gen-refs.mjs:51:  ? JSON.parse(readFileSync(statePath, 'utf8'))
+scripts/language-audit/gate.mjs:8:const runs = JSON.parse(readFileSync('scripts/language-audit/browser-runs.json', 'utf8'));
+scripts/language-audit/gate.mjs:9:const refs = JSON.parse(readFileSync('scripts/language-audit/nllb-refs-new.json', 'utf8'));
+scripts/language-audit/gate.mjs:199:const EN = JSON.parse(readFileSync('scripts/quality-gate/test-sets.json', 'utf8')).en;
+scripts/language-audit/graph-opt-experiment.mjs:36:      const msg = JSON.parse(m.data);
+scripts/language-audit/make-plan.mjs:8:const EN = JSON.parse(readFileSync('scripts/quality-gate/test-sets.json', 'utf8')).en;
+scripts/language-audit/make-plan.mjs:66:  const refs = JSON.parse(readFileSync(refsPath, 'utf8'));
+scripts/language-audit/chrf.mjs:59:const shippedRuns = JSON.parse(readFileSync('scripts/quality-gate/runs.json', 'utf8'));
+scripts/language-audit/chrf.mjs:60:const shippedRefList = JSON.parse(readFileSync('scripts/quality-gate/nllb-references.json', 'utf8')).directions;
+scripts/language-audit/chrf.mjs:79:const runs = JSON.parse(readFileSync('scripts/language-audit/browser-runs.json', 'utf8'));
+scripts/language-audit/chrf.mjs:80:const refs = JSON.parse(readFileSync('scripts/language-audit/nllb-refs-new.json', 'utf8'));
+src/lib/storage.ts:2: * Safe localStorage wrappers. Storage can be unavailable (private mode,
+src/lib/storage.ts:12:    window.localStorage.setItem(probe, "1");
+src/lib/storage.ts:13:    window.localStorage.removeItem(probe);
+src/lib/storage.ts:22:    if (available()) return window.localStorage.getItem(key);
+src/lib/storage.ts:32:      window.localStorage.setItem(key, value);
+src/lib/storage.ts:45:    if (available()) window.localStorage.removeItem(key);
+src/lib/storage.ts:56:    return JSON.parse(raw) as T;
+src/lib/storage.ts:70:/** localStorage keys used by the app. */
+src/lib/share.ts:104:    const parsed = JSON.parse(json) as SharePayload;
+src/lib/model-cache.ts:82:      const cache = await caches.open(cacheName);
+src/lib/model-cache.ts:106:      const cache = await caches.open(cacheName);
+src/lib/model-cache.ts:128:      const cache = await caches.open(cacheName);
+src/lib/model-cache.ts:150:      const cache = await caches.open(cacheName);
+src/lib/model-cache.ts:166:      await caches.delete(cacheName);
+src/lib/model-cache.ts:179:    const names = await caches.keys();
+src/lib/model-cache.ts:181:      names.filter((name) => name.startsWith(SHELL_CACHE_PREFIX)).map((name) => caches.delete(name)),
+src/app/layout.tsx:64:const prePaintScript = `(function(){try{if(localStorage.getItem("pt.model.ready")==="1"){document.documentElement.dataset.hero="compact"}}catch(e){}try{document.documentElement.classList.add("js")}catch(e){}})();`;
+scripts/benchmark/p2c-report.mjs:17:const results = JSON.parse(readFileSync(HERE('benchmark-results.json'), 'utf8')).results;
+scripts/benchmark/p2c-report.mjs:19:const fit = existsSync(HERE('p2c-token-fit.json')) ? JSON.parse(readFileSync(HERE('p2c-token-fit.json'), 'utf8')) : null;
+scripts/benchmark/p2c-report.mjs:55:  const s = JSON.parse(readFileSync(p, 'utf8'));
+scripts/benchmark/browser-driver.mjs:26:const state = JSON.parse(readFileSync(statePath, 'utf8'));
+scripts/benchmark/browser-driver.mjs:29:const sample = JSON.parse(readFileSync(HERE('sample.json'), 'utf8'));
+scripts/benchmark/browser-driver.mjs:67:      const msg = JSON.parse(m.data);
+scripts/benchmark/browser-driver.mjs:93:    try { await caches.delete('transformers-cache'); } catch (e) {}
+scripts/benchmark/browser-driver.mjs:94:    try { await caches.delete('pt-indictrans2'); } catch (e) {}
+scripts/benchmark/browser-driver.mjs:95:    try { await caches.delete('pt-bergamot'); } catch (e) {}
+scripts/benchmark/browser-driver.mjs:96:    try { localStorage.clear(); } catch (e) {}

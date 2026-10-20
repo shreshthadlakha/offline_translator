@@ -1,0 +1,69 @@
+src/workers/translator.worker.ts:44:const onnxEnv = env.backends.onnx as unknown as {
+src/workers/translator.worker.ts:256:    const tokenizer = (translator as unknown as { tokenizer?: { encode?: (t: string, o?: { add_special_tokens?: boolean }) => number[] } }).tokenizer;
+src/workers/translator.worker.ts:366:const startTranslationPipeline = pipeline as unknown as (
+src/workers/translator.worker.ts:401:  return options as unknown as Parameters<TranslationPipeline>[1];
+src/workers/translator.worker.ts:741:  const memory = (performance as unknown as { memory?: { usedJSHeapSize?: number; jsHeapSizeLimit?: number } }).memory;
+src/workers/bergamot-engine.ts:211:  const moz = (WebAssembly as unknown as { mozIntGemm?: () => WebAssembly.Module }).mozIntGemm;
+src/workers/bergamot-engine.ts:225:      const mod = globalThis.Module as unknown as { asm?: Record<string, (...a: unknown[]) => unknown> };
+src/workers/bergamot-engine.ts:373:    const loaded = globalThis.Module as unknown as BergamotModule;
+src/workers/net-report.ts:20:    (self as unknown as { postMessage: (message: WorkerToMain) => void }).postMessage({
+src/workers/nllb-lean-engine.ts:89:  const mod = ortModule as unknown as OrtModule;
+src/workers/nllb-lean-engine.ts:254:    const tokenizer = new NllbTokenizer(tokenizerJSON, tokenizerConfig) as unknown as TokenizerLike;
+src/workers/indictrans2-engine.ts:71:  const mod = ortModule as unknown as OrtModule;
+src/workers/indictrans2-engine.ts:253:    }) as unknown as TokenizerLike;
+src/workers/indictrans2-engine.ts:256:    }) as unknown as TokenizerLike;
+scripts/indictrans2/engine.ts:50:  srcTok: any;
+scripts/indictrans2/engine.ts:52:  tgtTok: any;
+src/lib/db.ts:3:const globalForPrisma = globalThis as unknown as {
+scripts/scan/targeted-grep.sh:27:rg -n --no-heading -e ': any' -e 'as any' -e 'as unknown as' -e '@ts-ignore' -e '@ts-expect-error' -e '@ts-nocheck' $OWNED > "$OUT/targeted-types.txt" || true
+scripts/benchmark/sanity.mjs:116:/** Consecutive span repetition, word level: any 1..6 word span that repeats
+scripts/bergamot/p11-audit.mjs:168:// --- 6. Tagalog deep check: any other browser-fetchable mirror? ----------
+scripts/benchmark/runs/ind_Latn-eng_Latn_opus-id-en.json:328:    "553": "If the Allies fail, Germany may be able to conquer England just as much as any other European country.",
+scripts/benchmark/runs/pan_Guru-eng_Latn_indictrans2-indic-en.json:407:    "934": "However, it doesn't come cheap: as any foolproof rule of thumb, you can expect to pay four times the economy's normal rent for business, and eleven times for first-class!",
+scripts/benchmark/runs/jpn_Jpan-eng_Latn_opus-ja-en.json:328:    "553": "If the Allied powers had been defeated, Germany would probably have conquered Britain as well as any other European nation.",
+src/workers/translator.worker.ts:598:      PRIORITY_RANK[job.priority] < PRIORITY_RANK[queue[bestIndex]!.priority] ||
+src/workers/translator.worker.ts:599:      (PRIORITY_RANK[job.priority] === PRIORITY_RANK[queue[bestIndex]!.priority] && job.seq < queue[bestIndex]!.seq)
+src/workers/bergamot-engine.ts:291:    const modelMemory = aligned(buffers.get(modelFile.name)!, ALIGNMENTS.model);
+src/workers/bergamot-engine.ts:292:    const shortlistMemory = aligned(buffers.get(lexFile.name)!, ALIGNMENTS.lex);
+src/workers/bergamot-engine.ts:295:      vocabList.push_back(aligned(buffers.get(vocab.name)!, ALIGNMENTS.vocab));
+src/workers/bergamot-engine.ts:410:    return out.length > 0 && out[0]!.trim().length > 0;
+src/workers/nllb-lean-engine.ts:248:    const tokenizerJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer.json")!));
+src/workers/nllb-lean-engine.ts:249:    const tokenizerConfig = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_config.json")!));
+src/workers/nllb-lean-engine.ts:250:    const genConfig = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+src/workers/nllb-lean-engine.ts:251:    const config = JSON.parse(new TextDecoder().decode(byName.get("config.json")!));
+src/workers/nllb-lean-engine.ts:406:          for (const name of Object.keys(encoderPast!)) feeds[name] = encoderPast![name]!;
+src/workers/nllb-lean-engine.ts:407:          for (const name of Object.keys(decoderPast!)) feeds[name] = decoderPast![name]!;
+src/workers/nllb-lean-engine.ts:453:          disposeAll(Object.values(decoderPast!));
+src/workers/indictrans2-engine.ts:247:    const meta = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_meta.json")!));
+src/workers/indictrans2-engine.ts:248:    const gen = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+src/workers/indictrans2-engine.ts:249:    const srcTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_src.json")!));
+src/workers/indictrans2-engine.ts:250:    const tgtTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_tgt.json")!));
+src/workers/indictrans2-engine.ts:276:    const enc = await o.InferenceSession.create(byName.get("encoder_model.onnx")!, options);
+src/workers/indictrans2-engine.ts:277:    const dec = await o.InferenceSession.create(byName.get("decoder_model.onnx")!, options);
+src/workers/indictrans2-engine.ts:279:      byName.get("decoder_with_past_model.onnx")!,
+scripts/indictrans2/engine.ts:157:          ...this.pastFeed(past!),
+scripts/indictrans2/proof.ts:99:  const refs = state.ids.map((i: number) => tgtLines[i]!);
+scripts/indictrans2/proof.ts:109:  const perSentence = hyps.map((h, i) => chrfppSentence(h, refs[i]!));
+scripts/indictrans2/proof.ts:124:          median: Number(sentenceMs.sort((a, b) => a - b)[Math.floor(sentenceMs.length / 2)]!.toFixed(0)),
+scripts/indictrans2/proof.ts:125:          p90: Number(sentenceMs[Math.floor(sentenceMs.length * 0.9)]!.toFixed(0)),
+scripts/indictrans2/proof.ts:133:      .map((w) => ({ chrf: w.s, src: srcLines[state.ids[w.i]!]!.slice(0, 90), hyp: hyps[w.i]!.slice(0, 90), ref: refs[w.i]!.slice(0, 90) })),
+src/hooks/use-engine.tsx:567:        void navigator.locks!.request(LOCK_NAME, { ifAvailable: true }, (lock) => {
+src/components/history/history-sheet.tsx:153:      if (last && dayKey(entry.createdAt) === dayKey(last.entries[0]!.createdAt)) {
+scripts/scan/logs/targeted-storage.txt:7:src/workers/nllb-lean-engine.ts:248:    const tokenizerJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer.json")!));
+scripts/scan/logs/targeted-storage.txt:8:src/workers/nllb-lean-engine.ts:249:    const tokenizerConfig = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_config.json")!));
+scripts/scan/logs/targeted-storage.txt:9:src/workers/nllb-lean-engine.ts:250:    const genConfig = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+scripts/scan/logs/targeted-storage.txt:10:src/workers/nllb-lean-engine.ts:251:    const config = JSON.parse(new TextDecoder().decode(byName.get("config.json")!));
+scripts/scan/logs/targeted-storage.txt:18:src/workers/indictrans2-engine.ts:247:    const meta = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_meta.json")!));
+scripts/scan/logs/targeted-storage.txt:19:src/workers/indictrans2-engine.ts:248:    const gen = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+scripts/scan/logs/targeted-storage.txt:20:src/workers/indictrans2-engine.ts:249:    const srcTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_src.json")!));
+scripts/scan/logs/targeted-storage.txt:21:src/workers/indictrans2-engine.ts:250:    const tgtTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_tgt.json")!));
+scripts/scan/logs/targeted-storage.txt:137:scripts/scan/logs/targeted-types.txt:30:src/workers/nllb-lean-engine.ts:248:    const tokenizerJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer.json")!));
+scripts/scan/logs/targeted-storage.txt:138:scripts/scan/logs/targeted-types.txt:31:src/workers/nllb-lean-engine.ts:249:    const tokenizerConfig = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_config.json")!));
+scripts/scan/logs/targeted-storage.txt:139:scripts/scan/logs/targeted-types.txt:32:src/workers/nllb-lean-engine.ts:250:    const genConfig = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+scripts/scan/logs/targeted-storage.txt:140:scripts/scan/logs/targeted-types.txt:33:src/workers/nllb-lean-engine.ts:251:    const config = JSON.parse(new TextDecoder().decode(byName.get("config.json")!));
+scripts/scan/logs/targeted-storage.txt:141:scripts/scan/logs/targeted-types.txt:38:src/workers/indictrans2-engine.ts:247:    const meta = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_meta.json")!));
+scripts/scan/logs/targeted-storage.txt:142:scripts/scan/logs/targeted-types.txt:39:src/workers/indictrans2-engine.ts:248:    const gen = JSON.parse(new TextDecoder().decode(byName.get("generation_config.json")!));
+scripts/scan/logs/targeted-storage.txt:143:scripts/scan/logs/targeted-types.txt:40:src/workers/indictrans2-engine.ts:249:    const srcTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_src.json")!));
+scripts/scan/logs/targeted-storage.txt:144:scripts/scan/logs/targeted-types.txt:41:src/workers/indictrans2-engine.ts:250:    const tgtTokJSON = JSON.parse(new TextDecoder().decode(byName.get("tokenizer_tgt.json")!));
+src/lib/terminal-punct.ts:112:  if (TERMINAL_CHARS.has(core[core.length - 1]!)) return out; // already terminal
+src/lib/model-cache.ts:43:    return NLLB_BUNDLE.files.map((f) => f.name.split("/").pop()!);
