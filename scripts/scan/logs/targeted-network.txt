@@ -1,3 +1,7 @@
+src/workers/bergamot-engine.ts:130:  const response = await fetch(url);
+src/workers/nllb-lean-engine.ts:120:  const response = await fetch(url);
+src/workers/indictrans2-engine.ts:112:  const response = await fetch(url);
+scripts/release/fetch-model-revisions.mjs:27:  const response = await fetch(url, { headers: { "User-Agent": "private-translator-release-check" } });
 scripts/browser-tests/tmp/cdp-domains.mjs:6:    const ws = new WebSocket(wsUrl);
 scripts/browser-tests/tmp/cdp-domains.mjs:35:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
 scripts/browser-tests/tmp/cdp-probe.mjs:6:    const ws = new WebSocket(wsUrl);
@@ -8,13 +12,9 @@ scripts/browser-tests/tmp/cdp-state.mjs:6:    const ws = new WebSocket(wsUrl);
 scripts/browser-tests/tmp/cdp-state.mjs:56:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
 scripts/browser-tests/tmp/cdp-reload-t1.mjs:6:    const ws = new WebSocket(wsUrl);
 scripts/browser-tests/tmp/cdp-reload-t1.mjs:35:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
-src/workers/bergamot-engine.ts:126:  const response = await fetch(url);
-scripts/browser-tests/results-b4a.md:28:Raw-CDP diagnosis (bypassing agent-browser, direct WebSocket to each page target,
-src/workers/nllb-lean-engine.ts:120:  const response = await fetch(url);
-src/workers/indictrans2-engine.ts:109:  const response = await fetch(url);
-scripts/indictrans2/download.ts:58:  const res = await fetch(url);
 scripts/bergamot/mozilla-demo-worker-reference.js:33:    resp = await fetch(modelRegistryUrl);
 scripts/bergamot/mozilla-demo-worker-reference.js:106:  const response = await fetch(url);
+scripts/browser-tests/results-b4a.md:28:Raw-CDP diagnosis (bypassing agent-browser, direct WebSocket to each page target,
 scripts/bergamot/collect-pins.mjs:35:const listing = await (await fetch(`https://huggingface.co/api/models/${REPO}?blobs=true`)).json();
 scripts/bergamot/collect-pins.mjs:49:        const res = await fetch(url, { method: "HEAD", redirect: "manual" });
 scripts/bergamot/proof-worker.mjs:104:  const response = await fetch(file.url);
@@ -25,7 +25,8 @@ scripts/bergamot/p11-audit.mjs:172:    fetch(`https://huggingface.co/api/models?
 scripts/bergamot/p11-audit.mjs:181:    const info = await (await fetch(`https://huggingface.co/api/models/${repoId}`)).json();
 scripts/nllb-lean/browser-measure.mjs:34:    const ws = new WebSocket(wsUrl);
 scripts/nllb-lean/browser-measure.mjs:63:  const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
-scripts/fetch-fonts.mjs:68:  const res = await fetch(url);
+scripts/indictrans2/download.ts:58:  const res = await fetch(url);
+scripts/fetch-fonts.mjs:64:  const res = await fetch(url);
 scripts/rtl-audit.mjs:15://   UI in a real headless Chromium over raw CDP — the same WebSocket approach
 scripts/rtl-audit.mjs:200:// Part 2 — rendered audit (own throwaway Chromium, CDP over WebSocket)
 scripts/rtl-audit.mjs:238:/** Raw CDP over WebSocket — the same helper browser-measure.mjs uses. */
@@ -39,9 +40,8 @@ scripts/language-audit/graph-opt-experiment.mjs:20:    const ws = new WebSocket(
 scripts/language-audit/graph-opt-experiment.mjs:87:const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
 scripts/benchmark/browser-driver.mjs:51:    const ws = new WebSocket(wsUrl);
 scripts/benchmark/browser-driver.mjs:80:  const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
-scripts/sw-template.js:83:          const response = await fetch(request);
-scripts/sw-template.js:100:        const response = await fetch(request);
-scripts/release/fetch-model-revisions.mjs:27:  const response = await fetch(url, { headers: { "User-Agent": "private-translator-release-check" } });
+scripts/sw-template.js:94:          const response = await fetch(request);
+scripts/sw-template.js:111:        const response = await fetch(request);
 src/lib/indictrans2/bundles.ts:71:  return `https://huggingface.co/${b.repo}/resolve/${b.commit}/${file}`;
 src/lib/nllb/bundles.ts:43:  return `https://huggingface.co/${NLLB_BUNDLE.repo}/resolve/${NLLB_BUNDLE.commit}/${name}`;
 src/lib/engines.ts:126:  licenseUrl: "https://huggingface.co/facebook/nllb-200-distilled-600M",
@@ -94,11 +94,11 @@ src/lib/engines.ts:222:const ROMANCE_EN = opus("opus-romance-en", "Xenova/opus-m
 src/lib/engines.ts:321:    licenseUrl: `https://huggingface.co/${modelId}`,
 src/lib/engines.ts:362:    licenseUrl: "https://huggingface.co/ai4bharat/IndicTrans2",
 src/lib/engines.ts:444:    licenseUrl: "https://github.com/mozilla/translations",
+src/lib/bergamot/bundles.ts:425:  return `https://huggingface.co/${BERGAMOT_MIRROR}/resolve/${BERGAMOT_REVISION}/${pair}/${name}`;
 scripts/browser-tests/tmp/cdp-domains.mjs:35:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
 scripts/browser-tests/tmp/cdp-domains.mjs:36:  const pages = list.filter((t) => t.type === "page" && t.url.startsWith("http://localhost:3000"));
 scripts/browser-tests/tmp/cdp-probe.mjs:39:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
 scripts/browser-tests/tmp/cdp-probe.mjs:40:  const pages = list.filter((t) => t.type === "page" && t.url.startsWith("http://localhost:3000"));
-src/lib/bergamot/bundles.ts:425:  return `https://huggingface.co/${BERGAMOT_MIRROR}/resolve/${BERGAMOT_REVISION}/${pair}/${name}`;
 scripts/browser-tests/tmp/cdp-unfreeze.mjs:35:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
 scripts/browser-tests/tmp/cdp-unfreeze.mjs:36:  const pages = list.filter((t) => t.type === "page" && t.url.startsWith("http://localhost:3000"));
 scripts/browser-tests/tmp/cdp-state.mjs:56:  const list = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();
@@ -138,6 +138,7 @@ scripts/indictrans2/README-hari-indic-en.md:56:Built for use with [Transformers.
 scripts/indictrans2/README-hari-indic-en.md:57:and [onnxruntime-web](https://onnxruntime.ai/docs/get-started/with-javascript.html)
 scripts/indictrans2/README-hari-indic-en.md:142:#   https://github.com/Hari31416/indictrans2-onnx-export/blob/main/src/translate.py
 scripts/indictrans2/download.ts:91:      const url = `https://huggingface.co/${bundle.repo}/resolve/${bundle.commit}/${file}`;
+scripts/release/fetch-model-revisions.mjs:26:  const url = `https://huggingface.co/api/models/${engine.modelId}`;
 scripts/indictrans2/README-naklitechie.md:33:> - the fp32 ONNX sibling [`naklitechie/indictrans2-en-indic-dist-200M-ONNX`](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M-ONNX) (bit-exact vs PyTorch), or
 scripts/indictrans2/README-naklitechie.md:34:> - the original PyTorch model [`naklitechie/indictrans2-en-indic-dist-200M`](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M).
 scripts/indictrans2/README-naklitechie.md:39:INT8 dynamic quantization of [`naklitechie/indictrans2-en-indic-dist-200M-ONNX`](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M-ONNX)
@@ -147,14 +148,9 @@ scripts/indictrans2/README-naklitechie.md:48:| [fp32 ONNX (`naklitechie/indictra
 scripts/indictrans2/README-naklitechie.md:58:[`naklitechie/indictrans2-en-indic-dist-200M`](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M), run with
 scripts/indictrans2/README-naklitechie.md:68:The intermediate fp32 ONNX bundle ([`naklitechie/indictrans2-en-indic-dist-200M-ONNX`](https://huggingface.co/naklitechie/indictrans2-en-indic-dist-200M-ONNX))
 scripts/indictrans2/README-naklitechie.md:194:MIT, preserved from upstream [ai4bharat/indictrans2-en-indic-dist-200M](https://huggingface.co/ai4bharat/indictrans2-en-indic-dist-200M).
-scripts/indictrans2/gen-bundle-table.ts:78:  return \`https://huggingface.co/\${b.repo}/resolve/\${b.commit}/\${file}\`;
-scripts/benchmark/published-baseline.json:5:    "url": "https://dl.fbaipublicfiles.com/large_objects/nllb/models/nllb_200_dense_distill_600m/metrics.csv",
-scripts/benchmark/published-baseline.json:6:    "via": "linked from the model card as https://tinyurl.com/nllb200densedst600mmetrics",
-scripts/hub-research.json:1385:      "url": "https://huggingface.co/api/models?author=Xenova&search=opus-mt&limit=1000",
-scripts/hub-research.json:1390:      "url": "https://huggingface.co/api/models?author=onnx-community&search=opus-mt&limit=200",
-scripts/release/fetch-model-revisions.mjs:26:  const url = `https://huggingface.co/api/models/${engine.modelId}`;
 scripts/release/measure-first-visit.mjs:7:// Usage: node scripts/release/measure-first-visit.mjs [http://127.0.0.1:3131]
 scripts/release/measure-first-visit.mjs:11:const BASE = process.argv[2] ?? "http://127.0.0.1:3131";
+scripts/indictrans2/gen-bundle-table.ts:78:  return \`https://huggingface.co/\${b.repo}/resolve/\${b.commit}/\${file}\`;
 scripts/bergamot/gcs-registry.json:3:  "baseUrl": "https://storage.googleapis.com/moz-fx-translations-data--303e-prod-translations-data",
 scripts/bergamot/gen-bundles.mjs:151:  return \`https://huggingface.co/\${BERGAMOT_MIRROR}/resolve/\${BERGAMOT_REVISION}/\${pair}/\${name}\`;
 scripts/bergamot/mozilla-demo-worker-reference.js:8:const githubRaw = "https://raw.githubusercontent.com/mozilla/firefox-translations-models/refs/heads/main"
@@ -175,6 +171,8 @@ scripts/nllb-lean/browser-measure.mjs:8:// Requires: agent-browser open http://l
 scripts/nllb-lean/browser-measure.mjs:63:  const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
 scripts/nllb-lean/browser-measure.mjs:65:  if (!page) page = list.find((t) => t.type === "page" && t.url.startsWith("http://localhost:3000"));
 scripts/nllb-lean/browser-measure.mjs:66:  if (!page) throw new Error("no page target; run: agent-browser open http://localhost:3000/robots.txt");
+scripts/hub-research.json:1385:      "url": "https://huggingface.co/api/models?author=Xenova&search=opus-mt&limit=1000",
+scripts/hub-research.json:1390:      "url": "https://huggingface.co/api/models?author=onnx-community&search=opus-mt&limit=200",
 scripts/rtl-audit.mjs:14://   Part 2 (needs the dev server on http://localhost:3000): drives the real
 scripts/rtl-audit.mjs:44:const APP = "http://localhost:3000";
 scripts/rtl-audit.mjs:459:    const version = await (await fetch(`http://127.0.0.1:${port}/json/version`)).json();
@@ -187,6 +185,8 @@ scripts/generate-notices.mjs:141:    : `[\`${r.upstreamModel}\`](https://hugging
 scripts/language-audit/browser-run.mjs:59:  const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
 scripts/language-audit/browser-run.mjs:62:  if (!page) page = list.find((t) => t.type === 'page' && t.url.startsWith('http://localhost:3000'));
 scripts/language-audit/browser-run.mjs:63:  if (!page) throw new Error('no page target; run: agent-browser open http://localhost:3000/robots.txt');
+scripts/benchmark/published-baseline.json:5:    "url": "https://dl.fbaipublicfiles.com/large_objects/nllb/models/nllb_200_dense_distill_600m/metrics.csv",
+scripts/benchmark/published-baseline.json:6:    "via": "linked from the model card as https://tinyurl.com/nllb200densedst600mmetrics",
 scripts/language-audit/graph-opt-experiment.mjs:87:const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
 scripts/language-audit/graph-opt-experiment.mjs:88:let page = list.find((t) => t.type === 'page' && t.url.includes('robots.txt')) ?? list.find((t) => t.type === 'page' && t.url.startsWith('http://localhost:3000'));
 scripts/language-audit/graph-opt-experiment.mjs:89:if (!page) throw new Error('open http://localhost:3000/robots.txt first');
