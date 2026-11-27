@@ -1,0 +1,5 @@
+{
+  "env": {
+    "ONNXRUNTIME_NODE_INSTALL_CUDA": "skip"
+  }
+}
