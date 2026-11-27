@@ -41,7 +41,7 @@ Every model is loaded **pinned to a fixed Hugging Face revision** (`MODEL_REVISI
 
 ## Languages and honest quality
 
-The whole routed fleet was benchmarked against professional human translations (FLORES-200 devtest, chrF++, 200 fixed sentences per direction through the real browser worker). Verdicts below come from that measurement — **including the failures**, because hiding them would defeat the point. Full detail: `scripts/benchmark/quality-table.md` (per-direction scores, gaps, flag rates); methodology and calibration: the P1/P2 sections of `worklog.md`.
+The whole routed fleet was benchmarked against professional human translations (FLORES-200 devtest, chrF++, 200 fixed sentences per direction through the real browser worker). Verdicts below come from that measurement — **including the failures**, because hiding them would defeat the point. Full detail: `scripts/benchmark/quality-table.md` (per-direction scores, gaps, flag rates).
 
 - **pass** — within 2 chrF++ points of the full model's published score on that direction (70 of 95 small-model directions, including 31 of the 37 Bergamot directions — many above the published score itself: English to Thai +10.0, to Serbian +7.8, to Traditional Chinese +8.0, to Croatian +5.6, to Polish +3.0, to Ukrainian +5.2 chrF++)
 - **borderline** — within 5 points, or passing with more flagged sentences than the bar allows (25): labelled "Fast, approximate" in the app, with a notice under the translation and a per-language "use the full model" choice
