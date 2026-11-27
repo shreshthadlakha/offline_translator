@@ -76,10 +76,10 @@ self.addEventListener("fetch", (event) => {
   const request = event.request;
 
   // This app's own files only. Cross origin requests, including the one time
-  // model download, are never touched.
+  // model download, are never touched. (WebSocket handshakes never reach a
+  // fetch event at all — no guard is needed or possible here.)
   if (new URL(request.url).origin !== self.location.origin) return;
   if (request.method !== "GET") return;
-  if (request.mode === "websocket") return;
   if (request.url.includes("/_next/webpack-hmr")) return;
 
   const isCacheFirst = CACHE_FIRST.some((prefix) => new URL(request.url).pathname.startsWith(prefix));
@@ -92,7 +92,7 @@ self.addEventListener("fetch", (event) => {
         if (cached) return cached;
         try {
           const response = await fetch(request);
-          if (response.ok) cache.put(request, response.clone());
+          if (response.ok) void cache.put(request, response.clone()).catch(() => {});
           return response;
         } catch {
           return new Response("Offline", { status: 503 });
@@ -110,7 +110,7 @@ self.addEventListener("fetch", (event) => {
       try {
         const response = await fetch(request);
         if (response.ok && response.type === "basic") {
-          cache.put(request, response.clone());
+          void cache.put(request, response.clone()).catch(() => {});
         }
         return response;
       } catch {

@@ -14,8 +14,12 @@
  *    the moment its session exists (the runtime copies the weights into its
  *    own heap during session creation, so the JavaScript copy is garbage
  *    immediately after).
- *  - The encoder session is fully built before the decoder's bytes are even
- *    requested. Never two buffers, never two session builds at once.
+ *  - One buffer and one session at a time. The decoder's session is built
+ *    first — the opposite of the inference order, deliberately: its creation
+ *    is the biggest memory event of the whole load and must run while
+ *    nothing else is resident (measured ~2.3 GB alone in the reference
+ *    harness). The encoder's bytes are requested only after the decoder's
+ *    session exists. Never two buffers, never two session builds at once.
  *  - Session options trim everything trimmable: no CPU memory arena, no
  *    memory pattern, WebAssembly execution only, graph optimization honored
  *    from the init message.

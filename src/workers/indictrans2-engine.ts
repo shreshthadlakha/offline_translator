@@ -279,12 +279,31 @@ export class IndicTrans2Engine {
       executionProviders: [device === "webgpu" ? "webgpu" : "wasm"],
       externalData,
     };
-    const enc = await o.InferenceSession.create(byName.get("encoder_model.onnx")!, options);
-    const dec = await o.InferenceSession.create(byName.get("decoder_model.onnx")!, options);
-    const decPast = await o.InferenceSession.create(
-      byName.get("decoder_with_past_model.onnx")!,
-      options,
-    );
+    // The sessions are only released by dispose(), which sees this.loaded —
+    // so a failure between creations must release what already exists here,
+    // or the WebGPU retry below the worker's fallback would leak the first
+    // session and hold its memory alongside the fresh wasm set.
+    let enc: OrtSession | null = null;
+    let dec: OrtSession | null = null;
+    let decPast: OrtSession | null = null;
+    try {
+      enc = await o.InferenceSession.create(byName.get("encoder_model.onnx")!, options);
+      dec = await o.InferenceSession.create(byName.get("decoder_model.onnx")!, options);
+      decPast = await o.InferenceSession.create(
+        byName.get("decoder_with_past_model.onnx")!,
+        options,
+      );
+    } catch (err) {
+      for (const session of [enc, dec, decPast]) {
+        if (!session) continue;
+        try {
+          await session.release();
+        } catch {
+          // Best effort: the engine is being torn down regardless.
+        }
+      }
+      throw err;
+    }
 
     this.loaded = {
       enc,

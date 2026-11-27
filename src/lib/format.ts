@@ -8,7 +8,10 @@
 export function formatBytes(bytes: number): string {
   if (!Number.isFinite(bytes) || bytes <= 0) return "0 B";
   if (bytes < 1000) return `${Math.round(bytes)} B`;
-  if (bytes < 1000 * 1000) return `${Math.max(1, Math.round(bytes / 1000))} KB`;
+  // 999,500 B and up rounds to "1000 KB", which reads as a megabyte: those
+  // values belong to the MB branch, whose 1.0 MB is the honest label.
+  const kb = Math.round(bytes / 1000);
+  if (kb < 1000) return `${Math.max(1, kb)} KB`;
   const mb = bytes / 1e6;
   if (mb < 10) return `${mb.toFixed(1)} MB`;
   return `${Math.round(mb)} MB`;

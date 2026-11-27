@@ -35,8 +35,15 @@ function readFromStorage(): HistoryEntry[] {
         e &&
         typeof e.id === "string" &&
         typeof e.sourceText === "string" &&
-        // A corrupt createdAt must not survive the filter: formatting an
-        // invalid date would break the whole sheet render (L-10).
+        // Every field the sheet renders must survive the filter, not just
+        // createdAt: a corrupt field breaks the sheet — a non-string
+        // targetText throws as a React child, a corrupt src/tgt renders
+        // wrong labels and restores a bogus pair (the failure class the
+        // createdAt guard was added for, L-10).
+        typeof e.targetText === "string" &&
+        typeof e.src === "string" &&
+        typeof e.tgt === "string" &&
+        typeof e.flagged === "boolean" &&
         typeof e.createdAt === "number" &&
         Number.isFinite(e.createdAt),
     )

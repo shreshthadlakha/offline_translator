@@ -2,7 +2,7 @@
  * Sentence splitting, from the technical design.
  * Split on line breaks first, then split each line into sentences with
  * Intl.Segmenter. The fallback regular expression covers common terminators
- * across scripts: . ! ? … । ॥ ۔ ؟ 。 ！ ？
+ * across scripts: . ! ? … । ॥ ۔ ؟ 。 ！ ？ ። ． ⸮
  * Line breaks are kept so the output has the same paragraph shape as the input.
  * A sentence longer than about 200 characters is split further at commas or
  * semicolons, so it isn't cut off by the model's length limit and long
@@ -16,7 +16,12 @@ export type SegmentedText = {
   lines: string[][];
 };
 
-const TERMINATORS = ".!?…।॥۔؟。！？";
+const TERMINATORS = ".!?…।॥۔؟。！？።．⸮";
+
+/** The terminators whose scripts take no space between sentences: what
+ * follows can start a new sentence unconditionally — a digit or a Latin
+ * letter after 。 is a new sentence beginning, not a continuation. */
+const NO_SPACE_TERMINATORS = "。！？";
 
 // Commas and semicolons across the scripts this app supports.
 const SOFT_BREAKS = ",;،؛，、；";
@@ -60,8 +65,7 @@ function isAbbreviation(before: string): boolean {
 
 /** True when the character after a terminator plausibly starts a new
  * sentence: whitespace or a quote, then an uppercase letter, a digit-free
- * start that is not a lowercase continuation. CJK terminators split
- * unconditionally (those scripts use no spaces between sentences). */
+ * start that is not a lowercase continuation. */
 function startsNewSentence(next: string): boolean {
   if (next.length === 0) return true;
   const first = next[0] ?? "";
@@ -80,11 +84,14 @@ export function splitByRegex(line: string): string[] {
   for (let i = 0; i < line.length; i++) {
     const ch = line[i] ?? "";
     if (!TERMINATORS.includes(ch)) continue;
-    // Only the ASCII terminators participate in the look-ahead rules; the
-    // script-specific ones (। ۔ ؟ 。 ！ ？ ॥) behave the same as before.
+    // The ASCII terminators participate in the look-ahead rules; the CJK
+    // marks (。！？) split unconditionally, because anything — a digit, a
+    // Latin letter — can start the next sentence in scripts that take no
+    // spaces between sentences. The fullwidth ． stays on the look-ahead
+    // path, like the ASCII period.
     const rest = line.slice(i + 1);
     if (ch === "." && isAbbreviation(line.slice(0, i))) continue;
-    if (rest.length > 0 && !startsNewSentence(rest)) continue;
+    if (!NO_SPACE_TERMINATORS.includes(ch) && rest.length > 0 && !startsNewSentence(rest)) continue;
     // Consume a run of terminators (e.g. "!!!", "?!").
     let end = i + 1;
     while (end < line.length && TERMINATORS.includes(line[end] ?? "")) end++;
@@ -101,7 +108,6 @@ export function splitByRegex(line: string): string[] {
 function splitLongSentence(sentence: string, limit = SPEED_CONFIG.sentenceSplitLimit): string[] {
   if (sentence.length <= limit) return [sentence];
   const pieces: string[] = [];
-  let current = "";
   let cursor = 0;
   while (cursor < sentence.length) {
     // Find the next soft break after which the chunk would exceed the limit.
@@ -119,10 +125,8 @@ function splitLongSentence(sentence: string, limit = SPEED_CONFIG.sentenceSplitL
     }
     const chunk = sentence.slice(cursor, end).trim();
     if (chunk.length > 0) pieces.push(chunk);
-    current = "";
     cursor = end;
   }
-  void current;
   return pieces.length > 0 ? pieces : [sentence.trim()];
 }
 

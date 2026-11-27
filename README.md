@@ -1,5 +1,7 @@
 # Private Translator
 
+[![CI](https://github.com/shreshthadlakha/offline_translator/actions/workflows/ci.yml/badge.svg)](https://github.com/shreshthadlakha/offline_translator/actions/workflows/ci.yml)
+
 Translate between 56 languages entirely on your own device. Nothing you type and nothing translated is ever sent anywhere: the only network requests the app makes are its own files and a one-time download of the translation model, pinned to an exact revision, straight from the Hugging Face Hub. No account, no limits, no analytics, no tracking, no third-party scripts or fonts.
 
 ## Quick start
@@ -7,7 +9,7 @@ Translate between 56 languages entirely on your own device. Nothing you type and
 Requires Node.js 24 (Node ≥ 20.9 works for dev and build; the verification scripts import TypeScript directly and want 24).
 
 ```bash
-npm ci        # installs and generates the worker, service worker and ORT runtime files
+npm ci        # installs and generates the worker, service worker and the ORT and Bergamot runtime files
 npm run dev   # http://localhost:3000
 ```
 

@@ -216,6 +216,11 @@ async function supportsWebGPU(): Promise<boolean> {
 function classifyLoadError(err: unknown): EngineErrorCode {
   const message = err instanceof Error ? `${err.name} ${err.message}` : String(err);
   if (/out of memory|memory access|allocation failed|oom/i.test(message)) return "memory";
+  // Failures that happen after the bytes are in: a warm-up that produced
+  // nothing, a route that does not exist, a bundle spec that was missing a
+  // field. Calling them "download" would send the person looking at their
+  // connection when their connection is fine.
+  if (/empty warm up output|no Bergamot pair|unknown Bergamot pair|missing bundle|incomplete file set/i.test(message)) return "translate";
   return "download";
 }
 
@@ -477,8 +482,9 @@ async function load(spec: EngineSpec, src: string, tgt: string, deviceWanted: "w
       if (!ok) throw new Error("empty warm up output");
     } else if (spec.kind === "nllb") {
       // The lean full-model engine: the pinned bundle's files fetched one at
-      // a time with checksums, the encoder session built before the decoder's
-      // bytes are requested, each buffer freed as soon as its session exists,
+      // a time with checksums, one buffer and one session at a time (the
+      // decoder's session is built first, on purpose — it is the biggest
+      // memory event and must run alone), each buffer freed as soon as its session exists,
       // and the library used only for the tokenizer. WebAssembly execution
       // only. Graph optimization defaults to "disabled" (measured: the q8
       // decoder's "basic" session is about twice as large in memory and three

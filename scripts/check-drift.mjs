@@ -92,6 +92,33 @@ for (const [key, bundle] of Object.entries(bundles)) {
   }
 }
 
+// 5b: the sizes the UI quotes from the engine table (picker labels, the
+// setup flow, "Saved models") must equal the bundle tables' own totals —
+// one download, one number. This drifted once (engines.ts lagged the
+// IndicTrans2 bundle totals by 24-58 KB per direction) and only a hand
+// comparison caught it.
+const sizeMismatches = [];
+for (const engine of allEngines()) {
+  if (engine.kind === "nllb") {
+    if (engine.expectedBytes !== NLLB_BUNDLE.totalBytes) {
+      sizeMismatches.push(`${engine.id}: table says ${engine.expectedBytes}, bundle says ${NLLB_BUNDLE.totalBytes}`);
+    }
+  } else if (engine.kind === "indictrans2") {
+    const bundle = Object.values(bundles).find((b) => b.repo === engine.modelId);
+    if (!bundle) sizeMismatches.push(`${engine.id}: no bundle table entry for ${engine.modelId}`);
+    else if (engine.expectedBytes !== bundle.totalBytes) {
+      sizeMismatches.push(`${engine.id}: table says ${engine.expectedBytes}, bundle says ${bundle.totalBytes}`);
+    }
+  }
+}
+if (sizeMismatches.length > 0) {
+  for (const m of sizeMismatches) console.error(`drift: expectedBytes differs from the bundle total for ${m}`);
+  failed = true;
+} else {
+  const sizeChecked = allEngines().filter((e) => e.kind === "nllb" || e.kind === "indictrans2").length;
+  console.log(`ok: engine-table sizes match the bundle totals (${sizeChecked} bundle engines)`);
+}
+
 // 6: Bergamot pins vs the research record.
 const bergamotResearch = JSON.parse(readFileSync(join(HERE, "bergamot/bergamot-pins.json"), "utf8"));
 if (bergamotResearch.revision !== BERGAMOT_REVISION) {
@@ -221,7 +248,10 @@ try {
   const mismatches = [];
   for (const [from, to] of [
     ["node_modules/@huggingface/transformers/dist", "public/ort"],
-    ["node_modules/@mkljczk/bergamot-translator", "public/bergamot"],
+    // The Bergamot runtime files live one level down, in worker/: from the
+    // package root the filter matched nothing and this check compared
+    // nothing, silently reporting a truncated public/bergamot as identical.
+    ["node_modules/@mkljczk/bergamot-translator/worker", "public/bergamot"],
   ]) {
     let names;
     try {

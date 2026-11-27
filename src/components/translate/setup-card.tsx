@@ -171,6 +171,14 @@ function SetupCardInner() {
         break;
       case "another-tab":
         body = copy.setup.anotherTab;
+        // Closing the other tab must be recoverable without a reload (H-1):
+        // no worker was ever created for this tab, so a retry re-attempts
+        // the one-tab lock and starts fresh.
+        action = (
+          <Button size="sm" variant="outline" onClick={() => engine.start()}>
+            {copy.setup.retry}
+          </Button>
+        );
         break;
       case "stale-code":
         body = copy.setup.staleCode;
@@ -182,6 +190,18 @@ function SetupCardInner() {
         break;
       case "memory":
         body = copy.setup.outOfMemory;
+        action = (
+          <Button size="sm" variant="outline" onClick={() => engine.start()}>
+            {copy.setup.retry}
+          </Button>
+        );
+        break;
+      case "startup":
+        // A worker that never came up (a CSP denial, a missing worker file):
+        // the connection is fine, so the download copy would send the person
+        // looking at the wrong problem. The message arrives verbatim; the
+        // card adds the way forward.
+        body = copy.setup.startupFailed;
         action = (
           <Button size="sm" variant="outline" onClick={() => engine.start()}>
             {copy.setup.retry}

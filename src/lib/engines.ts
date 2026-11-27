@@ -110,6 +110,12 @@ export type PairEngine = EngineDescriptor & {
   tag?: string;
   /** For IndicTrans2 engines: which of the two bundles serves this pair. */
   bundle?: "en-indic" | "indic-en";
+  /** For pipeline engines whose ONNX files live outside the default
+   *  "onnx/" directory of the repository (the p3 candidates): the subfolder
+   *  the library should fetch from. No table entry sets it today; the field
+   *  is wired through to the worker so the first engine that needs it only
+   *  fills this in. */
+  subfolder?: string;
   /** Set on quarantined routes: the pair falls back to the full model, and
    *  the entry stays in the table (with its reason) so a later phase can
    *  switch the route back on or replace the engine. */
@@ -267,9 +273,15 @@ for (const code of ROMANCE_EN_PAIRS) {
 // every gap worse than minus 10 chrF++ or with clear cut-off evidence, and
 // every Croatian, Serbian and Norwegian group route (P3d found no passing
 // alternative for any of them). Each pair keeps its entry and its measured
-// reason, so a later phase can bring a better engine back; until then the
-// pair falls back to the full model through the existing heavy download
-// warning.
+// reason, so a later phase can bring a better engine back.
+//
+// Since this block was written, the Bergamot routes below replaced every
+// one of these pairs (all 10 are also BERGAMOT_ROUTES keys, and that loop
+// overwrites the whole entry, disabled flag included) — so today no live
+// entry carries `disabled`, and those pairs run on Bergamot rather than
+// falling back to the full model. The mechanism stays for any future
+// quarantine without a replacement engine: a disabled entry is skipped by
+// engineForPair and its pair falls back to the full model.
 const QUARANTINED: Record<string, string> = {
   "eng_Latn|hrv_Latn": "P2 fail verdict: chrF++ 13.0 below the published full-model score, 24.5% of sentences cut off mid word. Croatian group route removed by the P7 safety net.",
   "hrv_Latn|eng_Latn": "P2 fail verdict: chrF++ 14.5 below the published full-model score, 5% flagged. Croatian group route removed by the P7 safety net.",
@@ -334,8 +346,8 @@ ENGINE_TABLE["eng_Latn|swh_Latn"] = fintutto("opus-en-sw", "fintutto/opus-mt-en-
 //
 // The thirteen Indian languages, both directions with English, run on
 // IndicTrans2 distilled 200M (MIT, AI4Bharat) as int8 ONNX exports by the
-// community member hari31416. Two bundles: English to Indic (~295 MB) and
-// Indic to English (~249 MB). Every file downloads from a pinned commit and
+// community member hari31416. Two bundles: English to Indic (~309 MB) and
+// Indic to English (~262 MB). Every file downloads from a pinned commit and
 // is verified against a SHA-256 checksum before it is used or cached
 // (src/lib/indictrans2/bundles.ts); the JavaScript preprocessing port and
 // the custom decoding loop live in src/workers/indictrans2-engine.ts, with
@@ -368,14 +380,14 @@ export const INDICTRANS2_EN_INDIC: EngineDescriptor = indictrans2(
   "indictrans2-en-indic",
   "hari31416/indictrans2-en-indic-dist-200M-ONNX-int8",
   "IndicTrans2 English to Indian languages",
-  309314905,
+  309338772,
 );
 
 export const INDICTRANS2_INDIC_EN: EngineDescriptor = indictrans2(
   "indictrans2-indic-en",
   "hari31416/indictrans2-indic-en-dist-200M-ONNX-int8",
   "IndicTrans2 Indian languages to English",
-  261656622,
+  261714435,
 );
 
 /** The thirteen Indian languages IndicTrans2 serves with English. */

@@ -126,7 +126,7 @@ describe("restoredPair (M-1)", () => {
   test("a large last pair with fast models on falls back to the last small pair", () => {
     const result = restoredPair({
       ...base,
-      lastTgt: "pus_Latn" in {} ? "pus_Latn" : "pbt_Arab", // pbt needs the full model
+      lastTgt: "pbt_Arab", // pbt needs the full model
       lastSmallTgt: "tur_Latn",
     });
     assert.deepEqual(result, { src: "eng_Latn", tgt: "tur_Latn", changed: true });

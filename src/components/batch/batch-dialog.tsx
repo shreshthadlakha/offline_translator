@@ -152,6 +152,24 @@ export function BatchDialog({ open, onOpenChange }: Props) {
     });
   }, [engine, state.phase, srcCode, tgtCode]);
 
+  // An engine-level failure (a setup error without a request id, a heartbeat
+  // death, a terminate from a settings change or Free memory now) never
+  // produces per-id results, so the run above would sit in "running" forever
+  // with a frozen bar. Whatever is still in flight has failed with it: drain
+  // it, count it as failed, and let the run finish so Copy and Download work
+  // on the partial result. An engine error before anything was queued (a
+  // failed setup) leaves the phase alone — the queueing effect resumes the
+  // run once the engine is ready again.
+  useEffect(() => {
+    if (state.phase !== "running" || engine.status !== "error") return;
+    if (pendingRef.current.size === 0) return;
+    const orphans = Array.from(pendingRef.current.values());
+    const orphanCount = orphans.reduce((sum, group) => sum + group.sentences.length, 0);
+    for (const id of pendingRef.current.keys()) engine.cancel(id);
+    pendingRef.current.clear();
+    setState((prev) => ({ ...prev, done: prev.done + orphanCount, failed: prev.failed + orphanCount, phase: "done" }));
+  }, [state.phase, engine.status, engine]);
+
   const cancel = useCallback(() => {
     for (const id of pendingRef.current.keys()) engine.cancel(id);
     pendingRef.current.clear();

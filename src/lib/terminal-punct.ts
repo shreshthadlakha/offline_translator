@@ -18,8 +18,10 @@
 /** The three terminal mark kinds a source sentence can end with. */
 type MarkKind = "period" | "exclaim" | "question";
 
-/** Trailing closing quotes and brackets, looked through on both sides. */
-const CLOSERS = /["'\u201d\u2019\u00bb\u203a)\]\u3009\u300b\u3011\u3015\u232a\u27e9]+$/;
+/** Trailing closing quotes and brackets, looked through on both sides. The
+ * Japanese corner brackets 」 (U+300D) and 』 (U+300F) are included: the
+ * restored mark belongs inside them, like every other closer. */
+const CLOSERS = /["'\u201d\u2019\u00bb\u203a)\]\u3009\u300b\u300d\u300f\u3011\u3015\u232a\u27e9]+$/;
 
 /** Every character that counts as terminal here (superset per script). */
 const TERMINAL_CHARS = new Set(

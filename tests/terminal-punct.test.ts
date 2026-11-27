@@ -42,6 +42,11 @@ describe("restoreTerminalPunctuation", () => {
     assert.equal(restoreTerminalPunctuation("« Quote. »", "« Citation »", "fra_Latn"), "« Citation. »");
   });
 
+  test("the mark goes inside the Japanese corner brackets", () => {
+    assert.equal(restoreTerminalPunctuation("It is a fine day.", "「今日はいい天気です」", "jpn_Jpan"), "「今日はいい天気です。」");
+    assert.equal(restoreTerminalPunctuation("It is a fine day.", "『今日はいい天気です』", "jpn_Jpan"), "『今日はいい天気です。』");
+  });
+
   test("an ellipsis source never triggers restoration", () => {
     assert.equal(restoreTerminalPunctuation("Wait…", "Attends", "fra_Latn"), "Attends");
     assert.equal(restoreTerminalPunctuation("Wait...", "Attends", "fra_Latn"), "Attends");

@@ -41,6 +41,19 @@ describe("splitByRegex (the fallback, M-12)", () => {
     assert.deepEqual(splitByRegex("これは文です。次の文です。"), ["これは文です。", "次の文です。"]);
   });
 
+  test("no-space terminators split before a digit start", () => {
+    // Those scripts take no spaces between sentences: anything, including a
+    // digit or a Latin letter, can start the next sentence.
+    assert.deepEqual(splitByRegex("値段は100円。5個ください。"), ["値段は100円。", "5個ください。"]);
+    assert.deepEqual(splitByRegex("結果はaでした。bも同じです。"), ["結果はaでした。", "bも同じです。"]);
+  });
+
+  test("the Amharic full stop is a terminator", () => {
+    assert.deepEqual(splitByRegex("ይህ መልካም ነው። ያንን አውቃለሁ።"), ["ይህ መልካም ነው።", "ያንን አውቃለሁ።"]);
+    // A finished Amharic sentence counts as complete: no trailing fragment.
+    assert.equal(trailingFragment({ lines: [["ይህ መልካም ነው።"]] }), null);
+  });
+
   test("no terminator means one sentence", () => {
     assert.deepEqual(splitByRegex("just some words"), ["just some words"]);
     assert.deepEqual(splitByRegex(""), []);

@@ -15,12 +15,10 @@ stop_dev_server() {
   pkill -TERM -f 'next dev -p 3000' 2>/dev/null || true
   pkill -TERM -f 'next-server' 2>/dev/null || true
   pkill -TERM -f 'bun run dev' 2>/dev/null || true
-  pkill -TERM -f 'tee dev.log' 2>/dev/null || true
   sleep 3
   pkill -KILL -f 'next dev -p 3000' 2>/dev/null || true
   pkill -KILL -f 'next-server' 2>/dev/null || true
   pkill -KILL -f 'bun run dev' 2>/dev/null || true
-  pkill -KILL -f 'tee dev.log' 2>/dev/null || true
   sleep 1
 }
 

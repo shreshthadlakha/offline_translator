@@ -1,6 +1,6 @@
 # Quality table — every engine the app routes, scored against professional human translation
 
-Generated 2026-10-17 from the P1 benchmark: 200 fixed FLORES-200 devtest sentences (seed 42, the same ids for every language and direction), chrF++ scored against the professional human references, run through the real browser worker bundle. The baseline is the full model's own published chrF++ (NLLB-200 distilled 600M, model-card metrics). Nothing typed or translated left the device.
+Generated 2026-11-26 from the P1 benchmark: 200 fixed FLORES-200 devtest sentences (seed 42, the same ids for every language and direction), chrF++ scored against the professional human references, run through the real browser worker bundle. The baseline is the full model's own published chrF++ (NLLB-200 distilled 600M, model-card metrics). Nothing typed or translated left the device.
 
 **The bar** (`scripts/benchmark/quality-bar.mjs`, all constants adjustable): a small model **passes** a direction when its chrF++ is within 2 points of the published baseline (or higher) **and** at most 2% of sentences carry a sanity flag; within 5 points is **borderline**; more than 5 below is **fail**. A chrF-pass gap with a flag breach is borderline, not fail — the flag review showed the high-flag passes (en->ar 15.5%, en->zh 17.5%) are mostly missing final punctuation rather than broken output. Full-model rows are **baseline**: the full model is the bar, so it gets no run and no verdict.
 

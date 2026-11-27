@@ -80,6 +80,17 @@ export function useSpeech(language: Language | undefined, text: string) {
     const chunks = parts.length > 0 ? parts : [value];
     let started = false;
     let remaining = chunks.length;
+    // Some engines fire both error and end for the same utterance (an
+    // interrupted chunk especially); counting twice would flip the speaking
+    // flag off while later chunks are still audible, so each utterance can
+    // settle exactly once.
+    const settled = new Set<SpeechSynthesisUtterance>();
+    const settle = (utterance: SpeechSynthesisUtterance) => {
+      if (settled.has(utterance)) return;
+      settled.add(utterance);
+      remaining -= 1;
+      if (remaining <= 0) setSpeaking(false);
+    };
     for (const chunk of chunks) {
       const utterance = new SpeechSynthesisUtterance(chunk);
       utterance.voice = voice;
@@ -90,14 +101,8 @@ export function useSpeech(language: Language | undefined, text: string) {
           setSpeaking(true);
         }
       };
-      utterance.onend = () => {
-        remaining -= 1;
-        if (remaining <= 0) setSpeaking(false);
-      };
-      utterance.onerror = () => {
-        remaining -= 1;
-        if (remaining <= 0) setSpeaking(false);
-      };
+      utterance.onend = () => settle(utterance);
+      utterance.onerror = () => settle(utterance);
       synth.speak(utterance);
     }
   }, [speechSupported, voice, language]);

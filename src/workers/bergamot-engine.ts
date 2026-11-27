@@ -242,6 +242,14 @@ export class BergamotEngine {
   private module: BergamotModule | null = null;
   private service: BlockingServiceLike | null = null;
   private model: TranslationModelLike | null = null;
+  /** The embind objects backing the current model: the aligned model,
+   *  shortlist and vocab memories, and the vocab list itself. Embind objects
+   *  own wasm-heap allocations that only an explicit .delete() frees — there
+   *  are no finalizers — so they must be kept reachable and deleted together
+   *  with the model. Before this they were locals of load(): every pair
+   *  switch leaked one pair's file set (~36-55 MB) into a heap that never
+   *  shrinks, because the engine deliberately stays alive across switches. */
+  private memories: { delete(): void }[] = [];
   private pair: string | null = null;
 
   /** True when the engine holds a model for this pair already. */
@@ -298,10 +306,23 @@ export class BergamotEngine {
     const modelMemory = aligned(buffers.get(modelFile.name)!, ALIGNMENTS.model);
     const shortlistMemory = aligned(buffers.get(lexFile.name)!, ALIGNMENTS.lex);
     const vocabList = new runtime.AlignedMemoryList();
+    const vocabMemories: AlignedMemoryLike[] = [];
     for (const vocab of vocabFiles) {
-      vocabList.push_back(aligned(buffers.get(vocab.name)!, ALIGNMENTS.vocab));
+      const memory = aligned(buffers.get(vocab.name)!, ALIGNMENTS.vocab);
+      vocabMemories.push(memory);
+      vocabList.push_back(memory);
     }
-    this.model = new runtime.TranslationModel(MODEL_CONFIG, modelMemory, shortlistMemory, vocabList, null);
+    // The model holds raw pointers into these memories for its lifetime, so
+    // they are tracked here and freed only after the model itself is gone.
+    this.memories = [modelMemory, shortlistMemory, ...vocabMemories, vocabList];
+    try {
+      this.model = new runtime.TranslationModel(MODEL_CONFIG, modelMemory, shortlistMemory, vocabList, null);
+    } catch (err) {
+      // A failed construction leaves the memories ownerless: without this
+      // they would die unreachable and leak exactly like the old locals.
+      this.disposeMemories();
+      throw err;
+    }
   }
 
   private async ensureRuntime(onProgress: ProgressFn): Promise<void> {
@@ -394,10 +415,17 @@ export class BergamotEngine {
     const out: string[] = [];
     for (const text of texts) {
       if (isCancelled()) throw new Error("cancelled");
+      // Nothing to send for a whitespace-only sentence: an empty vector into
+      // the blocking service is undefined territory, and an empty result is
+      // what the other engines return for empty input by construction.
+      const trimmed = text.trim();
+      if (trimmed.length === 0) {
+        out.push("");
+        continue;
+      }
       const responseOptions = new runtime.VectorResponseOptions();
       const input = new runtime.VectorString();
-      const trimmed = text.trim();
-      if (trimmed.length > 0) input.push_back(trimmed);
+      input.push_back(trimmed);
       const result = this.service.translate(this.model, input, responseOptions);
       const parts: string[] = [];
       for (let i = 0; i < result.size(); i++) {
@@ -417,6 +445,17 @@ export class BergamotEngine {
     return out.length > 0 && out[0]!.trim().length > 0;
   }
 
+  private disposeMemories(): void {
+    for (const memory of this.memories) {
+      try {
+        memory.delete();
+      } catch {
+        // Best effort: the model is being replaced regardless.
+      }
+    }
+    this.memories = [];
+  }
+
   private async disposeModel(): Promise<void> {
     if (this.model) {
       try {
@@ -426,6 +465,9 @@ export class BergamotEngine {
       }
       this.model = null;
     }
+    // Only now are the backing memories dead: the model held raw pointers
+    // into them, so they go strictly after it.
+    this.disposeMemories();
     this.pair = null;
   }
 

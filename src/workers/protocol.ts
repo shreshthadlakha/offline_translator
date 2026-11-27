@@ -38,7 +38,7 @@ export type Priority = "manual" | "sentence" | "fragment" | "batch";
 
 export type EngineDevice = "webgpu" | "wasm";
 
-export type EngineErrorCode = "memory" | "download" | "translate" | "quota" | "another-tab" | "stale-code";
+export type EngineErrorCode = "memory" | "download" | "translate" | "startup" | "quota" | "another-tab" | "stale-code";
 
 /** The engine description the worker takes. Mirrors lib/engines.ts, kept
  * structural so the worker bundle doesn't pull the whole catalog in. */

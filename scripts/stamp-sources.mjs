@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 // The worker's source stamp: a sha256 over every file under src/workers and
-// src/lib (everything the worker bundle can import), sorted by path. Shared
-// by scripts/build-worker.mjs (which writes it into the first line of the
-// generated bundle) and scripts/check-drift.mjs (which recomputes it), so a
-// stale public/translator.worker.js can never pass for a fresh one.
+// src/lib (everything the worker bundle can import), sorted by path, plus
+// the package-lock.json hash — the bundle embeds node_modules code (the
+// whole transformers library), so a dependency update must invalidate the
+// stamp exactly like a source edit, or a stale bundle could pass for a
+// fresh one. Shared by scripts/build-worker.mjs (which writes it into the
+// first line of the generated bundle) and scripts/check-drift.mjs (which
+// recomputes it).
 import { createHash } from "node:crypto";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -38,6 +41,16 @@ export function sourceStamp(root = ROOT) {
   for (const rel of files) {
     hash.update(rel);
     hash.update(readFileSync(join(root, rel)));
+  }
+  // The dependency tree the bundle embeds. The lockfile changes whenever a
+  // dependency version changes; if it is absent it contributes nothing (the
+  // input name is folded in regardless), so the stamp stays computable at
+  // any time.
+  hash.update("package-lock.json");
+  try {
+    hash.update(readFileSync(join(root, "package-lock.json")));
+  } catch {
+    // No lockfile here: nothing to fold in.
   }
   return { stamp: hash.digest("hex"), files: files.length };
 }

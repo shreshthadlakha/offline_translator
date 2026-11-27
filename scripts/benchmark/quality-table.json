@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T08:25:31.553Z",
+  "generatedAt": "2026-11-26T16:34:11.441Z",
   "bar": {
     "file": "scripts/benchmark/quality-bar.mjs",
     "constants": {
@@ -247,7 +247,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 54.63,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 52.7,
@@ -285,7 +285,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 38.84,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 34.6,
@@ -323,7 +323,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 60.71,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 57.9,
@@ -361,7 +361,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 51.26,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 46.2,
@@ -1311,7 +1311,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 64.7,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 62.5,
@@ -1349,7 +1349,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 55.37,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 50.4,
@@ -1525,7 +1525,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 65.68,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 62.5,
@@ -1563,7 +1563,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 57.86,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 54.2,
@@ -1905,7 +1905,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 58.91,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 57,
@@ -1943,7 +1943,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 53.18,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 50.2,
@@ -2133,7 +2133,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 61.1,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 59,
@@ -2171,7 +2171,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 54.5,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 47.2,
@@ -2209,7 +2209,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 62.43,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 58.9,
@@ -2247,7 +2247,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 50.24,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 44.6,
@@ -2285,7 +2285,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 64.81,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 62.5,
@@ -2323,7 +2323,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 55.34,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 49,
@@ -2437,7 +2437,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 60.72,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 58.5,
@@ -2475,7 +2475,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 48.09,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 44.9,
@@ -2803,7 +2803,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 63.31,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 61.5,
@@ -2841,7 +2841,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 50.56,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 46.7,
@@ -3452,7 +3452,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 57.51,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 55.8,
@@ -3490,7 +3490,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 56.11,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 51.1,
@@ -3528,7 +3528,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 62.57,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 61.2,
@@ -3566,7 +3566,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 57.6,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 51.8,
@@ -3832,7 +3832,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 261656622,
+      "modelSizeBytes": 261714435,
       "chrfpp": 59.06,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 57.8,
@@ -3870,7 +3870,7 @@
         "group": false,
         "langTag": null
       },
-      "modelSizeBytes": 309314905,
+      "modelSizeBytes": 309338772,
       "chrfpp": 49.85,
       "chrfppSource": "browser-worker run, 200 FLORES-200 devtest sample sentences",
       "baselineChrfpp": 46.6,

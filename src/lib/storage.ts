@@ -1,16 +1,25 @@
 /**
  * Safe localStorage wrappers. Storage can be unavailable (private mode,
  * blocked) or full, so every access is caught and falls back gracefully.
+ *
+ * Full is not unavailable: a full localStorage still reads fine, it only
+ * refuses writes. The read path therefore never probes with a write — the
+ * old probe made a full quota look like "no storage at all", hiding settings
+ * and history that were still on disk. Writes report failure (false) when
+ * the quota refuses them, after keeping the value in the session fallback so
+ * this visit still works; reads prefer a value written to the fallback this
+ * session over the stale one on disk. That shadow is per tab and accepted:
+ * the one-tab rule makes a second writing tab the rare case, and the disk
+ * copy catches up on this tab's next successful write.
  */
 
 const memoryFallback = new Map<string, string>();
 
-function available(): boolean {
+/** Storage is readable (access itself does not throw). Reads never write. */
+function readable(): boolean {
   try {
     if (typeof window === "undefined") return false;
-    const probe = "__pt_probe__";
-    window.localStorage.setItem(probe, "1");
-    window.localStorage.removeItem(probe);
+    void window.localStorage.getItem("__pt_probe__");
     return true;
   } catch {
     return false;
@@ -18,34 +27,36 @@ function available(): boolean {
 }
 
 export function storageGet(key: string): string | null {
+  // A value written to the fallback this session (quota full) is newer than
+  // whatever the disk still holds.
+  if (memoryFallback.has(key)) return memoryFallback.get(key) ?? null;
   try {
-    if (available()) return window.localStorage.getItem(key);
-    return memoryFallback.get(key) ?? null;
+    if (readable()) return window.localStorage.getItem(key);
+    return null;
   } catch {
-    return memoryFallback.get(key) ?? null;
+    return null;
   }
 }
 
 export function storageSet(key: string, value: string): boolean {
   try {
-    if (available()) {
-      window.localStorage.setItem(key, value);
-      return true;
-    }
-    memoryFallback.set(key, value);
+    window.localStorage.setItem(key, value);
+    memoryFallback.delete(key);
     return true;
   } catch {
+    // Unavailable, or full: keep it for this session. Reads still prefer
+    // this over the stale disk value; the caller is told it did not persist.
     memoryFallback.set(key, value);
     return false;
   }
 }
 
 export function storageRemove(key: string): void {
+  memoryFallback.delete(key);
   try {
-    if (available()) window.localStorage.removeItem(key);
-    memoryFallback.delete(key);
+    window.localStorage.removeItem(key);
   } catch {
-    memoryFallback.delete(key);
+    // Unavailable or blocked: nothing more to remove.
   }
 }
 

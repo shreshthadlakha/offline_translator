@@ -121,7 +121,15 @@ export type HeavyGate = (engine: PairEngine, pair: { src: string; tgt: string })
 function specFor(engine: PairEngine, srcCode: string, tgtCode: string): EngineSpec {
   const quality = directionQuality(srcCode, tgtCode);
   const tier = quality?.tier === "best" || quality?.tier === "good" || quality?.tier === "limited" ? quality.tier : undefined;
-  return { id: engine.id, kind: engine.kind, modelId: engine.modelId, langTag: engine.tag, bundle: engine.bundle, tier };
+  return {
+    id: engine.id,
+    kind: engine.kind,
+    modelId: engine.modelId,
+    langTag: engine.tag,
+    bundle: engine.bundle,
+    ...(engine.subfolder !== undefined ? { subfolder: engine.subfolder } : {}),
+    tier,
+  };
 }
 
 export function useEngine(heavyGate?: HeavyGate) {
@@ -186,6 +194,9 @@ export function useEngine(heavyGate?: HeavyGate) {
   const startRef = useRef<(options?: { auto?: boolean }) => void>(() => {});
   const switchToRef = useRef<(engine: PairEngine) => Promise<void>>(() => Promise.resolve());
 
+  /** In-flight guard for start(): set synchronously, cleared when the start
+   *  attempt settles, so a double press can never race the lock acquisition. */
+  const startingRef = useRef(false);
   const workerRef = useRef<Worker | null>(null);
   const listenersRef = useRef(new Set<Listener>());
   const fractionRef = useRef(0);
@@ -443,6 +454,19 @@ export function useEngine(heavyGate?: HeavyGate) {
           // thread asked for (defense in depth: the desired state is
           // trusted, never the worker's word alone).
           if (message.engineId !== activeSpecRef.current?.id) {
+            // The worker queues an init that arrives while another load runs
+            // (L-2) and reports the first engine ready before starting the
+            // second. That intermediate ready is expected here: the init for
+            // the active spec was already posted, and the matching ready
+            // follows when the queued load finishes. Only a ready claiming
+            // an engine nobody asked for — with no load in flight — is the
+            // impossible state worth the hard error.
+            const loadPending =
+              statusRef.current === "checking" ||
+              statusRef.current === "downloading" ||
+              statusRef.current === "initializing" ||
+              statusRef.current === "testing";
+            if (loadPending) break;
             terminate();
             setSwitching(false);
             setStatusSafe("error");
@@ -564,7 +588,7 @@ export function useEngine(heavyGate?: HeavyGate) {
         terminate();
         setSwitching(false);
         setStatusSafe("error");
-        const err = { code: "download" as EngineErrorCode, message: "The worker could not be started." };
+        const err = { code: "startup" as EngineErrorCode, message: "The worker could not be started." };
         setError(err);
         lastErrorRef.current = err;
         netlog.setEngineReady(false);
@@ -573,7 +597,7 @@ export function useEngine(heavyGate?: HeavyGate) {
         terminate();
         setSwitching(false);
         setStatusSafe("error");
-        const err = { code: "download" as EngineErrorCode, message: "The worker could not be started." };
+        const err = { code: "startup" as EngineErrorCode, message: "The worker could not be started." };
         setError(err);
         lastErrorRef.current = err;
         netlog.setEngineReady(false);
@@ -764,8 +788,16 @@ export function useEngine(heavyGate?: HeavyGate) {
   const start = useCallback(
     (options?: { auto?: boolean }) => {
       if (workerRef.current) return;
+      // A synchronous in-flight guard: the worker reference is only set after
+      // the lock is acquired (at least one event-loop turn later), so a
+      // second start() inside that window would otherwise pass the check
+      // above, ask for the lock this context already holds, and read the
+      // refusal as "another tab holds the engine" — a false error while the
+      // first load is proceeding normally.
+      if (startingRef.current) return;
       const engine = desiredRef.current;
       if (!engine) return;
+      startingRef.current = true;
       // An explicit start (a button, typing, Translate) lifts the deliberate
       // unload hold. The automatic path keeps it.
       if (options?.auto !== true) holdAutoStartRef.current = false;
@@ -775,40 +807,55 @@ export function useEngine(heavyGate?: HeavyGate) {
       switchStartRef.current = null;
       setAutoStarted(options?.auto === true);
       void (async () => {
-        // One tab at a time.
-        const locked = await acquireLock();
-        if (!locked) {
-          const err = { code: "another-tab" as EngineErrorCode, message: "another tab holds the engine" };
-          setError(err);
-          lastErrorRef.current = err;
-          setStatusSafe("error");
-          return;
-        }
-        if (workerRef.current) return; // A second start raced in.
-        const worker = new Worker("/translator.worker.js", { type: "module" });
-        workerRef.current = worker;
-        wireWorker(worker);
-        // The version handshake. No hello in time means files that don't
-        // belong together.
-        helloTimeoutRef.current = setTimeout(() => {
-          if (statusRef.current === "checking" || statusRef.current === "idle") {
-            terminate();
-            setStatusSafe("error");
-            const err = { code: "stale-code" as EngineErrorCode, message: "no hello from the worker" };
+        try {
+          // One tab at a time.
+          const locked = await acquireLock();
+          if (!locked) {
+            const err = { code: "another-tab" as EngineErrorCode, message: "another tab holds the engine" };
             setError(err);
             lastErrorRef.current = err;
+            setStatusSafe("error");
+            return;
           }
-        }, 5000);
-        worker.postMessage({ type: "hello" });
-        const ok = await beginLoad(engine);
-        // The safety net for every beginLoad early return (H-1): a precheck
-        // that fails after the worker exists must never leave a spec-less
-        // zombie behind — every later start() would silently no-op and the
-        // app would be bricked until reload.
-        if (!ok && workerRef.current && activeSpecRef.current == null) terminate();
-        // The pair may have changed while the prechecks ran. The desired
-        // engine effect re-runs on every status change and will catch it,
-        // because activeSpecRef is set before the first status update.
+          if (workerRef.current) return; // A second start raced in.
+          const worker = new Worker("/translator.worker.js", { type: "module" });
+          workerRef.current = worker;
+          wireWorker(worker);
+          // The version handshake. No hello in time means files that don't
+          // belong together.
+          helloTimeoutRef.current = setTimeout(() => {
+            if (statusRef.current === "checking" || statusRef.current === "idle") {
+              terminate();
+              setStatusSafe("error");
+              const err = { code: "stale-code" as EngineErrorCode, message: "no hello from the worker" };
+              setError(err);
+              lastErrorRef.current = err;
+            }
+          }, 5000);
+          worker.postMessage({ type: "hello" });
+          const ok = await beginLoad(engine);
+          // The safety net for every beginLoad early return (H-1): a precheck
+          // that fails after the worker exists must never leave a spec-less
+          // zombie behind — every later start() would silently no-op and the
+          // app would be bricked until reload.
+          if (!ok && workerRef.current && activeSpecRef.current == null) terminate();
+          // The pair may have changed while the prechecks ran. The desired
+          // engine effect re-runs on every status change and will catch it,
+          // because activeSpecRef is set before the first status update.
+        } catch {
+          // Worker creation or a precheck threw (a CSP worker-src denial, a
+          // missing worker file). Without this, the exception rejects the
+          // IIFE's promise unhandled and the one-tab lock stays held for the
+          // page's lifetime, turning every later start into a false
+          // "another tab holds the engine". terminate() releases the lock.
+          terminate();
+          setStatusSafe("error");
+          const err = { code: "startup" as EngineErrorCode, message: "The engine could not be started." };
+          setError(err);
+          lastErrorRef.current = err;
+        } finally {
+          startingRef.current = false;
+        }
       })();
     },
     [acquireLock, beginLoad, setStatusSafe, terminate, wireWorker],

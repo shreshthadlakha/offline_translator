@@ -3,16 +3,20 @@
 // @mkljczk/bergamot-translator into public/bergamot, so the app never
 // requests the runtime from a third party. The two files are the standard
 // Mozilla bergamot-translator build (MPL-2.0); the engine verifies their
-// SHA-256 against the pins in src/lib/bergamot/runtime.ts before use.
+// SHA-256 against the pins in src/lib/bergamot/bundles.ts before use.
 import { cp, mkdir, rm } from "node:fs/promises";
-import path from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const pkgDir = "node_modules/@mkljczk/bergamot-translator/worker";
-const outDir = "public/bergamot";
+// Anchored to the repo root, like every other script: run from any other
+// working directory these paths would otherwise resolve against it.
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const pkgDir = join(ROOT, "node_modules/@mkljczk/bergamot-translator/worker");
+const outDir = join(ROOT, "public/bergamot");
 
 await rm(outDir, { recursive: true, force: true });
 await mkdir(outDir, { recursive: true });
 for (const f of ["bergamot-translator-worker.js", "bergamot-translator-worker.wasm"]) {
-  await cp(path.join(pkgDir, f), path.join(outDir, f));
+  await cp(join(pkgDir, f), join(outDir, f));
 }
 console.log(`Self hosted the Bergamot runtime (2 files) in ${outDir}`);

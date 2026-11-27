@@ -138,6 +138,7 @@ export const copy = {
     dataSaverDecline: "Not now",
     outOfMemory: "This device ran out of memory during setup. Close other tabs and try again, or use a computer.",
     downloadFailed: "Couldn't download the model. Check your connection and try again.",
+    startupFailed: "The translation engine could not be started. This is not a download problem — try again, and if it keeps failing, reload the page.",
     retry: "Try again",
     offlineNotSetup: "You're offline, and translation isn't set up yet. Connect once to finish setup.",
     // Offline with a pair whose model isn't saved, when some other model is.
@@ -145,7 +146,7 @@ export const copy = {
     // A leftover crash flag from the last visit.
     crashedLastTime: "Last time, setup stopped before it finished. That usually means the device ran out of memory. Close other tabs and try again.",
     // Another tab holds the engine.
-    anotherTab: "Translation is open in another tab. Use that one, or close it and reload this one.",
+    anotherTab: "Translation is open in another tab. Use that one, or close it and try again here.",
     // Version handshake failure.
     staleCode: "The app files on this device are out of date. Reloading will fix it.",
     reload: "Reload",

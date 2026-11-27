@@ -22,6 +22,12 @@ function InputPaneInner() {
   const hidden = settings.hideInput;
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    // IME input (Chinese, Japanese, Korean): the Enter that commits a
+    // composition also fires keydown with isComposing set (and keyCode 229
+    // on older browsers). It must commit the composition, not trigger a
+    // translation of half-composed text — and preventDefault() on it can
+    // swallow the commit itself in Safari.
+    if (event.nativeEvent.isComposing || event.keyCode === 229) return;
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       translateNow();
